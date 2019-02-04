@@ -9,7 +9,7 @@ void *test_func1(void *args){
 }
 
 void *test_func2(void *args){
-    cout << "Test\n";
+    cout << "Test" << endl;
     return NULL;
 }
 
