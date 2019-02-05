@@ -14,7 +14,7 @@ pthread_t pthread_self(void){
 }
 static int ptr_mangle(int p){
     unsigned int ret;
-    asm(" movl %1, %%eax\;\n"
+    asm(" movl %1, %%eax;\n"
         " xorl %%gs:0x18, %%eax;"
         " roll $0x9, %%eax;"
         " movl %%eax, %0;"
