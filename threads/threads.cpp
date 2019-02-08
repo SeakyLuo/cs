@@ -17,20 +17,19 @@ using namespace std;
 // };
 
 bool init = false;
-static Scheduler scheduler;
 int pthread_create(pthread_t *restrict_thread, const pthread_attr_t *restrict_attr, void *(*start_routine) (void*), void *restrict_arg){
     if (!init){
-        scheduler.init();
+        Init();
         init = true;
     }
-    *restrict_thread = scheduler.add(restrict_thread, start_routine, restrict_arg);
+    *restrict_thread = add(restrict_thread, start_routine, restrict_arg);
     return 0;
 }
 void pthread_exit(void *value_ptr){
-    scheduler.terminate(pthread_self());
+    terminate(pthread_self());
 }
 pthread_t pthread_self(void){
-    return scheduler.getCurrentProc();
+    return getCurrentProc();
 }
 static int ptr_mangle(int p){
     unsigned int ret;
