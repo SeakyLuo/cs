@@ -9,13 +9,6 @@
 
 using namespace std;
 
-// struct thread_info {    /* Used as argument to thread_start() */
-//    pthread_t thread_id;        /* ID returned by pthread_create() */
-//    vector<pthread_t> threads;
-//    char *CPU_register;        /* CPU register */
-//    char *argv_string;      /* From command-line argument */
-// };
-
 bool init = false;
 int pthread_create(pthread_t *restrict_thread, const pthread_attr_t *restrict_attr, void *(*start_routine) (void*), void *restrict_arg){
     if (!init){
