@@ -5,8 +5,6 @@
 #include <setjmp.h> 	/* for performing non-local gotos with setjmp/longjmp */
 #include "scheduler.cpp"
 
-#define gettid() syscall(SYS_gettid)
-
 using namespace std;
 
 bool init = false;

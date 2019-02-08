@@ -70,7 +70,7 @@ void terminate(pthread_t thread){
     //     threads.erase(threads.begin() + elementIdx);
     //     // functions.erase(threads.begin() + elementIdx);
     //     // argv.erase(threads.begin() + elementIdx);
-    // }
+    // }`
     // else{
     //     cout << "ERROR: No such thread." << endl;
     // }
