@@ -47,10 +47,11 @@ class Scheduler{
             }
 
         }
-        void add(pthread_t *thread, void *(*start_routine) (void*), void *restrict_arg){
+        int add(pthread_t *thread, void *(*start_routine) (void*), void *restrict_arg){
             threads.push_back(thread);
             // functions.push_back(start_routine);
             // argv.push_back(restrict_arg);
+            return threads.size();
         }
         void terminate(pthread_t thread){
             auto elementIdx = find(threads.begin(), threads.end(), thread) - threads.begin();
@@ -63,6 +64,7 @@ class Scheduler{
                 cout << "ERROR: No such thread." << endl;
             }
         }
+        int getCurrentProc() { return current_proc; }
     private:
         /* itimerval data structure holds necessary info for timer; see man page(s) */
 	    struct itimerval it_val;

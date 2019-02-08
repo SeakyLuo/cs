@@ -23,15 +23,14 @@ int pthread_create(pthread_t *restrict_thread, const pthread_attr_t *restrict_at
         scheduler.init();
         init = true;
     }
-    scheduler.add(restrict_thread, start_routine, restrict_arg);
-    *restrict_thread = pthread_self();
+    *restrict_thread = scheduler.add(restrict_thread, start_routine, restrict_arg);
     return 0;
 }
 void pthread_exit(void *value_ptr){
     scheduler.terminate(pthread_self());
 }
 pthread_t pthread_self(void){
-    return gettid();
+    return scheduler.getCurrentProc();
 }
 static int ptr_mangle(int p){
     unsigned int ret;
