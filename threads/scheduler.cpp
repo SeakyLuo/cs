@@ -17,7 +17,7 @@ int current_proc;
 // Signal handler
 void loop(int signal){
     for (int i = 0; i < threads.size(); i++){
-        urrent_proc = i;
+        current_proc = i;
         longjmp(buffer[i], 1);
     }
 }
