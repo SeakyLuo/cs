@@ -16,7 +16,6 @@ using namespace std;
 
 static int ptr_mangle(int p){
     unsigned int ret;
-    cout << "wtf " << p << "\n";
     asm(" movl %1, %%eax;\n"
         " xorl %%gs:0x18, %%eax;"
         " roll $0x9, %%eax;"
@@ -25,7 +24,6 @@ static int ptr_mangle(int p){
     : "r"(p)
     : "%eax"
     );
-    cout << "wtf???" << ret << "\n";
     return ret;
 }
 
@@ -45,9 +43,9 @@ jmp_buf jbuf;
 void loop(int signal){
     int size = threads.size();
     loop_starts = true;
-    if(size){
-        longjmp(threads[(++current_proc) % size].buf, 1);
+    if (size){
         cout << "fuck~\n";
+        longjmp(threads[(++current_proc) % size].buf, 1);
     }
 }
 void Init(){
@@ -89,13 +87,13 @@ int add(pthread_t *thread, void *(*start_routine) (void*), void *arg){
     t.stack = (int*) malloc(STACK_SIZE * sizeof(int));
     t.stack[STACK_SIZE - 1] = *(int*)&arg;
     t.stack[STACK_SIZE - 2] = *(int*)&pthread_exit;
-    ptr_mangle(100);cout<<"fuck\n";
-    t.buf->__jmpbuf[4] =  ptr_mangle((int)(t.stack[STACK_SIZE - 1]));cout<<"fuck\n";
-    t.buf->__jmpbuf[5] =  ptr_mangle(*(int*)&start_routine);cout<<"fuck\n";
+    t.buf->__jmpbuf[4] =  ptr_mangle(*t.stack + STACK_SIZE - 1);
+    t.buf->__jmpbuf[5] =  ptr_mangle(*(int*)&start_routine);
     // t.buf->__jmpbuf[4] = (int)(t.stack[STACK_SIZE - 1]);
     // t.buf->__jmpbuf[5] = *(int*)&start_routine;
     threads.push_back(t);
-    pause();
+    // pause();
+    cout << "fuck\n";
     return t.tid;
 }
 void terminate(pthread_t tid){
