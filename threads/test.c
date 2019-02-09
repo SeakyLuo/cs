@@ -1,10 +1,18 @@
+#include <pthread.h>
+#include <sys/time.h> 	/* for setitimer */
+#include <unistd.h> 	/* for pause */
+#include <setjmp.h> 	/* for performing non-local gotos with setjmp/longjmp */
+#include <stdio.h>
+
+static int ptr_mangle(int p);
+
 void test_funct(void *ptr){
     printf("I am here!\n");
     return;
 }
 
-void res_funct(){
-    print("Returned to here?\n");
+void ret_funct(){
+    printf("Returned to here?\n");
     return;
 }
 
@@ -16,8 +24,8 @@ int main(int argc, char *argv[]){
     stack[1] = (int) ret_funct;
     buf_1 -> __jmpbuf[4] = ptr_mangle((int)(stack + 1));
     buf_1 -> __jmpbuf[5] = ptr_mangle((int)(test_funct));
-    buf_1 -> __jmpbuf[4] = (int)(stack + 1);
-    buf_1 -> __jmpbuf[5] = (int) test_funct;
+    // buf_1 -> __jmpbuf[4] = (int)(stack + 1);
+    // buf_1 -> __jmpbuf[5] = (int) test_funct;
     printf("About to jump\n");
     longjmp(buf_1, 1);
     return 0;

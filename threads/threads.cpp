@@ -2,7 +2,6 @@
 #include <unistd.h>
 #include <pthread.h>
 #include <signal.h>
-#include <setjmp.h> 	/* for performing non-local gotos with setjmp/longjmp */
 #include "scheduler.cpp"
 
 using namespace std;
@@ -17,20 +16,9 @@ int pthread_create(pthread_t *restrict_thread, const pthread_attr_t *restrict_at
     return 0;
 }
 void pthread_exit(void *value_ptr){
-    terminate(pthread_self());
+    terminate(threads[getCurrentProc()]->tid);
+    longjmp(jbuf, 1);
 }
 pthread_t pthread_self(void){
-    return getCurrentProc();
-}
-static int ptr_mangle(int p){
-    unsigned int ret;
-    asm(" movl %1, %%eax;\n"
-        " xorl %%gs:0x18, %%eax;"
-        " roll $0x9, %%eax;"
-        " movl %%eax, %0;"
-    : "=r"(ret)
-    : "r"(p)
-    : "%eax"
-    );
-    return ret;
+    return threads[getCurrentProc()]->tid;
 }
