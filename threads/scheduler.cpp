@@ -14,8 +14,6 @@ using namespace std;
 #define STATUS_READY 1
 #define STATUS_RUN 2
 
-
-
 static int ptr_mangle(int p){
     unsigned int ret;
     asm(" movl %1, %%eax;\n"
@@ -36,13 +34,18 @@ typedef struct Thread {
     int* stack;
 }Thread;
 
-vector<Thread*> threads;
-int current_proc;
+vector<Thread> threads;
+int current_proc = 0;
 jmp_buf jbuf;
 
 // Signal handler
 void loop(int signal){
-    longjmp(threads[(++current_proc) % threads.size()]->buf, 1);
+    int size = threads.size();
+    cout << "fuck " << size << "\n";
+    if(size){
+        longjmp(threads[(++current_proc) % size].buf, 1);
+        cout << "fuck~\n";
+    }
 }
 void Init(){
     /* itimerval data structure holds necessary info for timer; see man page(s) */
@@ -59,47 +62,45 @@ void Init(){
     if (sigaction(SIGALRM, &act, NULL) == -1){
         cout << "Unable to catch SIGALRM\n";
     }
-
     /* set timer in seconds */
-    it_val.it_value.tv_sec = INTERVAL / 1000;
+    it_val.it_value.tv_sec = INTERVAL / 1000.0;
     /* set timer in microseconds */
     it_val.it_value.tv_usec = (INTERVAL * 1000) % 1000000;
     /* next timer should use the same time interval */
     it_val.it_interval = it_val.it_value;
-
     /* set timer. From now on, after INTERVAL ms SIGALRM will be sent and
       loop will be invoked */
     if (setitimer(ITIMER_REAL, &it_val, NULL) == -1){
         cout << "error calling setitimer()\n";
     }
-
     /* main loop so the program doesn't die before the first timer goes off.
     After the first timer, control will never come back (regardless of pause()) */
     while(1) {
         pause();
     }
-
 }
-int add(pthread_t *thread, void *(*start_routine) (void*), void *restrict_arg){
-    Thread* t;
-    t->tid = threads.size();
-    t->status = STATUS_READY;
-    t->stack = (int*) malloc(STACK_SIZE * sizeof(int));
-    t->stack[STACK_SIZE - 1] = *(int*)restrict_arg;
-    t->stack[STACK_SIZE - 2] = *(int*)&pthread_exit;
-    t->buf -> __jmpbuf[4] = ptr_mangle((int)(t->stack[STACK_SIZE - 1]));
-    t->buf -> __jmpbuf[5] = ptr_mangle(*(int*)&start_routine);
+int add(pthread_t *thread, void *(*start_routine) (void*), void *arg){
+    Thread t;
+    t.tid = threads.size();
+    t.status = STATUS_READY;
+    t.stack = (int*) malloc(STACK_SIZE * sizeof(int));
+    t.stack[STACK_SIZE - 1] = *(int*)&arg;
+    t.stack[STACK_SIZE - 2] = *(int*)&pthread_exit;
+    // ptr_mangle((int)(t.stack[STACK_SIZE - 1]));cout<<"fuck\n";
+    // ptr_mangle(*(int*)&start_routine);cout<<"fuck\n";
+    t.buf->__jmpbuf[4] = (int)(t.stack[STACK_SIZE - 1]);
+    t.buf->__jmpbuf[5] = *(int*)&start_routine;
     threads.push_back(t);
     pause();
-    return t->tid;
+    return t.tid;
 }
 void terminate(pthread_t tid){
-    vector<Thread*>::iterator iter;
+    vector<Thread>::iterator iter;
     for (iter = threads.begin(); iter != threads.end(); iter++)
-        if ((*iter)->tid == tid)
+        if (iter->tid == tid)
             break;
-    (*iter)->status = STATUS_EXIT;
-    delete [] (*iter)->stack;
+    iter->status = STATUS_EXIT;
+    free(iter->stack);
     threads.erase(iter);
     setjmp(jbuf);
 }

@@ -3,6 +3,7 @@
 #include <pthread.h>
 #include <signal.h>
 #include "scheduler.cpp"
+#include <iostream>
 
 using namespace std;
 
@@ -16,9 +17,9 @@ int pthread_create(pthread_t *restrict_thread, const pthread_attr_t *restrict_at
     return 0;
 }
 void pthread_exit(void *value_ptr){
-    terminate(threads[getCurrentProc()]->tid);
+    terminate(threads[getCurrentProc()].tid);
     longjmp(jbuf, 1);
 }
 pthread_t pthread_self(void){
-    return threads[getCurrentProc()]->tid;
+    return threads[getCurrentProc()].tid;
 }
