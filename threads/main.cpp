@@ -3,9 +3,9 @@
 using namespace std;
 
 void *test(void *args){
-    cout << "Thread ID: " << pthread_self() << '\n';
-    sleep(3);
-    cout << "Sleep Ends.\n";
+    // cout << "Thread " << pthread_self() << " starts sleeping\n";
+    // sleep(3);
+    // cout << "Wake up\n";
     pthread_exit(NULL);
     return NULL;
 }
