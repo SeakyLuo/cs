@@ -3,6 +3,7 @@
 #include <unistd.h> 	/* for pause */
 #include <setjmp.h> 	/* for performing non-local gotos with setjmp/longjmp */
 #include <stdio.h>
+#include <stdlib.h>
 
 static int ptr_mangle(int p);
 

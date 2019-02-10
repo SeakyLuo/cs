@@ -19,8 +19,8 @@
 /* prototype for signal handler will be called when timer goes off */
 void signal_handler(int);
 
-/* the jmp_buf data structure is used to store the 
-  'state' of the program when setjmp is called */ 
+/* the jmp_buf data structure is used to store the
+  'state' of the program when setjmp is called */
 jmp_buf ping_env,pong_env;
 
 /* keep track of which process is active */
@@ -59,7 +59,7 @@ int main(int argc, char *argv[]) {
 
 	   For the initial run-through (timer hasn't gone off yet) both setjmp's
 	   are direct invocations, so in both cases setjmp will return 0.
-	   
+
 	   The first setjmp initializes the jmp_buf for the 'ping thread'
 	   The second setjmp initializes the jmp_buf for the 'pong thread'*/
 	if(setjmp(ping_env)) {
@@ -108,7 +108,7 @@ void signal_handler(int signo) {
 		longjmp(pong_env,1);
 	} else {
 		current_proc = 0;
-		
+
 		/* call longjmp to perform non-local goto to ping environment */
 		longjmp(ping_env,1);
 	}
