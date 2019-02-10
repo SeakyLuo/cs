@@ -52,7 +52,7 @@ void loop(int signal){
         int new_proc = (current_proc + 1) % size;
         if (new_proc != current_proc){
             current_proc = new_proc;
-            cout << "New: " << current_proc << '\n';
+            // cout << "New: " << current_proc << '\n';
             longjmp(jbuffer[current_proc], 1);
         }
     }
@@ -91,9 +91,7 @@ void Init(){
         if (setjmp(*iter)){
             while(1){
                 cout << "start routine at " << current_proc << '\n';
-                // start_routine()
                 longjmp(threads[current_proc].buf, 1);
-                // pause();
             }
         }
     }
@@ -116,9 +114,9 @@ void thread_exit(){
         if (iter->tid == threads[current_proc].tid)
             break;
     iter->status = STATUS_EXIT;
-    if (iter->stack){
-        free(iter->stack);
-    }
+    // if (iter->stack){
+    //     free(iter->stack);
+    // }
     threads.erase(iter);
 }
 int add_thread(pthread_t *thread, void *(*start_routine) (void*), void *arg){
@@ -131,7 +129,6 @@ int add_thread(pthread_t *thread, void *(*start_routine) (void*), void *arg){
     t.buf->__jmpbuf[4] =  ptr_mangle((int)&t.stack[STACK_SIZE - 1]);
     t.buf->__jmpbuf[5] =  ptr_mangle(*(int*)&start_routine);
     threads.push_back(t);
-    // current_proc++;
     cout << "add\n";
     return t.tid;
 }
