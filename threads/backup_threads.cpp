@@ -8,11 +8,10 @@ void *nothing(void *args){cout << "fuck\n"; return NULL;}
 int pthread_create(pthread_t *restrict_thread, const pthread_attr_t *restrict_attr, void *(*start_routine) (void*), void *restrict_arg){
     if (!init){
         Init();
-        pthread_t main_thread;
-        add_thread(&main_thread, nothing, NULL);
+        add_thread(NULL, NULL);
     }
     if (setjmp(threads[current].buf) == 0){
-        *restrict_thread = add_thread(restrict_thread, start_routine, restrict_arg);
+        *restrict_thread = add_thread(start_routine, restrict_arg);
         longjmp(jb, 1);
     }
     return 0;

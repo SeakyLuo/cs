@@ -68,16 +68,18 @@ void thread_exit(){
     if (threads.size()) longjmp(jb, 1);
     else exit(0);
 }
-int add_thread(pthread_t *thread, void *(*start_routine) (void*), void *arg){
+int add_thread(void *(*start_routine) (void*), void *arg){
     Thread t;
     // current = threads.size();
     t.tid = threads.size();
     t.status = STATUS_READY;
     t.stack = (int*) malloc(STACK_SIZE * sizeof(int));
-    t.stack[STACK_SIZE - 2] = (int) arg;
-    t.stack[STACK_SIZE - 1] = (int) thread_exit;
-    t.buf->__jmpbuf[4] = ptr_mangle((int) &t.stack[STACK_SIZE - 1]);
-    t.buf->__jmpbuf[5] = ptr_mangle((int) start_routine);
+    if (*start_routine){
+        t.stack[STACK_SIZE - 2] = (int) arg;
+        t.stack[STACK_SIZE - 1] = (int) thread_exit;
+        t.buf->__jmpbuf[4] = ptr_mangle((int) &t.stack[STACK_SIZE - 1]);
+        t.buf->__jmpbuf[5] = ptr_mangle((int) start_routine);
+    }
     threads.push_back(t);
     return t.tid;
 }
@@ -108,7 +110,5 @@ void Init(){
         cout << "error calling setitimer()\n";
     }
     init = true;
-    while(!loop_starts){
-        pause();
-    }
+    pause();
 }

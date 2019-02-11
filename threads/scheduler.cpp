@@ -36,31 +36,26 @@ typedef struct Thread {
 
 vector<Thread> threads;
 vector<jmp_buf> jbuffer(128);
-int thread_counter = 0;
-int thread_index = 0;
 bool init = false;
 jmp_buf ctn_main, scheduler_jmpbuf;
-int new_proc = 0;
+int current = 0;
 
 // Signal handler
 void loop(int signal){
-    int size = threads.size();
     setjmp(scheduler_jmpbuf);
-    new_proc = thread_counter;
+    int size = threads.size();
+    while (size == 0) pause();
+    cout << "fuck " << current << "\n";
+    threads[current].status = STATUS_READY;
     do {
-        new_proc = (new_proc + 1) % size;
-    }
-    while (threads[new_proc].status != STATUS_READY);
+        current = (current + 1) % size;
+    }while (threads[current].status != STATUS_READY);
 
-    if(new_proc != 0){
-        threads[0].status = STATUS_READY;
-        threads[new_proc].status = STATUS_RUN;
-        //thread_counter;
-        longjmp(threads[new_proc].buf, 1);
-    }
-    else{
-        threads[new_proc].status = STATUS_RUN;
-        longjmp(ctn_main,1);
+    threads[current].status = STATUS_RUN;
+    if (current){
+        longjmp(threads[current].buf, 1);
+    }else{
+        longjmp(ctn_main, 1);
     }
 }
 void Init(){
@@ -90,29 +85,30 @@ void Init(){
     init = true;
     pause();
 }
-int add_thread(pthread_t *thread, void *(*start_routine) (void*), void *arg){
+int add_thread(void *(*start_routine) (void*), void *arg){
     Thread t;
     t.tid = threads.size();
     t.status = STATUS_READY;
     t.stack = (int*) malloc(STACK_SIZE * sizeof(int));
-    t.stack[STACK_SIZE - 2] = (int) arg;
-    t.stack[STACK_SIZE - 1] = (int) pthread_exit;
-    t.buf->__jmpbuf[4] =  ptr_mangle((int) &t.stack[STACK_SIZE - 1]);
-    t.buf->__jmpbuf[5] =  ptr_mangle((int) start_routine);
+    if (*start_routine){
+        t.stack[STACK_SIZE - 2] = (int) arg;
+        t.stack[STACK_SIZE - 1] = (int) pthread_exit;
+        t.buf->__jmpbuf[4] =  ptr_mangle((int) &t.stack[STACK_SIZE - 1]);
+        t.buf->__jmpbuf[5] =  ptr_mangle((int) start_routine);
+    }
     threads.push_back(t);
-    thread_counter++;
     return t.tid;
 }
 void thread_exit(){
     vector<Thread>::iterator iter;
     for (iter = threads.begin(); iter != threads.end(); iter++)
-        if (iter->tid == threads[thread_counter - 1].tid)
+        if (iter->tid == threads[current].tid)
             break;
 
     iter->status = STATUS_EXIT;
-    thread_counter--;
     threads.erase(iter);
-    if (threads.size()) longjmp(scheduler_jmpbuf, 1);
-    else exit(0);
+    longjmp(scheduler_jmpbuf, 1);
+    // if (threads.size()) longjmp(scheduler_jmpbuf, 1);
+    // else exit(0);
     //free(iter->stack);
 }
