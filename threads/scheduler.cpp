@@ -2,7 +2,6 @@
 #include <sys/time.h>   /* for setitimer */
 #include <vector>
 #include <unistd.h>     /* for pause */
-#include <algorithm>
 #include <iostream>
 #include <setjmp.h>     /* for performing non-local gotos with setjmp/longjmp */
 #include <signal.h>
@@ -13,6 +12,7 @@ using namespace std;
 #define STACK_SIZE 32767
 #define STATUS_EXIT 0
 #define STATUS_READY 1
+#define STATUS_RUN 2
 
 static int ptr_mangle(int p){
     unsigned int ret;
@@ -35,30 +35,50 @@ typedef struct Thread {
 }Thread;
 
 vector<Thread> threads;
-vector<jmp_buf> jbuffer(128);
-int current_proc = -1;
-bool init = false;
-bool isMain = false;
-jmp_buf main_jb, start, sjb;
+int current = 0;
+bool init = false, loop_starts = false;
+jmp_buf jb;
 
 // Signal handler
 void loop(int signal){
+    loop_starts = true;
+    setjmp(jb);
     int size = threads.size();
-    cout << "threads size: " << size << " current_proc: " << current_proc << endl;
     if (size){
-        // current_proc = (current_proc + 1) % size;
-        // cout << "New: " << current_proc << '\n';
-        // longjmp(jbuffer[current_proc], 1);
-        int new_proc = (current_proc + 1) % size;
-        if (new_proc != current_proc){
-            current_proc = new_proc;
-            // cout << "New: " << current_proc << '\n';
-            longjmp(jbuffer[current_proc], 1);
-        }
+        setjmp(threads[current].buf);
+        threads[current].status = STATUS_READY;
+        do{
+            current = (current + 1) % size;
+        }while(threads[current].status != STATUS_READY);
+        threads[current].status = STATUS_RUN;
+        longjmp(threads[current].buf, 1);
     }
-    if (isMain){
-        longjmp(main_jb, 1);
-    }
+}
+void thread_exit(){
+    vector<Thread>::iterator iter;
+    for (iter = threads.begin(); iter != threads.end(); iter++)
+        if (iter->tid == threads[current].tid)
+            break;
+    iter->status = STATUS_EXIT;
+    // if (iter->stack){
+    //     free(iter->stack);
+    // }
+    // threads.erase(iter);
+    if (threads.size()) longjmp(jb, 1);
+    else exit(0);
+}
+int add_thread(pthread_t *thread, void *(*start_routine) (void*), void *arg){
+    Thread t;
+    // current = threads.size();
+    t.tid = threads.size();
+    t.status = STATUS_READY;
+    t.stack = (int*) malloc(STACK_SIZE * sizeof(int));
+    t.stack[STACK_SIZE - 2] = (int) arg;
+    t.stack[STACK_SIZE - 1] = (int) thread_exit;
+    t.buf->__jmpbuf[4] = ptr_mangle((int) &t.stack[STACK_SIZE - 1]);
+    t.buf->__jmpbuf[5] = ptr_mangle((int) start_routine);
+    threads.push_back(t);
+    return t.tid;
 }
 void Init(){
     /* itimerval data structure holds necessary info for timer; see man page(s) */
@@ -86,49 +106,8 @@ void Init(){
     if (setitimer(ITIMER_REAL, &it_val, NULL) == -1){
         cout << "error calling setitimer()\n";
     }
-
-    for (auto iter = jbuffer.begin(); iter != jbuffer.end(); iter++){
-        if (setjmp(*iter)){
-            while(1){
-                cout << "start routine at " << current_proc << '\n';
-                longjmp(threads[current_proc].buf, 1);
-            }
-        }
-    }
-    setjmp(sjb);
-    if (!init){
-        init = true;
-        longjmp(start, 1);
-    }
-
-    /* main loop so the program doesn't die before the first timer goes off.
-    After the first timer, control will never come back (regardless of pause()) */
-    while (1){
-        printf("MAIN LOOP has control!\n");
+    init = true;
+    while(!loop_starts){
         pause();
     }
-}
-void thread_exit(){
-    vector<Thread>::iterator iter;
-    for (iter = threads.begin(); iter != threads.end(); iter++)
-        if (iter->tid == threads[current_proc].tid)
-            break;
-    iter->status = STATUS_EXIT;
-    // if (iter->stack){
-    //     free(iter->stack);
-    // }
-    threads.erase(iter);
-}
-int add_thread(pthread_t *thread, void *(*start_routine) (void*), void *arg){
-    Thread t;
-    t.tid = threads.size();
-    t.status = STATUS_READY;
-    t.stack = (int*) malloc(STACK_SIZE * sizeof(int));
-    t.stack[STACK_SIZE - 2] = *(int*)&arg;
-    t.stack[STACK_SIZE - 1] = *(int*)&thread_exit;
-    t.buf->__jmpbuf[4] =  ptr_mangle((int)&t.stack[STACK_SIZE - 1]);
-    t.buf->__jmpbuf[5] =  ptr_mangle(*(int*)&start_routine);
-    threads.push_back(t);
-    cout << "add\n";
-    return t.tid;
 }
