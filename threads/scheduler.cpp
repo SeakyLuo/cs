@@ -45,14 +45,13 @@ void loop(int signal){
     setjmp(jb);
     int size = threads.size();
     if (size > 1){
-        int next = current;
-        do { next = (next + 1) % size; }
-        while (threads[next].status != STATUS_READY);
+        int next;
+        for (next = current; threads[next].status != STATUS_READY; next = (next + 1) % size);
         cout << "Curr: " << current << " Next: " << next << " Threads:" << size << "\n";
         threads[current].status = STATUS_READY;
         threads[current = next].status = STATUS_RUN;
     }else{
-        cout << "Only Main\n";
+        cout << "Main\n";
     }
     longjmp(threads[current].buf, 1);
 }
@@ -63,6 +62,7 @@ void thread_exit(){
             break;
 
     iter->status = STATUS_EXIT;
+    cout << iter -> tid << " deleted\n";
     threads.erase(iter);
     int size = threads.size();
     if (current == size) current = 0;
@@ -95,7 +95,10 @@ void Init(){
     /* set necessary signal flags; in our case, we want to make sure that we intercept
     signals even when we're inside the loop function (again, see man page(s)) */
     act.sa_flags = SA_NODEFER;
-    sigemptyset(&act.sa_mask);
+    // sigset_t sigs;
+    // sigemptyset(&act.sa_mask);
+    // sigaddset(&sigs, SIGALRM);
+    // act.sa_mask = sigs;
     if (sigaction(SIGALRM, &act, NULL) == -1){
         cout << "Unable to catch SIGALRM\n";
     }
