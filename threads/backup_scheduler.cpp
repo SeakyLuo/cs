@@ -37,12 +37,11 @@ typedef struct Thread {
 
 vector<Thread> threads;
 int current = 0;
-bool init = false, loop_starts = false;
+bool init = false;
 jmp_buf jb;
 
 // Signal handler
 void loop(int signal){
-    loop_starts = true;
     setjmp(jb);
     int size = threads.size();
     if (size){

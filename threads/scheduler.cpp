@@ -37,26 +37,23 @@ typedef struct Thread {
 vector<Thread> threads;
 vector<jmp_buf> jbuffer(128);
 bool init = false;
-jmp_buf ctn_main, scheduler_jmpbuf;
+jmp_buf jb;
 int current = 0;
 
 // Signal handler
 void loop(int signal){
-    setjmp(scheduler_jmpbuf);
+    setjmp(jb);
     int size = threads.size();
-    while (size == 0) pause();
-    cout << "fuck " << current << "\n";
-    threads[current].status = STATUS_READY;
-    do {
-        current = (current + 1) % size;
-    }while (threads[current].status != STATUS_READY);
-
-    threads[current].status = STATUS_RUN;
-    if (current){
+    if (size > 1){
+        int next;
+        cout << "Hello\n";
+        for (next = current; threads[next].status != STATUS_READY; next = (next + 1) % size);
+        cout << "Curr: " << current << " Next: " << next << "\n";
+        threads[current].status = STATUS_READY;
+        threads[current = next].status = STATUS_RUN;
         longjmp(threads[current].buf, 1);
-    }else{
-        longjmp(ctn_main, 1);
     }
+    cout << "Main\n";
 }
 void Init(){
     /* itimerval data structure holds necessary info for timer; see man page(s) */
@@ -92,7 +89,7 @@ int add_thread(void *(*start_routine) (void*), void *arg){
     t.stack = (int*) malloc(STACK_SIZE * sizeof(int));
     if (*start_routine){
         t.stack[STACK_SIZE - 2] = (int) arg;
-        t.stack[STACK_SIZE - 1] = (int) pthread_exit;
+        t.stack[STACK_SIZE - 1] = (int) thread_exit;
         t.buf->__jmpbuf[4] =  ptr_mangle((int) &t.stack[STACK_SIZE - 1]);
         t.buf->__jmpbuf[5] =  ptr_mangle((int) start_routine);
     }
@@ -107,8 +104,7 @@ void thread_exit(){
 
     iter->status = STATUS_EXIT;
     threads.erase(iter);
-    longjmp(scheduler_jmpbuf, 1);
-    // if (threads.size()) longjmp(scheduler_jmpbuf, 1);
-    // else exit(0);
     //free(iter->stack);
+    if (threads.size()) longjmp(jb, 1);
+    else exit(0);
 }
