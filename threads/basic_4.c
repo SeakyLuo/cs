@@ -35,7 +35,7 @@ void * bbq_party(void *args) {
 }
 
 int main() {
-	
+
 	printf("Inviting friends to the party!\n");
 
 	pthread_create(&thread_1, NULL, bbq_party, NULL);

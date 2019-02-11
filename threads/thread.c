@@ -17,9 +17,9 @@ void pthread_exit(void* value_ptr) {
 }
 
 void thread_create(pthread_t* restrictthread, const pthread_attr_t* restrictattr, void* (*start_routine)(void*), void* restrict_arg) {
-	printf("Seg fault\n");int index = get_next_thread(0, STATE_DEAD);printf("Seg fault\n");
+	int index = get_next_thread(0, STATE_DEAD);
 	setjmp(threads[index].buffer);
-	printf("Seg fault\n");
+
 	char* stack = (char*) malloc(STACK_SIZE);
 	int* base_pointer = (int*) (stack + STACK_SIZE - 4);
 	*base_pointer = (int) pthread_exit;
@@ -28,7 +28,7 @@ void thread_create(pthread_t* restrictthread, const pthread_attr_t* restrictattr
 	threads[index].state = STATE_READY;
 	threads[index].stack_pointer = stack;
 	tcount ++;
-	*restrictthread = (pthread_t) index;printf("Seg fault\n");
+	*restrictthread = (pthread_t) index;
 
 	if (!initialized) {
 		set_timer();
@@ -39,7 +39,6 @@ void thread_create(pthread_t* restrictthread, const pthread_attr_t* restrictattr
 		if (setjmp(threads[index].buffer))
 			return;
 		initialized = 1;
-printf("Seg fault\n");
 	}
 }
 

@@ -35,25 +35,55 @@ typedef struct Thread {
 }Thread;
 
 vector<Thread> threads;
-vector<jmp_buf> jbuffer(128);
 bool init = false;
 jmp_buf jb;
 int current = 0;
+int tid = 0;
 
 // Signal handler
 void loop(int signal){
     setjmp(jb);
     int size = threads.size();
     if (size > 1){
-        int next;
-        cout << "Hello\n";
-        for (next = current; threads[next].status != STATUS_READY; next = (next + 1) % size);
-        cout << "Curr: " << current << " Next: " << next << "\n";
+        int next = current;
+        do { next = (next + 1) % size; }
+        while (threads[next].status != STATUS_READY);
+        cout << "Curr: " << current << " Next: " << next << " Threads:" << size << "\n";
         threads[current].status = STATUS_READY;
         threads[current = next].status = STATUS_RUN;
-        longjmp(threads[current].buf, 1);
+    }else{
+        cout << "Only Main\n";
     }
-    cout << "Main\n";
+    longjmp(threads[current].buf, 1);
+}
+void thread_exit(){
+    vector<Thread>::iterator iter;
+    for (iter = threads.begin(); iter != threads.end(); iter++)
+        if (iter->tid == threads[current].tid)
+            break;
+
+    iter->status = STATUS_EXIT;
+    threads.erase(iter);
+    int size = threads.size();
+    if (current == size) current = 0;
+    //free(iter->stack);
+    if (size) longjmp(jb, 1);
+    else exit(0);
+}
+int add_thread(void *(*start_routine) (void*), void *arg){
+    Thread t;
+    t.tid = tid++;
+    t.status = STATUS_READY;
+    t.stack = (int*) malloc(STACK_SIZE * sizeof(int));
+    if (*start_routine){
+        t.stack[STACK_SIZE - 2] = (int) arg;
+        t.stack[STACK_SIZE - 1] = (int) thread_exit;
+        t.buf->__jmpbuf[4] = ptr_mangle((int) &t.stack[STACK_SIZE - 1]);
+        t.buf->__jmpbuf[5] = ptr_mangle((int) start_routine);
+    }
+    threads.push_back(t);
+    current = threads.size() - 1;
+    return t.tid;
 }
 void Init(){
     /* itimerval data structure holds necessary info for timer; see man page(s) */
@@ -65,6 +95,7 @@ void Init(){
     /* set necessary signal flags; in our case, we want to make sure that we intercept
     signals even when we're inside the loop function (again, see man page(s)) */
     act.sa_flags = SA_NODEFER;
+    sigemptyset(&act.sa_mask);
     if (sigaction(SIGALRM, &act, NULL) == -1){
         cout << "Unable to catch SIGALRM\n";
     }
@@ -81,30 +112,4 @@ void Init(){
     }
     init = true;
     pause();
-}
-int add_thread(void *(*start_routine) (void*), void *arg){
-    Thread t;
-    t.tid = threads.size();
-    t.status = STATUS_READY;
-    t.stack = (int*) malloc(STACK_SIZE * sizeof(int));
-    if (*start_routine){
-        t.stack[STACK_SIZE - 2] = (int) arg;
-        t.stack[STACK_SIZE - 1] = (int) thread_exit;
-        t.buf->__jmpbuf[4] =  ptr_mangle((int) &t.stack[STACK_SIZE - 1]);
-        t.buf->__jmpbuf[5] =  ptr_mangle((int) start_routine);
-    }
-    threads.push_back(t);
-    return t.tid;
-}
-void thread_exit(){
-    vector<Thread>::iterator iter;
-    for (iter = threads.begin(); iter != threads.end(); iter++)
-        if (iter->tid == threads[current].tid)
-            break;
-
-    iter->status = STATUS_EXIT;
-    threads.erase(iter);
-    //free(iter->stack);
-    if (threads.size()) longjmp(jb, 1);
-    else exit(0);
 }
