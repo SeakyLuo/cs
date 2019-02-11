@@ -47,11 +47,11 @@ void loop(int signal){
     if (size > 1){
         int next;
         for (next = current; threads[next].status != STATUS_READY; next = (next + 1) % size);
-        cout << "Curr: " << current << " Next: " << next << " Threads:" << size << "\n";
+        // cout << "Curr: " << current << " Next: " << next << " Threads:" << size << "\n";
         threads[current].status = STATUS_READY;
         threads[current = next].status = STATUS_RUN;
     }else{
-        cout << "Only Main\n";
+        // cout << "Only Main\n";
     }
     longjmp(threads[current].buf, 1);
 }
@@ -80,8 +80,8 @@ int add_thread(void *(*start_routine) (void*), void *arg){
         t.buf->__jmpbuf[4] = ptr_mangle((int) &t.stack[STACK_SIZE - 1]);
         t.buf->__jmpbuf[5] = ptr_mangle((int) start_routine);
     }
+    current = threads.size();
     threads.push_back(t);
-    current = threads.size() - 1;
     return t.tid;
 }
 void Init(){
