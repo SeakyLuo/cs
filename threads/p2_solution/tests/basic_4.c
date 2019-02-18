@@ -16,23 +16,22 @@ void force_sleep(int seconds) {
 		memset(&remainder_spec,0,sizeof(remainder_spec));
 	}
 }
-
 #define enjoy_party force_sleep(1)
 #define cleanup_party force_sleep(2)
+#define pass_time force_sleep(1)
 
 unsigned int thread_1_done = 0;
-unsigned int thread_2_done = 0;
+unsigned int make_mess = 0;
+unsigned int is_welcome = 1;
 pthread_t thread_1;
-pthread_t thread_2;
 
 void * bbq_party(void *args) {
-	printf("Friend %u came to the party!\n",pthread_self());
-	
-	if(pthread_self() == thread_1) {
-		thread_1_done++;
-	} else {
-		thread_2_done++;
+	printf("Friend %u came to the party!\n",(unsigned)pthread_self());
+	while(is_welcome > 0) {
+		make_mess++;
+		pass_time;
 	}
+	thread_1_done++;
 }
 
 int main() {
@@ -40,15 +39,19 @@ int main() {
 	printf("Inviting friends to the party!\n");
 
 	pthread_create(&thread_1, NULL, bbq_party, NULL);
-	pthread_create(&thread_2, NULL, bbq_party, NULL);
 
-	while(thread_1_done == 0 && thread_2_done == 0) {
-		enjoy_party;
+	while(thread_1_done == 0) {
+		if(is_welcome > 0 && make_mess >= 2) {
+			printf("%u made a mess! Not a good friend.\n",(unsigned)thread_1);
+			is_welcome = 0;
+		} else {
+			enjoy_party;
+		}
 	}
 
-	printf("Friend %u left the party...\n", thread_1);
-	printf("Friend %u left the party...\n", thread_2);
+	printf("Not-Friend %u finally left the party.\n", (unsigned)thread_1);
 	cleanup_party;
-	printf("Now we're all alone... :(\n");
+	printf("I should find better friends...\n");
+
 	return 0;
 }

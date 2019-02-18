@@ -37,9 +37,7 @@ static struct sigaction act;
 #define STOP_TIMER setitimer(ITIMER_REAL,&zero_timer,NULL)
 /* number of ms for timer */
 #define INTERVAL 50
-#define STATUS_EXIT 0
-#define STATUS_RUN 1
-#define STATUS_BLOCK 1
+
 /*
  * Thread Control Block definition
  */
@@ -68,7 +66,7 @@ typedef struct {
 /* queue for pool thread, easy for round robin */
 static std::queue<thread> thread_pool;
 /* keep separate handle for main thread */
-static thread main_thread;
+static thread main_tcb;
 static thread garbage_collector;
 
 /* for assigning id to threads; main implicitly has 0 */
@@ -109,11 +107,11 @@ void init() {
 	interval_timer.it_interval = interval_timer.it_value;
 
 	/* create thread control buffer for main thread, set as current active tcb */
-	main_thread.id = 0;
-	main_thread.stack = NULL;
+	main_tcb.id = 0;
+	main_tcb.stack = NULL;
 
 	/* front of thread_pool is the active thread */
-	thread_pool.push(main_thread);
+	thread_pool.push(main_tcb);
 
 	/* set up garbage collector */
 	garbage_collector.id = 128;
@@ -221,8 +219,8 @@ void pthread_exit(void *value_ptr) {
 	if(thread_pool.front().id == 0) {
 		/* if its the main thread, still keep a reference to it
 	       we'll longjmp here when all other threads are done */
-		main_thread = thread_pool.front();
-		if(setjmp(main_thread.jb)) {
+		main_tcb = thread_pool.front();
+		if(setjmp(main_tcb.jb)) {
 			/* garbage collector's stack should be freed by OS upon exit;
 			   We'll free anyways, for completeness */
 			free((void*) garbage_collector.stack);
@@ -279,10 +277,10 @@ void the_nowhere_zone(void) {
 	/* Don't schedule the thread anymore */
 	thread_pool.pop();
 
-	/* If the last thread just exited, jump to main_thread and exit.
+	/* If the last thread just exited, jump to main_tcb and exit.
 	   Otherwise, start timer again and jump to next thread*/
 	if(thread_pool.size() == 0) {
-		longjmp(main_thread.jb,1);
+		longjmp(main_tcb.jb,1);
 	} else {
 		START_TIMER;
 		longjmp(thread_pool.front().jb,1);
