@@ -9,6 +9,7 @@
 #include <time.h>
 #include <string.h>
 #include <queue>
+#include "semaphore.cpp"
 
 /*
  * these could go in a .h file but i'm lazy
