@@ -53,11 +53,17 @@ typedef struct {
 	char *stack;
 
 	void lock(){
-
+		sigset_t sig;
+		sigemptyset(&sig);
+		sigaddset(&sig, SIGALRM);
+		sigprocmask(SIG_BLOCK, &sig, NULL);
 	}
 
 	void unlock(){
-
+		sigset_t sig;
+		sigemptyset(&sig);
+		sigaddset(&sig, SIGALRM);
+		sigprocmask(SIG_UNBLOCK, &sig, NULL);
 	}
 } thread;
 
