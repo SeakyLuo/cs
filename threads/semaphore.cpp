@@ -13,7 +13,7 @@ int sem_init(sem_t *sem, int pshared, unsigned value){
 	//4. Assign it value passed in the function parameter
 	//5. Set its waiting queue to NULL
 	//6. Add it to global sem_queue
-
+	return 0;
 }
 
 int sem_destroy(sem_t *sem){
@@ -24,7 +24,7 @@ int sem_destroy(sem_t *sem){
 	//2. Find the semaphore from global sem_queue
 	//3. Remove from global sem_queue
 	//4. Free it
-
+	return 0;
 }
 
 int sem_wait(sem_t *sem){
@@ -37,7 +37,7 @@ int sem_wait(sem_t *sem){
 	//	add current thread to semaphore's waiting queue set current thread status to blocked call schedule()
 
 	// sudo code
-	//s = find_sema(id); 
+	//s = find_sema(id);
 	//if (s == NULL) error;
 	//if (s->value > 0) {
 	//	s->value--;
@@ -49,6 +49,7 @@ int sem_wait(sem_t *sem){
 	//	current->status = BLOCKED;
 	//	schedule();
 	//}
+	return 0;
 }
 
 int sem_post(sem_t *sem){
@@ -65,11 +66,12 @@ int sem_post(sem_t *sem){
 	//s = find_sema(id);
 	//if (s == NULL) error;
 	//if (s->value > 0){
-	//	s->value++;    
-	//	unlock(); 
+	//	s->value++;
+	//	unlock();
 	//}
 	//else {
 	//	s->q->status = RUNNABLE; // set first thread in waiting queue for sem to Runnable
-	//	s->q = s->q->sema; // switch to next thread 
+	//	s->q = s->q->sema; // switch to next thread
 	//}
+	return 0;
 }
