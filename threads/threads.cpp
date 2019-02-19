@@ -40,7 +40,7 @@ static struct sigaction act;
 #define INTERVAL 50
 #define STATUS_EXIT 0
 #define STATUS_RUN 1
-#define STATUS_BLOCK 1
+#define STATUS_BLOCK 2
 /*
  * Thread Control Block definition
  */
