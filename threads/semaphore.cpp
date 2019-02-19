@@ -1,7 +1,15 @@
 #include <semaphore.h>
+#include "threads.h"
 
 using namespace std;
 #define SEM_VALUE_MAX 65536
+
+typedef struct Semaphore {
+	int id;
+	int value;
+	Thread *thread;
+	Semaphore *next;
+} Semaphore;
 
 int sem_init(sem_t *sem, int pshared, unsigned value){
 	//1. Check errors:
@@ -13,6 +21,7 @@ int sem_init(sem_t *sem, int pshared, unsigned value){
 	//4. Assign it value passed in the function parameter
 	//5. Set its waiting queue to NULL
 	//6. Add it to global sem_queue
+	if (pshared || value > SEM_VALUE_MAX || sem == NULL) return;
 	return 0;
 }
 

@@ -24,10 +24,13 @@ bool init = false;
 int tid = 0;
 
 typedef struct Thread {
-    pthread_t tid;
+    pthread_t id;
 	int status;
 	char* stack;
     jmp_buf jb;
+	Thread *join;
+	void *exit_value;
+	Semaphore *sem;
     void lock(){
 		sigset_t sig;
 		sigemptyset(&sig);
@@ -44,7 +47,7 @@ typedef struct Thread {
 } Thread;
 Thread threads[MAX_THREADS];
 
-void signal_handler(int signo);
+void signal_handler(int);
 void the_nowhere_zone(void);
 static int ptr_mangle(int p){
 	unsigned int ret;
@@ -63,4 +66,4 @@ void pthread_exit_wrapper(){
     asm("movl %%eax , %0\n": "=r"(res)) ;
     pthread_exit((void*) res);
 }
-int pthread_join(pthread_t thread, void **value_ptr);
+int pthread_join(pthread_t, void**);

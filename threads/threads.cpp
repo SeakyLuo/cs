@@ -1,6 +1,23 @@
 #include "threads.h"
 
 int pthread_join(pthread_t thread, void **value_ptr){
+	//1. Get Thread from runQueue //t = list_get(run_queue, id);
+	//2. handle error checks: EINVAL, ESRCH, EDEADLK 
+	//3. Update information in the thread that to be waited for: t -> joining = current; 
+	//4. Set current(calling) thread status to BLOCKED (Remove it from run_queue depending on your implementation if required
+	//	or
+	//	return only runnable threads from find_next_runnable
+	//Wake up the waiting thread once thread exits
+	//Modify your pthread_exit
+	//if (current->joining != NULL) {
+	//	1. //Find the thread that is waiting
+	//		thread *to_wake = current->joining; 
+	//	2. Save the exit_value 
+	//	3. Change the to_wake status to Runnable (Add to run_queue if required depending on your implementation)
+	//}
+	if (threads[current].join != NULL) {
+
+	}
 	return 0;
 }
 
@@ -53,7 +70,7 @@ int pthread_create(pthread_t *restrict_thread, const pthread_attr_t *restrict_at
 	if(!init) Init();
 	*restrict_thread = ++tid;
     Thread t;
-    t.tid = tid;
+    t.id = tid;
 	t.status = STATUS_RUN;
 	t.stack = (char*) malloc(STACK_SIZE);
     *(int*)(t.stack + STACK_SIZE - 4) = (int) restrict_arg;
@@ -77,6 +94,6 @@ void pthread_exit(void *value_ptr){
 }
 
 pthread_t pthread_self(void) {
-    if (current) return threads[current].tid;
+    if (current) return threads[current].id;
     else return 0;
 }
