@@ -301,8 +301,7 @@ void the_nowhere_zone(void) {
  *
  * ptr mangle magic; for security reasons
  */
-int ptr_mangle(int p)
-{
+int ptr_mangle(int p){
     unsigned int ret;
     __asm__(" movl %1, %%eax;\n"
         " xorl %%gs:0x18, %%eax;"
