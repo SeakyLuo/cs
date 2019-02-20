@@ -11,6 +11,9 @@ typedef struct Semaphore {
 	Semaphore *next;
 } Semaphore;
 
+vector<Semaphore> sems;
+int sid = 0;
+
 int sem_init(sem_t *sem, int pshared, unsigned value){
 	//1. Check errors:
 	//	a.pshared != 0
@@ -22,6 +25,10 @@ int sem_init(sem_t *sem, int pshared, unsigned value){
 	//5. Set its waiting queue to NULL
 	//6. Add it to global sem_queue
 	if (pshared || value > SEM_VALUE_MAX || sem == NULL) return;
+	*sem = ++sid;
+	Semaphore s;
+	s.id = sid;
+	sems.push_back(s);
 	return 0;
 }
 
@@ -33,10 +40,29 @@ int sem_destroy(sem_t *sem){
 	//2. Find the semaphore from global sem_queue
 	//3. Remove from global sem_queue
 	//4. Free it
+	vector<Semaphore>::iterator iter;
+	for (iter = sems.begin(); iter != sems.end(); iter++){
+		if (iter->sid == sem) break;
+	}
+	sems.erase(iter);
 	return 0;
 }
 
 int sem_wait(sem_t *sem){
+	if (sem == NULL) return;
+	for (iter = sems.begin(); iter != sems.end(); iter++){
+		if (iter->sid == sem){
+			if (iter->value){
+				iter->value--;
+				iter->thread.unlock();
+			}else{
+				threads[current].sem = iter->next;
+				threads[current].status = STATUS_BLOCK;
+				iter->thread = threads[current];
+				signal_handler(SIGALRM);
+			}
+		}
+	}
 	//1. Check errors:
 	//	a.sem == NULL
 	//2. s = find semaphore from sem_queue
@@ -62,6 +88,18 @@ int sem_wait(sem_t *sem){
 }
 
 int sem_post(sem_t *sem){
+	if (sem == NULL) return;
+	for (iter = sems.begin(); iter != sems.end(); iter++){
+		if (iter->sid == sem){
+			if (iter->value){
+				iter->value++;
+				iter->thread.unlock();
+			}else{
+				threads[current].status = STATUS_RUN;
+				iter->thread = iter->thread.sem;
+			}
+		}
+	}
 	//1. Check errors:
 	//	a.sem == NULL
 	//2. s = find semaphore from sem_queue
