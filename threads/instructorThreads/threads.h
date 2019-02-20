@@ -45,12 +45,21 @@ static struct sigaction act;
 #define STATUS_EXIT 0
 #define STATUS_RUN 1
 #define STATUS_BLOCK 2
-#define STACK_SIZE 32767
 #define SEM_VALUE_MAX 65536
+
+typedef struct Semaphore {
+	int id;
+	int value;
+	Thread *thread;
+	Semaphore *next;
+} Semaphore;
+
+vector<Semaphore> sems;
+int sid = 0;
 /*
  * Thread Control Block definition
  */
-typedef struct Thread{
+typedef struct {
 	/* pthread_t usually typedef as unsigned long int */
 	pthread_t id;
 	/* jmp_buf usually defined as struct with __jmpbuf internal buffer
@@ -72,29 +81,19 @@ typedef struct Thread{
 		sigaddset(&sig, SIGALRM);
 		sigprocmask(SIG_UNBLOCK, &sig, NULL);
 	}
-} Thread;
-
-typedef struct semaphore {
-	int id;
-	int value;
-	Thread *thread;
-	semaphore *next;
-} semaphore;
-
-vector<semaphore> sems;
-int sid = 0;
+} thread;
 
 /*
  * Globals for thread scheduling and control
  */
 
 /* queue for pool thread, easy for round robin */
-static std::queue<Thread> threads;
+static std::queue<thread> thread_pool;
 /* keep separate handle for main thread */
-static Thread main_thread;
-static Thread garbage_collector;
+static thread main_thread;
+static thread garbage_collector;
 
 /* for assigning id to threads; main implicitly has 0 */
-static unsigned long tid = 1;
+static unsigned long id_counter = 1;
 /* we initialize in pthread_create only once */
-static bool has_initialized = false;
+static int has_initialized = 0;

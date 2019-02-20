@@ -1,18 +1,4 @@
-#include <semaphore.h>
 #include "threads.h"
-
-using namespace std;
-#define SEM_VALUE_MAX 65536
-
-typedef struct Semaphore {
-	int id;
-	int value;
-	Thread *thread;
-	Semaphore *next;
-} Semaphore;
-
-vector<Semaphore> sems;
-int sid = 0;
 
 int sem_init(sem_t *sem, int pshared, unsigned value){
 	//1. Check errors:
@@ -24,7 +10,7 @@ int sem_init(sem_t *sem, int pshared, unsigned value){
 	//4. Assign it value passed in the function parameter
 	//5. Set its waiting queue to NULL
 	//6. Add it to global sem_queue
-	if (pshared || value > SEM_VALUE_MAX || sem == NULL) return;
+	if (pshared || value > SEM_VALUE_MAX || sem == NULL) return 0;
 	*sem = ++sid;
 	Semaphore s;
 	s.id = sid;
@@ -42,14 +28,14 @@ int sem_destroy(sem_t *sem){
 	//4. Free it
 	vector<Semaphore>::iterator iter;
 	for (iter = sems.begin(); iter != sems.end(); iter++){
-		if (iter->sid == sem) break;
+		if (iter->id == sem) break;
 	}
 	sems.erase(iter);
 	return 0;
 }
 
 int sem_wait(sem_t *sem){
-	if (sem == NULL) return;
+	if (sem == NULL) return 0;
 	for (iter = sems.begin(); iter != sems.end(); iter++){
 		if (iter->sid == sem){
 			if (iter->value){
@@ -63,6 +49,7 @@ int sem_wait(sem_t *sem){
 			}
 		}
 	}
+	return 0;
 	//1. Check errors:
 	//	a.sem == NULL
 	//2. s = find semaphore from sem_queue
@@ -84,11 +71,10 @@ int sem_wait(sem_t *sem){
 	//	current->status = BLOCKED;
 	//	schedule();
 	//}
-	return 0;
 }
 
 int sem_post(sem_t *sem){
-	if (sem == NULL) return;
+	if (sem == NULL) return 0;
 	for (iter = sems.begin(); iter != sems.end(); iter++){
 		if (iter->sid == sem){
 			if (iter->value){
@@ -100,6 +86,7 @@ int sem_post(sem_t *sem){
 			}
 		}
 	}
+	return 0;
 	//1. Check errors:
 	//	a.sem == NULL
 	//2. s = find semaphore from sem_queue
@@ -120,5 +107,4 @@ int sem_post(sem_t *sem){
 	//	s->q->status = RUNNABLE; // set first thread in waiting queue for sem to Runnable
 	//	s->q = s->q->sema; // switch to next thread
 	//}
-	return 0;
 }
