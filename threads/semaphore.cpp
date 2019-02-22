@@ -10,7 +10,7 @@ int sem_init(sem_t *sem, int pshared, unsigned value){
 	//4. Assign it value passed in the function parameter
 	//5. Set its waiting queue to NULL
 	//6. Add it to global sem_queue
-	if (pshared || value > SEM_VALUE_MAX || sem == NULL) return 0;
+	if (pshared || value >= SEM_VALUE_MAX || sem == NULL) return 0;
 	*sem = ++sid;
 	Semaphore s;
 	s.id = sid;
@@ -30,7 +30,9 @@ int sem_destroy(sem_t *sem){
 	for (iter = sems.begin(); iter != sems.end(); iter++){
 		if (iter->id == sem) break;
 	}
-	sems.erase(iter);
+	if (iter->thread == NULL){
+		sems.erase(iter);
+	}
 	return 0;
 }
 
@@ -38,13 +40,13 @@ int sem_wait(sem_t *sem){
 	if (sem == NULL) return 0;
 	for (iter = sems.begin(); iter != sems.end(); iter++){
 		if (iter->sid == sem){
-			if (iter->value){
+			if (iter->value > 0){
 				iter->value--;
 				iter->thread.unlock();
 			}else{
-				threads[current].sem = iter->next;
-				threads[current].status = STATUS_BLOCK;
-				iter->thread = threads[current];
+				threads.front().sem = *iter;
+				threads.front().status = STATUS_BLOCK;
+				iter->thread = threads.front();
 				signal_handler(SIGALRM);
 			}
 		}
@@ -77,11 +79,11 @@ int sem_post(sem_t *sem){
 	if (sem == NULL) return 0;
 	for (iter = sems.begin(); iter != sems.end(); iter++){
 		if (iter->sid == sem){
-			if (iter->value){
+			if (iter->value > 0){
 				iter->value++;
 				iter->thread.unlock();
 			}else{
-				threads[current].status = STATUS_RUN;
+				threads.front().status = STATUS_RUN;
 				iter->thread = iter->thread.sem;
 			}
 		}

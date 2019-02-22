@@ -50,7 +50,7 @@ static struct sigaction act;
 /*
  * Thread Control Block definition
  */
-typedef struct Thread{
+typedef struct Thread {
 	/* pthread_t usually typedef as unsigned long int */
 	pthread_t id;
 	/* jmp_buf usually defined as struct with __jmpbuf internal buffer
@@ -58,6 +58,10 @@ typedef struct Thread{
 	jmp_buf jb;
 	/* stack pointer for thread; for main thread, this will be NULL */
 	char *stack;
+	Thread *join;
+	int status;
+	void *exit_value;
+	Semaphore *sem;
 
 	void lock(){
 		sigset_t sig;
@@ -74,14 +78,14 @@ typedef struct Thread{
 	}
 } Thread;
 
-typedef struct semaphore {
+typedef struct Semaphore {
 	int id;
 	int value;
 	Thread *thread;
-	semaphore *next;
-} semaphore;
+	Semaphore *next;
+} Semaphore;
 
-vector<semaphore> sems;
+vector<Semaphore> sems;
 int sid = 0;
 
 /*
