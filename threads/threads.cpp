@@ -8,6 +8,7 @@ int pthread_join(pthread_t thread, void **value_ptr){
 	for (iter = threads.begin(); iter != threads.end(); iter++){
 		if (iter->id == thread) break;
 	}
+	if (iter == threads.end()) return 3; // no such process
 
 	//Thread *target_thread = *iter;
 	threads.front().join = &(*iter);
