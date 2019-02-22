@@ -1,6 +1,20 @@
 #include "threads.h"
 
 int pthread_join(pthread_t thread, void **value_ptr){
+
+	PAUSE_TIMER;
+
+	vector<Thread>::iterator iter;
+	for (iter = threads.begin(); iter != threads.end(); iter++){
+		if (iter->id == thread) break;
+	}
+
+	//Thread *target_thread = *iter;
+	threads.front().join = &(*iter);
+	threads.front().status = STATUS_BLOCK;
+
+	START_TIMER;
+	
 	// 1. Get Thread from runQueue //t = list_get(run_queue, id);
 	// 2. handle error checks: EINVAL, ESRCH, EDEADLK
 	// 3. Update information in the thread that to be waited for:
@@ -56,7 +70,7 @@ void init(){
 	main_thread.stack = NULL;
 
 	/* front of threads is the active thread */
-	threads.push(main_thread);
+	threads.push_back(main_thread);
 
 	/* set up garbage collector */
 	garbage_collector.id = 128;
@@ -100,9 +114,10 @@ int pthread_create(pthread_t *restrict_thread, const pthread_attr_t *restrict_at
 	   which main will have access to */
 	Thread t;
 	t.id = tid++;
+	t.status = STATUS_RUNNABLE;
 	*restrict_thread = t.id;
 
-	/* simulate function call by pushing arguments and return address to the stack
+	/* simulate function call by push_backing arguments and return address to the stack
 	   remember the stack grows down, and that threads should implicitly return to
 	   pthread_exit after done with start_routine */
 
@@ -122,7 +137,7 @@ int pthread_create(pthread_t *restrict_thread, const pthread_attr_t *restrict_at
 	t.jb->__jmpbuf[5] = ptr_mangle((uintptr_t) start_routine);
 
 	/* new thread is ready to be scheduled! */
-	threads.push(t);
+	threads.push_back(t);
 
     /* resume timer */
     RESUME_TIMER;
@@ -157,14 +172,17 @@ void pthread_exit(void *value_ptr){
 	if (has_initialized == 0){
 		exit(0);
 	}
-
 	/* stop the timer so we don't get interrupted */
 	STOP_TIMER;
 
-	if (threads.front().id == 0){
+	Thread this_thread = threads.front();
+	if (this_thread.join != NULL)
+		this_thread.join->status = STATUS_RUNNABLE;
+
+	if (this_thread.id == 0){
 		/* if its the main thread, still keep a reference to it
 	       we'll longjmp here when all other threads are done */
-		main_thread = threads.front();
+		main_thread = this_thread;
 		if (setjmp(main_thread.jb)){
 			/* garbage collector's stack should be freed by OS upon exit;
 			   We'll free anyways, for completeness */
@@ -196,8 +214,10 @@ void signal_handler(int signo) {
 	   non-zero value. */
 	if (setjmp(threads.front().jb) == 0){
 		/* switch threads */
-		threads.push(threads.front());
-		threads.pop();
+		do{
+			threads.push_back(threads.front());
+			threads.erase(threads.begin());
+		}while(threads.front().status == STATUS_BLOCK);
 		/* resume scheduler and GOOOOOOOOOO */
 		longjmp(threads.front().jb, 1);
 	}
@@ -220,7 +240,7 @@ void the_nowhere_zone(void) {
 	threads.front().stack = NULL;
 
 	/* Don't schedule the thread anymore */
-	threads.pop();
+	threads.erase(threads.begin());
 
 	/* If the last thread just exited, jump to main_thread and exit.
 	   Otherwise, start timer again and jump to next thread*/

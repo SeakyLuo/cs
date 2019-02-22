@@ -43,7 +43,7 @@ static struct sigaction act;
 /* number of ms for timer */
 #define INTERVAL 50
 #define STATUS_EXIT 0
-#define STATUS_RUN 1
+#define STATUS_RUNNABLE 1
 #define STATUS_BLOCK 2
 #define STACK_SIZE 32767
 #define SEM_VALUE_MAX 65536
@@ -61,7 +61,7 @@ typedef struct Thread {
 	Thread *join;
 	int status;
 	void *exit_value;
-	Semaphore *sem;
+	Thread *sem;
 
 	void lock(){
 		sigset_t sig;
@@ -93,7 +93,8 @@ int sid = 0;
  */
 
 /* queue for pool thread, easy for round robin */
-static std::queue<Thread> threads;
+//static std::queue<Thread> threads;
+static std::vector<Thread> threads;
 /* keep separate handle for main thread */
 static Thread main_thread;
 static Thread garbage_collector;
