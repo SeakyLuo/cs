@@ -11,7 +11,7 @@ int pthread_join(pthread_t thread, void **value_ptr){
 	if (iter == threads.end()) return 3; // no such process
 
 	//Thread *target_thread = *iter;
-	threads.front().join = &(*iter);
+	iter->join = &threads.front();
 	threads.front().status = STATUS_BLOCK;
 
 	START_TIMER;
