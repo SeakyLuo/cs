@@ -1,17 +1,17 @@
 #include "threads.h"
 
-int pthread_join(pthread_t thread_id, void **value_ptr){
+int pthread_join(pthread_t thread, void **value_ptr){
 	PAUSE_TIMER;
 	vector<Thread>::iterator iter;
 	for (iter = threads.begin(); iter != threads.end(); iter++){
-		if (iter->id == thread_id){
-			iter->join = &threads.front();
-			threads.front().status = STATUS_BLOCK;
-			break;
-		}
+		if (iter->id == thread) break;
+	}
+	if(iter != threads.end()){
+		iter->join = &threads.front();
+		threads.front().status = STATUS_BLOCK;
 	}
 	RESUME_TIMER;
-	*value_ptr = exit_values[thread];
+	*value_ptr = exit_value_arr[thread];
 	return 0;
 
 	// 1. Get Thread from runQueue //t = list_get(run_queue, id);
@@ -176,7 +176,7 @@ void pthread_exit(void *value_ptr){
 	Thread this_thread = threads.front();
 	if (this_thread.join != NULL){
 		this_thread.join->status = STATUS_RUNNABLE;
-		exit_values[this_thread.id] = value_ptr;
+		exit_value_arr.push_back(value_ptr);
 	}
 
 	if (this_thread.id == 0){
@@ -194,7 +194,7 @@ void pthread_exit(void *value_ptr){
 	/* Jump to garbage collector stack frame to free memory and scheduler another thread.
 	   Since we're currently "living" on this thread's stack frame, deleting it while we're
 	   on it would be undefined behavior */
-	longjmp(garbage_collector.jb, 1);
+	longjmp(garbage_collector.jb,1);
 }
 
 /*
@@ -247,7 +247,7 @@ void the_nowhere_zone(void) {
 	   Otherwise, start timer again and jump to next thread*/
 	if(threads.size() == 0) {
 		longjmp(main_thread.jb, 1);
-	}else{
+	} else {
 		START_TIMER;
 		longjmp(threads.front().jb, 1);
 	}
