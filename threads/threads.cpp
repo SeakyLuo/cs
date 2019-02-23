@@ -1,20 +1,20 @@
 #include "threads.h"
 
 int pthread_join(pthread_t thread, void **value_ptr){
-
 	PAUSE_TIMER;
-
+	//cout << "here" << endl;
 	vector<Thread>::iterator iter;
 	for (iter = threads.begin(); iter != threads.end(); iter++){
 		if (iter->id == thread) break;
 	}
-	if (iter == threads.end()) return 3; // no such process
-
 	//Thread *target_thread = *iter;
-	iter->join = &threads.front();
-	threads.front().status = STATUS_BLOCK;
-
-	START_TIMER;
+	if(iter != threads.end()){
+		iter->join = &threads.front();
+		threads.front().status = STATUS_BLOCK;
+	}
+	RESUME_TIMER;
+	*value_ptr = exit_value_arr[thread];
+	return 0;
 	
 	// 1. Get Thread from runQueue //t = list_get(run_queue, id);
 	// 2. handle error checks: EINVAL, ESRCH, EDEADLK
@@ -35,7 +35,6 @@ int pthread_join(pthread_t thread, void **value_ptr){
 	// 3. Change the to_wake status to Runnable
 	// (Add to run_queue if required depending on your
 	// implementation)
-	return 0;
 }
 
 /*
@@ -125,7 +124,7 @@ int pthread_create(pthread_t *restrict_thread, const pthread_attr_t *restrict_at
 	t.stack = (char *) malloc (STACK_SIZE);
 
 	*(int*)(t.stack + STACK_SIZE - 4) = (int) restrict_arg;
-	*(int*)(t.stack + STACK_SIZE - 8) = (int) pthread_exit;
+	*(int*)(t.stack + STACK_SIZE - 8) = (int) pthread_exit_wrapper;
 
 	/* initialize jump buf structure to be 0, just in case there's garbage */
 	memset(&t.jb, 0, sizeof(t.jb));
@@ -177,8 +176,10 @@ void pthread_exit(void *value_ptr){
 	STOP_TIMER;
 
 	Thread this_thread = threads.front();
-	if (this_thread.join != NULL)
+	if (this_thread.join != NULL){
 		this_thread.join->status = STATUS_RUNNABLE;
+		exit_value_arr.push_back(value_ptr);
+	}
 
 	if (this_thread.id == 0){
 		/* if its the main thread, still keep a reference to it
@@ -241,6 +242,7 @@ void the_nowhere_zone(void) {
 	threads.front().stack = NULL;
 
 	/* Don't schedule the thread anymore */
+
 	threads.erase(threads.begin());
 
 	/* If the last thread just exited, jump to main_thread and exit.

@@ -98,6 +98,7 @@ static std::vector<Thread> threads;
 /* keep separate handle for main thread */
 static Thread main_thread;
 static Thread garbage_collector;
+static vector<void *> exit_value_arr;
 
 /* for assigning id to threads; main implicitly has 0 */
 static unsigned long tid = 1;
