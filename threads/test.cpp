@@ -56,13 +56,23 @@ int bbq_party(void *args) {
     return 12345;
 }
 
+int bbq_party2(void *args) {
+    printf("Friend %u came to the party!\n",(unsigned)pthread_self());
+    if(pthread_self() == thread_1) {
+        thread_1_done++;
+    } else {
+        thread_2_done++;
+    }
+    return 45678;
+}
+
 int main() {
     
     printf("Inviting friends to the party!\n");
 
     pthread_create(&thread_1, NULL, (void * (*)(void*))bbq_party, NULL);
-    pthread_create(&thread_2, NULL, (void * (*)(void*))bbq_party, NULL);
-    
+    pthread_create(&thread_2, NULL, (void * (*)(void*))bbq_party2, NULL);
+
 
     while(thread_1_done == 0 && thread_2_done == 0) {
         enjoy_party;
@@ -72,10 +82,15 @@ int main() {
     printf("Friend %u left the party...\n", (unsigned)thread_2);
 
     void *returnValue;
+    cout << "thread_1:" << thread_1 << endl;
     pthread_join(thread_1, &returnValue);
-
-
     cout << "return value: " << (int) returnValue << endl;
+
+    void *returnValue2;
+    cout << "thread_2:" << thread_2 << endl;
+    pthread_join(thread_2, &returnValue2);
+    cout << "return value: " << (int) returnValue2 << endl;
+
     //printf("return value: %d\n", (int) returnValue);
     cleanup_party;
     printf("Now we're all alone... :(\n");

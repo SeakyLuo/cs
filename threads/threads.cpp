@@ -178,7 +178,7 @@ void pthread_exit(void *value_ptr){
 	Thread this_thread = threads.front();
 	if (this_thread.join != NULL){
 		this_thread.join->status = STATUS_RUNNABLE;
-		exit_value_arr.push_back(value_ptr);
+		exit_value_arr[this_thread.id] = value_ptr;
 	}
 
 	if (this_thread.id == 0){
