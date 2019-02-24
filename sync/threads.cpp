@@ -1,21 +1,19 @@
 #include "threads.h"
 
-int pthread_join(pthread_t thread, void **value_ptr){
+int pthread_join(pthread_t thread_id, void **value_ptr){
 	PAUSE_TIMER;
-	//cout << "here" << endl;
 	vector<Thread>::iterator iter;
 	for (iter = threads.begin(); iter != threads.end(); iter++){
-		if (iter->id == thread) break;
-	}
-	//Thread *target_thread = *iter;
-	if(iter != threads.end()){
-		iter->join = &threads.front();
-		threads.front().status = STATUS_BLOCK;
+		if (iter->id == thread_id){
+			iter->join = &threads.front();
+			threads.front().status = STATUS_BLOCK;
+			break;
+		}
 	}
 	RESUME_TIMER;
-	*value_ptr = exit_value_arr[thread];
+	*value_ptr = exit_values[thread];
 	return 0;
-	
+
 	// 1. Get Thread from runQueue //t = list_get(run_queue, id);
 	// 2. handle error checks: EINVAL, ESRCH, EDEADLK
 	// 3. Update information in the thread that to be waited for:
@@ -74,7 +72,7 @@ void init(){
 
 	/* set up garbage collector */
 	garbage_collector.id = 128;
-	garbage_collector.stack = (char *) malloc(32767);
+	garbage_collector.stack = (char *) malloc(STACK_SIZE);
 
 	/* initialize jump buf structure to be 0, just in case there's garbage */
 	memset(&garbage_collector.jb, 0, sizeof(garbage_collector.jb));
@@ -82,7 +80,7 @@ void init(){
 	sigemptyset(&garbage_collector.jb->__saved_mask);
 
 	/* garbage collector 'lives' in the_nowhere_zone */
-	garbage_collector.jb->__jmpbuf[4] = ptr_mangle((uintptr_t) (garbage_collector.stack + 32759));
+	garbage_collector.jb->__jmpbuf[4] = ptr_mangle((uintptr_t) (garbage_collector.stack + STACK_SIZE - 8));
 	garbage_collector.jb->__jmpbuf[5] = ptr_mangle((uintptr_t) the_nowhere_zone);
 
 	/* Initialize timer and wait for first sigalarm to go off */
@@ -178,7 +176,7 @@ void pthread_exit(void *value_ptr){
 	Thread this_thread = threads.front();
 	if (this_thread.join != NULL){
 		this_thread.join->status = STATUS_RUNNABLE;
-		exit_value_arr.push_back(value_ptr);
+		exit_values[this_thread.id] = value_ptr;
 	}
 
 	if (this_thread.id == 0){
@@ -196,7 +194,7 @@ void pthread_exit(void *value_ptr){
 	/* Jump to garbage collector stack frame to free memory and scheduler another thread.
 	   Since we're currently "living" on this thread's stack frame, deleting it while we're
 	   on it would be undefined behavior */
-	longjmp(garbage_collector.jb,1);
+	longjmp(garbage_collector.jb, 1);
 }
 
 /*
@@ -249,7 +247,7 @@ void the_nowhere_zone(void) {
 	   Otherwise, start timer again and jump to next thread*/
 	if(threads.size() == 0) {
 		longjmp(main_thread.jb, 1);
-	} else {
+	}else{
 		START_TIMER;
 		longjmp(threads.front().jb, 1);
 	}

@@ -1,8 +1,5 @@
 #include "threads.h"
 
-#define SUCCESS 1
-#define FAILURE 0
-
 int sem_init(sem_t *sem, int pshared, unsigned value){
 	//1. Check errors:
 	//	a.pshared != 0
@@ -13,12 +10,12 @@ int sem_init(sem_t *sem, int pshared, unsigned value){
 	//4. Assign it value passed in the function parameter
 	//5. Set its waiting queue to NULL
 	//6. Add it to global sem_queue
-	if (pshared || value >= SEM_VALUE_MAX || sem == NULL) return FAILURE;
+	if (pshared || value >= SEM_VALUE_MAX || sem == NULL) return 0;
 	*sem = ++sid;
 	Semaphore s;
 	s.id = sid;
 	sems.push_back(s);
-	return SUCCESS;
+	return 0;
 }
 
 int sem_destroy(sem_t *sem){
@@ -36,11 +33,11 @@ int sem_destroy(sem_t *sem){
 	if (iter->thread == NULL){
 		sems.erase(iter);
 	}
-	return SUCCESS;
+	return 0;
 }
 
 int sem_wait(sem_t *sem){
-	if (sem == NULL) return FAILURE;
+	if (sem == NULL) return 0;
 	for (iter = sems.begin(); iter != sems.end(); iter++){
 		if (iter->sid == sem){
 			if (iter->value > 0){
@@ -54,7 +51,7 @@ int sem_wait(sem_t *sem){
 			}
 		}
 	}
-	return SUCCESS;
+	return 0;
 	//1. Check errors:
 	//	a.sem == NULL
 	//2. s = find semaphore from sem_queue
@@ -79,7 +76,7 @@ int sem_wait(sem_t *sem){
 }
 
 int sem_post(sem_t *sem){
-	if (sem == NULL) return FAILURE;
+	if (sem == NULL) return 0;
 	for (iter = sems.begin(); iter != sems.end(); iter++){
 		if (iter->sid == sem){
 			if (iter->value > 0){
@@ -91,7 +88,7 @@ int sem_post(sem_t *sem){
 			}
 		}
 	}
-	return SUCCESS;
+	return 0;
 	//1. Check errors:
 	//	a.sem == NULL
 	//2. s = find semaphore from sem_queue
