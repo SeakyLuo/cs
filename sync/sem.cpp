@@ -14,7 +14,6 @@ typedef struct Semaphore {
 	int id;
 	int value;
 	Thread *thread;
-	Semaphore *next;
 } Semaphore;
 
 vector<Semaphore> sems;

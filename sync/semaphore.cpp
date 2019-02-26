@@ -21,9 +21,9 @@ int sid = 0;
 
 int sem_init(sem_t *sem, int pshared, unsigned value){
 	if (pshared || value >= SEM_VALUE_MAX || sem == NULL) return FAILURE;
-	__sem_t redefined_sem;
-	redefined_sem.id = ++sid;
-	sem->__align = (long int)&redefined_sem;
+	__sem_t* redefined_sem = (__sem_t*) malloc(sizeof(__sem_t));
+	redefined_sem->id = ++sid;
+	sem->__align = (long int)redefined_sem;
 	Semaphore s;
 	s.id = sid;
 	sems.push_back(s);
@@ -37,6 +37,8 @@ int sem_destroy(sem_t *sem){
 		if (iter->id == ((__sem_t*)sem->__align)->id) break;
 	}
 	if (iter->thread == NULL){
+		printf("free\n");
+		free((__sem_t*)sem->__align);
 		sems.erase(iter);
 		return SUCCESS;
 	}
