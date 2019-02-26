@@ -47,7 +47,6 @@ static struct sigaction act;
 #define STATUS_RUNNABLE 1
 #define STATUS_BLOCK 2
 #define STACK_SIZE 32767
-#define SEM_VALUE_MAX 65536
 /*
  * Thread Control Block definition
  */
@@ -78,16 +77,6 @@ typedef struct Thread {
 	}
 } Thread;
 
-typedef struct Semaphore {
-	int id;
-	int value;
-	Thread *thread;
-	Semaphore *next;
-} Semaphore;
-
-vector<Semaphore> sems;
-int sid = 0;
-
 /*
  * Globals for thread scheduling and control
  */
@@ -98,7 +87,6 @@ static std::vector<Thread> threads;
 /* keep separate handle for main thread */
 static Thread main_thread;
 static Thread garbage_collector;
-static map<pthread_t, void *> exit_values;
 
 /* for assigning id to threads; main implicitly has 0 */
 static unsigned long tid = 1;

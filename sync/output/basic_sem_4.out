@@ -1,0 +1,7 @@
+Main locking sem_1
+Main locking sem_2, then unlocking sem_1
+Thread got sem_1
+Main unlocking sem_2
+Thread got sem_2
+arg = 2
+r1  = 1

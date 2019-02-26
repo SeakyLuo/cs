@@ -1,4 +1,4 @@
-#include "threads.h"
+#include "semaphore.cpp"
 
 int pthread_join(pthread_t thread_id, void **value_ptr){
 	PAUSE_TIMER;
@@ -11,28 +11,8 @@ int pthread_join(pthread_t thread_id, void **value_ptr){
 		}
 	}
 	RESUME_TIMER;
-	*value_ptr = exit_values[thread];
+	*value_ptr = exit_values[thread_id];
 	return 0;
-
-	// 1. Get Thread from runQueue //t = list_get(run_queue, id);
-	// 2. handle error checks: EINVAL, ESRCH, EDEADLK
-	// 3. Update information in the thread that to be waited for:
-	// t -> joining = current;
-	// 4. Set current(calling) thread status to BLOCKED
-	// (Remove it from run_queue depending on your
-	// implementation if required
-	// or
-	// return only runnable threads from find_next_runnable)
-	// Wake up the waiting thread once thread
-	// exits
-	// ● Modify your pthread_exit:
-	// if (current->joining != NULL) {
-	// 1. //Find the thread that is waiting
-	// thread *to_wake = current->joining;
-	// 2. Save the exit_value
-	// 3. Change the to_wake status to Runnable
-	// (Add to run_queue if required depending on your
-	// implementation)
 }
 
 /*

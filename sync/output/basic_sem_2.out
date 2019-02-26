@@ -1,0 +1,4 @@
+Thread 1 has the lock
+Thread 2 has the lock
+r1 = 1
+r2 = 1

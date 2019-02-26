@@ -1,0 +1,7 @@
+Thread 1 has the lock
+Thread 2 has the lock
+Thread 3 has the lock
+Main waiting...
+r1 = 1
+r2 = 1
+r3 = 1
