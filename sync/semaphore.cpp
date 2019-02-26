@@ -37,7 +37,6 @@ int sem_destroy(sem_t *sem){
 		if (iter->id == ((__sem_t*)sem->__align)->id) break;
 	}
 	if (iter->thread == NULL){
-		printf("free\n");
 		free((__sem_t*)sem->__align);
 		sems.erase(iter);
 		return SUCCESS;
@@ -71,7 +70,7 @@ int sem_post(sem_t *sem){
 				iter->value++;
 				iter->thread->unlock();
 			}else{
-				threads.front().status = STATUS_RUNNABLE;
+				iter->thread->status = STATUS_RUNNABLE;
 				iter->thread = iter->thread->sem;
 			}
 		}

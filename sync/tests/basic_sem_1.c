@@ -35,16 +35,15 @@ void * bbq_party(void *args) {
 }
 
 int main() {
-	
+
 	printf("Initiating semaphore...");
 	sem_init(&my_sem, 0, 1);
 	printf("Done\n");
 	pthread_create(&thread_1, NULL, bbq_party, NULL);
-
 	while(thread_1_done == 0) {
 		enjoy_party;
 	}
-	
+
 	cleanup_party;
 	printf("Destroying semaphore...");
 	sem_destroy(&my_sem);

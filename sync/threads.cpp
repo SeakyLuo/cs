@@ -93,6 +93,7 @@ int pthread_create(pthread_t *restrict_thread, const pthread_attr_t *restrict_at
 	Thread t;
 	t.id = tid++;
 	t.status = STATUS_RUNNABLE;
+	t.join = NULL;
 	*restrict_thread = t.id;
 
 	/* simulate function call by push_backing arguments and return address to the stack
@@ -153,16 +154,16 @@ void pthread_exit(void *value_ptr){
 	/* stop the timer so we don't get interrupted */
 	STOP_TIMER;
 
-	Thread this_thread = threads.front();
-	if (this_thread.join != NULL){
-		this_thread.join->status = STATUS_RUNNABLE;
-		exit_values[this_thread.id] = value_ptr;
+	Thread current = threads.front();
+	if (current.join != NULL){
+		current.join->status = STATUS_RUNNABLE;
+		exit_values[current.id] = value_ptr;
 	}
 
-	if (this_thread.id == 0){
+	if (current.id == 0){
 		/* if its the main thread, still keep a reference to it
 	       we'll longjmp here when all other threads are done */
-		main_thread = this_thread;
+		main_thread = current;
 		if (setjmp(main_thread.jb)){
 			/* garbage collector's stack should be freed by OS upon exit;
 			   We'll free anyways, for completeness */
