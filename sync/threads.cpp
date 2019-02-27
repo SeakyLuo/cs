@@ -1,16 +1,20 @@
 #include "semaphore.cpp"
 
 int pthread_join(pthread_t thread_id, void **value_ptr){
-	PAUSE_TIMER;
+	// PAUSE_TIMER;
 	vector<Thread>::iterator iter;
-	for (iter = threads.begin(); iter != threads.end(); iter++){
+	for (auto iter = threads.begin(); iter != threads.end(); iter++){
 		if (iter->id == thread_id){
 			iter->join = &threads.front();
-			threads.front().status = STATUS_BLOCK;
+			iter->join->status = STATUS_BLOCK;
 			break;
 		}
 	}
-	RESUME_TIMER;
+	// RESUME_TIMER;
+	printf("fucku\n");
+	signal_handler(SIGALRM);
+	printf("fucku\n");
+	// while(iter->join->status == STATUS_BLOCK){cout<<iter->join->status;};
 	*value_ptr = exit_values[thread_id];
 	return 0;
 }
@@ -157,8 +161,9 @@ void pthread_exit(void *value_ptr){
 	Thread current = threads.front();
 	if (current.join != NULL){
 		current.join->status = STATUS_RUNNABLE;
-		exit_values[current.id] = value_ptr;
 	}
+	exit_values[current.id] = value_ptr;
+
 
 	if (current.id == 0){
 		/* if its the main thread, still keep a reference to it
@@ -198,7 +203,7 @@ void signal_handler(int signo) {
 		do{
 			threads.push_back(threads.front());
 			threads.erase(threads.begin());
-		}while(threads.front().status == STATUS_BLOCK);
+		}while(threads.front().status != STATUS_RUNNABLE);
 		/* resume scheduler and GOOOOOOOOOO */
 		longjmp(threads.front().jb, 1);
 	}

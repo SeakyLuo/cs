@@ -58,8 +58,8 @@ typedef struct Thread {
 	jmp_buf jb;
 	/* stack pointer for thread; for main thread, this will be NULL */
 	char *stack;
-	Thread *join;
 	int status;
+	Thread *join;
 	Thread *sem;
 
 	void lock(){
