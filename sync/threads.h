@@ -43,9 +43,8 @@ static struct sigaction act;
 #define STOP_TIMER setitimer(ITIMER_REAL,&zero_timer,NULL)
 /* number of ms for timer */
 #define INTERVAL 50
-#define STATUS_EXIT 0
+#define STATUS_BLOCK 0
 #define STATUS_RUNNABLE 1
-#define STATUS_BLOCK 2
 #define STACK_SIZE 32767
 /*
  * Thread Control Block definition
