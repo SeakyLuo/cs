@@ -9,26 +9,30 @@ typedef struct {
 	char array[50];
 } __sem_t;
 
-map<pthread_t, void*> exit_values;
+map<pthread_t, void *> exit_values;
 typedef struct Semaphore {
 	int id;
 	int value;
-	Thread *thread;
+	queue<int> threads; // ids of waiting threads
 } Semaphore;
+
 
 vector<Semaphore> sems;
 int sid = 0;
 
+vector<Thread>::iterator findThread(int id){
+	for (auto iter = threads.begin(); iter != threads.end(); iter++)
+		if (iter->id == id) return iter;
+	return threads.end();
+}
+
+vector<Semaphore>::iterator findSem(sem_t *sem){
+	for (auto iter = sems.begin(); iter != sems.end(); iter++)
+		if (iter->id == ((__sem_t*)sem->__align)->id) return iter;
+	return sems.end();
+}
+
 int sem_init(sem_t *sem, int pshared, unsigned value){
-	//1. Check errors:
-	//	a.pshared != 0
-	//	b.value > MAX_VALUE(65536)
-	//	c.sem == NULL
-	//2. Create Semaphore object
-	//3. Assign it unique sem_id
-	//4. Assign it value passed in the function parameter
-	//5. Set its waiting queue to NULL
-	//6. Add it to global sem_queue
 	if (pshared || value >= SEM_VALUE_MAX || sem == NULL) return FAILURE;
 	__sem_t* redefined_sem = (__sem_t*) malloc(sizeof(__sem_t));
 	redefined_sem->id = ++sid;
@@ -41,100 +45,44 @@ int sem_init(sem_t *sem, int pshared, unsigned value){
 }
 
 int sem_destroy(sem_t *sem){
-	//1. Check errors:
-	//	a.sem_queue == NULL
-	//	b.sem == NULL
-	//	c. if sem->q != NULL(means some threads are waiting for sem)
-	//2. Find the semaphore from global sem_queue
-	//3. Remove from global sem_queue
-	//4. Free it
 	if (sem == NULL) return FAILURE;
-	vector<Semaphore>::iterator iter;
-	for (iter = sems.begin(); iter != sems.end(); iter++){
-		if (iter->id == ((__sem_t*)sem->__align)->id) break;
-	}
-	if (iter->thread == NULL){
+	auto iter = findSem(sem);
+	if (iter == sems.end()) return FAILURE;
+	if (iter->threads.empty()){
 		free((__sem_t*)sem->__align);
 		sems.erase(iter);
-		return SUCCESS;
 	}
-	return FAILURE;
+	return SUCCESS;
 }
 
 int sem_wait(sem_t *sem){
 	if (sem == NULL) return FAILURE;
-	for (auto iter = sems.begin(); iter != sems.end(); iter++){
-		if (iter->id == ((__sem_t*)sem->__align)->id){
-			printf("fuckuu\n");
-			if (iter->value > 0){printf("if\n");
-				iter->value--;printf("fuckuu\n");
-				iter->thread->unlock();printf("fuckuu\n");
-			}else{printf("else\n");
-				threads.front().sem = iter->thread;printf("fuckuu\n");
-				iter->thread = &threads.front();printf("fuckuu\n");
-				iter->thread->status = STATUS_BLOCK;printf("fuckuu\n");
-				// signal_handler(SIGALRM);
-			}
-			break;
-		}
+	auto iter = findSem(sem);
+	if (iter == sems.end()) return FAILURE;
+	auto thread = findThread(iter->threads.front());
+	if (iter->value > 0){
+		iter->value--;
+		thread->unlock();
+	}else{
+		thread->status = STATUS_BLOCK;
+		iter->threads.push(threads.front().id);
+		signal_handler(SIGALRM);
 	}
 	return SUCCESS;
-	//1. Check errors:
-	//	a.sem == NULL
-	//2. s = find semaphore from sem_queue
-	//3. if s->value > 0:
-	//	decrement value
-	//else:
-	//	add current thread to semaphore's waiting queue set current thread status to blocked call schedule()
-
-	// sudo code
-	//s = find_sema(id);
-	//if (s == NULL) error;
-	//if (s->value > 0) {
-	//	s->value--;
-	//	unlock();
-	//}
-	//else {
-	//	current->sema = s->q; // Store backup of waiting thread for semaphore (We are creating chain of threads waiting)
-	//	s->q = current;  // Add it to the beginning
-	//	current->status = BLOCKED;
-	//	schedule();
-	//}
 }
 
 int sem_post(sem_t *sem){
 	if (sem == NULL) return FAILURE;
-	for (auto iter = sems.begin(); iter != sems.end(); iter++){printf("ufuck\n");
-		if (iter->id == ((__sem_t*)sem->__align)->id){
-			if (iter->value > 0){printf("if\n");
-				iter->value++;printf("ufucku\n");
-				iter->thread->unlock();printf("ufucku\n");
-			}else{printf("else\n");
-				iter->thread->status = STATUS_RUNNABLE;printf("ufucku\n");
-				iter->thread = iter->thread->sem;printf("ufucku\n");
-			}
-			break;
-		}
-	}printf("sem_post_finished\n");
+	auto iter = findSem(sem);
+	if (iter == sems.end()) return FAILURE;
+	auto thread = findThread(iter->threads.front());
+	if (iter->value > 0){
+		iter->value++;
+		thread->unlock();
+	}else{
+		thread->status = STATUS_RUNNABLE;
+		iter->threads.pop();
+	}
 	return SUCCESS;
-	//1. Check errors:
-	//	a.sem == NULL
-	//2. s = find semaphore from sem_queue
-	//3. if s->value > 0:
-	//	increment value
-	//else:
-	//	get the first waiting thread and set to RUNNABLE
-	//Make next waiting thread as head
 
-	// sudo code
-	//s = find_sema(id);
-	//if (s == NULL) error;
-	//if (s->value > 0){
-	//	s->value++;
-	//	unlock();
-	//}
-	//else {
-	//	s->q->status = RUNNABLE; // set first thread in waiting queue for sem to Runnable
-	//	s->q = s->q->sema; // switch to next thread
-	//}
 }

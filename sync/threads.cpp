@@ -1,7 +1,6 @@
 #include "semaphore.cpp"
 
 int pthread_join(pthread_t thread_id, void **value_ptr){
-	// PAUSE_TIMER;
 	vector<Thread>::iterator iter;
 	for (auto iter = threads.begin(); iter != threads.end(); iter++){
 		if (iter->id == thread_id){
@@ -10,11 +9,7 @@ int pthread_join(pthread_t thread_id, void **value_ptr){
 			break;
 		}
 	}
-	// RESUME_TIMER;
-	printf("fucku\n");
 	signal_handler(SIGALRM);
-	printf("fucku\n");
-	// while(iter->join->status == STATUS_BLOCK){cout<<iter->join->status;};
 	*value_ptr = exit_values[thread_id];
 	return 0;
 }

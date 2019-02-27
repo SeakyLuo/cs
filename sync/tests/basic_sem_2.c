@@ -26,7 +26,6 @@ void * bbq_party(void *args) {
 
 	sem_wait(&my_sem);
 	printf("Thread %u has the lock\n",(unsigned)pthread_self());
-	force_sleep(1);printf("sleep?\n");
 	sem_post(&my_sem);
 	return (void*)HAMBURGER;
 }
@@ -39,9 +38,9 @@ int main() {
 
 	pthread_create(&thread_1, NULL, bbq_party, NULL);
 	pthread_create(&thread_2, NULL, bbq_party, NULL);
-	printf("fuck\n");
-	pthread_join(thread_1, (void**)&r1);printf("fuck\n");
-	pthread_join(thread_2, (void**)&r2);printf("fuck\n");
+
+	pthread_join(thread_1, (void**)&r1);
+	pthread_join(thread_2, (void**)&r2);
 
 	printf("r1 = %d\n",r1);
 	printf("r2 = %d\n",r2);

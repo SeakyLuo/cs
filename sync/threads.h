@@ -60,7 +60,6 @@ typedef struct Thread {
 	char *stack;
 	int status;
 	Thread *join;
-	Thread *sem;
 
 	void lock(){
 		sigset_t sig;
