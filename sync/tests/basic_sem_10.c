@@ -1,3 +1,6 @@
+// thread1 calls pthread join on thread2
+
+
 #include <pthread.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -23,31 +26,28 @@ void force_sleep(int seconds) {
 
 unsigned int thread_1_done = 0;
 sem_t my_sem;
-pthread_t thread_1;
+pthread_t thread_1, thread_2;
 
-void * bbq_party(void *args) {
-	sem_wait(&my_sem);
-	printf("Got lock.\n");
-	thread_1_done++;
-	printf("Releasing lock...\n");
-	sem_post(&my_sem);
-	return NULL;
+void * start1(void *args) {
+  int ret = 0;
+  pthread_join(thread_2,(void**)&ret);
+	return (void*)(ret+5);
+}
+
+void * start2(void *args) {
+  force_sleep(1);
+  return (void*)5;
 }
 
 int main() {
-	
-	printf("Initiating semaphore...");
-	sem_init(&my_sem, 0, 1);
-	printf("Done\n");
-	pthread_create(&thread_1, NULL, bbq_party, NULL);
 
-	while(thread_1_done == 0) {
-		enjoy_party;
-	}
-	
-	cleanup_party;
-	printf("Destroying semaphore...");
-	sem_destroy(&my_sem);
+  int ret = 0;
+
+  printf("Start\n");
+	pthread_create(&thread_1, NULL, start1, NULL);
+  pthread_create(&thread_2, NULL, start2, NULL);
+	pthread_join(thread_1, (void**)&ret);
+  printf("Ret = %d\n",ret);
 	printf("Done\n");
 
 	return 0;
