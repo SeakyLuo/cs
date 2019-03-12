@@ -4,12 +4,20 @@
 
 using namespace std;
 
+typedef struct block {
+	block next;
+} block;
+
 // This function creates a fresh (and empty) file system on the virtual disk with name disk name.
 // As part of this function, you should first invoke make disk(disk name) to create a new disk.
 // Then, open this disk and write/initialize the necessary meta-information for your file system
 // so that it can be later used (mounted). The function returns 0 on success, and -1 when the
 // disk disk name could not be created, opened, or properly initialized.
 int make_fs(char *disk_name){
+	if (make_disk(disk_name) == 0 && open_disk(disk_name) == 0) {
+
+		return 0;
+	}
     return -1;
 }
 
@@ -44,14 +52,25 @@ int umount_fs(char *disk_name){
 // already 32 file descriptors active. When a file is opened, the file offset (seek pointer) is set
 // to 0 (the beginning of the file).
 int fs_open(char *name){
-    return -1;
+	int f;
+	if (active == 32 || (f = open(name, O_RDONLY)) < 0) {
+		perror("fs_open: cannot open file");
+		return -1;
+	}
+	active++;
+	handle;
+    return 0;
 }
 
 // The file descriptor fildes is closed. A closed file descriptor can no longer be used to access
 // the corresponding file. Upon successful completion, a value of 0 is returned. In case the file
 // descriptor fildes does not exist or is not open, the function returns -1.
 int fs_close(int fildes){
-    return -1;
+	if (close(fildes) < 0)
+		return -1;
+	active--;
+	handle;
+	return 0;
 }
 
 // This function creates a new file with name name in the root directory of your file system.
@@ -62,6 +81,11 @@ int fs_close(int fildes){
 // in the root directory. Note that to access a file that is created, it has to be subsequently
 // opened.
 int fs_create(char *name){
+	int f;
+	if (active == 32 || (f = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0644)) < 0) {
+		perror("fs_open: cannot open file");
+		return -1;
+	}
     return -1;
 }
 
