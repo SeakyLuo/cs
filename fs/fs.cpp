@@ -5,6 +5,7 @@
 #include <fcntl.h>
 #include <cstdio>
 #include <cstring>
+#include <vector>
 #include <map>
 #include "disk.h"
 
@@ -14,6 +15,7 @@
 using namespace std;
 
 struct super_block {
+	// free is true
 	// free meta group
 	// free data block
 	bool meta[BLOCK_COUNT];
@@ -29,30 +31,76 @@ struct super_block {
 		return -1;
 	}
 };
+super_block sb;
 
 struct block {
 	int size;
 	block* next;
+	block(int size, block* next){
+		this->size = size;
+		this->next = next;
+	}
 };
 
 struct meta {
-	char* name; // file name
-	int size;   // file size, max 4096
-	int index;  // 2 + i * 4
+	int addr[4][1024]; // data indices
+	meta(){
+		for (int i = 0; i < 4; i++)
+			for (int j = 0; j < 1024; j++)
+				addr[i][j] = -1;
+	}
+	void append(int index){
+		// data block index
+		for (int i = 0; i < 4; i++){
+			for (int j = 0; j < 1024; j++){
+				if (addr[i][j] == -1){
+					addr[i][j] = index;
+					sb.data[index] = false;
+					return;
+				}
+			}
+		}
+	}
+	void free(){
+		// free data block
+		for (int i = 0; i < 4; ++i)
+			for (int j = 0; j < 1024; ++j)
+				if (addr[i][j] == 0) return;
+				else sb.data[addr[i][j]] = true;
+	}
 };
 
 struct directory {
 	int size;
-	int index;
-	block blocks[4];
+	int index; // meta index 2 + i * 4
+	meta getMeta(int index){
+		// meta group index
+		meta m;
+		for (int i = 0; i < 4; i++){
+			char* buf;
+			int* addr;
+			block_read(index + i, buf);
+			memcpy(addr, buf, sizeof(int*));
+			for (int j = 0; j < 1024; i++)
+				m[i][j] = addr[j];
+		}
+		return m;
+	}
 };
 
 typedef map<char*, directory> dir_map;
-super_block sb;
 dir_map dm;
 map<int, char*> fn_map; // fd - name
 int counter = 0; // fd counter
-int active = 0;
+vector<char*> active;
+
+void save(){
+	char* buf;
+	memcpy(buf, &sb, sizeof(super_block));
+	block_write(0, buf);
+	memcpy(buf, &dm, sizeof(dir_map));
+	block_write(1, buf);
+}
 
 // This function creates a fresh (and empty) file system on the virtual disk with name disk name.
 // As part of this function, you should first invoke make disk(disk name) to create a new disk.
@@ -119,14 +167,21 @@ int umount_fs(char *disk_name){
 // to 0 (the beginning of the file).
 int fs_open(char *name){
 	int f;
-	if (active == 32 || strlen(name) > 15 || (f = open(name, O_RDONLY)) < 0) {
+	if (active.size() == 32 || strlen(name) > 15 || (f = open(name, O_RDONLY)) < 0) {
 		return -1;
 	}
 	directory dir;
-	dir.size = 0;
-	dir.index = sb.findEmptyMeta();
-	dm[name] = dir;
-	active++;
+	if (dm.find(name) != dm.end()){
+		dir = dm[name];
+	}else{
+		int meta_index = sb.findEmptyMeta();
+		dir.size = 0;
+		dir.index = meta_index;
+		dm[name] = dir;
+		fn_map[f] = name;
+		sb.meta[meta_index] = false;
+	}
+	active.push_back(name);
     return f;
 }
 
@@ -136,7 +191,11 @@ int fs_open(char *name){
 int fs_close(int fildes){
 	if (close(fildes) < 0)
 		return -1;
-	active--;
+	vector<char*>::iterator iter;
+	for (iter = active.begin(); iter != active.end(); iter++)
+		if (*iter == fn_map[fildes])
+			break;
+	active.erase(iter);
 	return 0;
 }
 
@@ -149,10 +208,10 @@ int fs_close(int fildes){
 // opened.
 int fs_create(char *name){
 	int f;
-	if (active == 32 || (f = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0644)) < 0) {
+	if (active.size() == 32 || strlen(name) > 15 || (f = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0644)) < 0) {
 		return -1;
 	}
-    return f;
+    return fs_open(name);
 }
 
 // This function deletes the file with name name from the root directory of your file system
@@ -164,8 +223,14 @@ int fs_create(char *name){
 // the file is currently open (i.e., there exists at least one open file descriptor that is associated
 // with this file).
 int fs_delete(char *name){
-	// flip bool
-    return -1;
+	for (auto iter = active.begin(); iter != active.end(); iter++)
+		if (strcmp(*iter, name) == 0)
+			return -1;
+	directory dir = dm[name];
+	int meta_index = dir.index;
+	sb.meta[meta_index] = true;
+	dir.getMeta(meta_index).free();
+    return 0;
 }
 
 // This function attempts to read nbyte bytes of data from the file referenced by the descriptor
@@ -178,6 +243,7 @@ int fs_delete(char *name){
 // a failure when the file descriptor fildes is not valid. The read function implicitly increments
 // the file pointer by the number of bytes that were actually read.
 int fs_read(int fildes, void *buf, size_t nbyte){
+
     return -1;
 }
 

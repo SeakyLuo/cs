@@ -6,7 +6,7 @@
 int main() {
 	int fildes = 0;
 	int ret = 0;
-	char disk_name[] = "/home/fs";
+	char disk_name[] = "fs1";
 	char file_name1[] = "file1";
 	char file_name2[] = "file2";
 
@@ -56,7 +56,7 @@ int main() {
 	}
 
 	// mount fs from basic_fs_02.c
-	char disk_name2[] = "/home/fs2";
+	char disk_name2[] = "fs2";
 	ret = mount_fs(disk_name2);
 	if(ret != 0) {
 		printf("ERROR: mount_fs failed on mounting disk_name2\n");

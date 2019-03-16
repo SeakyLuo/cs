@@ -6,7 +6,7 @@
 int main() {
 	int fildes = 0;
 	int ret = 0;
-	char disk_name[] = "/home/fs2";
+	char disk_name[] = "fs2";
 	char file_name[] = "file2";
 
 	// Make filesystem.

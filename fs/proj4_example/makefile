@@ -16,4 +16,4 @@ disk.o:
 	gcc -c disk.c
 
 clean:
-	rm disk.o *.run file1 file2 file3
+	rm disk.o *.run fs1 fs2

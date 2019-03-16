@@ -5,7 +5,7 @@
 
 int main() {
 	int ret = 0;
-	char disk_name[] = "/home/fs2";
+	char disk_name[] = "fs2";
 	char file_name[] = "file2";
 
 	// Mount filesystem from basic_fs_02.c
