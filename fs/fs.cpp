@@ -1,12 +1,58 @@
 #include <iostream>
 #include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <cstdio>
+#include <cstring>
+#include <map>
 #include "disk.h"
+
+#define BLOCK_LIMIT 64
+#define BLOCK_COUNT 4096
 
 using namespace std;
 
-typedef struct block {
-	block next;
-} block;
+struct super_block {
+	// free meta group
+	// free data block
+	bool meta[BLOCK_COUNT];
+	bool data[BLOCK_COUNT];
+	int findEmptyMeta(){
+		for (int i = 0; i < BLOCK_COUNT; i++)
+			if (meta[i]) return i;
+		return -1;
+	}
+	int findEmptyData(){
+		for (int i = 0; i < BLOCK_COUNT; i++)
+			if (data[i]) return i;
+		return -1;
+	}
+};
+
+struct block {
+	int size;
+	block* next;
+};
+
+struct meta {
+	char* name; // file name
+	int size;   // file size, max 4096
+	int index;  // 2 + i * 4
+};
+
+struct directory {
+	int size;
+	int index;
+	block blocks[4];
+};
+
+typedef map<char*, directory> dir_map;
+super_block sb;
+dir_map dm;
+map<int, char*> fn_map; // fd - name
+int counter = 0; // fd counter
+int active = 0;
 
 // This function creates a fresh (and empty) file system on the virtual disk with name disk name.
 // As part of this function, you should first invoke make disk(disk name) to create a new disk.
@@ -14,11 +60,18 @@ typedef struct block {
 // so that it can be later used (mounted). The function returns 0 on success, and -1 when the
 // disk disk name could not be created, opened, or properly initialized.
 int make_fs(char *disk_name){
-	if (make_disk(disk_name) == 0 && open_disk(disk_name) == 0) {
-
-		return 0;
+	if (make_disk(disk_name) == -1) return -1;
+	open_disk(disk_name);
+	for (int i = 0; i < BLOCK_COUNT; i++){
+		sb.meta[i] = sb.data[i] = true;
 	}
-    return -1;
+	char* sb_buf;
+	memcpy(sb_buf, &sb, sizeof(super_block));
+	block_write(0, sb_buf);
+	char* dm_buf;
+	memcpy(dm_buf, &dm, sizeof(dir_map));
+	block_write(1, dm_buf);
+    return 0;
 }
 
 // This function mounts a file system that is stored on a virtual disk with name disk name.
@@ -28,7 +81,14 @@ int make_fs(char *disk_name){
 // could not be opened or when the disk does not contain a valid file system (that you previously
 // created with make fs).
 int mount_fs(char *disk_name){
-    return -1;
+	if (open_disk(disk_name) == -1) return -1;
+	char* sb_buf;
+	block_read(0, sb_buf);
+	memcpy(&sb, sb_buf, sizeof(super_block));
+	char* dm_buf;
+	block_read(1, dm_buf);
+	memcpy(&dm, dm_buf, sizeof(dir_map));
+    return 0;
 }
 
 // This function unmounts your file system from a virtual disk with name disk name. As part
@@ -38,7 +98,13 @@ int mount_fs(char *disk_name){
 // and -1 when the disk disk name could not be closed or when data could not be written to
 // the disk (this should not happen).
 int umount_fs(char *disk_name){
-    return -1;
+	char* sb_buf;
+	memcpy(sb_buf, &sb, sizeof(super_block));
+	block_write(0, sb_buf);
+	char* dm_buf;
+	memcpy(dm_buf, &dm, sizeof(dir_map));
+	block_write(1, dm_buf);
+    return close_disk();
 }
 
 // The file specified by name is opened for reading and writing, and the file descriptor corresponding
@@ -53,13 +119,15 @@ int umount_fs(char *disk_name){
 // to 0 (the beginning of the file).
 int fs_open(char *name){
 	int f;
-	if (active == 32 || (f = open(name, O_RDONLY)) < 0) {
-		perror("fs_open: cannot open file");
+	if (active == 32 || strlen(name) > 15 || (f = open(name, O_RDONLY)) < 0) {
 		return -1;
 	}
+	directory dir;
+	dir.size = 0;
+	dir.index = sb.findEmptyMeta();
+	dm[name] = dir;
 	active++;
-	handle;
-    return 0;
+    return f;
 }
 
 // The file descriptor fildes is closed. A closed file descriptor can no longer be used to access
@@ -69,7 +137,6 @@ int fs_close(int fildes){
 	if (close(fildes) < 0)
 		return -1;
 	active--;
-	handle;
 	return 0;
 }
 
@@ -83,10 +150,9 @@ int fs_close(int fildes){
 int fs_create(char *name){
 	int f;
 	if (active == 32 || (f = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0644)) < 0) {
-		perror("fs_open: cannot open file");
 		return -1;
 	}
-    return -1;
+    return f;
 }
 
 // This function deletes the file with name name from the root directory of your file system
@@ -98,6 +164,7 @@ int fs_create(char *name){
 // the file is currently open (i.e., there exists at least one open file descriptor that is associated
 // with this file).
 int fs_delete(char *name){
+	// flip bool
     return -1;
 }
 
