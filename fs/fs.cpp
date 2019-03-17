@@ -269,7 +269,7 @@ int fs_read(int fildes, void *buf, size_t nbyte){
 	int current_bytes = 0;
 	for (int i = 0; i < MAX_ADDR; i++){
 		if (m.addr[i] != -1){
-			block_read(m.addr[i], buf + current_bytes);
+			block_read(m.addr[i], (char*)(buf + current_bytes));
 			current_bytes += MAX_ADDR;
 		}else{
 			save();
@@ -301,7 +301,7 @@ int fs_write(int fildes, void *buf, size_t nbyte){
 	int block; // block index
 	while (curr < nbyte && (block = sb.findEmptyData()) != -1){
 		m.append(block);
-		block_write(block, buf + offset_map[fildes] + curr);
+		block_write(block, (char*)(buf + offset_map[fildes] + curr));
 		curr += MAX_ADDR;
 	}
 	save();
