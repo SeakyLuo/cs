@@ -11,6 +11,7 @@
 
 #define BLOCK_LIMIT 64
 #define BLOCK_COUNT 4096
+#define MAX_ADDR 4096
 
 using namespace std;
 
@@ -22,7 +23,7 @@ struct super_block {
 	bool data[BLOCK_COUNT];
 	int findEmptyMeta(){
 		for (int i = 0; i < BLOCK_COUNT; i++)
-			if (meta[i]) return i;
+			if (meta[i]) return i + 2;
 		return -1;
 	}
 	int findEmptyData(){
@@ -43,48 +44,65 @@ struct block {
 };
 
 struct meta {
-	int addr[4][1024]; // data indices
+	int addr[MAX_ADDR]; // data indices
 	meta(){
-		for (int i = 0; i < 4; i++)
-			for (int j = 0; j < 1024; j++)
-				addr[i][j] = -1;
+		for (int i = 0; i < MAX_ADDR; i++)
+			addr[i] = -1;
 	}
 	void append(int index){
 		// data block index
-		for (int i = 0; i < 4; i++){
-			for (int j = 0; j < 1024; j++){
-				if (addr[i][j] == -1){
-					addr[i][j] = index;
-					sb.data[index] = false;
-					return;
-				}
+		for (int i = 0; i < MAX_ADDR; i++){
+			if (addr[i] == -1){
+				addr[i] = index;
+				sb.data[index] = false;
+				return;
 			}
 		}
 	}
 	void free(){
 		// free data block
-		for (int i = 0; i < 4; ++i)
-			for (int j = 0; j < 1024; ++j)
-				if (addr[i][j] == 0) return;
-				else sb.data[addr[i][j]] = true;
+		for (int i = 0; i < MAX_ADDR; i++)
+			if (addr[i] == 0) return;
+			else sb.data[addr[i]] = true;
+	}
+	int last(){
+		// last used block
+		if (addr[0] == -1) return -1;
+		for (int i = 1; i < MAX_ADDR; i++)
+			if (addr[i] == -1)
+				return addr[i - 1];
+		return addr[MAX_ADDR - 1];
 	}
 };
 
+meta getMeta(int index){
+	// meta group index
+	meta m;
+	for (int i = 0; i < 4; i++){
+		char* buf;
+		int* addr;
+		block_read(index + i, buf);
+		memcpy(addr, buf, sizeof(int*));
+		for (int j = 0; j < 1024; j++)
+			m.addr[i * 1024 + j] = addr[j];
+	}
+	return m;
+}
+
+
 struct directory {
-	int size;
+	int size; // total file size
 	int index; // meta index 2 + i * 4
-	meta getMeta(int index){
-		// meta group index
-		meta m;
+	void save_meta(){
+		meta m = getMeta(index);
+		char* buf;
+		int addr[1024];
 		for (int i = 0; i < 4; i++){
-			char* buf;
-			int* addr;
-			block_read(index + i, buf);
-			memcpy(addr, buf, sizeof(int*));
-			for (int j = 0; j < 1024; i++)
-				m[i][j] = addr[j];
+			for (int j = 0; j < 1024; j++)
+				addr[j] = m.addr[j + i * 1024];
+			memcpy(buf, &addr, sizeof(int*));
+			block_write(index + i, buf);
 		}
-		return m;
 	}
 };
 
@@ -93,7 +111,7 @@ dir_map dm;
 map<int, char*> fn_map; // fd - name
 int counter = 0; // fd counter
 vector<char*> active;
-
+map<int, int> offset_map;
 void save(){
 	char* buf;
 	memcpy(buf, &sb, sizeof(super_block));
@@ -167,19 +185,8 @@ int umount_fs(char *disk_name){
 // to 0 (the beginning of the file).
 int fs_open(char *name){
 	int f;
-	if (active.size() == 32 || strlen(name) > 15 || (f = open(name, O_RDONLY)) < 0) {
+	if (active.size() == 32 || strlen(name) > 15 || (f = open(name, O_WRONLY)) < 0) {
 		return -1;
-	}
-	directory dir;
-	if (dm.find(name) != dm.end()){
-		dir = dm[name];
-	}else{
-		int meta_index = sb.findEmptyMeta();
-		dir.size = 0;
-		dir.index = meta_index;
-		dm[name] = dir;
-		fn_map[f] = name;
-		sb.meta[meta_index] = false;
 	}
 	active.push_back(name);
     return f;
@@ -211,6 +218,18 @@ int fs_create(char *name){
 	if (active.size() == 32 || strlen(name) > 15 || (f = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0644)) < 0) {
 		return -1;
 	}
+	directory dir;
+	if (dm.find(name) != dm.end()){
+		dir = dm[name];
+	}else{
+		int meta_index = sb.findEmptyMeta();
+		dir.size = 0;
+		dir.index = meta_index;
+		dm[name] = dir;
+		fn_map[f] = name;
+		sb.meta[meta_index] = false;
+	}
+	save();
     return fs_open(name);
 }
 
@@ -229,7 +248,8 @@ int fs_delete(char *name){
 	directory dir = dm[name];
 	int meta_index = dir.index;
 	sb.meta[meta_index] = true;
-	dir.getMeta(meta_index).free();
+	getMeta(meta_index).free();
+	save();
     return 0;
 }
 
@@ -243,8 +263,21 @@ int fs_delete(char *name){
 // a failure when the file descriptor fildes is not valid. The read function implicitly increments
 // the file pointer by the number of bytes that were actually read.
 int fs_read(int fildes, void *buf, size_t nbyte){
-
-    return -1;
+	if (fn_map.find(fildes) == fn_map.end()) return -1;
+	meta m = getMeta(dm[fn_map[fildes]].index);
+	char* new_buf;
+	int current_bytes = 0;
+	for (int i = 0; i < MAX_ADDR; i++){
+		if (m.addr[i] != -1){
+			block_read(m.addr[i], buf + current_bytes);
+			current_bytes += MAX_ADDR;
+		}else{
+			save();
+			buf = buf + offset_map[fildes];
+			return 0;
+		}
+	}
+	return -1;
 }
 
 // This function attempts to write nbyte bytes of data to the file referenced by the descriptor
@@ -260,13 +293,25 @@ int fs_read(int fildes, void *buf, size_t nbyte){
 // The write function implicitly increments the file pointer by the number of bytes that were
 // actually written.
 int fs_write(int fildes, void *buf, size_t nbyte){
-    return -1;
+	if (fn_map.find(fildes) == fn_map.end()) return -1;
+	directory dir = dm[fn_map[fildes]];
+	dir.size += nbyte;
+	int curr = 0; // current byte
+	meta m = getMeta(dir.index);
+	int block; // block index
+	while (curr < nbyte && (block = sb.findEmptyData()) != -1){
+		m.append(block);
+		block_write(block, buf + offset_map[fildes] + curr);
+		curr += MAX_ADDR;
+	}
+	save();
+    return 0;
 }
 
 // This function returns the current size of the file pointed to by the file descriptor fildes. In
 // case fildes is invalid, the function returns -1.
 int fs_get_filesize(int fildes){
-    return -1;
+    return (fn_map.find(fildes) == fn_map.end()) ? -1 : dm[fn_map[fildes]].size;
 }
 
 // This function sets the file pointer (the offset used for read and write operations) associated
@@ -277,6 +322,8 @@ int fs_get_filesize(int fildes){
 // fildes is invalid, when the requested offset is larger than the file size, or when offset is less
 // than zero.
 int fs_lseek(int fildes, off_t offset){
+	if (fn_map.find(fildes) == fn_map.end() || offset < 0 || offset > fs_get_filesize(fildes)) return -1;
+	offset_map[fildes] = offset;
     return -1;
 }
 
