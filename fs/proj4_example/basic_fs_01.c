@@ -32,34 +32,34 @@ int main() {
 	if(fildes < 0) {
 		printf("ERROR: fs_open failed\n");
 	}
-printf("fuck\n");
+printf("%d\n", fildes);
 	// write to file
 	char data[] = "This is my data";
 	int len = strlen(data);
-	ret = fs_write(fildes,data,len);
+	ret = fs_write(fildes,data,len);printf("%d\n", fildes);
 	if(ret != len) {
 		printf("ERROR: fs_write failed to write correct number of bytes\n");
 	}
-printf("fuck\n");
+
 	// close file
 	ret = fs_close(fildes);
 	if(ret != 0) {
 		printf("ERROR: fs_close failed\n");
 	}
-printf("fuck\n");
+
 	// re-open file
 	fildes = fs_open(file_name);
 	if(fildes < 0) {
 		printf("ERROR: fs_open failed\n");
 	}
-printf("fuck\n");
+
 	// read what we just wrote into buffer
 	char buffer[4096];
-	ret = fs_read(fildes,buffer,len);printf("fuck\n");
+	ret = fs_read(fildes,buffer,len);
 	if(ret != len) {
 		printf("ERROR: fs_read failed to read correct number of bytes\n");
 	}
-printf("fuck\n");
+
 	// make sure what we read matches with what we wrote
 	ret = strncmp(data,buffer,len);
 	if(ret != 0) {

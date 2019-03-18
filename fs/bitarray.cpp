@@ -3,9 +3,9 @@
 class bitarray{
     public:
         int length;
-        std::string array = "";
-        bitarray(){ }
+        std::string array;
         void init(int length){
+            this->array = "";
             this->length = length;
             for (int i = 0; i < length; i++)
                 array += '1';
@@ -17,8 +17,5 @@ class bitarray{
             for (int i = 0; i < length; i++)
                 if (array[i] == '1') return i;
             return -1;
-        }
-        char& operator[] (size_t pos){
-            return array[pos];
         }
 };

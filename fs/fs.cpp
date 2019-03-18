@@ -102,7 +102,8 @@ dir_map dm;
 
 map<int, char*> fn_map; // fd - name
 int counter = 0; // fd counter
-vector<char*> active_fd;
+// vector<char*> active_fd;
+map<int, char*> active_fd;
 map<int, int> offset_map;
 
 void save(){
@@ -165,26 +166,20 @@ int umount_fs(char *disk_name){
 // already 32 file descriptors active. When a file is opened, the file offset (seek pointer) is set
 // to 0 (the beginning of the file).
 int fs_open(char *name){
-	int f;
-	if (active_fd.size() == 32 || strlen(name) > 15 || (f = open(name, O_WRONLY)) < 0) {
+	if (active_fd.size() == 32 || strlen(name) > 15 || dm.find(name) == dm.end())
 		return -1;
-	}
-	fn_map[f] = name;
-	active_fd.push_back(name);
-    return f;
+	counter++;
+	fn_map[counter] = name;
+	active_fd[counter] = name;
+    return counter;
 }
 
 // The file descriptor fildes is closed. A closed file descriptor can no longer be used to access
 // the corresponding file. Upon successful completion, a value of 0 is returned. In case the file
 // descriptor fildes does not exist or is not open, the function returns -1.
 int fs_close(int fildes){
-	if (close(fildes) < 0)
-		return -1;
-	vector<char*>::iterator iter;
-	for (iter = active_fd.begin(); iter != active_fd.end(); iter++)
-		if (*iter == fn_map[fildes])
-			break;
-	active_fd.erase(iter);
+	if (active_fd.find(fildes) == active_fd.end()) return -1;
+	active_fd.erase(fildes);
 	return 0;
 }
 
@@ -196,8 +191,7 @@ int fs_close(int fildes){
 // in the root directory. Note that to access a file that is created, it has to be subsequently
 // opened.
 int fs_create(char *name){
-	int f;
-	if (active_fd.size() == 32 || strlen(name) > 15 || (f = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0644)) < 0) {
+	if (active_fd.size() == 32 || strlen(name) > 15 || dm.find(name) != dm.end()) {
 		return -1;
 	}
 	directory dir;
@@ -222,8 +216,7 @@ int fs_create(char *name){
 // with this file).
 int fs_delete(char *name){
 	for (auto iter = active_fd.begin(); iter != active_fd.end(); iter++)
-		if (strcmp(*iter, name) == 0)
-			return -1;
+		if (iter->second == name) return -1;
 	directory dir = dm[name];
 	int meta_index = dir.index;
 	sb.meta_ba.flip(meta_index);
@@ -248,7 +241,7 @@ int fs_read(int fildes, void *buf, size_t nbyte){
 	int current_bytes = 0;
 	for (int i = 0; i < MAX_ADDR; i++){
 		if (m->addr[i] != -1){
-			block_read(m->addr[i], (char*)((char*)buf + current_bytes));
+			block_read(m->addr[i] + BLOCK_COUNT, (char*)((char*)buf + current_bytes));
 			current_bytes += MAX_ADDR;
 		}else{
 			save();
@@ -301,8 +294,8 @@ int fs_write(int fildes, void *buf, size_t nbyte){
 		sb.data_ba.flip(block);
 		block = sb.findEmptyData();
 	}
-	m->save(dir.index);printf("fucku\n");
-	save();printf("fucku\n");
+	m->save(dir.index);
+	save();
 	return curr > nbyte ? nbyte : curr;
 }
 
