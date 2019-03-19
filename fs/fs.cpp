@@ -91,10 +91,10 @@ struct directory {
 typedef map<char*, directory> dir_map;
 dir_map dm;
 
-map<int, char*> fn_map; // fd - name
+map<int, char*> fn_map; // fd-name
 int counter = 0; // fd counter
 map<int, char*> active; // active file descriptor
-map<int, int> offset_map;
+map<int, int> offset_map; // fd-offset
 
 void save(){
 	char sb_buf[BLOCK_SIZE];
