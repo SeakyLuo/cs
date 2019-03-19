@@ -11,6 +11,7 @@ class bitarray{
                 array += '1';
         }
         void flip(int index){
+            printf("Index: %d\n", index);
             array[index] = (array[index] == '0') ? '1' : '0';
         }
         int getEmpty(){

@@ -28,6 +28,8 @@ struct super_block {
 	}
 	int findEmptyMeta(){ return meta_ba.getEmpty(); }
 	int findEmptyData(){ return data_ba.getEmpty(); }
+	void flipMeta(int index) { meta_ba.flip(index); }
+	void flipData(int index) { data_ba.flip(index); }
 };
 super_block sb;
 
@@ -45,16 +47,18 @@ class meta {
 			for (int i = 0; i < MAX_ADDR; i++){
 				if (addr[i] == -1){
 					addr[i] = index;
-					sb.data_ba.flip(index);
+					printf("Meta Append\n");
+					sb.flipData(index);
 					return;
 				}
 			}
 		}
 		void free(){
 			// free data block
+			printf("Free\n");
 			for (int i = 0; i < MAX_ADDR; i++)
 				if (addr[i] == -1) return;
-				else sb.data_ba.flip(addr[i]);
+				else sb.flipData(addr[i]);
 		}
 		void save(int index){
 			index = 2 + index * 4;
@@ -189,7 +193,7 @@ int fs_create(char *name){
 	dir.size = 0;
 	dir.index = meta_index;
 	dm[name] = dir;
-	sb.meta_ba.flip(meta_index);
+	sb.flipMeta(meta_index);
 	meta* m = new meta();
 	m->save(meta_index);
 	save();
@@ -209,7 +213,7 @@ int fs_delete(char *name){
 		if (iter->second == name) return -1;
 	directory dir = dm[name];
 	int meta_index = dir.index;
-	sb.meta_ba.flip(meta_index);
+	sb.flipMeta(meta_index);
 	getMeta(meta_index)->free();
 	save();
     return 0;
@@ -231,16 +235,24 @@ int fs_read(int fildes, void *buf, size_t nbyte){
 	meta* m = getMeta(dm[name].index);
 	int offset = offset_map[fildes];
 	if (offset == dir.size) return 0;
-	int bytes = (nbyte + offset > dir.size) ? dir.size - offset : nbyte;
+	int next = offset % BLOCK_SIZE;  // next bytes to read
+	int bytes = (nbyte + offset > dir.size) ? dir.size - offset : nbyte; // total bytes to read
+	int left = bytes; // bytes not read
+	if (next) next = (bytes + next > BLOCK_SIZE) ? BLOCK_SIZE - next : bytes;
+	else next = (bytes > BLOCK_SIZE) ? BLOCK_SIZE : bytes;
 	// char* tmp = new char [BLOCK_SIZE + offset]; // bytes + offset
 	char* tmp = (char*) buf;
 	// char tmp[bytes + offset];
-	int curr = 0;
+	int curr = 0; // current bytes
 	for (int i = offset / BLOCK_SIZE; curr < bytes; i++){
-		block_read(m->addr[i] + BLOCK_COUNT, tmp + curr);
-		curr += (curr + BLOCK_SIZE <= bytes) ? BLOCK_SIZE : (bytes % BLOCK_SIZE);
+		printf("Block: %d Bytes To Read: %d Bytes Not Read: %d\n", m->addr[i] + 4096, next, left);
+		block_read(m->addr[i] + 4096, tmp + curr);
+		curr += next;
+		left -= next;
+		next = (curr + BLOCK_SIZE <= left) ? BLOCK_SIZE : left;
 	}
 	buf = tmp + offset;
+	printf("tmp: %s\nbuf: %s\n", tmp, buf);
 	offset_map[fildes] += bytes;
 	return bytes;
 }
@@ -262,9 +274,10 @@ int fs_write(int fildes, void *buf, size_t nbyte){
 	directory dir = dm[fn_map[fildes]];
 	meta* m = getMeta(dir.index);
 	int offset = offset_map[fildes] % BLOCK_SIZE;
-	int next = sb.findEmptyData(); // next empty block
-	int block = (offset && next > -1) ? offset / BLOCK_SIZE : next;
+	int next_block = sb.findEmptyData(); // next empty block
+	int block = (offset && next_block > -1) ? offset / BLOCK_SIZE : next_block;
 	if (block == -1) return 0;
+	int written = 0; // bytes written
 	char* copy = (char*)buf;
 	if (offset){
 		char* read_buf;
@@ -272,24 +285,25 @@ int fs_write(int fildes, void *buf, size_t nbyte){
 		block_read(block + 4096, read_buf);
 		for (int i = 0; i < offset; ++i)
 			write_buf[i] = read_buf[i];
-		for (int i = offset; i < BLOCK_SIZE; ++i)
-			write_buf[i] = copy[i - offset];
+		written += (nbyte + offset < BLOCK_SIZE) ? nbyte : BLOCK_SIZE - offset;
+		for (int i = 0; i < written; ++i)
+			write_buf[i + offset] = copy[i];
 		block_write(block + 4096, write_buf);
 		block = sb.findEmptyData();
+		offset = 0;
+		printf("Offset written bytes: %d", written);
 	}
-	int curr;
-	for (curr = offset; curr < nbyte && block > -1; block = sb.findEmptyData()){
+	for (; written < nbyte && block > -1; block = sb.findEmptyData()){
 		m->append(block);
-		block_write(block + 4096, copy + curr);
-		curr += (curr + BLOCK_SIZE <= nbyte) ? BLOCK_SIZE : (nbyte % BLOCK_SIZE);
-		sb.data_ba.flip(block);
+		block_write(block + 4096, copy + written);
+		printf("%d Bytes written into Block %d\n", (written + BLOCK_SIZE <= nbyte) ? BLOCK_SIZE : (nbyte % BLOCK_SIZE), block);
+		written += (written + BLOCK_SIZE <= nbyte) ? BLOCK_SIZE : (nbyte % BLOCK_SIZE);
 	}
-	int bytes = (block == -1) ? nbyte - curr : nbyte;
-	dm[fn_map[fildes]].size += bytes;
-	offset_map[fildes] += bytes;
+	dm[fn_map[fildes]].size += written;
+	offset_map[fildes] += written;
 	m->save(dir.index);
 	save();
-	return bytes;
+	return written;
 }
 
 // This function returns the current size of the file pointed to by the file descriptor fildes. In
@@ -330,7 +344,8 @@ int fs_truncate(int fildes, off_t length){
 		end = size / BLOCK_SIZE + (size % BLOCK_SIZE != 0);
 	for (int i = start; i < end; i++){
 		block_write(m->addr[i] + 4096, buf);
-		sb.data_ba.flip(m->addr[i]);
+		printf("nani\n");
+		sb.flipData(m->addr[i]);
 	}
 	dm[fn_map[fildes]].size = length;
 	save();
