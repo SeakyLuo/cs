@@ -238,7 +238,6 @@ int fs_read(int fildes, void *buf, size_t nbyte){
 	int left = bytes; // bytes not read
 	if (next) next = (bytes + next > BLOCK_SIZE) ? BLOCK_SIZE - next : bytes;
 	else next = (bytes > BLOCK_SIZE) ? BLOCK_SIZE : bytes;
-	// char* tmp = new char [BLOCK_SIZE + offset]; // bytes + offset
 	char* tmp = (char*) buf;
 	// char tmp[bytes + offset];
 	int curr = 0; // current bytes
@@ -337,11 +336,16 @@ int fs_truncate(int fildes, off_t length){
 	if (size < length) return -1;
 	if (offset_map[fildes] > length) offset_map[fildes] = length;
 	meta *m = getMeta(dir.index);
-	char* buf;
-	int start = length / BLOCK_SIZE + (length % BLOCK_SIZE != 0),
+	char empty_buf[BLOCK_SIZE];
+	int start = length / BLOCK_SIZE,
 		end = size / BLOCK_SIZE + (size % BLOCK_SIZE != 0);
+	if (length % BLOCK_SIZE){
+		char trun_buf[length % BLOCK_SIZE];
+		block_read(m->addr[start] + 4096, trun_buf);
+		block_write(m->addr[start++] + 4096, trun_buf);
+	}
 	for (int i = start; i < end; i++){
-		block_write(m->addr[i] + 4096, buf);
+		block_write(m->addr[i] + 4096, empty_buf);
 		sb.flipData(m->addr[i]);
 	}
 	dm[fn_map[fildes]].size = length;

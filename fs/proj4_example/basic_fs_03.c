@@ -15,13 +15,13 @@ int main() {
 	if(ret != 0) {
 		printf("ERROR: mount_fs failed\n");
 	}
-printf("seg fault\n");
+
 	// open file from basic_fs_01.c
 	fildes = fs_open(file_name1);
 	if(fildes < 0) {
 		printf("ERROR: fs_open failed\n");
 	}
-printf("seg fault\n");
+
 	// this is the string we wrote to file1 in basic_fs_01.c
 	// Lets make sure it was actually written into the file correctly
 	char data[] = "This is my data";
@@ -31,7 +31,7 @@ printf("seg fault\n");
 	if(filesize != len) {
 		printf("ERROR: /home/fs/file1 does not have correct size!\n");
 	}
-printf("seg fault\n");
+
 	char buffer[20];
 	ret = fs_read(fildes,buffer,len);
 	if(ret != len) {
