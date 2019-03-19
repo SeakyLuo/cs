@@ -9,4 +9,4 @@ fs:
 disk:
 	g++ -c disk.c
 clean:
-	rm fs.o
+	rm t1 t2 t3 t4

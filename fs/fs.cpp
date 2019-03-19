@@ -47,7 +47,6 @@ class meta {
 			for (int i = 0; i < MAX_ADDR; i++){
 				if (addr[i] == -1){
 					addr[i] = index;
-					printf("Meta Append\n");
 					sb.flipData(index);
 					return;
 				}
@@ -55,7 +54,6 @@ class meta {
 		}
 		void free(){
 			// free data block
-			printf("Free\n");
 			for (int i = 0; i < MAX_ADDR; i++)
 				if (addr[i] == -1) return;
 				else sb.flipData(addr[i]);
@@ -95,17 +93,17 @@ dir_map dm;
 
 map<int, char*> fn_map; // fd - name
 int counter = 0; // fd counter
-map<int, char*> active_fd;
+map<int, char*> active; // active file descriptor
 map<int, int> offset_map;
 
 void save(){
-	char* buf1 = new char [BLOCK_SIZE];
-	memcpy(buf1, &sb, sizeof(super_block));
-	block_write(0, buf1);
+	char sb_buf[BLOCK_SIZE];
+	memcpy(sb_buf, &sb, sizeof(super_block));
+	block_write(0, sb_buf);
 
-	char* buf2 = new char [BLOCK_SIZE];
-	memcpy(buf2, &dm, sizeof(dir_map));
-	block_write(1, buf2);
+	char dm_buf[BLOCK_SIZE];
+	memcpy(dm_buf, &dm, sizeof(dir_map));
+	block_write(1, dm_buf);
 }
 // This function creates a fresh (and empty) file system on the virtual disk with name disk name.
 // As part of this function, you should first invoke make disk(disk name) to create a new disk.
@@ -128,10 +126,10 @@ int make_fs(char *disk_name){
 int mount_fs(char *disk_name){
 	if (open_disk(disk_name) == -1) return -1;
 	// load
-	char* sb_buf = new char [BLOCK_SIZE];
+	char sb_buf[BLOCK_SIZE];
 	block_read(0, sb_buf);
 	memcpy(&sb, sb_buf, sizeof(super_block));
-	char* dm_buf = new char [BLOCK_SIZE];
+	char dm_buf[BLOCK_SIZE];
 	block_read(1, dm_buf);
 	memcpy(&dm, dm_buf, sizeof(dir_map));
     return 0;
@@ -159,11 +157,11 @@ int umount_fs(char *disk_name){
 // already 32 file descriptors active. When a file is opened, the file offset (seek pointer) is set
 // to 0 (the beginning of the file).
 int fs_open(char *name){
-	if (active_fd.size() == 32 || strlen(name) > 15 || dm.find(name) == dm.end())
+	if (active.size() == 32 || strlen(name) > 15 || dm.find(name) == dm.end())
 		return -1;
 	counter++;
 	fn_map[counter] = name;
-	active_fd[counter] = name;
+	active[counter] = name;
 	offset_map[counter] = 0;
     return counter;
 }
@@ -172,8 +170,8 @@ int fs_open(char *name){
 // the corresponding file. Upon successful completion, a value of 0 is returned. In case the file
 // descriptor fildes does not exist or is not open, the function returns -1.
 int fs_close(int fildes){
-	if (active_fd.find(fildes) == active_fd.end()) return -1;
-	active_fd.erase(fildes);
+	if (active.find(fildes) == active.end()) return -1;
+	active.erase(fildes);
 	offset_map.erase(fildes);
 	return 0;
 }
@@ -186,7 +184,7 @@ int fs_close(int fildes){
 // in the root directory. Note that to access a file that is created, it has to be subsequently
 // opened.
 int fs_create(char *name){
-	if (active_fd.size() == 32 || strlen(name) > 15 || dm.find(name) != dm.end())
+	if (active.size() == 32 || strlen(name) > 15 || dm.find(name) != dm.end())
 		return -1;
 	directory dir;
 	int meta_index = sb.findEmptyMeta();
@@ -209,7 +207,7 @@ int fs_create(char *name){
 // the file is currently open (i.e., there exists at least one open file descriptor that is associated
 // with this file).
 int fs_delete(char *name){
-	for (auto iter = active_fd.begin(); iter != active_fd.end(); iter++)
+	for (auto iter = active.begin(); iter != active.end(); iter++)
 		if (iter->second == name) return -1;
 	directory dir = dm[name];
 	int meta_index = dir.index;
@@ -344,7 +342,6 @@ int fs_truncate(int fildes, off_t length){
 		end = size / BLOCK_SIZE + (size % BLOCK_SIZE != 0);
 	for (int i = start; i < end; i++){
 		block_write(m->addr[i] + 4096, buf);
-		printf("nani\n");
 		sb.flipData(m->addr[i]);
 	}
 	dm[fn_map[fildes]].size = length;
