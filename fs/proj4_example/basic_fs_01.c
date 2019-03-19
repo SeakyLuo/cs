@@ -35,8 +35,8 @@ int main() {
 
 	// write to file
 	char data[] = "This is my data";
-	int len = strlen(data);printf("%d %d\n", fildes, len);
-	ret = fs_write(fildes,data,len);printf("%d %d\n", fildes, len);
+	int len = strlen(data);
+	ret = fs_write(fildes,data,len);
 	if(ret != len) {
 		printf("ERROR: fs_write failed to write correct number of bytes\n");
 	}
