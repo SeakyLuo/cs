@@ -95,7 +95,7 @@ int main() {
 	if(ret < 0) {
 		printf("ERROR: umount_fs failed\n");
 	}
-printf("seg fault\n");
+
 	// done!
 	return 0;
 }

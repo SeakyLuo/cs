@@ -2,6 +2,7 @@
 #include <cstdio>
 #include <cstring>
 #include <map>
+#include <bitset>
 #include "disk.h"
 
 #define BLOCK_LIMIT 64
@@ -10,27 +11,26 @@
 #define MAX_ADDR 4096
 
 using namespace std;
-
 struct super_block {
-	// free is true
-	string meta;
-	string data;
+	// free is 1
+	bitset<1024> meta;
+	bitset<4096> data;
 	void init(){
-		meta = string(1024, '1');
-		data = string(4096, '1');
+		meta.set();
+		data.set();
 	}
+	void flipMeta(int index){ meta.flip(index); }
+	void flipData(int index){ data.flip(index); }
 	int findEmptyMeta(){
 		for (int i = 0; i < 1024; i++)
-			if (meta[i] == '1') return i;
+			if (meta[i]) return i;
 		return -1;
 	}
 	int findEmptyData(){
 		for (int i = 0; i < 4096; i++)
-			if (data[i] == '1') return i;
+			if (data[i]) return i;
 		return -1;
 	}
-	void flipMeta(int index) { meta[index] = (meta[index] == '0') ? '1' : '0'; }
-	void flipData(int index) { data[index] = (data[index] == '0') ? '1' : '0'; }
 };
 super_block sb;
 
