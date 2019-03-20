@@ -274,6 +274,7 @@ int fs_delete(char *name){
 // a failure when the file descriptor fildes is not valid. The read function implicitly increments
 // the file pointer by the number of bytes that were actually read.
 int fs_read(int fildes, void *buf, size_t nbyte){
+	memset(buf,0,nbyte);
 	if (fn_map.find(fildes) == fn_map.end()) return -1;
 	char* name = fn_map[fildes];
 	directory dir = dm[find_dir(name)];
@@ -285,10 +286,12 @@ int fs_read(int fildes, void *buf, size_t nbyte){
 	int max = dir.size / BLOCK_SIZE + (dir.size % BLOCK_SIZE != 0);
 	char tmp[max * BLOCK_SIZE];
 	int curr = 0; // current bytes
+	// cout << "max in read: " << max << endl;
 	for (int i = 0; i < max; i++){
 		block_read(m->addr[i] + 4096, tmp + curr);
 		curr += BLOCK_SIZE;
 	}
+	// cout << "tmp in read: " << (char*)tmp << endl;
 	memcpy(buf, tmp + offset, bytes);
 	offset_map[fildes] += bytes;
 	return bytes;
@@ -318,13 +321,17 @@ int fs_write(int fildes, void *buf, size_t nbyte){
 	int bytes = nbyte;
 	for (int i = offset / BLOCK_SIZE; i < m->count(); i++){
 		block_read(m->addr[i] + 4096, tmp);
+		//cout << "temp: " << (char*)tmp << endl;
 		int read = (BLOCK_SIZE - offset < nbyte) ? BLOCK_SIZE - offset : nbyte;
 		memcpy(tmp + offset, (char*) buf + curr, read);
 		curr += read;
 		block_write(m->addr[i] + 4096, tmp);
 		offset = 0;
 	}
-	for (int block = sb.findEmptyData(); curr < nbyte && block > -1; block = sb.findEmptyData()){
+	//cout << tmp << endl;
+	//cout <<"buf in write: " << (char*)buf + 4094 << endl;
+	int block;
+	for (block = sb.findEmptyData(); curr < nbyte && block > -1; block = sb.findEmptyData()){
 		memcpy(tmp, (char*) buf + curr, (bytes < BLOCK_SIZE) ? bytes : BLOCK_SIZE);
 		block_write(block + 4096, tmp);
 		curr += BLOCK_SIZE;
@@ -334,7 +341,11 @@ int fs_write(int fildes, void *buf, size_t nbyte){
 	}
 	dm[dir_index].size = (offset_map[fildes] < dir.size) ? dir.size : offset_map[fildes];
 	m->save(dir.index);
-	return nbyte;
+
+	if (block == -1 && curr < nbyte)
+		return curr;
+	else
+		return nbyte;
 }
 
 
