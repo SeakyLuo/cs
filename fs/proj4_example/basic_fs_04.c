@@ -13,20 +13,20 @@ int main() {
 	if(ret != 0) {
 		printf("ERROR: mount_fs failed\n");
 	}
-
+printf("seg fault\n");
 	// open file from basic_fs_02.c
 	int fildes_file1 = fs_open(file_name);
 	if(fildes_file1 < 0) {
 		printf("ERROR: fs_open failed\n");
 	}
-
+printf("seg fault\n");
 	// create another file (there should be one from basic_fs_02.c)
 	char file2[] = "file3";
 	ret = fs_create(file2);
 	if(ret != 0) {
 		printf("ERROR: fs_create failed\n");
 	}
-
+printf("seg fault\n");
 	int fildes_file2 = fs_open(file2);
 	if(fildes_file2 < 0) {
 		printf("ERROR: fs_open failed\n");

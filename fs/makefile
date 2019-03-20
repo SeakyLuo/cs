@@ -11,4 +11,4 @@ disk:
 test:
 	g++ -o test test.c disk.o
 clean:
-	rm t1 t2 t3 t4
+	rm t1 t2 t3 t4 test file1 file2 fs1 fs2

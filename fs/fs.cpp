@@ -1,13 +1,8 @@
 #include <iostream>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
-#include <fcntl.h>
 #include <cstdio>
 #include <cstring>
 #include <map>
 #include "disk.h"
-#include "bitarray.cpp"
 
 #define BLOCK_LIMIT 64
 #define META_COUNT 1024
@@ -18,18 +13,24 @@ using namespace std;
 
 struct super_block {
 	// free is true
-	bitarray meta_ba; // free meta group
-	bitarray data_ba; // free data block
-	int dm_size;
-	super_block(){
-		meta_ba.init(1024);
-		data_ba.init(4096);
-		dm_size = 0;
+	string meta;
+	string data;
+	void init(){
+		meta = string(1024, '1');
+		data = string(4096, '1');
 	}
-	int findEmptyMeta(){ return meta_ba.getEmpty(); }
-	int findEmptyData(){ return data_ba.getEmpty(); }
-	void flipMeta(int index) { meta_ba.flip(index); }
-	void flipData(int index) { data_ba.flip(index); }
+	int findEmptyMeta(){
+		for (int i = 0; i < 1024; i++)
+			if (meta[i] == '1') return i;
+		return -1;
+	}
+	int findEmptyData(){
+		for (int i = 0; i < 4096; i++)
+			if (data[i] == '1') return i;
+		return -1;
+	}
+	void flipMeta(int index) { meta[index] = (meta[index] == '0') ? '1' : '0'; }
+	void flipData(int index) { data[index] = (data[index] == '0') ? '1' : '0'; }
 };
 super_block sb;
 
@@ -94,12 +95,35 @@ meta* getMeta(int index){
 }
 
 struct directory {
-	int size; // total file size
-	int index; // meta index 2 + i * 4
+	char name[15]; // filename
+	int size = 0; // total file size
+	int index = -1; // meta index 2 + i * 4
+	bool empty = true;
 };
 
-typedef map<char*, directory> dir_map;
-dir_map dm;
+directory dm[64];
+int find_dir(char* name){
+	for (int i = 0; i < 64; i++)
+		if (!dm[i].empty && strcmp(name, dm[i].name) == 0)
+			return i;
+	return -1;
+}
+int empty_dir(){
+	for (int i = 0; i < 64; i++)
+		if (dm[i].empty) return i;
+	return -1;
+}
+void append_dir(directory& dir){
+	dm[empty_dir()] = dir;
+}
+void erase_dir(directory& dir){
+	for (int i = 0; i < 64; i++){
+		if (strcmp(dir.name, dm[i].name) == 0){
+			dm[i].empty = true;
+			break;
+		}
+	}
+}
 
 map<int, char*> fn_map; // fd-name
 int counter = 0; // fd counter
@@ -107,12 +131,13 @@ map<int, char*> active; // active file descriptor
 map<int, int> offset_map; // fd-offset
 
 void save(){
-	sb.dm_size = sizeof(dm);
 	char sb_buf[BLOCK_SIZE];
+	memset(sb_buf, 0, BLOCK_SIZE);
 	memcpy(&sb_buf, &sb, sizeof(sb));
 	block_write(0, sb_buf);
 
 	char dm_buf[BLOCK_SIZE];
+	memset(dm_buf, 0, BLOCK_SIZE);
 	memcpy(&dm_buf, &dm, sizeof(dm));
 	block_write(1, dm_buf);
 }
@@ -124,6 +149,11 @@ void save(){
 int make_fs(char *disk_name){
 	if (make_disk(disk_name) == -1 || open_disk(disk_name) == -1)
 		return -1;
+	sb.init();
+	for (int i = 0; i < 64; i++){
+		directory dir;
+		dm[i] = dir;
+	}
 	save();
     return close_disk();
 }
@@ -138,11 +168,13 @@ int mount_fs(char *disk_name){
 	if (open_disk(disk_name) == -1) return -1;
 	// load
 	char sb_buf[BLOCK_SIZE];
+	memset(sb_buf, 0, BLOCK_SIZE);
 	block_read(0, sb_buf);
-	memcpy(&sb, sb_buf, sizeof(super_block));
+	memcpy(&sb, sb_buf, sizeof(sb));
 	char dm_buf[BLOCK_SIZE];
+	memset(dm_buf, 0, BLOCK_SIZE);
 	block_read(1, dm_buf);
-	memcpy(&dm, dm_buf, sb.dm_size);
+	memcpy(&dm, dm_buf, sizeof(dm));
     return 0;
 }
 
@@ -168,7 +200,7 @@ int umount_fs(char *disk_name){
 // already 32 file descriptors active. When a file is opened, the file offset (seek pointer) is set
 // to 0 (the beginning of the file).
 int fs_open(char *name){
-	if (active.size() == 32 || strlen(name) > 15 || dm.find(name) == dm.end())
+	if (active.size() == 32 || strlen(name) > 15 || find_dir(name) == -1)
 		return -1;
 	counter++;
 	fn_map[counter] = name;
@@ -196,17 +228,18 @@ int fs_close(int fildes){
 // in the root directory. Note that to access a file that is created, it has to be subsequently
 // opened.
 int fs_create(char *name){
-	if (active.size() == 32 || strlen(name) > 15 || dm.find(name) != dm.end())
+	if (active.size() == 32 || strlen(name) > 15 || empty_dir() == -1 || find_dir(name) != -1)
 		return -1;
-	directory dir;
 	int meta_index = sb.findEmptyMeta();
+	directory dir;
+	strcpy(dir.name, name);
 	dir.size = 0;
 	dir.index = meta_index;
-	dm[name] = dir;
+	dir.empty = false;
+	append_dir(dir);
 	sb.flipMeta(meta_index);
 	meta* m = new meta();
 	m->save(meta_index);
-	// save();
     return 0;
 }
 
@@ -221,13 +254,13 @@ int fs_create(char *name){
 int fs_delete(char *name){
 	for (auto iter = active.begin(); iter != active.end(); iter++)
 		if (iter->second == name) return -1;
-	directory dir = dm[name];
+	directory dir = dm[find_dir(name)];
 	int meta_index = dir.index;
 	sb.flipMeta(meta_index);
 	meta *m = getMeta(meta_index);
 	m->free();
 	m->save(meta_index);
-	// save();
+	erase_dir(dir);
     return 0;
 }
 
@@ -243,8 +276,8 @@ int fs_delete(char *name){
 int fs_read(int fildes, void *buf, size_t nbyte){
 	if (fn_map.find(fildes) == fn_map.end()) return -1;
 	char* name = fn_map[fildes];
-	directory dir = dm[name];
-	meta* m = getMeta(dm[name].index);
+	directory dir = dm[find_dir(name)];
+	meta* m = getMeta(dir.index);
 	int offset = offset_map[fildes];
 	if (offset == dir.size) return 0;
 	int next = offset % BLOCK_SIZE;  // next bytes to read
@@ -275,46 +308,31 @@ int fs_read(int fildes, void *buf, size_t nbyte){
 // actually written.
 int fs_write(int fildes, void *buf, size_t nbyte){
 	if (fn_map.find(fildes) == fn_map.end()) return -1;
-	directory dir = dm[fn_map[fildes]];
-	meta* m = getMeta(dm[fn_map[fildes]].index);
+	int dir_index = find_dir(fn_map[fildes]);
+	directory dir = dm[dir_index];
+	meta* m = getMeta(dir.index);
 	int offset = offset_map[fildes];
 	offset_map[fildes] = offset + nbyte;
 	char tmp[BLOCK_SIZE];
 	int curr = 0;
 	int bytes = nbyte;
 	for (int i = offset / BLOCK_SIZE; i < m->count(); i++){
-		if (BLOCK_SIZE - offset < nbyte){
-			block_read(m->addr[i] + 4096, tmp);
-			memcpy(tmp + offset, (char*) buf + curr, (BLOCK_SIZE - offset));
-			block_write(m->addr[i] + 4096, tmp);
-			curr += BLOCK_SIZE - offset;
-			offset = 0;
-		}
-		else{
-			block_read(m->addr[i] + 4096, tmp);
-			memcpy(tmp + offset,(char*) buf + curr, nbyte);
-			block_write(m->addr[i] + 4096, tmp);
-			curr += nbyte;
-			offset = 0;
-		}
+		block_read(m->addr[i] + 4096, tmp);
+		int read = (BLOCK_SIZE - offset < nbyte) ? BLOCK_SIZE - offset : nbyte;
+		memcpy(tmp + offset, (char*) buf + curr, read);
+		curr += read;
+		block_write(m->addr[i] + 4096, tmp);
+		offset = 0;
 	}
-	int block = sb.findEmptyData();
-	while(curr < nbyte && block  != -1){
-		if (bytes < BLOCK_SIZE){
-			memcpy(tmp,(char*) buf + curr, bytes);
-			block_write(block + 4096, tmp);
-		}
-		else{
-			memcpy(tmp,(char*) buf + curr, BLOCK_SIZE);
-			block_write(block + 4096, tmp);
-		}
+	for (int block = sb.findEmptyData(); curr < nbyte && block > -1; block = sb.findEmptyData()){
+		memcpy(tmp, (char*) buf + curr, (bytes < BLOCK_SIZE) ? bytes : BLOCK_SIZE);
+		block_write(block + 4096, tmp);
 		curr += BLOCK_SIZE;
 		bytes -= BLOCK_SIZE;
 		m->append(block);
 		memset(tmp, 0, BLOCK_SIZE);
-		block = sb.findEmptyData();
 	}
-	dm[fn_map[fildes]].size = (offset_map[fildes] < dm[fn_map[fildes]].size) ? dm[fn_map[fildes]].size :offset_map[fildes] ;
+	dm[dir_index].size = (offset_map[fildes] < dir.size) ? dir.size : offset_map[fildes];
 	m->save(dir.index);
 	return nbyte;
 }
@@ -323,7 +341,7 @@ int fs_write(int fildes, void *buf, size_t nbyte){
 // This function returns the current size of the file pointed to by the file descriptor fildes. In
 // case fildes is invalid, the function returns -1.
 int fs_get_filesize(int fildes){
-    return (fn_map.find(fildes) == fn_map.end()) ? -1 : dm[fn_map[fildes]].size;
+    return (find_dir(fn_map[fildes]) == -1) ? -1 : dm[find_dir(fn_map[fildes])].size;
 }
 
 // This function sets the file pointer (the offset used for read and write operations) associated
@@ -348,12 +366,12 @@ int fs_lseek(int fildes, off_t offset){
 // fs truncate returns -1 on failure. It is a failure when the file descriptor fildes is invalid or the
 // requested length is larger than the file size.
 int fs_truncate(int fildes, off_t length){
-	if (fn_map.find(fildes) == fn_map.end()) return -1;
-	directory dir = dm[fn_map[fildes]];
-	int size = dm[fn_map[fildes]].size;
+	int dir_index = find_dir(fn_map[fildes]);
+	if (dir_index == -1) return -1;
+	directory dir = dm[dir_index];
+	int size = dir.size;
 	if (size < length) return -1;
 	if (offset_map[fildes] > length) offset_map[fildes] = length;
-	dm[fn_map[fildes]].size = length;
 	meta *m = getMeta(dir.index);
 	char empty_buf[BLOCK_SIZE];
 	int start = length / BLOCK_SIZE,
@@ -369,6 +387,7 @@ int fs_truncate(int fildes, off_t length){
 		block_write(m->addr[i] + 4096, empty_buf);
 		sb.flipData(m->addr[i]);
 	}
+	dm[dir_index].size = length;
 	// save();
     return 0;
 }

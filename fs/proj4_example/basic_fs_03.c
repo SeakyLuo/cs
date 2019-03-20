@@ -15,46 +15,46 @@ int main() {
 	if(ret != 0) {
 		printf("ERROR: mount_fs failed\n");
 	}
-printf("seg fault\n");
+
 	// open file from basic_fs_01.c
 	fildes = fs_open(file_name1);
 	if(fildes < 0) {
 		printf("ERROR: fs_open failed\n");
 	}
-printf("seg fault\n");
+
 	// this is the string we wrote to file1 in basic_fs_01.c
 	// Lets make sure it was actually written into the file correctly
 	char data[] = "This is my data";
 	int len = strlen(data);
-printf("seg fault\n");
+
 	int filesize = fs_get_filesize(fildes);
 	if(filesize != len) {
 		printf("ERROR: /home/fs/file1 does not have correct size!\n");
 	}
-printf("seg fault\n");
+
 	char buffer[20];
 	ret = fs_read(fildes,buffer,len);
 	if(ret != len) {
 		printf("ERROR: fs_read failed to read correct number of bytes\n");
 	}
-printf("seg fault\n");
+
 	ret = strncmp(data,buffer,len);
 	if(ret != 0) {
 		printf("ERROR: /home/fs/file1 does not have correct data!\n");
 	}
-printf("seg fault\n");
+
 	// close file descriptor
 	ret = fs_close(fildes);
 	if(ret != 0) {
 		printf("ERROR: fs_close failed\n");
 	}
-printf("seg fault\n");
+
 	// unmount fs from basic_fs_01.c
 	ret = umount_fs(disk_name);
 	if(ret != 0) {
 		printf("ERROR: umount_fs failed\n");
 	}
-printf("seg fault\n");
+
 	// mount fs from basic_fs_02.c
 	char disk_name2[] = "fs2";
 	ret = mount_fs(disk_name2);
@@ -95,7 +95,7 @@ printf("seg fault\n");
 	if(ret < 0) {
 		printf("ERROR: umount_fs failed\n");
 	}
-
+printf("seg fault\n");
 	// done!
 	return 0;
 }

@@ -5,10 +5,8 @@ class bitarray{
         int length;
         std::string array;
         void init(int length){
-            this->array = "";
+            this->array = std::string(length, '1');
             this->length = length;
-            for (int i = 0; i < length; i++)
-                array += '1';
         }
         void flip(int index){
             array[index] = (array[index] == '0') ? '1' : '0';
