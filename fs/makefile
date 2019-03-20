@@ -8,5 +8,7 @@ fs:
 	g++ -o t4 proj4_example/basic_fs_04.c fs.o disk.o
 disk:
 	g++ -c disk.c
+test:
+	g++ -o test test.c disk.o
 clean:
 	rm t1 t2 t3 t4
