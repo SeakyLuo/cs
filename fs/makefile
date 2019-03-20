@@ -2,13 +2,3 @@ all: fs
 
 fs:
 	g++ -std=c++11 -c fs.cpp -o fs.o
-	g++ -o t1 proj4_example/basic_fs_01.c fs.o disk.o
-	g++ -o t2 proj4_example/basic_fs_02.c fs.o disk.o
-	g++ -o t3 proj4_example/basic_fs_03.c fs.o disk.o
-	g++ -o t4 proj4_example/basic_fs_04.c fs.o disk.o
-disk:
-	g++ -c disk.c
-test:
-	g++ -o test test.c disk.o
-clean:
-	rm t1 t2 t3 t4 test file1 file2 fs1 fs2

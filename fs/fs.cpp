@@ -36,7 +36,7 @@ super_block sb;
 
 class meta {
 	public:
-		int* addr; // data indices
+		int* addr; // data block indices
 		meta(){
 			addr = new int [MAX_ADDR];
 			for (int i = 0; i < MAX_ADDR; i++)
@@ -388,6 +388,5 @@ int fs_truncate(int fildes, off_t length){
 		sb.flipData(m->addr[i]);
 	}
 	dm[dir_index].size = length;
-	// save();
     return 0;
 }
