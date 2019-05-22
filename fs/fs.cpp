@@ -257,7 +257,9 @@ int fs_create(char *name){
 int fs_delete(char *name){
 	for (auto iter = active.begin(); iter != active.end(); iter++)
 		if (iter->second == name) return -1;
-	directory dir = dm[find_dir(name)];
+	int dir_index = find_dir(name);
+	if (dir_index == -1) return -1;
+	directory dir = dm[dir_index];
 	int meta_index = dir.index;
 	sb.flipMeta(meta_index);
 	meta *m = getMeta(meta_index);
@@ -374,6 +376,7 @@ int fs_lseek(int fildes, off_t offset){
 // fs truncate returns -1 on failure. It is a failure when the file descriptor fildes is invalid or the
 // requested length is larger than the file size.
 int fs_truncate(int fildes, off_t length){
+	if (fn_map.find(fildes) == fn_map.end()) return -1;
 	int dir_index = find_dir(fn_map[fildes]);
 	if (dir_index == -1) return -1;
 	directory dir = dm[dir_index];
