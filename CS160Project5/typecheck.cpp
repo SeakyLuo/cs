@@ -82,6 +82,10 @@ void TypeCheck::visitProgramNode(ProgramNode* node) {
 }
 
 void TypeCheck::visitClassNode(ClassNode* node) {
+    currentMemberOffset = 0;
+    currentMethodTable->clear();
+    currentVariableTable->clear();
+    node->visit_children(this);
     currentClassName = node->identifier_1->name;
     if (node->identifier_2 && !classTable->count(node->identifier_2->name))
         typeError(undefined_class);
@@ -98,22 +102,25 @@ void TypeCheck::visitClassNode(ClassNode* node) {
     }
     classinfo info;
     info.superClassName = (node->identifier_2) ? "" : node->identifier_2->name;
-    currentMethodTable->clear();
-    for (auto iter: *(node->declaration_list)) visitDeclarationNode(iter);
     info.methods = currentMethodTable;
-    for (auto iter: *(node->method_list)) visitMethodNode(iter);
-    currentVariableTable->clear();
     info.members = currentVariableTable;
+    info.membersSize = currentMemberOffset;
     (*classTable)[currentClassName] = info;
 }
 
 void TypeCheck::visitMethodNode(MethodNode* node) {
+    currentParameterOffset = 12;
+    currentLocalOffset = 0;
+    node->visit_children(this);
     std::string methodName = node->identifier->name;
     BaseType returnBaseType = node->type->basetype;
+    std::string returnTypeName = node->methodbodynode->returnstatement->identifier->name;
     if (methodName == "main" && returnBaseType != bt_none)
         typeError(main_method_incorrect_signature);
     else if (methodName == currentClassName && returnBaseType != bt_none)
         typeError(constructor_returns_type);
+    else if (node->type->objectClassName != returnTypeName)
+        typeError(return_type_mismatch);
     currentVariableTable->clear();
     MethodInfo info;
     CompoundType returnType;
@@ -127,7 +134,7 @@ void TypeCheck::visitMethodNode(MethodNode* node) {
         info.parameters->push_back(type);
     }
     info.returnType = returnType;
-    info.localsSize = 4;
+    info.localsSize = currentParameterOffset - currentMemberOffset;
     (*currentMethodTable)[methodName] = info;
 }
 
@@ -141,9 +148,10 @@ void TypeCheck::visitParameterNode(ParameterNode* node) {
     type.baseType = node->type->basetype;
     type.objectClassName = node->type->objectClassName;
     info.type = type;
-    info.offset = 0;
+    info.offset = currentParameterOffset;
     info.size = 4;
     (*currentVariableTable)[node->identifier->name] = info;
+    currentParameterOffset += 4;
 }
 
 void TypeCheck::visitDeclarationNode(DeclarationNode* node) {
@@ -153,9 +161,11 @@ void TypeCheck::visitDeclarationNode(DeclarationNode* node) {
     for (auto iter: *(node->identifier_list)){
         VariableInfo info;
         info.type = type;
-        info.offset = 0;
+        info.offset = currentParameterOffset;
         info.size = 4;
         (*currentVariableTable)[iter->name] = info;
+        currentParameterOffset += 4;
+        // currentParameterOffset/currentMemberOffset
     }
 }
 
@@ -165,6 +175,10 @@ void TypeCheck::visitReturnStatementNode(ReturnStatementNode* node) {
 
 void TypeCheck::visitAssignmentNode(AssignmentNode* node) {
     std::string name = (node->identifier_2) ? node->identifier_2->name : node->identifier_1->name;
+    if (node->identifier_2 && !currentVariableTable->count(node->identifier_1->name))
+        typeError(not_object);
+    if (!currentVariableTable->count(name1)) // need to check parent class table
+        typeError(undefined_variable);
     if (node->expression->basetype != (*currentVariableTable)[name].type.baseType)
         typeError(assignment_type_mismatch);
 }
@@ -249,7 +263,10 @@ void TypeCheck::visitNegationNode(NegationNode* node) {
 }
 
 void TypeCheck::visitMethodCallNode(MethodCallNode* node) {
+    node->visit_children(this);
     std::string methodName = (node->identifier_2) ? node->identifier_2->name : node->identifier_1->name;
+    if (node->identifier_2 && !currentVariableTable->count(node->identifier_1->name))
+        typeError(not_object);
     if (currentMethodTable->count(methodName)){
         auto found = node->expression_list;
         auto expected = (*currentMethodTable)[methodName].parameters;
@@ -266,10 +283,13 @@ void TypeCheck::visitMethodCallNode(MethodCallNode* node) {
 }
 
 void TypeCheck::visitMemberAccessNode(MemberAccessNode* node) {
-    std::string name1 = node->identifier_1->name, name2 = node->identifier_2->name;
+    std::string name1 = node->identifier_1->name,
+                name2 = node->identifier_2->name;
     if (!currentVariableTable->count(name1))
         typeError(not_object);
-    else if (!(*classTable)[name1].members->count(name2))
+    if (!currentVariableTable->count(name1)) // need to check parent class table
+        typeError(undefined_variable);
+    if (!(*classTable)[name1].members->count(name2))
         typeError(undefined_member);
 }
 
