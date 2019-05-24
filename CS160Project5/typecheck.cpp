@@ -142,7 +142,7 @@ void TypeCheck::visitMethodNode(MethodNode* node) {
 }
 
 void TypeCheck::visitMethodBodyNode(MethodBodyNode* node) {
-    node->visit_children(this);
+
 }
 
 void TypeCheck::visitParameterNode(ParameterNode* node) {
@@ -156,7 +156,6 @@ void TypeCheck::visitParameterNode(ParameterNode* node) {
     info.offset = currentParameterOffset;
     info.size = 4;
     (*currentVariableTable)[node->identifier->name] = info;
-    std::cout << "Type: " << node->objectClassName << '\n';
     node->identifier->basetype = node->type->basetype;
     node->identifier->objectClassName = node->type->objectClassName;
 }
@@ -395,7 +394,7 @@ void TypeCheck::visitNewNode(NewNode* node) {
 }
 
 void TypeCheck::visitIntegerTypeNode(IntegerTypeNode* node) {
-    node->basetype = bt_boolean;
+    node->basetype = bt_integer;
     node->objectClassName = "Integer";
 }
 
