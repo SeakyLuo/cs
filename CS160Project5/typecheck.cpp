@@ -70,7 +70,6 @@ void TypeCheck::visitProgramNode(ProgramNode* node) {
     classTable = new ClassTable();
     currentMethodTable = new MethodTable();
     currentVariableTable = new VariableTable();
-    node->visit_children(this);
     bool mainClass = false;
     for (auto iter: *(node->class_list)){
         if (iter->identifier_1->name == "Main"){
@@ -79,11 +78,13 @@ void TypeCheck::visitProgramNode(ProgramNode* node) {
         }
     }
     if (!mainClass) typeError(no_main_class);
+    node->visit_children(this);
 }
 
 void TypeCheck::visitClassNode(ClassNode* node) {
     currentMethodTable->clear();
     currentVariableTable->clear();
+    currentMemberOffset = 0;
     currentClassName = node->identifier_1->name;
     if (node->identifier_2 && !classTable->count(node->identifier_2->name))
         typeError(undefined_class);
@@ -98,13 +99,25 @@ void TypeCheck::visitClassNode(ClassNode* node) {
         }
         if (!mainFunc) typeError(no_main_method);
     }
-    node->visit_children(this);
     classinfo info;
-    info.superClassName = (node->identifier_2) ? "" : node->identifier_2->name;
+    info.superClassName = (node->identifier_2) ? node->identifier_2->name : "";
     info.methods = currentMethodTable;
-    info.members = currentVariableTable;
-    info.membersSize = 4 * node->declaration_list->size();
+    info.members = new VariableTable();
+    for (auto iter: *(node->declaration_list)){
+        VariableInfo vi;
+        CompoundType type;
+        type.baseType = iter->type->basetype;
+        type.objectClassName = iter->type->objectClassName;
+        vi.type = type;
+        vi.offset = currentLocalOffset;
+        vi.size = 4;
+        auto member = iter->identifier_list->front();
+        (*info.members)[member->name] = vi;
+        currentMemberOffset += 4;
+    }
+    info.membersSize = currentMemberOffset;
     (*classTable)[currentClassName] = info;
+    node->visit_children(this);
 }
 
 void TypeCheck::visitMethodNode(MethodNode* node) {
@@ -142,7 +155,19 @@ void TypeCheck::visitMethodNode(MethodNode* node) {
 }
 
 void TypeCheck::visitMethodBodyNode(MethodBodyNode* node) {
-
+    for (auto iter: *(node->declaration_list)){
+        CompoundType type;
+        type.baseType = iter->type->basetype;
+        type.objectClassName = iter->type->objectClassName;
+        for (auto id: *(iter->identifier_list)){
+            currentLocalOffset -= 4;
+            VariableInfo info;
+            info.type = type;
+            info.offset = currentLocalOffset;
+            info.size = 4;
+            (*currentVariableTable)[id->name] = info;
+        }
+    }
 }
 
 void TypeCheck::visitParameterNode(ParameterNode* node) {
@@ -162,19 +187,6 @@ void TypeCheck::visitParameterNode(ParameterNode* node) {
 
 void TypeCheck::visitDeclarationNode(DeclarationNode* node) {
     node->visit_children(this);
-    CompoundType type;
-    type.baseType = node->type->basetype;
-    type.objectClassName = node->type->objectClassName;
-    for (auto iter: *(node->identifier_list)){
-        currentMemberOffset -= 4;
-        VariableInfo info;
-        info.type = type;
-        info.offset = currentMemberOffset;
-        info.size = 4;
-        (*currentVariableTable)[iter->name] = info;
-        iter->basetype = node->type->basetype;
-        iter->objectClassName = node->type->objectClassName;
-    }
 }
 
 void TypeCheck::visitReturnStatementNode(ReturnStatementNode* node) {

@@ -88,7 +88,7 @@ Methods: Method Methods { $$ = $2; $$->push_front($1); }
 Method: T_ID '(' ParamList ')' T_ARROW ReturnType '{' Body '}' { $$ = new MethodNode($1, $3, $6, $8); };
 
 ParamList: Params { $$ = $1; }
-         | %empty { $$ = NULL; }
+         | %empty { $$ = new std::list<ParameterNode*>(); }
          ;
 
 Params: Params ',' Param { $$ = $1; $$->push_back($3); }
@@ -134,7 +134,7 @@ MethodCall: T_ID '(' ArgList ')' { $$ = new MethodCallNode($1, NULL, $3); }
           ;
 
 ArgList: Args { $$ = $1; }
-       | %empty { $$ = NULL; }
+       | %empty { $$ = new std::list<ExpressionNode*>(); }
        ;
 
 Args: Args ',' Expr { $$ = $1; $$->push_back($3); }

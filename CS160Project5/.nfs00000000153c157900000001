@@ -1,0 +1,1382 @@
+python3 runtests.py | diff - output.txt
+2d1
+< Name: Main
+9a9,17
+>         VariableTable {
+>           i0 -> {Integer, -12, 4},
+>           local0 -> {Boolean, -4, 4},
+>           local1 -> {Boolean, -8, 4}
+>         }
+>       }
+>     }
+>   }
+> }
+12d19
+< Name: Main
+19a27,35
+>         VariableTable {
+>           i0 -> {Integer, -4, 4},
+>           i1 -> {Integer, -8, 4},
+>           i2 -> {Integer, -12, 4}
+>         }
+>       }
+>     }
+>   }
+> }
+22d37
+< Name: Main
+29a45,53
+>         VariableTable {
+>           local0 -> {Boolean, -4, 4},
+>           local1 -> {Integer, -8, 4},
+>           local2 -> {Boolean, -12, 4}
+>         }
+>       }
+>     }
+>   }
+> }
+32d55
+< Name: Main
+39c62,69
+<         12,
+---
+>         4,
+>         VariableTable {
+>           i0 -> {Integer, -4, 4}
+>         }
+>       }
+>     }
+>   }
+> }
+42d71
+< Name: Main
+49c78,85
+<         12,
+---
+>         4,
+>         VariableTable {
+>           local0 -> {Integer, -4, 4}
+>         }
+>       }
+>     }
+>   }
+> }
+52d87
+< Name: Main
+59c94,102
+<         12,
+---
+>         8,
+>         VariableTable {
+>           local0 -> {Integer, -4, 4},
+>           local1 -> {Integer, -8, 4}
+>         }
+>       }
+>     }
+>   }
+> }
+62d104
+< Name: Main
+69a112,120
+>         VariableTable {
+>           local0 -> {Integer, -4, 4},
+>           local1 -> {Integer, -8, 4},
+>           local2 -> {Integer, -12, 4}
+>         }
+>       }
+>     }
+>   }
+> }
+72d122
+< Name: Main
+79c129,134
+<         12,
+---
+>         0,
+>         VariableTable {}
+>       }
+>     }
+>   }
+> }
+82d136
+< Name: Main
+89c143,150
+<         12,
+---
+>         4,
+>         VariableTable {
+>           local0 -> {Integer, -4, 4}
+>         }
+>       }
+>     }
+>   }
+> }
+92d152
+< Name: Main
+99c159,167
+<         12,
+---
+>         8,
+>         VariableTable {
+>           local0 -> {Boolean, -4, 4},
+>           local1 -> {Boolean, -8, 4}
+>         }
+>       }
+>     }
+>   }
+> }
+102,103d169
+< Name: class0
+< Name: Main
+109a176,193
+>         16,
+>         VariableTable {
+>           i0 -> {Integer, -16, 4},
+>           local0 -> {Integer, -4, 4},
+>           local1 -> {Integer, -8, 4},
+>           local2 -> {Object(class0), -12, 4}
+>         }
+>       }
+>     }
+>   },
+>   class0 -> {
+>     VariableTable {
+>       member0 -> {Integer, 0, 4},
+>       member1 -> {Integer, 4, 4}
+>     },
+>     MethodTable {
+>       class0 -> {
+>         None,
+110a195,224
+>         VariableTable {
+>           arg0 -> {Integer, 12, 4},
+>           arg1 -> {Boolean, 16, 4},
+>           arg2 -> {Boolean, 20, 4},
+>           local0 -> {Boolean, -4, 4},
+>           local1 -> {Boolean, -8, 4},
+>           local2 -> {Integer, -12, 4}
+>         }
+>       },
+>       f0 -> {
+>         Integer,
+>         4,
+>         VariableTable {
+>           local0 -> {Boolean, -4, 4}
+>         }
+>       },
+>       f1 -> {
+>         None,
+>         12,
+>         VariableTable {
+>           arg0 -> {Boolean, 12, 4},
+>           arg1 -> {Integer, 16, 4},
+>           local0 -> {Integer, -4, 4},
+>           local1 -> {Boolean, -8, 4},
+>           local2 -> {Integer, -12, 4}
+>         }
+>       }
+>     }
+>   }
+> }
+113,115d226
+< Name: class0
+< Name: class1
+< Name: Main
+122a234,286
+>         VariableTable {
+>           local0 -> {Integer, -4, 4},
+>           local1 -> {Integer, -8, 4},
+>           local2 -> {Object(class0), -12, 4}
+>         }
+>       }
+>     }
+>   },
+>   class0 -> {
+>     VariableTable {
+>       member0 -> {Integer, 0, 4},
+>       member1 -> {Boolean, 4, 4},
+>       member2 -> {Boolean, 8, 4}
+>     },
+>     MethodTable {
+>       class0 -> {
+>         None,
+>         0,
+>         VariableTable {
+>           arg0 -> {Boolean, 12, 4},
+>           arg1 -> {Integer, 16, 4}
+>         }
+>       }
+>     }
+>   },
+>   class1 -> {
+>     class0,
+>     VariableTable {
+>       member3 -> {Object(class0), 0, 4}
+>     },
+>     MethodTable {
+>       class1 -> {
+>         None,
+>         12,
+>         VariableTable {
+>           arg0 -> {Boolean, 12, 4},
+>           arg1 -> {Boolean, 16, 4},
+>           arg2 -> {Boolean, 20, 4},
+>           local0 -> {Boolean, -4, 4},
+>           local1 -> {Integer, -8, 4},
+>           local2 -> {Boolean, -12, 4}
+>         }
+>       },
+>       f0 -> {
+>         Integer,
+>         0,
+>         VariableTable {
+>           arg0 -> {Object(class0), 12, 4}
+>         }
+>       }
+>     }
+>   }
+> }
+125,127d288
+< Name: class0
+< Name: class1
+< Name: Main
+134c295,344
+<         12,
+---
+>         0,
+>         VariableTable {}
+>       }
+>     }
+>   },
+>   class0 -> {
+>     VariableTable {
+>       member0 -> {Integer, 0, 4},
+>       member1 -> {Integer, 4, 4}
+>     },
+>     MethodTable {
+>       class0 -> {
+>         None,
+>         0,
+>         VariableTable {
+>           arg0 -> {Integer, 12, 4},
+>           arg1 -> {Integer, 16, 4},
+>           arg2 -> {Integer, 20, 4}
+>         }
+>       },
+>       f0 -> {
+>         Integer,
+>         12,
+>         VariableTable {
+>           arg0 -> {Integer, 12, 4},
+>           arg1 -> {Integer, 16, 4},
+>           arg2 -> {Boolean, 20, 4},
+>           i0 -> {Integer, -12, 4},
+>           local0 -> {Integer, -4, 4},
+>           local1 -> {Boolean, -8, 4}
+>         }
+>       }
+>     }
+>   },
+>   class1 -> {
+>     class0,
+>     VariableTable {},
+>     MethodTable {
+>       class1 -> {
+>         None,
+>         4,
+>         VariableTable {
+>           arg0 -> {Integer, 12, 4},
+>           arg1 -> {Integer, 16, 4},
+>           local0 -> {Object(class0), -4, 4}
+>         }
+>       }
+>     }
+>   }
+> }
+137,138d346
+< Name: class0
+< Name: Main
+145c353,388
+<         12,
+---
+>         8,
+>         VariableTable {
+>           local0 -> {Boolean, -4, 4},
+>           local1 -> {Object(class0), -8, 4}
+>         }
+>       }
+>     }
+>   },
+>   class0 -> {
+>     VariableTable {
+>       member0 -> {Integer, 0, 4}
+>     },
+>     MethodTable {
+>       class0 -> {
+>         None,
+>         8,
+>         VariableTable {
+>           arg0 -> {Boolean, 12, 4},
+>           arg1 -> {Integer, 16, 4},
+>           arg2 -> {Integer, 20, 4},
+>           local0 -> {Integer, -4, 4},
+>           local1 -> {Boolean, -8, 4}
+>         }
+>       },
+>       f0 -> {
+>         Integer,
+>         0,
+>         VariableTable {
+>           arg0 -> {Integer, 12, 4},
+>           arg1 -> {Boolean, 16, 4},
+>           arg2 -> {Boolean, 20, 4}
+>         }
+>       }
+>     }
+>   }
+> }
+148,149d390
+< Name: class0
+< Name: Main
+156c397,435
+<         12,
+---
+>         16,
+>         VariableTable {
+>           i0 -> {Integer, -16, 4},
+>           local0 -> {Boolean, -4, 4},
+>           local1 -> {Integer, -8, 4},
+>           local2 -> {Boolean, -12, 4}
+>         }
+>       }
+>     }
+>   },
+>   class0 -> {
+>     VariableTable {
+>       member0 -> {Integer, 0, 4}
+>     },
+>     MethodTable {
+>       class0 -> {
+>         None,
+>         4,
+>         VariableTable {
+>           arg0 -> {Boolean, 12, 4},
+>           arg1 -> {Boolean, 16, 4},
+>           arg2 -> {Integer, 20, 4},
+>           local0 -> {Integer, -4, 4}
+>         }
+>       },
+>       f0 -> {
+>         None,
+>         8,
+>         VariableTable {
+>           arg0 -> {Boolean, 12, 4},
+>           arg1 -> {Boolean, 16, 4},
+>           arg2 -> {Boolean, 20, 4},
+>           i0 -> {Integer, -8, 4},
+>           local0 -> {Boolean, -4, 4}
+>         }
+>       }
+>     }
+>   }
+> }
+159,160d437
+< Name: class0
+< Name: Main
+167a445,482
+>         VariableTable {
+>           local0 -> {Object(class0), -4, 4},
+>           local1 -> {Integer, -8, 4},
+>           local2 -> {Object(class0), -12, 4}
+>         }
+>       }
+>     }
+>   },
+>   class0 -> {
+>     VariableTable {
+>       member0 -> {Integer, 0, 4}
+>     },
+>     MethodTable {
+>       class0 -> {
+>         None,
+>         0,
+>         VariableTable {
+>           arg0 -> {Boolean, 12, 4},
+>           arg1 -> {Integer, 16, 4}
+>         }
+>       },
+>       f0 -> {
+>         Integer,
+>         0,
+>         VariableTable {
+>           arg0 -> {Boolean, 12, 4}
+>         }
+>       },
+>       f1 -> {
+>         Integer,
+>         0,
+>         VariableTable {
+>           arg0 -> {Integer, 12, 4}
+>         }
+>       }
+>     }
+>   }
+> }
+170,171d484
+< Name: class0
+< Name: Main
+178a492,531
+>         VariableTable {
+>           i0 -> {Integer, -12, 4},
+>           local0 -> {Integer, -4, 4},
+>           local1 -> {Boolean, -8, 4}
+>         }
+>       }
+>     }
+>   },
+>   class0 -> {
+>     VariableTable {
+>       member0 -> {Boolean, 0, 4},
+>       member1 -> {Boolean, 4, 4},
+>       member2 -> {Integer, 8, 4}
+>     },
+>     MethodTable {
+>       class0 -> {
+>         None,
+>         12,
+>         VariableTable {
+>           arg0 -> {Integer, 12, 4},
+>           arg1 -> {Integer, 16, 4},
+>           arg2 -> {Integer, 20, 4},
+>           local0 -> {Integer, -4, 4},
+>           local1 -> {Integer, -8, 4},
+>           local2 -> {Boolean, -12, 4}
+>         }
+>       },
+>       f0 -> {
+>         Integer,
+>         8,
+>         VariableTable {
+>           arg0 -> {Boolean, 12, 4},
+>           arg1 -> {Integer, 16, 4},
+>           local0 -> {Integer, -4, 4},
+>           local1 -> {Integer, -8, 4}
+>         }
+>       }
+>     }
+>   }
+> }
+181,182d533
+< Name: class0
+< Name: Main
+189a541,566
+>         VariableTable {
+>           i0 -> {Integer, -8, 4},
+>           i1 -> {Integer, -12, 4},
+>           local0 -> {Boolean, -4, 4}
+>         }
+>       }
+>     }
+>   },
+>   class0 -> {
+>     VariableTable {
+>       member0 -> {Boolean, 0, 4},
+>       member1 -> {Integer, 4, 4},
+>       member2 -> {Integer, 8, 4}
+>     },
+>     MethodTable {
+>       class0 -> {
+>         None,
+>         0,
+>         VariableTable {
+>           arg0 -> {Integer, 12, 4},
+>           arg1 -> {Integer, 16, 4}
+>         }
+>       }
+>     }
+>   }
+> }
+192,193d568
+< Name: class0
+< Name: Main
+200c575,615
+<         12,
+---
+>         8,
+>         VariableTable {
+>           local0 -> {Integer, -4, 4},
+>           local1 -> {Boolean, -8, 4}
+>         }
+>       }
+>     }
+>   },
+>   class0 -> {
+>     VariableTable {},
+>     MethodTable {
+>       class0 -> {
+>         None,
+>         4,
+>         VariableTable {
+>           arg0 -> {Integer, 12, 4},
+>           arg1 -> {Integer, 16, 4},
+>           arg2 -> {Integer, 20, 4},
+>           local0 -> {Integer, -4, 4}
+>         }
+>       },
+>       f0 -> {
+>         Integer,
+>         12,
+>         VariableTable {
+>           local0 -> {Boolean, -4, 4},
+>           local1 -> {Integer, -8, 4},
+>           local2 -> {Boolean, -12, 4}
+>         }
+>       },
+>       f1 -> {
+>         Boolean,
+>         4,
+>         VariableTable {
+>           arg0 -> {Integer, 12, 4},
+>           local0 -> {Integer, -4, 4}
+>         }
+>       }
+>     }
+>   }
+> }
+203,205d617
+< Name: class0
+< Name: class1
+< Name: Main
+211a624,638
+>         4,
+>         VariableTable {
+>           i0 -> {Integer, -4, 4}
+>         }
+>       }
+>     }
+>   },
+>   class0 -> {
+>     VariableTable {
+>       member0 -> {Boolean, 0, 4},
+>       member1 -> {Integer, 4, 4}
+>     },
+>     MethodTable {
+>       class0 -> {
+>         None,
+212a640,686
+>         VariableTable {
+>           arg0 -> {Boolean, 12, 4},
+>           i0 -> {Integer, -12, 4},
+>           local0 -> {Integer, -4, 4},
+>           local1 -> {Integer, -8, 4}
+>         }
+>       },
+>       f0 -> {
+>         None,
+>         4,
+>         VariableTable {
+>           local0 -> {Integer, -4, 4}
+>         }
+>       }
+>     }
+>   },
+>   class1 -> {
+>     VariableTable {
+>       member0 -> {Object(class0), 0, 4},
+>       member1 -> {Integer, 4, 4},
+>       member2 -> {Boolean, 8, 4}
+>     },
+>     MethodTable {
+>       class1 -> {
+>         None,
+>         4,
+>         VariableTable {
+>           arg0 -> {Integer, 12, 4},
+>           arg1 -> {Integer, 16, 4},
+>           arg2 -> {Boolean, 20, 4},
+>           local0 -> {Boolean, -4, 4}
+>         }
+>       },
+>       f0 -> {
+>         Boolean,
+>         8,
+>         VariableTable {
+>           arg0 -> {Boolean, 12, 4},
+>           arg1 -> {Integer, 16, 4},
+>           arg2 -> {Object(class0), 20, 4},
+>           local0 -> {Object(class0), -4, 4},
+>           local1 -> {Boolean, -8, 4}
+>         }
+>       }
+>     }
+>   }
+> }
+215,218d688
+< Name: class0
+< Name: class1
+< Name: class2
+< Name: Main
+225c695,842
+<         12,
+---
+>         16,
+>         VariableTable {
+>           i0 -> {Integer, -16, 4},
+>           local0 -> {Object(class1), -4, 4},
+>           local1 -> {Integer, -8, 4},
+>           local2 -> {Object(class2), -12, 4}
+>         }
+>       }
+>     }
+>   },
+>   class0 -> {
+>     VariableTable {},
+>     MethodTable {
+>       class0 -> {
+>         None,
+>         0,
+>         VariableTable {
+>           arg0 -> {Integer, 12, 4},
+>           arg1 -> {Integer, 16, 4},
+>           arg2 -> {Integer, 20, 4},
+>           arg3 -> {Boolean, 24, 4}
+>         }
+>       },
+>       f0 -> {
+>         Boolean,
+>         12,
+>         VariableTable {
+>           arg0 -> {Boolean, 12, 4},
+>           arg1 -> {Integer, 16, 4},
+>           arg2 -> {Boolean, 20, 4},
+>           arg3 -> {Boolean, 24, 4},
+>           arg4 -> {Boolean, 28, 4},
+>           local0 -> {Integer, -4, 4},
+>           local1 -> {Boolean, -8, 4},
+>           local2 -> {Integer, -12, 4}
+>         }
+>       },
+>       f1 -> {
+>         Boolean,
+>         12,
+>         VariableTable {
+>           arg0 -> {Integer, 12, 4},
+>           arg1 -> {Boolean, 16, 4},
+>           i0 -> {Integer, -12, 4},
+>           local0 -> {Boolean, -4, 4},
+>           local1 -> {Integer, -8, 4}
+>         }
+>       },
+>       f2 -> {
+>         Integer,
+>         16,
+>         VariableTable {
+>           arg0 -> {Integer, 12, 4},
+>           arg1 -> {Boolean, 16, 4},
+>           i0 -> {Integer, -16, 4},
+>           local0 -> {Boolean, -4, 4},
+>           local1 -> {Integer, -8, 4},
+>           local2 -> {Integer, -12, 4}
+>         }
+>       }
+>     }
+>   },
+>   class1 -> {
+>     class0,
+>     VariableTable {
+>       member0 -> {Object(class0), 0, 4},
+>       member1 -> {Object(class0), 4, 4},
+>       member2 -> {Object(class0), 8, 4},
+>       member3 -> {Integer, 12, 4}
+>     },
+>     MethodTable {
+>       class1 -> {
+>         None,
+>         28,
+>         VariableTable {
+>           arg0 -> {Integer, 12, 4},
+>           arg1 -> {Integer, 16, 4},
+>           arg2 -> {Integer, 20, 4},
+>           i0 -> {Integer, -24, 4},
+>           i1 -> {Integer, -28, 4},
+>           local0 -> {Boolean, -4, 4},
+>           local1 -> {Integer, -8, 4},
+>           local2 -> {Object(class0), -12, 4},
+>           local3 -> {Integer, -16, 4},
+>           local4 -> {Integer, -20, 4}
+>         }
+>       },
+>       f3 -> {
+>         None,
+>         16,
+>         VariableTable {
+>           local0 -> {Boolean, -4, 4},
+>           local1 -> {Boolean, -8, 4},
+>           local2 -> {Boolean, -12, 4},
+>           local3 -> {Boolean, -16, 4}
+>         }
+>       },
+>       f4 -> {
+>         Integer,
+>         20,
+>         VariableTable {
+>           arg0 -> {Boolean, 12, 4},
+>           arg1 -> {Integer, 16, 4},
+>           arg2 -> {Integer, 20, 4},
+>           arg3 -> {Boolean, 24, 4},
+>           local0 -> {Object(class0), -4, 4},
+>           local1 -> {Integer, -8, 4},
+>           local2 -> {Object(class0), -12, 4},
+>           local3 -> {Boolean, -16, 4},
+>           local4 -> {Boolean, -20, 4}
+>         }
+>       }
+>     }
+>   },
+>   class2 -> {
+>     VariableTable {},
+>     MethodTable {
+>       class2 -> {
+>         None,
+>         20,
+>         VariableTable {
+>           arg0 -> {Integer, 12, 4},
+>           arg1 -> {Boolean, 16, 4},
+>           arg2 -> {Boolean, 20, 4},
+>           local0 -> {Object(class0), -4, 4},
+>           local1 -> {Boolean, -8, 4},
+>           local2 -> {Object(class1), -12, 4},
+>           local3 -> {Integer, -16, 4},
+>           local4 -> {Object(class1), -20, 4}
+>         }
+>       },
+>       f0 -> {
+>         Integer,
+>         16,
+>         VariableTable {
+>           arg0 -> {Boolean, 12, 4},
+>           arg1 -> {Boolean, 16, 4},
+>           arg2 -> {Boolean, 20, 4},
+>           arg3 -> {Boolean, 24, 4},
+>           local0 -> {Integer, -4, 4},
+>           local1 -> {Integer, -8, 4},
+>           local2 -> {Integer, -12, 4},
+>           local3 -> {Integer, -16, 4}
+>         }
+>       }
+>     }
+>   }
+> }
+228,231d844
+< Name: class0
+< Name: class1
+< Name: class2
+< Name: Main
+237a851,906
+>         8,
+>         VariableTable {
+>           local0 -> {Integer, -4, 4},
+>           local1 -> {Integer, -8, 4}
+>         }
+>       }
+>     }
+>   },
+>   class0 -> {
+>     VariableTable {
+>       member0 -> {Integer, 0, 4},
+>       member1 -> {Integer, 4, 4},
+>       member2 -> {Boolean, 8, 4},
+>       member3 -> {Boolean, 12, 4},
+>       member4 -> {Integer, 16, 4},
+>       member5 -> {Integer, 20, 4}
+>     },
+>     MethodTable {
+>       class0 -> {
+>         None,
+>         68,
+>         VariableTable {
+>           i0 -> {Integer, -4, 4},
+>           i1 -> {Integer, -8, 4},
+>           i10 -> {Integer, -44, 4},
+>           i11 -> {Integer, -48, 4},
+>           i12 -> {Integer, -52, 4},
+>           i13 -> {Integer, -56, 4},
+>           i14 -> {Integer, -60, 4},
+>           i15 -> {Integer, -64, 4},
+>           i16 -> {Integer, -68, 4},
+>           i2 -> {Integer, -12, 4},
+>           i3 -> {Integer, -16, 4},
+>           i4 -> {Integer, -20, 4},
+>           i5 -> {Integer, -24, 4},
+>           i6 -> {Integer, -28, 4},
+>           i7 -> {Integer, -32, 4},
+>           i8 -> {Integer, -36, 4},
+>           i9 -> {Integer, -40, 4}
+>         }
+>       }
+>     }
+>   },
+>   class1 -> {
+>     class0,
+>     VariableTable {
+>       member10 -> {Integer, 0, 4},
+>       member11 -> {Integer, 4, 4},
+>       member6 -> {Object(class0), 8, 4},
+>       member7 -> {Integer, 12, 4},
+>       member8 -> {Integer, 16, 4},
+>       member9 -> {Integer, 20, 4}
+>     },
+>     MethodTable {
+>       class1 -> {
+>         None,
+238a908,998
+>         VariableTable {
+>           i0 -> {Integer, -8, 4},
+>           i1 -> {Integer, -12, 4},
+>           local0 -> {Object(class0), -4, 4}
+>         }
+>       }
+>     }
+>   },
+>   class2 -> {
+>     class0,
+>     VariableTable {
+>       member6 -> {Object(class1), 0, 4},
+>       member7 -> {Boolean, 4, 4}
+>     },
+>     MethodTable {
+>       class2 -> {
+>         None,
+>         16,
+>         VariableTable {
+>           arg0 -> {Boolean, 12, 4},
+>           arg1 -> {Integer, 16, 4},
+>           arg2 -> {Integer, 20, 4},
+>           i0 -> {Integer, -16, 4},
+>           local0 -> {Boolean, -4, 4},
+>           local1 -> {Integer, -8, 4},
+>           local2 -> {Integer, -12, 4}
+>         }
+>       },
+>       f0 -> {
+>         None,
+>         24,
+>         VariableTable {
+>           arg0 -> {Boolean, 12, 4},
+>           arg1 -> {Boolean, 16, 4},
+>           arg2 -> {Boolean, 20, 4},
+>           arg3 -> {Object(class1), 24, 4},
+>           local0 -> {Integer, -4, 4},
+>           local1 -> {Integer, -8, 4},
+>           local2 -> {Object(class1), -12, 4},
+>           local3 -> {Object(class0), -16, 4},
+>           local4 -> {Boolean, -20, 4},
+>           local5 -> {Object(class0), -24, 4}
+>         }
+>       },
+>       f1 -> {
+>         Object(class0),
+>         4,
+>         VariableTable {
+>           arg0 -> {Object(class1), 12, 4},
+>           arg1 -> {Object(class0), 16, 4},
+>           arg2 -> {Integer, 20, 4},
+>           local0 -> {Boolean, -4, 4}
+>         }
+>       },
+>       f2 -> {
+>         None,
+>         24,
+>         VariableTable {
+>           arg0 -> {Object(class1), 12, 4},
+>           i0 -> {Integer, -12, 4},
+>           i1 -> {Integer, -16, 4},
+>           i2 -> {Integer, -20, 4},
+>           i3 -> {Integer, -24, 4},
+>           local0 -> {Integer, -4, 4},
+>           local1 -> {Object(class1), -8, 4}
+>         }
+>       },
+>       f3 -> {
+>         Integer,
+>         4,
+>         VariableTable {
+>           arg0 -> {Boolean, 12, 4},
+>           arg1 -> {Integer, 16, 4},
+>           i0 -> {Integer, -4, 4}
+>         }
+>       },
+>       f4 -> {
+>         Integer,
+>         20,
+>         VariableTable {
+>           arg0 -> {Boolean, 12, 4},
+>           i0 -> {Integer, -16, 4},
+>           i1 -> {Integer, -20, 4},
+>           local0 -> {Boolean, -4, 4},
+>           local1 -> {Object(class1), -8, 4},
+>           local2 -> {Boolean, -12, 4}
+>         }
+>       }
+>     }
+>   }
+> }
+241,243d1000
+< Name: class0
+< Name: class1
+< Name: Main
+250,260c1007,1027
+<         12,
+< 
+< ./lang < tests/0.bad.lang:
+< Name: class0
+< Name: class1
+< Name: class2
+< Name: class3
+< Name: Main
+< ClassTable {
+<   Main -> {
+<     VariableTable {},
+---
+>         24,
+>         VariableTable {
+>           local0 -> {Object(class1), -4, 4},
+>           local1 -> {Boolean, -8, 4},
+>           local2 -> {Integer, -12, 4},
+>           local3 -> {Integer, -16, 4},
+>           local4 -> {Boolean, -20, 4},
+>           local5 -> {Object(class0), -24, 4}
+>         }
+>       }
+>     }
+>   },
+>   class0 -> {
+>     VariableTable {
+>       member0 -> {Integer, 0, 4},
+>       member1 -> {Integer, 4, 4},
+>       member2 -> {Boolean, 8, 4},
+>       member3 -> {Boolean, 12, 4},
+>       member4 -> {Integer, 16, 4},
+>       member5 -> {Integer, 20, 4}
+>     },
+262c1029
+<       main -> {
+---
+>       class0 -> {
+264c1031,1137
+<         12,
+---
+>         24,
+>         VariableTable {
+>           arg0 -> {Boolean, 12, 4},
+>           arg1 -> {Integer, 16, 4},
+>           arg2 -> {Integer, 20, 4},
+>           arg3 -> {Integer, 24, 4},
+>           local0 -> {Integer, -4, 4},
+>           local1 -> {Integer, -8, 4},
+>           local2 -> {Boolean, -12, 4},
+>           local3 -> {Integer, -16, 4},
+>           local4 -> {Boolean, -20, 4},
+>           local5 -> {Boolean, -24, 4}
+>         }
+>       },
+>       f0 -> {
+>         None,
+>         8,
+>         VariableTable {
+>           arg0 -> {Boolean, 12, 4},
+>           arg1 -> {Integer, 16, 4},
+>           arg2 -> {Boolean, 20, 4},
+>           arg3 -> {Integer, 24, 4},
+>           local0 -> {Integer, -4, 4},
+>           local1 -> {Integer, -8, 4}
+>         }
+>       },
+>       f1 -> {
+>         Boolean,
+>         16,
+>         VariableTable {
+>           arg0 -> {Integer, 12, 4},
+>           arg1 -> {Boolean, 16, 4},
+>           arg2 -> {Boolean, 20, 4},
+>           arg3 -> {Boolean, 24, 4},
+>           i0 -> {Integer, -12, 4},
+>           i1 -> {Integer, -16, 4},
+>           local0 -> {Boolean, -4, 4},
+>           local1 -> {Boolean, -8, 4}
+>         }
+>       },
+>       f2 -> {
+>         None,
+>         24,
+>         VariableTable {
+>           arg0 -> {Integer, 12, 4},
+>           arg1 -> {Boolean, 16, 4},
+>           arg2 -> {Integer, 20, 4},
+>           arg3 -> {Integer, 24, 4},
+>           i0 -> {Integer, -24, 4},
+>           local0 -> {Integer, -4, 4},
+>           local1 -> {Boolean, -8, 4},
+>           local2 -> {Integer, -12, 4},
+>           local3 -> {Integer, -16, 4},
+>           local4 -> {Integer, -20, 4}
+>         }
+>       }
+>     }
+>   },
+>   class1 -> {
+>     VariableTable {
+>       member0 -> {Object(class0), 0, 4},
+>       member1 -> {Object(class0), 4, 4},
+>       member2 -> {Object(class0), 8, 4},
+>       member3 -> {Integer, 12, 4},
+>       member4 -> {Integer, 16, 4},
+>       member5 -> {Integer, 20, 4}
+>     },
+>     MethodTable {
+>       class1 -> {
+>         None,
+>         8,
+>         VariableTable {
+>           arg0 -> {Integer, 12, 4},
+>           local0 -> {Integer, -4, 4},
+>           local1 -> {Integer, -8, 4}
+>         }
+>       },
+>       f0 -> {
+>         Integer,
+>         8,
+>         VariableTable {
+>           arg0 -> {Object(class0), 12, 4},
+>           arg1 -> {Integer, 16, 4},
+>           arg2 -> {Integer, 20, 4},
+>           i0 -> {Integer, -8, 4},
+>           local0 -> {Object(class0), -4, 4}
+>         }
+>       },
+>       f1 -> {
+>         None,
+>         24,
+>         VariableTable {
+>           arg0 -> {Integer, 12, 4},
+>           arg1 -> {Integer, 16, 4},
+>           arg2 -> {Boolean, 20, 4},
+>           arg3 -> {Integer, 24, 4},
+>           local0 -> {Integer, -4, 4},
+>           local1 -> {Object(class0), -8, 4},
+>           local2 -> {Object(class0), -12, 4},
+>           local3 -> {Integer, -16, 4},
+>           local4 -> {Integer, -20, 4},
+>           local5 -> {Boolean, -24, 4}
+>         }
+>       }
+>     }
+>   }
+> }
+266,268c1139,1140
+< ./lang < tests/1.bad.lang:
+< Name: class0
+< Name: class1
+---
+> ./lang < tests/0.bad.lang:
+> Undefined variable.
+269a1142
+> ./lang < tests/1.bad.lang:
+273,284c1146
+< Name: class0
+< Name: class1
+< Name: class2
+< Name: class3
+< Name: Main
+< ClassTable {
+<   Main -> {
+<     VariableTable {},
+<     MethodTable {
+<       main -> {
+<         None,
+<         12,
+---
+> Method does not exist.
+287,296c1149
+< Name: class0
+< Name: class1
+< Name: Main
+< ClassTable {
+<   Main -> {
+<     VariableTable {},
+<     MethodTable {
+<       main -> {
+<         None,
+<         12,
+---
+> Variable is not an object.
+299,309c1152
+< Name: class0
+< Name: class1
+< Name: class2
+< Name: Main
+< ClassTable {
+<   Main -> {
+<     VariableTable {},
+<     MethodTable {
+<       main -> {
+<         None,
+<         12,
+---
+> Method called with argument of incorrect type.
+312,321c1155
+< Name: class0
+< Name: class1
+< Name: Main
+< ClassTable {
+<   Main -> {
+<     VariableTable {},
+<     MethodTable {
+<       main -> {
+<         None,
+<         12,
+---
+> Return statement type does not match declared return type.
+324,333c1158
+< Name: class0
+< Name: class1
+< Name: Main
+< ClassTable {
+<   Main -> {
+<     VariableTable {},
+<     MethodTable {
+<       main -> {
+<         None,
+<         12,
+---
+> Method called with incorrect number of arguments.
+336,341d1160
+< Name: class0
+< Name: class1
+< Name: class2
+< Name: class3
+< Name: Main
+< 
+345,356c1164
+< Name: class0
+< Name: class1
+< Name: class2
+< Name: class3
+< Name: Main
+< ClassTable {
+<   Main -> {
+<     VariableTable {},
+<     MethodTable {
+<       main -> {
+<         None,
+<         12,
+---
+> Predicate of if statement is not boolean.
+359,372c1167
+< Name: class0
+< Name: class1
+< Name: class2
+< Name: Main
+< ClassTable {
+<   Main -> {
+<     VariableTable {
+<       argc -> {Integer, 16, 4},
+<       argv -> {Boolean, 20, 4}
+<     },
+<     MethodTable {
+<       main -> {
+<         None,
+<         20,
+---
+> Return statement type does not match declared return type.
+375,384c1170
+< Name: class0
+< Name: class1
+< Name: Main
+< ClassTable {
+<   Main -> {
+<     VariableTable {},
+<     MethodTable {
+<       main -> {
+<         None,
+<         12,
+---
+> Class does not exist.
+387,396c1173
+< Name: class0
+< Name: class1
+< Name: Main
+< ClassTable {
+<   Main -> {
+<     VariableTable {},
+<     MethodTable {
+<       main -> {
+<         None,
+<         12,
+---
+> Expression types do not match.
+399,409c1176
+< Name: class0
+< Name: class1
+< Name: class2
+< Name: Main
+< ClassTable {
+<   Main -> {
+<     VariableTable {},
+<     MethodTable {
+<       main -> {
+<         None,
+<         12,
+---
+> Left and right hand sides of assignment types mismatch.
+412,423c1179
+< Name: class0
+< Name: class1
+< Name: class2
+< Name: class3
+< Name: Main
+< ClassTable {
+<   Main -> {
+<     VariableTable {},
+<     MethodTable {
+<       main -> {
+<         None,
+<         12,
+---
+> Method called with argument of incorrect type.
+426,434c1182
+< Name: class0
+< Name: Main
+< ClassTable {
+<   Main -> {
+<     VariableTable {},
+<     MethodTable {
+<       main -> {
+<         None,
+<         12,
+---
+> Undefined variable.
+437,445c1185
+< Name: class0
+< Name: Main
+< ClassTable {
+<   Main -> {
+<     VariableTable {},
+<     MethodTable {
+<       main -> {
+<         None,
+<         12,
+---
+> Variable is not an object.
+448,456c1188
+< Name: class0
+< Name: Main
+< ClassTable {
+<   Main -> {
+<     VariableTable {},
+<     MethodTable {
+<       main -> {
+<         None,
+<         12,
+---
+> Return statement type does not match declared return type.
+459,468c1191
+< Name: class0
+< Name: class1
+< Name: Main
+< ClassTable {
+<   Main -> {
+<     VariableTable {},
+<     MethodTable {
+<       main -> {
+<         None,
+<         12,
+---
+> Method does not exist.
+471,482c1194
+< Name: class0
+< Name: class1
+< Name: class2
+< Name: class3
+< Name: Main
+< ClassTable {
+<   Main -> {
+<     VariableTable {},
+<     MethodTable {
+<       main -> {
+<         None,
+<         12,
+---
+> Class member does not exist.
+485,495c1197
+< Name: class0
+< Name: class1
+< Name: class2
+< Name: Main
+< ClassTable {
+<   Main -> {
+<     VariableTable {},
+<     MethodTable {
+<       main -> {
+<         None,
+<         12,
+---
+> Undefined variable.
+498,510c1200
+< Name: class0
+< Name: class1
+< Name: class2
+< Name: class3
+< Name: class4
+< Name: Main
+< ClassTable {
+<   Main -> {
+<     VariableTable {},
+<     MethodTable {
+<       main -> {
+<         None,
+<         12,
+---
+> Class member does not exist.
+513,525c1203
+< Name: class0
+< Name: class1
+< Name: class2
+< Name: class3
+< Name: class4
+< Name: Main
+< ClassTable {
+<   Main -> {
+<     VariableTable {},
+<     MethodTable {
+<       main -> {
+<         None,
+<         12,
+---
+> Expression types do not match.
+528,537c1206
+< Name: class0
+< Name: class1
+< Name: Main
+< ClassTable {
+<   Main -> {
+<     VariableTable {},
+<     MethodTable {
+<       main -> {
+<         None,
+<         12,
+---
+> Method called with incorrect number of arguments.
+540,549c1209
+< Name: class0
+< Name: class1
+< Name: Main
+< ClassTable {
+<   Main -> {
+<     VariableTable {},
+<     MethodTable {
+<       main -> {
+<         None,
+<         12,
+---
+> Undefined variable.

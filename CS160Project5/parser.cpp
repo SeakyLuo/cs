@@ -1440,7 +1440,7 @@ yyreduce:
 
   case 15:
 #line 91 "parser.y" /* yacc.c:1646  */
-    { (yyval.parameter_list_ptr) = NULL; }
+    { (yyval.parameter_list_ptr) = new std::list<ParameterNode*>(); }
 #line 1445 "parser.cpp" /* yacc.c:1646  */
     break;
 
@@ -1590,7 +1590,7 @@ yyreduce:
 
   case 40:
 #line 137 "parser.y" /* yacc.c:1646  */
-    { (yyval.expression_list_ptr) = NULL; }
+    { (yyval.expression_list_ptr) = new std::list<ExpressionNode*>(); }
 #line 1595 "parser.cpp" /* yacc.c:1646  */
     break;
 
