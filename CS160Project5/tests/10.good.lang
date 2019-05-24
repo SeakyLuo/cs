@@ -4,7 +4,7 @@ class0 {
 
     f0() -> integer {
         boolean local0;
-        
+
         return (member1);
 
     }
@@ -13,7 +13,7 @@ class0 {
         integer local0;
         boolean local1;
         integer local2;
-        
+
 
     }
 
@@ -21,7 +21,7 @@ class0 {
         boolean local0;
         boolean local1;
         integer local2;
-        
+
 
     }
 
@@ -36,12 +36,12 @@ Main {
         integer local1;
         class0 local2;
         integer i0;
-        
+
         local0 = local2.member0;
         i0 = -39;
         while -39 >= i0 {
              i0 = i0 + 0;
-        
+
             local0 = 233;
             print (not (true));
         }
@@ -50,9 +50,9 @@ Main {
             if not (false) {
                 local2.f1(true, 112);
             }
-            
+
         }
-        
+
 
     }
 

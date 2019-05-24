@@ -99,7 +99,7 @@ Grammar
    67     | T_TRUE
    68     | T_FALSE
    69     | T_NEW T_ID
-   70     | T_NEW T_ID '(' Args ')'
+   70     | T_NEW T_ID '(' ArgList ')'
 
    71 MemberAccess: T_ID '.' T_ID
 
@@ -194,9 +194,9 @@ Assign (57)
 MethodCall (58)
     on left: 36 37, on right: 29 64
 ArgList (59)
-    on left: 38 39, on right: 36 37
+    on left: 38 39, on right: 36 37 70
 Args (60)
-    on left: 40 41, on right: 38 40 70
+    on left: 40 41, on right: 38 40
 If (61)
     on left: 42 43, on right: 30
 While (62)
@@ -828,7 +828,7 @@ State 62
 State 63
 
    69 Expr: T_NEW . T_ID
-   70     | T_NEW . T_ID '(' Args ')'
+   70     | T_NEW . T_ID '(' ArgList ')'
 
     T_ID  shift, and go to state 86
 
@@ -1140,7 +1140,7 @@ State 85
 State 86
 
    69 Expr: T_NEW T_ID .
-   70     | T_NEW T_ID . '(' Args ')'
+   70     | T_NEW T_ID . '(' ArgList ')'
 
     '('  shift, and go to state 112
 
@@ -1552,7 +1552,7 @@ State 111
 
 State 112
 
-   70 Expr: T_NEW T_ID '(' . Args ')'
+   70 Expr: T_NEW T_ID '(' . ArgList ')'
 
     T_NUM    shift, and go to state 61
     T_MINUS  shift, and go to state 62
@@ -1563,8 +1563,11 @@ State 112
     T_ID     shift, and go to state 67
     '('      shift, and go to state 68
 
+    $default  reduce using rule 39 (ArgList)
+
     MethodCall    go to state 69
-    Args          go to state 135
+    ArgList       go to state 135
+    Args          go to state 106
     Expr          go to state 107
     MemberAccess  go to state 71
 
@@ -1913,11 +1916,9 @@ State 134
 
 State 135
 
-   40 Args: Args . ',' Expr
-   70 Expr: T_NEW T_ID '(' Args . ')'
+   70 Expr: T_NEW T_ID '(' ArgList . ')'
 
     ')'  shift, and go to state 142
-    ','  shift, and go to state 130
 
 
 State 136
@@ -2004,7 +2005,7 @@ State 141
 
 State 142
 
-   70 Expr: T_NEW T_ID '(' Args ')' .
+   70 Expr: T_NEW T_ID '(' ArgList ')' .
 
     $default  reduce using rule 70 (Expr)
 

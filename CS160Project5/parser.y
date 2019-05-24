@@ -178,7 +178,7 @@ Expr: Expr T_PLUS Expr { $$ = new PlusNode($1, $3); }
     | T_TRUE { $$ = new BooleanLiteralNode($1); }
     | T_FALSE { $$ = new BooleanLiteralNode($1); }
     | T_NEW T_ID { $$ = new NewNode($2, NULL); }
-    | T_NEW T_ID '(' Args ')' { $$ = new NewNode($2, $4); }
+    | T_NEW T_ID '(' ArgList ')' { $$ = new NewNode($2, $4); }
     ;
 
 MemberAccess: T_ID '.' T_ID { $$ = new MemberAccessNode($1, $3); };
