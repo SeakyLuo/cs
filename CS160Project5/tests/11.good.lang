@@ -4,7 +4,7 @@ class0 {
     boolean	member2;
 
     class0(boolean arg0, integer arg1) -> none {
-        
+
 
     }
 
@@ -15,7 +15,7 @@ class1 extends class0 {
     class0	member3;
 
     f0(class0 arg0) -> integer {
-        
+
         return 163;
 
     }
@@ -24,7 +24,7 @@ class1 extends class0 {
         boolean local0;
         integer local1;
         boolean local2;
-        
+
         print 157;
         local0 = member3.member1;
 
@@ -40,7 +40,7 @@ Main {
         integer local0;
         integer local1;
         class0 local2;
-        
+
 
     }
 

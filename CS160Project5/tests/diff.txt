@@ -1,663 +1,117 @@
+g++  -c -o typecheck.o typecheck.cpp
+g++ -o lang ast.o parser.o lexer.o typecheck.o main.o
 python3 runtests.py | diff - output.txt
-9,109c9,13
-< 
-< ./lang < tests/1.good.lang:
-< ClassTable {
-<   Main -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-< 
-< ./lang < tests/2.good.lang:
-< ClassTable {
-<   Main -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-< 
-< ./lang < tests/3.good.lang:
-< ClassTable {
-<   Main -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-< 
-< ./lang < tests/4.good.lang:
-< ClassTable {
-<   Main -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-< 
-< ./lang < tests/5.good.lang:
-< ClassTable {
-<   Main -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-< 
-< ./lang < tests/6.good.lang:
-< ClassTable {
-<   Main -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-< 
-< ./lang < tests/7.good.lang:
-< ClassTable {
-<   Main -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-< 
-< ./lang < tests/8.good.lang:
-< ClassTable {
-<   Main -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-< 
-< ./lang < tests/9.good.lang:
-< ClassTable {
-<   Main -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-< 
-< ./lang < tests/10.good.lang:
-< ClassTable {
-<   Main -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class0 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
+170,171d169
+< Size: 3
+< Size: 3
+196c194
+<         24,
 ---
->         VariableTable {
->           i0 -> {Integer, -12, 4},
->           local0 -> {Boolean, -4, 4},
->           local1 -> {Boolean, -8, 4}
->         }
-115c19
-< ./lang < tests/11.good.lang:
+>         12,
+215c213
+<         20,
 ---
-> ./lang < tests/1.good.lang:
-123,144c27,31
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class0 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class1 -> {
-<     class0,
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
----
->         VariableTable {
->           i0 -> {Integer, -4, 4},
->           i1 -> {Integer, -8, 4},
->           i2 -> {Integer, -12, 4}
->         }
-150c37
-< ./lang < tests/12.good.lang:
----
-> ./lang < tests/2.good.lang:
-158,179c45,49
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class0 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class1 -> {
-<     class0,
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
----
->         VariableTable {
->           local0 -> {Boolean, -4, 4},
->           local1 -> {Integer, -8, 4},
->           local2 -> {Boolean, -12, 4}
->         }
-185c55
-< ./lang < tests/13.good.lang:
----
-> ./lang < tests/3.good.lang:
-192,203c62,65
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class0 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
----
->         4,
->         VariableTable {
->           i0 -> {Integer, -4, 4}
->         }
-209c71
-< ./lang < tests/14.good.lang:
----
-> ./lang < tests/4.good.lang:
-216,227c78,81
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class0 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
----
->         4,
->         VariableTable {
->           local0 -> {Integer, -4, 4}
->         }
-233c87
-< ./lang < tests/15.good.lang:
----
-> ./lang < tests/5.good.lang:
-240,251c94,98
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class0 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
----
->         8,
->         VariableTable {
->           local0 -> {Integer, -4, 4},
->           local1 -> {Integer, -8, 4}
->         }
-257c104
-< ./lang < tests/16.good.lang:
----
-> ./lang < tests/6.good.lang:
-265,275c112,116
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class0 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
----
->         VariableTable {
->           local0 -> {Integer, -4, 4},
->           local1 -> {Integer, -8, 4},
->           local2 -> {Integer, -12, 4}
->         }
-281c122
-< ./lang < tests/17.good.lang:
----
-> ./lang < tests/7.good.lang:
-288,298c129
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class0 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
+>         12,
+253c251
+<         8,
 ---
 >         0,
-305c136
-< ./lang < tests/18.good.lang:
+256,257c254
+<           arg1 -> {Integer, 16, 4},
+<           member3 -> {Object(class0), 37738800, 4}
 ---
-> ./lang < tests/8.good.lang:
-312,323c143,146
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class0 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
----
->         4,
->         VariableTable {
->           local0 -> {Integer, -4, 4}
->         }
-329c152
-< ./lang < tests/19.good.lang:
----
-> ./lang < tests/9.good.lang:
-336,357c159,163
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class0 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class1 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
----
->         8,
->         VariableTable {
->           local0 -> {Boolean, -4, 4},
->           local1 -> {Boolean, -8, 4}
->         }
-363c169
-< ./lang < tests/20.good.lang:
----
-> ./lang < tests/10.good.lang:
-370,371c176,182
-<         12,
-<         VariableTable {}
----
->         16,
->         VariableTable {
->           i0 -> {Integer, -16, 4},
->           local0 -> {Integer, -4, 4},
->           local1 -> {Integer, -8, 4},
->           local2 -> {Object(class0), -12, 4}
->         }
-376,387c187,190
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class1 -> {
-<     class0,
-<     VariableTable {},
----
->     VariableTable {
->       member0 -> {Integer, 0, 4},
->       member1 -> {Integer, 4, 4}
->     },
-389c192
-<       main -> {
----
->       class0 -> {
-392,399c195,211
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class2 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
----
->         VariableTable {
->           arg0 -> {Integer, 12, 4},
->           arg1 -> {Boolean, 16, 4},
->           arg2 -> {Boolean, 20, 4},
->           local0 -> {Boolean, -4, 4},
->           local1 -> {Boolean, -8, 4},
->           local2 -> {Integer, -12, 4}
->         }
->       },
->       f0 -> {
->         Integer,
->         4,
->         VariableTable {
->           local0 -> {Boolean, -4, 4}
->         }
->       },
->       f1 -> {
-402c214,220
-<         VariableTable {}
----
->         VariableTable {
->           arg0 -> {Boolean, 12, 4},
->           arg1 -> {Integer, 16, 4},
->           local0 -> {Integer, -4, 4},
->           local1 -> {Boolean, -8, 4},
->           local2 -> {Integer, -12, 4}
->         }
-408c226
-< ./lang < tests/21.good.lang:
----
-> ./lang < tests/11.good.lang:
-416c234,238
-<         VariableTable {}
----
->         VariableTable {
->           local0 -> {Integer, -4, 4},
->           local1 -> {Integer, -8, 4},
->           local2 -> {Object(class0), -12, 4}
->         }
-421c243,247
-<     VariableTable {},
----
->     VariableTable {
->       member0 -> {Integer, 0, 4},
->       member1 -> {Boolean, 4, 4},
->       member2 -> {Boolean, 8, 4}
->     },
-423c249
-<       main -> {
----
->       class0 -> {
-425,426c251,255
-<         12,
-<         VariableTable {}
----
->         0,
->         VariableTable {
->           arg0 -> {Boolean, 12, 4},
 >           arg1 -> {Integer, 16, 4}
->         }
-432,443c261,263
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class2 -> {
-<     class0,
-<     VariableTable {},
+270c267
+<         24,
 ---
->     VariableTable {
->       member3 -> {Object(class0), 0, 4}
->     },
-445c265
-<       main -> {
----
->       class1 -> {
-448c268,282
-<         VariableTable {}
----
->         VariableTable {
->           arg0 -> {Boolean, 12, 4},
->           arg1 -> {Boolean, 16, 4},
->           arg2 -> {Boolean, 20, 4},
->           local0 -> {Boolean, -4, 4},
->           local1 -> {Integer, -8, 4},
->           local2 -> {Boolean, -12, 4}
->         }
->       },
->       f0 -> {
->         Integer,
->         0,
->         VariableTable {
->           arg0 -> {Object(class0), 12, 4}
->         }
-454c288
-< ./lang < tests/22.good.lang:
----
-> ./lang < tests/12.good.lang:
-461c295
-<         12,
+>         12,
+282c279
+<         4,
 ---
 >         0,
-467,491c301,304
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class1 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   }
-< }
-< 
-< ./lang < tests/0.bad.lang:
-< ClassTable {
-<   Main -> {
-<     VariableTable {},
+292c289,344
+< Left and right hand sides of assignment types mismatch.
 ---
+> ClassTable {
+>   Main -> {
+>     VariableTable {},
+>     MethodTable {
+>       main -> {
+>         None,
+>         0,
+>         VariableTable {}
+>       }
+>     }
+>   },
+>   class0 -> {
 >     VariableTable {
 >       member0 -> {Integer, 0, 4},
 >       member1 -> {Integer, 4, 4}
 >     },
-493c306
-<       main -> {
----
+>     MethodTable {
 >       class0 -> {
-495c308
-<         12,
----
+>         None,
 >         0,
-497c310,312
-<           main -> {None, 37379552, 0}
----
+>         VariableTable {
 >           arg0 -> {Integer, 12, 4},
 >           arg1 -> {Integer, 16, 4},
 >           arg2 -> {Integer, 20, 4}
-499,506c314,316
-<       }
-<     }
-<   },
-<   class0 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
----
+>         }
 >       },
 >       f0 -> {
 >         Integer,
-509c319,324
-<           main -> {None, 37379552, 0}
----
+>         12,
+>         VariableTable {
 >           arg0 -> {Integer, 12, 4},
 >           arg1 -> {Integer, 16, 4},
 >           arg2 -> {Boolean, 20, 4},
 >           i0 -> {Integer, -12, 4},
 >           local0 -> {Integer, -4, 4},
 >           local1 -> {Boolean, -8, 4}
-514a330
+>         }
+>       }
+>     }
+>   },
+>   class1 -> {
 >     class0,
-517,541c333
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {
-<           main -> {None, 37379552, 0}
-<         }
-<       }
-<     }
-<   },
-<   class2 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {
-<           main -> {None, 37379552, 0}
-<         }
-<       }
-<     }
-<   },
-<   class3 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
----
+>     VariableTable {},
+>     MethodTable {
 >       class1 -> {
-543c335
-<         12,
----
+>         None,
 >         4,
-545c337,339
-<           main -> {None, 37379552, 0}
----
+>         VariableTable {
 >           arg0 -> {Integer, 12, 4},
 >           arg1 -> {Integer, 16, 4},
 >           local0 -> {Object(class0), -4, 4}
-552,555c346
-< ./lang < tests/1.bad.lang:
-< Class does not exist.
-< 
-< ./lang < tests/2.bad.lang:
+>         }
+>       }
+>     }
+>   }
+> }
+295c347,388
+< Left and right hand sides of assignment types mismatch.
 ---
-> ./lang < tests/13.good.lang:
-562,563c353,357
-<         12,
-<         VariableTable {}
----
+> ClassTable {
+>   Main -> {
+>     VariableTable {},
+>     MethodTable {
+>       main -> {
+>         None,
 >         8,
 >         VariableTable {
 >           local0 -> {Boolean, -4, 4},
 >           local1 -> {Object(class0), -8, 4}
 >         }
-568,600c362,364
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class1 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class2 -> {
-<     class1,
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class3 -> {
-<     class0,
-<     VariableTable {},
----
+>       }
+>     }
+>   },
+>   class0 -> {
 >     VariableTable {
 >       member0 -> {Integer, 0, 4}
 >     },
-602c366
-<       main -> {
----
+>     MethodTable {
 >       class0 -> {
-604,605c368,384
-<         12,
-<         VariableTable {}
----
+>         None,
 >         8,
 >         VariableTable {
 >           arg0 -> {Boolean, 12, 4},
@@ -675,456 +129,78 @@ python3 runtests.py | diff - output.txt
 >           arg1 -> {Boolean, 16, 4},
 >           arg2 -> {Boolean, 20, 4}
 >         }
-611c390
-< ./lang < tests/3.bad.lang:
----
-> ./lang < tests/14.good.lang:
-618c397
-<         12,
----
->         16,
-620c399,402
-<           main -> {None, 11151680, 0}
----
->           i0 -> {Integer, -16, 4},
->           local0 -> {Boolean, -4, 4},
->           local1 -> {Integer, -8, 4},
->           local2 -> {Boolean, -12, 4}
-626c408,410
-<     VariableTable {},
----
->     VariableTable {
->       member0 -> {Integer, 0, 4}
->     },
-628c412
-<       main -> {
----
->       class0 -> {
-630c414
-<         12,
+>       }
+>     }
+>   }
+> }
+321c414
+<         16,
 ---
 >         4,
-632c416,419
-<           main -> {None, 11151680, 0}
----
->           arg0 -> {Boolean, 12, 4},
->           arg1 -> {Boolean, 16, 4},
->           arg2 -> {Integer, 20, 4},
->           local0 -> {Integer, -4, 4}
-634,640c421,422
-<       }
-<     }
-<   },
-<   class1 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
----
->       },
->       f0 -> {
-642c424
-<         12,
----
->         8,
-644c426,430
-<           main -> {None, 11151680, 0}
----
->           arg0 -> {Boolean, 12, 4},
->           arg1 -> {Boolean, 16, 4},
->           arg2 -> {Boolean, 20, 4},
->           i0 -> {Integer, -8, 4},
->           local0 -> {Boolean, -4, 4}
-651c437
-< ./lang < tests/4.bad.lang:
----
-> ./lang < tests/15.good.lang:
-659c445,449
-<         VariableTable {}
----
->         VariableTable {
->           local0 -> {Object(class0), -4, 4},
->           local1 -> {Integer, -8, 4},
->           local2 -> {Object(class0), -12, 4}
->         }
-664,684c454,456
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class1 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class2 -> {
-<     VariableTable {},
----
->     VariableTable {
->       member0 -> {Integer, 0, 4}
->     },
-686c458
-<       main -> {
----
->       class0 -> {
-688,689c460,478
-<         12,
-<         VariableTable {}
----
->         0,
->         VariableTable {
->           arg0 -> {Boolean, 12, 4},
->           arg1 -> {Integer, 16, 4}
->         }
->       },
->       f0 -> {
->         Integer,
->         0,
->         VariableTable {
->           arg0 -> {Boolean, 12, 4}
->         }
->       },
->       f1 -> {
->         Integer,
->         0,
->         VariableTable {
->           arg0 -> {Integer, 12, 4}
->         }
-695c484
-< ./lang < tests/5.bad.lang:
----
-> ./lang < tests/16.good.lang:
-703c492,496
-<         VariableTable {}
----
->         VariableTable {
->           i0 -> {Integer, -12, 4},
->           local0 -> {Integer, -4, 4},
->           local1 -> {Boolean, -8, 4}
->         }
-708,719c501,505
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class1 -> {
-<     class0,
-<     VariableTable {},
----
->     VariableTable {
->       member0 -> {Boolean, 0, 4},
->       member1 -> {Boolean, 4, 4},
->       member2 -> {Integer, 8, 4}
->     },
-721c507
-<       main -> {
----
->       class0 -> {
-724c510,527
-<         VariableTable {}
----
->         VariableTable {
->           arg0 -> {Integer, 12, 4},
->           arg1 -> {Integer, 16, 4},
->           arg2 -> {Integer, 20, 4},
->           local0 -> {Integer, -4, 4},
->           local1 -> {Integer, -8, 4},
->           local2 -> {Boolean, -12, 4}
->         }
->       },
->       f0 -> {
->         Integer,
->         8,
->         VariableTable {
->           arg0 -> {Boolean, 12, 4},
->           arg1 -> {Integer, 16, 4},
->           local0 -> {Integer, -4, 4},
->           local1 -> {Integer, -8, 4}
->         }
-730c533
-< ./lang < tests/6.bad.lang:
----
-> ./lang < tests/17.good.lang:
-738c541,545
-<         VariableTable {}
----
->         VariableTable {
->           i0 -> {Integer, -8, 4},
->           i1 -> {Integer, -12, 4},
->           local0 -> {Boolean, -4, 4}
->         }
-743,754c550,554
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class1 -> {
-<     class0,
-<     VariableTable {},
----
->     VariableTable {
->       member0 -> {Boolean, 0, 4},
->       member1 -> {Integer, 4, 4},
->       member2 -> {Integer, 8, 4}
->     },
-756c556
-<       main -> {
----
->       class0 -> {
-758,759c558,562
-<         12,
-<         VariableTable {}
----
->         0,
->         VariableTable {
->           arg0 -> {Integer, 12, 4},
->           arg1 -> {Integer, 16, 4}
->         }
-765,768c568
-< ./lang < tests/7.bad.lang:
-< The "Main" class has members.
-< 
-< ./lang < tests/8.bad.lang:
----
-> ./lang < tests/18.good.lang:
-775,776c575,579
-<         12,
-<         VariableTable {}
----
->         8,
->         VariableTable {
->           local0 -> {Integer, -4, 4},
->           local1 -> {Boolean, -8, 4}
->         }
-783,815c586
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class1 -> {
-<     class0,
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class2 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class3 -> {
-<     class0,
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
----
->       class0 -> {
-816a588,597
->         4,
->         VariableTable {
->           arg0 -> {Integer, 12, 4},
->           arg1 -> {Integer, 16, 4},
->           arg2 -> {Integer, 20, 4},
->           local0 -> {Integer, -4, 4}
->         }
->       },
->       f0 -> {
->         Integer,
-818c599,611
-<         VariableTable {}
----
->         VariableTable {
->           local0 -> {Boolean, -4, 4},
->           local1 -> {Integer, -8, 4},
->           local2 -> {Boolean, -12, 4}
->         }
->       },
->       f1 -> {
->         Boolean,
->         4,
->         VariableTable {
->           arg0 -> {Integer, 12, 4},
->           local0 -> {Integer, -4, 4}
->         }
-824c617
-< ./lang < tests/9.bad.lang:
----
-> ./lang < tests/19.good.lang:
-827,830c620
-<     VariableTable {
-<       argc -> {Integer, 16, 4},
-<       argv -> {Boolean, 20, 4}
-<     },
----
->     VariableTable {},
-834c624
+331c424
 <         20,
 ---
->         4,
-836,837c626
-<           argc -> {Integer, 16, 4},
-<           argv -> {Boolean, 20, 4}
+>         8,
+367c460
+<         8,
 ---
->           i0 -> {Integer, -4, 4}
-844,845c633,634
-<       argc -> {Integer, 16, 4},
-<       argv -> {Boolean, 20, 4}
+>         0,
+375c468
+<         4,
 ---
->       member0 -> {Boolean, 0, 4},
->       member1 -> {Integer, 4, 4}
-848c637
-<       main -> {
+>         0,
+382c475
+<         4,
 ---
->       class0 -> {
-850c639
-<         20,
+>         0,
+416c509
+<         24,
 ---
 >         12,
-852,853c641,644
-<           argc -> {Integer, 16, 4},
-<           argv -> {Boolean, 20, 4}
+428c521
+<         16,
 ---
->           arg0 -> {Boolean, 12, 4},
->           i0 -> {Integer, -12, 4},
->           local0 -> {Integer, -4, 4},
->           local1 -> {Integer, -8, 4}
-855,864c646,647
-<       }
-<     }
-<   },
-<   class1 -> {
-<     VariableTable {
-<       argc -> {Integer, 16, 4},
-<       argv -> {Boolean, 20, 4}
-<     },
-<     MethodTable {
-<       main -> {
----
->       },
->       f0 -> {
-866c649
-<         20,
----
->         4,
-868,869c651
-<           argc -> {Integer, 16, 4},
-<           argv -> {Boolean, 20, 4}
----
->           local0 -> {Integer, -4, 4}
-874,875c656
-<   class2 -> {
-<     class1,
----
->   class1 -> {
-877,878c658,660
-<       argc -> {Integer, 16, 4},
-<       argv -> {Boolean, 20, 4}
----
->       member0 -> {Object(class0), 0, 4},
->       member1 -> {Integer, 4, 4},
->       member2 -> {Boolean, 8, 4}
-881c663
-<       main -> {
----
->       class1 -> {
-883c665
-<         20,
----
->         4,
-885,886c667,681
-<           argc -> {Integer, 16, 4},
-<           argv -> {Boolean, 20, 4}
----
->           arg0 -> {Integer, 12, 4},
->           arg1 -> {Integer, 16, 4},
->           arg2 -> {Boolean, 20, 4},
->           local0 -> {Boolean, -4, 4}
->         }
->       },
->       f0 -> {
->         Boolean,
 >         8,
->         VariableTable {
->           arg0 -> {Boolean, 12, 4},
->           arg1 -> {Integer, 16, 4},
->           arg2 -> {Object(class0), 20, 4},
->           local0 -> {Object(class0), -4, 4},
->           local1 -> {Boolean, -8, 4}
-893,928c688
-< ./lang < tests/10.bad.lang:
-< ClassTable {
-<   Main -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class0 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class1 -> {
-<     class0,
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   }
-< }
-< 
-< ./lang < tests/11.bad.lang:
+465c558
+<         8,
 ---
-> ./lang < tests/20.good.lang:
-935,936c695,701
-<         12,
-<         VariableTable {}
+>         0,
+495c588
+<         16,
 ---
+>         4,
+514c607
+<         8,
+---
+>         4,
+546c639
+<         16,
+---
+>         12,
+551,554c644
+<           local1 -> {Integer, -8, 4},
+<           member0 -> {Object(class0), 38920272, 4},
+<           member1 -> {Integer, 38920272, 4},
+<           member2 -> {Boolean, 38920272, 4}
+---
+>           local1 -> {Integer, -8, 4}
+575c665
+<         16,
+---
+>         4,
+585c675
+<         20,
+---
+>         8,
+599c689,842
+< Expression types do not match.
+---
+> ClassTable {
+>   Main -> {
+>     VariableTable {},
+>     MethodTable {
+>       main -> {
+>         None,
 >         16,
 >         VariableTable {
 >           i0 -> {Integer, -16, 4},
@@ -1132,36 +208,14 @@ python3 runtests.py | diff - output.txt
 >           local1 -> {Integer, -8, 4},
 >           local2 -> {Object(class2), -12, 4}
 >         }
-943,968c708
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class1 -> {
-<     class0,
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   }
-< }
-< 
-< ./lang < tests/12.bad.lang:
-< ClassTable {
-<   Main -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
----
+>       }
+>     }
+>   },
+>   class0 -> {
+>     VariableTable {},
+>     MethodTable {
 >       class0 -> {
-969a710,719
+>         None,
 >         0,
 >         VariableTable {
 >           arg0 -> {Integer, 12, 4},
@@ -1172,9 +226,8 @@ python3 runtests.py | diff - output.txt
 >       },
 >       f0 -> {
 >         Boolean,
-972c722,729
-<           main -> {None, 8845616, 0}
----
+>         12,
+>         VariableTable {
 >           arg0 -> {Boolean, 12, 4},
 >           arg1 -> {Integer, 16, 4},
 >           arg2 -> {Boolean, 20, 4},
@@ -1183,22 +236,12 @@ python3 runtests.py | diff - output.txt
 >           local0 -> {Integer, -4, 4},
 >           local1 -> {Boolean, -8, 4},
 >           local2 -> {Integer, -12, 4}
-974,981c731,733
-<       }
-<     }
-<   },
-<   class0 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
----
+>         }
 >       },
 >       f1 -> {
 >         Boolean,
-984c736,752
-<           main -> {None, 8845616, 0}
----
+>         12,
+>         VariableTable {
 >           arg0 -> {Integer, 12, 4},
 >           arg1 -> {Boolean, 16, 4},
 >           i0 -> {Integer, -12, 4},
@@ -1216,9 +259,11 @@ python3 runtests.py | diff - output.txt
 >           local0 -> {Boolean, -4, 4},
 >           local1 -> {Integer, -8, 4},
 >           local2 -> {Integer, -12, 4}
-990c758,764
-<     VariableTable {},
----
+>         }
+>       }
+>     }
+>   },
+>   class1 -> {
 >     class0,
 >     VariableTable {
 >       member0 -> {Object(class0), 0, 4},
@@ -1226,13 +271,9 @@ python3 runtests.py | diff - output.txt
 >       member2 -> {Object(class0), 8, 4},
 >       member3 -> {Integer, 12, 4}
 >     },
-992c766
-<       main -> {
----
+>     MethodTable {
 >       class1 -> {
-994c768,794
-<         12,
----
+>         None,
 >         28,
 >         VariableTable {
 >           arg0 -> {Integer, 12, 4},
@@ -1260,9 +301,7 @@ python3 runtests.py | diff - output.txt
 >       f4 -> {
 >         Integer,
 >         20,
-996c796,804
-<           main -> {None, 8845616, 0}
----
+>         VariableTable {
 >           arg0 -> {Boolean, 12, 4},
 >           arg1 -> {Integer, 16, 4},
 >           arg2 -> {Integer, 20, 4},
@@ -1272,19 +311,17 @@ python3 runtests.py | diff - output.txt
 >           local2 -> {Object(class0), -12, 4},
 >           local3 -> {Boolean, -16, 4},
 >           local4 -> {Boolean, -20, 4}
-1002d809
-<     class0,
-1005c812
-<       main -> {
----
+>         }
+>       }
+>     }
+>   },
+>   class2 -> {
+>     VariableTable {},
+>     MethodTable {
 >       class2 -> {
-1007c814
-<         12,
----
+>         None,
 >         20,
-1009c816,837
-<           main -> {None, 8845616, 0}
----
+>         VariableTable {
 >           arg0 -> {Integer, 12, 4},
 >           arg1 -> {Boolean, 16, 4},
 >           arg2 -> {Boolean, 20, 4},
@@ -1307,22 +344,29 @@ python3 runtests.py | diff - output.txt
 >           local1 -> {Integer, -8, 4},
 >           local2 -> {Integer, -12, 4},
 >           local3 -> {Integer, -16, 4}
-1016c844
-< ./lang < tests/13.bad.lang:
+>         }
+>       }
+>     }
+>   }
+> }
+602c845,998
+< Predicate of if statement is not boolean.
 ---
-> ./lang < tests/21.good.lang:
-1023c851
-<         12,
----
+> ClassTable {
+>   Main -> {
+>     VariableTable {},
+>     MethodTable {
+>       main -> {
+>         None,
 >         8,
-1025c853,854
-<           main -> {None, 17434752, 0}
----
+>         VariableTable {
 >           local0 -> {Integer, -4, 4},
 >           local1 -> {Integer, -8, 4}
-1031c860,867
-<     VariableTable {},
----
+>         }
+>       }
+>     }
+>   },
+>   class0 -> {
 >     VariableTable {
 >       member0 -> {Integer, 0, 4},
 >       member1 -> {Integer, 4, 4},
@@ -1331,17 +375,11 @@ python3 runtests.py | diff - output.txt
 >       member4 -> {Integer, 16, 4},
 >       member5 -> {Integer, 20, 4}
 >     },
-1033c869
-<       main -> {
----
+>     MethodTable {
 >       class0 -> {
-1035c871
-<         12,
----
+>         None,
 >         68,
-1037c873,889
-<           main -> {None, 17434752, 0}
----
+>         VariableTable {
 >           i0 -> {Integer, -4, 4},
 >           i1 -> {Integer, -8, 4},
 >           i10 -> {Integer, -44, 4},
@@ -1359,9 +397,12 @@ python3 runtests.py | diff - output.txt
 >           i7 -> {Integer, -32, 4},
 >           i8 -> {Integer, -36, 4},
 >           i9 -> {Integer, -40, 4}
-1044c896,903
-<     VariableTable {},
----
+>         }
+>       }
+>     }
+>   },
+>   class1 -> {
+>     class0,
 >     VariableTable {
 >       member10 -> {Integer, 0, 4},
 >       member11 -> {Integer, 4, 4},
@@ -1370,46 +411,29 @@ python3 runtests.py | diff - output.txt
 >       member8 -> {Integer, 16, 4},
 >       member9 -> {Integer, 20, 4}
 >     },
-1046c905
-<       main -> {
----
+>     MethodTable {
 >       class1 -> {
-1050c909,911
-<           main -> {None, 17434752, 0}
----
+>         None,
+>         12,
+>         VariableTable {
 >           i0 -> {Integer, -8, 4},
 >           i1 -> {Integer, -12, 4},
 >           local0 -> {Object(class0), -4, 4}
-1056c917,921
-<     VariableTable {},
----
+>         }
+>       }
+>     }
+>   },
+>   class2 -> {
 >     class0,
 >     VariableTable {
 >       member6 -> {Object(class1), 0, 4},
 >       member7 -> {Boolean, 4, 4}
 >     },
-1058c923
-<       main -> {
----
+>     MethodTable {
 >       class2 -> {
-1060c925
-<         12,
----
+>         None,
 >         16,
-1062,1073c927,986
-<           main -> {None, 17434752, 0}
-<         }
-<       }
-<     }
-<   },
-<   class3 -> {
-<     class1,
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
----
+>         VariableTable {
 >           arg0 -> {Boolean, 12, 4},
 >           arg1 -> {Integer, 16, 4},
 >           arg2 -> {Integer, 20, 4},
@@ -1470,23 +494,27 @@ python3 runtests.py | diff - output.txt
 >       f4 -> {
 >         Integer,
 >         20,
-1075c988,993
-<           main -> {None, 17434752, 0}
----
+>         VariableTable {
 >           arg0 -> {Boolean, 12, 4},
 >           i0 -> {Integer, -16, 4},
 >           i1 -> {Integer, -20, 4},
 >           local0 -> {Boolean, -4, 4},
 >           local1 -> {Object(class1), -8, 4},
 >           local2 -> {Boolean, -12, 4}
-1082c1000
-< ./lang < tests/14.bad.lang:
+>         }
+>       }
+>     }
+>   }
+> }
+605c1001,1137
+< Left and right hand sides of assignment types mismatch.
 ---
-> ./lang < tests/22.good.lang:
-1089,1090c1007,1015
-<         12,
-<         VariableTable {}
----
+> ClassTable {
+>   Main -> {
+>     VariableTable {},
+>     MethodTable {
+>       main -> {
+>         None,
 >         24,
 >         VariableTable {
 >           local0 -> {Object(class1), -4, 4},
@@ -1496,23 +524,10 @@ python3 runtests.py | diff - output.txt
 >           local4 -> {Boolean, -20, 4},
 >           local5 -> {Object(class0), -24, 4}
 >         }
-1095,1109c1020,1027
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   }
-< }
-< 
-< ./lang < tests/15.bad.lang:
-< ClassTable {
-<   Main -> {
-<     VariableTable {},
----
+>       }
+>     }
+>   },
+>   class0 -> {
 >     VariableTable {
 >       member0 -> {Integer, 0, 4},
 >       member1 -> {Integer, 4, 4},
@@ -1521,17 +536,11 @@ python3 runtests.py | diff - output.txt
 >       member4 -> {Integer, 16, 4},
 >       member5 -> {Integer, 20, 4}
 >     },
-1111c1029
-<       main -> {
----
+>     MethodTable {
 >       class0 -> {
-1113c1031
-<         12,
----
+>         None,
 >         24,
-1115c1033,1084
-<           main -> {None, 7470672, 0}
----
+>         VariableTable {
 >           arg0 -> {Boolean, 12, 4},
 >           arg1 -> {Integer, 16, 4},
 >           arg2 -> {Integer, 20, 4},
@@ -1584,10 +593,10 @@ python3 runtests.py | diff - output.txt
 >           local2 -> {Integer, -12, 4},
 >           local3 -> {Integer, -16, 4},
 >           local4 -> {Integer, -20, 4}
-1120,1121c1089,1097
-<   class0 -> {
-<     VariableTable {},
----
+>         }
+>       }
+>     }
+>   },
 >   class1 -> {
 >     VariableTable {
 >       member0 -> {Object(class0), 0, 4},
@@ -1597,17 +606,11 @@ python3 runtests.py | diff - output.txt
 >       member4 -> {Integer, 16, 4},
 >       member5 -> {Integer, 20, 4}
 >     },
-1123c1099
-<       main -> {
----
+>     MethodTable {
 >       class1 -> {
-1125c1101
-<         12,
----
+>         None,
 >         8,
-1127c1103,1132
-<           main -> {None, 7470672, 0}
----
+>         VariableTable {
 >           arg0 -> {Integer, 12, 4},
 >           local0 -> {Integer, -4, 4},
 >           local1 -> {Integer, -8, 4}
@@ -1638,431 +641,86 @@ python3 runtests.py | diff - output.txt
 >           local3 -> {Integer, -16, 4},
 >           local4 -> {Integer, -20, 4},
 >           local5 -> {Boolean, -24, 4}
-1133a1139,1186
-> ./lang < tests/0.bad.lang:
-> Undefined variable.
-> 
-> ./lang < tests/1.bad.lang:
-> Class does not exist.
-> 
-> ./lang < tests/2.bad.lang:
+>         }
+>       }
+>     }
+>   }
+> }
+614c1146
+< Expression types do not match.
+---
 > Method does not exist.
-> 
-> ./lang < tests/3.bad.lang:
+617c1149
+< Method called with argument of incorrect type.
+---
 > Variable is not an object.
-> 
-> ./lang < tests/4.bad.lang:
+620c1152
+< Method called with incorrect number of arguments.
+---
 > Method called with argument of incorrect type.
-> 
-> ./lang < tests/5.bad.lang:
+623c1155
+< Left and right hand sides of assignment types mismatch.
+---
 > Return statement type does not match declared return type.
-> 
-> ./lang < tests/6.bad.lang:
+626c1158
+< Expression types do not match.
+---
 > Method called with incorrect number of arguments.
-> 
-> ./lang < tests/7.bad.lang:
+629c1161
+< Left and right hand sides of assignment types mismatch.
+---
 > The "Main" class has members.
-> 
-> ./lang < tests/8.bad.lang:
-> Predicate of if statement is not boolean.
-> 
-> ./lang < tests/9.bad.lang:
-> Return statement type does not match declared return type.
-> 
-> ./lang < tests/10.bad.lang:
-> Class does not exist.
-> 
-> ./lang < tests/11.bad.lang:
-> Expression types do not match.
-> 
-> ./lang < tests/12.bad.lang:
-> Left and right hand sides of assignment types mismatch.
-> 
-> ./lang < tests/13.bad.lang:
-> Method called with argument of incorrect type.
-> 
-> ./lang < tests/14.bad.lang:
-> Undefined variable.
-> 
-> ./lang < tests/15.bad.lang:
-> Variable is not an object.
-> 
-1135,1156c1188
-< ClassTable {
-<   Main -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class0 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   }
-< }
+635c1167
+< Method called with argument of incorrect type.
 ---
 > Return statement type does not match declared return type.
-1159,1190c1191
-< ClassTable {
-<   Main -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class0 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class1 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   }
-< }
+638c1170
+< Method called with argument of incorrect type.
+---
+> Class does not exist.
+644c1176
+< Method called with argument of incorrect type.
+---
+> Left and right hand sides of assignment types mismatch.
+647c1179
+< Expression types do not match.
+---
+> Method called with argument of incorrect type.
+653c1185
+< Undefined variable.
+---
+> Variable is not an object.
+656c1188
+< Expression types do not match.
+---
+> Return statement type does not match declared return type.
+659c1191
+< Left and right hand sides of assignment types mismatch.
 ---
 > Method does not exist.
-1193,1246c1194
-< ClassTable {
-<   Main -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class0 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class1 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class2 -> {
-<     class0,
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class3 -> {
-<     class2,
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   }
-< }
+662c1194
+< Expression types do not match.
 ---
 > Class member does not exist.
-1249,1291c1197
-< ClassTable {
-<   Main -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class0 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class1 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class2 -> {
-<     class1,
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   }
-< }
+665c1197
+< Predicate of if statement is not boolean.
 ---
 > Undefined variable.
-1294,1369c1200
-< ClassTable {
-<   Main -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {
-<           main -> {None, 13898784, 0}
-<         }
-<       }
-<     }
-<   },
-<   class0 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {
-<           main -> {None, 13898784, 0}
-<         }
-<       }
-<     }
-<   },
-<   class1 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {
-<           main -> {None, 13898784, 0}
-<         }
-<       }
-<     }
-<   },
-<   class2 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {
-<           main -> {None, 13898784, 0}
-<         }
-<       }
-<     }
-<   },
-<   class3 -> {
-<     class0,
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {
-<           main -> {None, 13898784, 0}
-<         }
-<       }
-<     }
-<   },
-<   class4 -> {
-<     class3,
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {
-<           main -> {None, 13898784, 0}
-<         }
-<       }
-<     }
-<   }
-< }
+668c1200
+< Left and right hand sides of assignment types mismatch.
 ---
 > Class member does not exist.
-1372,1435c1203
-< ClassTable {
-<   Main -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class0 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class1 -> {
-<     class0,
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class2 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class3 -> {
-<     class2,
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class4 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   }
-< }
+671,673c1203
+< Size: 2
+< 
+< Left and right hand sides of assignment types mismatch.
 ---
 > Expression types do not match.
-1438,1469c1206
-< ClassTable {
-<   Main -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class0 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class1 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   }
-< }
+676c1206
+< Expression types do not match.
 ---
 > Method called with incorrect number of arguments.
-1472,1503c1209
-< ClassTable {
-<   Main -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class0 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   },
-<   class1 -> {
-<     VariableTable {},
-<     MethodTable {
-<       main -> {
-<         None,
-<         12,
-<         VariableTable {}
-<       }
-<     }
-<   }
-< }
+679c1209
+< Expression types do not match.
 ---
 > Undefined variable.
