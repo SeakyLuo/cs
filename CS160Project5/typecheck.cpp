@@ -464,14 +464,18 @@ void TypeCheck::visitNewNode(NewNode* node) {
         typeError(undefined_class);
     auto found = node->expression_list;
     std::string className = node->identifier->name;
-    auto expected = (*(*classTable)[className].methods)[className].parameters;
-    if (found->size() != expected->size())
-        typeError(argument_number_mismatch);
-    auto f = found->begin();
-    auto e = expected->begin();
-    for (; f != found->end() && e != expected->end(); ++f, ++e)
-        if ((*f)->objectClassName != e->objectClassName)
-            typeError(argument_type_mismatch);
+    if ((*classTable)[className].methods->count(className)){
+        auto expected = (*(*classTable)[className].methods)[className].parameters;
+        if (found->size() != expected->size())
+            typeError(argument_number_mismatch);
+        auto f = found->begin();
+        auto e = expected->begin();
+        for (; f != found->end() && e != expected->end(); ++f, ++e)
+            if ((*f)->objectClassName != e->objectClassName)
+                typeError(argument_type_mismatch);
+    }else{
+        if (found->size()) typeError(argument_number_mismatch);
+    }
     node->basetype = bt_object;
     node->objectClassName = className;
 }
