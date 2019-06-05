@@ -86,8 +86,8 @@ void inheritanceHelper(ClassTable* classTable, VariableTable* table, std::string
     for (auto iter: (*info.members)){
         variableinfo vi = iter.second;
         vi.offset = offset;
-        offset += 4;
         (*table)[iter.first] = vi;
+        offset += 4;
     }
 }
 

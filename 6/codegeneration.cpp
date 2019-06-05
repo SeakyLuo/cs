@@ -254,11 +254,21 @@ void CodeGenerator::visitMethodCallNode(MethodCallNode* node) {
     // • call instruction moves into method’s prologue
     std::cout << "# MethodCall\n";
     std::cout << "push %eax;\npush %ecx;\npush %edx;\n";
-    for (int i = 1; i <= node->expression_list->size(); ++i){
+    auto iter = node->expression_list->rbegin();
+    for (int i = 1; i <= node->expression_list->size(); ++i, ++iter){
+        iter->accept(this);
         std::cout << "push " << i * (-4) << "(%ebp)\n";
     }
     std::cout << "ret\n";
     node->visit_children(this);
+    std::string className, methodName
+    if (node->identifier_2){
+        className = currentClassName;
+        methodName = node->identifier_1->name;
+    }else{
+        className = node->identifier_1->objectClassName;
+        methodName = node->identifier_2->name;
+    }
     // • Pop return address (done implicitly by ret)
     // • Remove the arguments
     // • Retrieve the return value from %eax
@@ -293,7 +303,6 @@ void CodeGenerator::visitBooleanLiteralNode(BooleanLiteralNode* node) {
 void CodeGenerator::visitNewNode(NewNode* node) {
     std::cout << "# New\n";
     node->visit_children(this);
-    // need to include size of super class
     std::cout << "push $" << (*classTable)[node->identifier->name].membersSize << "\n";
     std::cout << "call malloc\n";
     std::cout << "add $4, %esp\n";
