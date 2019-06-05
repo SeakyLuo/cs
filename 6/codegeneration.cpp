@@ -66,7 +66,7 @@ void CodeGenerator::visitAssignmentNode(AssignmentNode* node) {
             std::cout << "mov " << offset << "(%ebp), %ebx\n";
 			std::cout << "mov %eax, " << memberOffset << "(%ebx)\n";
         }else{
-            offset = (*currentClassInfo.variables)[variableName].offset;
+            offset = (*currentClassInfo.members)[variableName].offset;
 			std::cout << "mov 8(%ebp), %ebx"<< std::endl;
 			std::cout << "mov " << offset << "(%ebx), %eax\n";
 			std::cout << "mov %eax, " << memberOffset << "(%ebx)\n";
@@ -176,15 +176,11 @@ void CodeGenerator::visitTimesNode(TimesNode* node) {
 void CodeGenerator::visitDivideNode(DivideNode* node) {
     std::cout << "# Divide\n";
     node->visit_children(this);
-    // ??????????
-    // int sign = node->expression_1->integer->value > 0;
-    int sign;
     std::cout << "pop  %eax\n";
-    std::cout << "pop  %ebx\n";
-    std::cout << "mov $" << sign << ", %edx\n";
     std::cout << "cdq\n";
-    std::cout << "idiv  %ebx\n";
-    std::cout << "push %ebx\n";
+    std::cout << "pop  %ebx\n";
+    std::cout << "idiv %ebx\n";
+    std::cout << "push %eax\n";
 }
 
 void CodeGenerator::visitGreaterNode(GreaterNode* node) {
@@ -236,7 +232,7 @@ void CodeGenerator::visitNotNode(NotNode* node) {
     std::cout << "# Not\n";
     node->visit_children(this);
     std::cout << "pop  %eax\n";
-    std::cout << "not  %eax\n";
+    std::cout << "xor $1, %eax\n";
     std::cout << "push %eax\n";
 }
 

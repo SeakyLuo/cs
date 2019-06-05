@@ -79,6 +79,18 @@ void TypeCheck::visitProgramNode(ProgramNode* node) {
     node->visit_children(this);
 }
 
+void inheritanceHelper(ClassTable* classTable, VariableTable* table, std::string className, int& offset){
+    if (className.empty()) return;
+    classinfo info = (*classTable)[className];
+    inheritanceHelper(classTable, table, info.superClassName, offset);
+    for (auto iter: (*info.members)){
+        variableinfo vi = iter.second;
+        vi.offset = offset;
+        offset += 4;
+        (*table)[iter.first] = vi;
+    }
+}
+
 void TypeCheck::visitClassNode(ClassNode* node) {
     currentMethodTable = new MethodTable();
     currentVariableTable = NULL;
@@ -101,6 +113,8 @@ void TypeCheck::visitClassNode(ClassNode* node) {
     info.superClassName = (node->identifier_2) ? node->identifier_2->name : "";
     info.methods = currentMethodTable;
     info.members = new VariableTable();
+    if (node->identifier_2)
+        inheritanceHelper(classTable, info.members, info.superClassName, currentMemberOffset);
     for (auto iter: *(node->declaration_list)){
         VariableInfo vi;
         vi.offset = currentMemberOffset;
@@ -181,8 +195,7 @@ void TypeCheck::visitDeclarationNode(DeclarationNode* node) {
     type.objectClassName = node->type->objectClassName;
     if (type.baseType == bt_object && !classTable->count(type.objectClassName)) typeError(undefined_class);
     if (currentVariableTable){
-        // Class Members
-        // add super class members
+        // Method Declaration
         for (auto iter: *(node->identifier_list)){
             VariableInfo info;
             info.type = type;
@@ -192,10 +205,9 @@ void TypeCheck::visitDeclarationNode(DeclarationNode* node) {
             iter->objectClassName = type.objectClassName;
         }
     }else{
-        // Method Declaration
+        // Class Members
         (*(*classTable)[currentClassName].members)[node->identifier_list->front()->name].type = type;
     }
-
 }
 
 void TypeCheck::visitReturnStatementNode(ReturnStatementNode* node) {
@@ -477,7 +489,6 @@ void TypeCheck::visitNewNode(NewNode* node) {
             if ((*f)->objectClassName != e->objectClassName)
                 typeError(argument_type_mismatch);
     }else{
-        // if (found->size()) typeError(argument_number_mismatch);
         typeError(undefined_method);
     }
     node->basetype = bt_object;
