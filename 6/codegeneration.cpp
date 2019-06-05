@@ -9,12 +9,10 @@ void CodeGenerator::visitProgramNode(ProgramNode* node) {
 	std::cout << "printstr: .asciz \"%d\\n\"\n";
     std::cout << ".text\n";
     std::cout << ".globl Main_main\n";
-    std::cout << "# Program\n";
     node->visit_children(this);
 }
 
 void CodeGenerator::visitClassNode(ClassNode* node) {
-    std::cout << "# Class\n";
     currentClassName = node->identifier_1->name;
     currentClassInfo = (*classTable)[currentClassName];
     node->visit_children(this);
@@ -24,12 +22,13 @@ void CodeGenerator::visitMethodNode(MethodNode* node) {
     std::cout << "# Method\n";
     currentMethodName = node->identifier->name;
     currentMethodInfo = (*currentClassInfo.methods)[currentMethodName];
-    // std::cout << ".globl " << currentClassName << '_' << currentMethodName << '\n';
     std::cout << "push %ebp\n";
     std::cout << "mov %esp, %ebp\n";
     std::cout << "sub $" << currentMethodInfo.localsSize << ", %esp\n";
     std::cout << "push %ebx\npush %edi\npush %esi\n";
     node->visit_children(this);
+  	// if (currentMethodName == currentClassName)
+	// 	std::cout << " mov 8(%ebp), %eax\n";
     std::cout << "pop %ebx\npop %edi\npop %esi\n";
     std::cout << "mov %ebp, %ebp\n";
     std::cout << "pop %ebp\n";
@@ -46,26 +45,6 @@ void CodeGenerator::visitParameterNode(ParameterNode* node) {
 
 void CodeGenerator::visitDeclarationNode(DeclarationNode* node) {
     node->visit_children(this);
-    if (true){
-        // Class Members
-        std::cout << "# Class Members\n";
-        int index = 0;
-        for (auto iter: *(node->identifier_list)){
-            index -=4;
-            std::cout << "sub $4, %esp\n";
-            std::cout << "push " << index << "(%ebp)\n";
-        }
-    }else{
-        // Method Declaration
-        std::cout << "# Method Declaration\n";
-        int index = 0;
-        for (auto iter: *(node->identifier_list)){
-            index -=4;
-            std::cout << "sub $4, %esp\n";
-            std::cout << "push " << index << "(%ebp)\n";
-        }
-    }
-
 }
 
 void CodeGenerator::visitReturnStatementNode(ReturnStatementNode* node) {
@@ -77,6 +56,31 @@ void CodeGenerator::visitReturnStatementNode(ReturnStatementNode* node) {
 void CodeGenerator::visitAssignmentNode(AssignmentNode* node) {
     std::cout << "# Assignment\n";
     node->visit_children(this);
+    // std::cout << " pop %eax" << std::endl;
+    std::string variableName = node->identifier_1->name;
+    int offset;
+    if (node->identifier_2){
+        int memberOffset = (*(*classTable)[node->identifier_1->objectClassName].members)[node->identifier_2->name].offset;
+        if (currentMethodInfo.variables->count(variableName)){
+            offset = (*currentMethodInfo.variables)[variableName].offset;
+            std::cout << "mov " << offset << "(%ebp), %ebx\n";
+			std::cout << "mov %eax, " << memberOffset << "(%ebx)\n";
+        }else{
+            offset = (*currentClassInfo.variables)[variableName].offset;
+			std::cout << "mov 8(%ebp), %ebx"<< std::endl;
+			std::cout << "mov " << offset << "(%ebx), %eax\n";
+			std::cout << "mov %eax, " << memberOffset << "(%ebx)\n";
+        }
+    }else{
+        if (currentMethodInfo.variables->count(variableName)){
+            offset = (*currentMethodInfo.variables)[variableName].offset;
+            std::cout << "mov %eax, " << offset << "(%ebp)\n";
+        }else{
+            offset = (*currentClassInfo.members)[variableName].offset;
+            std::cout << "mov 8(%ebp), %ebx\n";
+            std::cout << "mov %eax, " << offset << "(%ebx)\n";
+        }
+    }
 }
 
 void CodeGenerator::visitCallNode(CallNode* node) {
@@ -277,6 +281,7 @@ void CodeGenerator::visitMemberAccessNode(MemberAccessNode* node) {
 
 void CodeGenerator::visitVariableNode(VariableNode* node) {
     node->visit_children(this);
+    int offset;
 }
 
 void CodeGenerator::visitIntegerLiteralNode(IntegerLiteralNode* node) {

@@ -182,6 +182,7 @@ void TypeCheck::visitDeclarationNode(DeclarationNode* node) {
     if (type.baseType == bt_object && !classTable->count(type.objectClassName)) typeError(undefined_class);
     if (currentVariableTable){
         // Class Members
+        // add super class members
         for (auto iter: *(node->identifier_list)){
             VariableInfo info;
             info.type = type;
