@@ -181,6 +181,7 @@ void TypeCheck::visitDeclarationNode(DeclarationNode* node) {
     type.objectClassName = node->type->objectClassName;
     if (type.baseType == bt_object && !classTable->count(type.objectClassName)) typeError(undefined_class);
     if (currentVariableTable){
+        // Class Members
         for (auto iter: *(node->identifier_list)){
             VariableInfo info;
             info.type = type;
@@ -190,6 +191,7 @@ void TypeCheck::visitDeclarationNode(DeclarationNode* node) {
             iter->objectClassName = type.objectClassName;
         }
     }else{
+        // Method Declaration
         (*(*classTable)[currentClassName].members)[node->identifier_list->front()->name].type = type;
     }
 
@@ -474,7 +476,8 @@ void TypeCheck::visitNewNode(NewNode* node) {
             if ((*f)->objectClassName != e->objectClassName)
                 typeError(argument_type_mismatch);
     }else{
-        if (found->size()) typeError(argument_number_mismatch);
+        // if (found->size()) typeError(argument_number_mismatch);
+        typeError(undefined_method);
     }
     node->basetype = bt_object;
     node->objectClassName = className;
