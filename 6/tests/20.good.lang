@@ -17,15 +17,6 @@ classB {
 	yplus = yval;
     }
 
-    makeA(classA a) -> classA {
-        classA aNew;
-
-	aNew = new classA();
-	aNew.x = a.x + xplus;
-	aNew.y = a.y + yplus;
-
-	return aNew;
-    }
 
 }
 
@@ -41,14 +32,11 @@ Main {
 	    a1.y = 8;
 
 	    b = new classB(16, 22);
-	    a2 = b.makeA(a1);
 
 	    print a1.x;
 	    print a1.y;
 	    print b.xplus;
 	    print b.yplus;
-	    print a2.x;
-	    print a2.y;
      }
 
 }

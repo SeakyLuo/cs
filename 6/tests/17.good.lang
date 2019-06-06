@@ -8,7 +8,6 @@ Main {
      main() -> none {
      	    classA a;
 
-	    a = new classA;
 	    a.x = 5;
 	    a.y = 6;
 
