@@ -18,7 +18,9 @@ mov %eax, -4(%ebp)
 # Assignment Ends
 # Assignment
 # Plus
+# Variable
 push -4(%ebp)
+# Variable Ends
 push $1
 pop  %ebx
 pop  %eax
@@ -30,7 +32,9 @@ mov %eax, -8(%ebp)
 # Assignment Ends
 # If
 # Equal
+# Variable
 push -8(%ebp)
+# Variable Ends
 push $2
 mov $0, %edx
 pop %ebx

@@ -18,7 +18,9 @@ mov %eax, -4(%ebp)
 # Assignment Ends
 # Print
 # Times
+# Variable
 push -4(%ebp)
+# Variable Ends
 push $2
 pop  %ebx
 pop  %eax
@@ -51,7 +53,9 @@ mov %eax, -4(%ebp)
 # Assignment Ends
 # Print
 # Plus
+# Variable
 push -4(%ebp)
+# Variable Ends
 push $1
 pop  %ebx
 pop  %eax
@@ -67,20 +71,19 @@ add $8, %esp
 push %eax
 push %ecx
 push %edx
-add $0, %esp
 push 8(%ebp)
 call classA_f0
 add $4, %esp
-sub $0, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # Call Ends
 # Print
 # Minus
+# Variable
 push -4(%ebp)
+# Variable Ends
 push $1
 pop  %ebx
 pop  %eax
@@ -113,15 +116,12 @@ push %ebx
 push %eax
 push %ecx
 push %edx
-add $0, %esp
 push -4(%ebp)
 call classA_doAll
 add $4, %esp
-sub $0, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # Call Ends
 pop %ebx

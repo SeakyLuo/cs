@@ -30,7 +30,9 @@ mov %eax, -12(%ebp)
 while_0:
 # GreaterEqual
 push $8
+# Variable
 push -4(%ebp)
+# Variable Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -45,10 +47,14 @@ je while_end_0
 # Assignment
 # Greater
 # Minus
+# Variable
 push -4(%ebp)
+# Variable Ends
 # Times
 # Divide
+# Variable
 push -4(%ebp)
+# Variable Ends
 push $2
 pop  %ebx
 pop  %eax
@@ -80,7 +86,9 @@ mov %eax, -12(%ebp)
 # Assignment Ends
 # Assignment
 # Plus
+# Variable
 push -4(%ebp)
+# Variable Ends
 push $1
 pop  %ebx
 pop  %eax
@@ -91,14 +99,18 @@ pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
 # If
+# Variable
 push -12(%ebp)
+# Variable Ends
 pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je else_1
 # Assignment
 # Times
+# Variable
 push -8(%ebp)
+# Variable Ends
 push $2
 pop  %ebx
 pop  %eax
@@ -113,7 +125,9 @@ else_1:
 # Else
 # Assignment
 # Plus
+# Variable
 push -8(%ebp)
+# Variable Ends
 push $1
 pop  %ebx
 pop  %eax
@@ -126,7 +140,9 @@ mov %eax, -8(%ebp)
 if_end_1:
 # If Ends
 # Print
+# Variable
 push -8(%ebp)
+# Variable Ends
 push $printstr
 call printf
 add $8, %esp

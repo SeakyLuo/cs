@@ -43,8 +43,12 @@ mov %eax, -12(%ebp)
 # Assignment Ends
 # Assignment
 # Times
+# Variable
 push -12(%ebp)
+# Variable Ends
+# Variable
 push -8(%ebp)
+# Variable Ends
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax
@@ -107,7 +111,9 @@ pop %eax
 mov %eax, -12(%ebp)
 # Assignment Ends
 # Print
+# Variable
 push -4(%ebp)
+# Variable Ends
 push $printstr
 call printf
 add $8, %esp
@@ -194,6 +200,7 @@ push $23
 pop  %eax
 neg  %eax
 push %eax
+# Negation Ends
 push $208
 pop  %ebx
 pop  %eax
@@ -204,7 +211,9 @@ pop %eax
 mov %eax, -12(%ebp)
 # Assignment Ends
 # If
+# Variable
 push -4(%ebp)
+# Variable Ends
 pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
@@ -236,7 +245,9 @@ add $8, %esp
 # Plus
 # Plus
 push $5
+# Variable
 push -16(%ebp)
+# Variable Ends
 pop  %ebx
 pop  %eax
 add  %ebx, %eax
@@ -273,7 +284,9 @@ mov $0, %ebx
 cmp %eax, %ebx
 je else_2
 # Print
+# Variable
 push -4(%ebp)
+# Variable Ends
 push $printstr
 call printf
 add $8, %esp
@@ -298,7 +311,9 @@ else_0:
 push %eax
 push %ecx
 push %edx
+# Variable
 push -8(%ebp)
+# Variable Ends
 # Or
 # And
 push $1
@@ -322,14 +337,10 @@ push %eax
 # Not Ends
 push 8(%ebp)
 call class0_f1
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -4(%ebp)
@@ -339,26 +350,30 @@ mov %eax, -4(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -16(%ebp)
+# Variable Ends
+# Variable
 push -4(%ebp)
+# Variable Ends
+# Variable
 push -4(%ebp)
+# Variable Ends
 push 8(%ebp)
 call class0_f1
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 push $printstr
 call printf
 add $8, %esp
 # Print Ends
 # Print
+# Variable
 push -8(%ebp)
+# Variable Ends
 push $printstr
 call printf
 add $8, %esp
@@ -380,10 +395,14 @@ add $8, %esp
 # Print Ends
 # Assignment
 # Minus
+# Variable
 push -12(%ebp)
+# Variable Ends
 # Times
 push $143
+# Variable
 push -16(%ebp)
+# Variable Ends
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax
@@ -453,7 +472,6 @@ add $4, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # Call Ends
 # Call
@@ -467,7 +485,6 @@ add $4, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # Call Ends
 # Call
@@ -481,7 +498,6 @@ add $4, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # Call Ends
 # Call
@@ -495,7 +511,6 @@ add $4, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # Call Ends
 pop %ebx
@@ -566,8 +581,12 @@ mov %eax, -12(%ebp)
 # Assignment Ends
 # Print
 # And
+# Variable
 push 16(%ebp)
+# Variable Ends
+# Variable
 push -8(%ebp)
+# Variable Ends
 pop  %ebx
 pop  %eax
 and  %ebx, %eax
@@ -580,7 +599,9 @@ add $8, %esp
 # Print
 # Divide
 push $21
+# Variable
 push -12(%ebp)
+# Variable Ends
 pop  %ebx
 pop  %eax
 cdq
@@ -592,7 +613,9 @@ call printf
 add $8, %esp
 # Print Ends
 # Assignment
+# Variable
 push -16(%ebp)
+# Variable Ends
 pop %eax
 mov %eax, -12(%ebp)
 # Assignment Ends
@@ -602,7 +625,9 @@ pop %eax
 mov %eax, -12(%ebp)
 # Assignment Ends
 # Print
+# Variable
 push 20(%ebp)
+# Variable Ends
 push $printstr
 call printf
 add $8, %esp
@@ -642,6 +667,7 @@ push $25
 pop  %eax
 neg  %eax
 push %eax
+# Negation Ends
 push $33
 mov $0, %edx
 pop %ebx
@@ -660,16 +686,12 @@ cmp %ebx, %eax
 sete %dl
 push %edx
 # Equal Ends
-push 8(%ebp)
+push 20(%esp)
 call class0_class0
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -721,18 +743,15 @@ push $49
 pop  %eax
 neg  %eax
 push %eax
+# Negation Ends
 push $0
 push $0
-push 8(%ebp)
+push 20(%esp)
 call class0_class0
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -749,15 +768,15 @@ mov %eax, -12(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -12(%ebp)
+# Variable Ends
 push -24(%ebp)
 call class0_f4
-add $4, %esp
-pop %eax
+add $8, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # Call Ends
 pop %ebx
@@ -798,16 +817,12 @@ pop  %eax
 xor $1, %eax
 push %eax
 # Not Ends
-push 8(%ebp)
+push 20(%esp)
 call class0_class0
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -837,16 +852,12 @@ push %edx
 push $136
 push $1
 push $1
-push 8(%ebp)
+push 20(%esp)
 call class0_class0
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -875,16 +886,12 @@ sete %dl
 push %edx
 # Equal Ends
 push $1
-push 8(%ebp)
+push 20(%esp)
 call class0_class0
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -892,7 +899,9 @@ pop %eax
 mov %eax, -12(%ebp)
 # Assignment Ends
 # Print
+# Variable
 push 12(%ebp)
+# Variable Ends
 push $printstr
 call printf
 add $8, %esp
@@ -927,7 +936,6 @@ add $4, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # Call Ends
 # Call
@@ -941,7 +949,6 @@ add $4, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # Call Ends
 pop %ebx
@@ -1023,16 +1030,12 @@ pop  %eax
 xor $1, %eax
 push %eax
 # Not Ends
-push 8(%ebp)
+push 20(%esp)
 call class0_class0
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -1040,7 +1043,9 @@ pop %eax
 mov %eax, -12(%ebp)
 # Assignment Ends
 # Print
+# Variable
 push -16(%ebp)
+# Variable Ends
 push $printstr
 call printf
 add $8, %esp
@@ -1053,7 +1058,9 @@ mov %eax, -28(%ebp)
 # While
 while_3:
 # GreaterEqual
+# Variable
 push -28(%ebp)
+# Variable Ends
 push $49
 mov $0, %edx
 pop %ebx
@@ -1068,7 +1075,9 @@ cmp %eax, %ebx
 je while_end_3
 # Assignment
 # Minus
+# Variable
 push -28(%ebp)
+# Variable Ends
 push $4
 pop  %ebx
 pop  %eax
@@ -1089,22 +1098,24 @@ je else_4
 push %eax
 push %ecx
 push %edx
+# Variable
 push -4(%ebp)
+# Variable Ends
 push -12(%ebp)
 call class0_f0
-add $4, %esp
-pop %eax
+add $8, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je else_5
 # Print
+# Variable
 push -24(%ebp)
+# Variable Ends
 push $printstr
 call printf
 add $8, %esp
@@ -1151,6 +1162,7 @@ push $122
 pop  %eax
 neg  %eax
 push %eax
+# Negation Ends
 push $61
 pop  %ebx
 pop  %eax
@@ -1188,16 +1200,12 @@ pop  %eax
 and  %ebx, %eax
 push %eax
 # And Ends
-push 8(%ebp)
+push 20(%esp)
 call class0_class0
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -1225,16 +1233,12 @@ push %eax
 # Minus Ends
 push $1
 push $0
-push 8(%ebp)
+push 20(%esp)
 call class0_class0
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -1291,16 +1295,12 @@ pop  %eax
 and  %ebx, %eax
 push %eax
 # And Ends
-push 8(%ebp)
+push 20(%esp)
 call class0_class0
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -1325,6 +1325,7 @@ push $124
 pop  %eax
 neg  %eax
 push %eax
+# Negation Ends
 push $170
 pop  %ebx
 pop  %eax
@@ -1363,16 +1364,12 @@ cmp %ebx, %eax
 setg %dl
 push %edx
 # Greater Ends
-push 8(%ebp)
+push 20(%esp)
 call class0_class0
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -1390,6 +1387,7 @@ push $76
 pop  %eax
 neg  %eax
 push %eax
+# Negation Ends
 pop %eax
 mov %eax, -20(%ebp)
 # Assignment Ends
@@ -1397,7 +1395,9 @@ mov %eax, -20(%ebp)
 while_6:
 # Greater
 push $95
+# Variable
 push -20(%ebp)
+# Variable Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -1411,7 +1411,9 @@ cmp %eax, %ebx
 je while_end_6
 # Assignment
 # Plus
+# Variable
 push -20(%ebp)
+# Variable Ends
 push $9
 pop  %ebx
 pop  %eax
@@ -1430,11 +1432,19 @@ push %edx
 push %eax
 push %ecx
 push %edx
+# Variable
 push -4(%ebp)
+# Variable Ends
+# Variable
 push -16(%ebp)
+# Variable Ends
 # Equal
+# Variable
 push -8(%ebp)
+# Variable Ends
+# Variable
 push -16(%ebp)
+# Variable Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -1444,14 +1454,10 @@ push %edx
 # Equal Ends
 push -12(%ebp)
 call class0_f3
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 push $105
 # Not
@@ -1462,14 +1468,10 @@ push %eax
 # Not Ends
 push -12(%ebp)
 call class0_f3
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 push $printstr
 call printf
@@ -1501,18 +1503,22 @@ push $15
 pop  %eax
 neg  %eax
 push %eax
+# Negation Ends
 pop %eax
 mov %eax, -24(%ebp)
 # Assignment Ends
 # While
 while_8:
 # Greater
+# Variable
 push -24(%ebp)
+# Variable Ends
 # Negation
 push $60
 pop  %eax
 neg  %eax
 push %eax
+# Negation Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -1526,12 +1532,15 @@ cmp %eax, %ebx
 je while_end_8
 # Assignment
 # Plus
+# Variable
 push -24(%ebp)
+# Variable Ends
 # Negation
 push $9
 pop  %eax
 neg  %eax
 push %eax
+# Negation Ends
 pop  %ebx
 pop  %eax
 add  %ebx, %eax
@@ -1596,13 +1605,16 @@ push $42
 pop  %eax
 neg  %eax
 push %eax
+# Negation Ends
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
 # Print
 # Times
 push $172
+# Variable
 push -4(%ebp)
+# Variable Ends
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax
@@ -1616,13 +1628,17 @@ add $8, %esp
 # Plus
 # Times
 push $150
+# Variable
 push -4(%ebp)
+# Variable Ends
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax
 push %eax
 # Times Ends
+# Variable
 push -4(%ebp)
+# Variable Ends
 pop  %ebx
 pop  %eax
 add  %ebx, %eax
@@ -1644,7 +1660,9 @@ mov %eax, -12(%ebp)
 # While
 while_9:
 # Greater
+# Variable
 push -12(%ebp)
+# Variable Ends
 push $87
 mov $0, %edx
 pop %ebx
@@ -1659,7 +1677,9 @@ cmp %eax, %ebx
 je while_end_9
 # Assignment
 # Divide
+# Variable
 push -12(%ebp)
+# Variable Ends
 push $3
 pop  %ebx
 pop  %eax
@@ -1684,7 +1704,9 @@ while_end_9:
 push $0
 # Greater
 push $4
+# Variable
 push -4(%ebp)
+# Variable Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -1702,7 +1724,9 @@ mov $0, %ebx
 cmp %eax, %ebx
 je else_10
 # Assignment
+# Variable
 push -8(%ebp)
+# Variable Ends
 pop %eax
 mov %eax, -8(%ebp)
 # Assignment Ends
@@ -1710,7 +1734,9 @@ mov %eax, -8(%ebp)
 else_10:
 # Else
 # If
+# Variable
 push -8(%ebp)
+# Variable Ends
 pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
@@ -1721,6 +1747,7 @@ push $67
 pop  %eax
 neg  %eax
 push %eax
+# Negation Ends
 pop %eax
 mov %eax, -16(%ebp)
 # Assignment Ends
@@ -1732,7 +1759,10 @@ push $51
 pop  %eax
 neg  %eax
 push %eax
+# Negation Ends
+# Variable
 push -16(%ebp)
+# Variable Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -1746,7 +1776,9 @@ cmp %eax, %ebx
 je while_end_12
 # Assignment
 # Times
+# Variable
 push -16(%ebp)
+# Variable Ends
 push $2
 pop  %ebx
 pop  %eax
@@ -1765,7 +1797,9 @@ mov %eax, -20(%ebp)
 while_13:
 # GreaterEqual
 push $296
+# Variable
 push -20(%ebp)
+# Variable Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -1779,7 +1813,9 @@ cmp %eax, %ebx
 je while_end_13
 # Assignment
 # Times
+# Variable
 push -20(%ebp)
+# Variable Ends
 push $4
 pop  %ebx
 pop  %eax
@@ -1790,7 +1826,9 @@ pop %eax
 mov %eax, -20(%ebp)
 # Assignment Ends
 # Print
+# Variable
 push -4(%ebp)
+# Variable Ends
 push $printstr
 call printf
 add $8, %esp
@@ -1812,7 +1850,9 @@ mov %eax, -24(%ebp)
 # While
 while_14:
 # GreaterEqual
+# Variable
 push -24(%ebp)
+# Variable Ends
 push $64
 mov $0, %edx
 pop %ebx
@@ -1827,7 +1867,9 @@ cmp %eax, %ebx
 je while_end_14
 # Assignment
 # Divide
+# Variable
 push -24(%ebp)
+# Variable Ends
 push $3
 pop  %ebx
 pop  %eax
@@ -1840,8 +1882,12 @@ mov %eax, -24(%ebp)
 # Assignment Ends
 # Assignment
 # GreaterEqual
+# Variable
 push -4(%ebp)
+# Variable Ends
+# Variable
 push -4(%ebp)
+# Variable Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -1867,7 +1913,9 @@ mov %eax, -28(%ebp)
 while_15:
 # GreaterEqual
 push $107
+# Variable
 push -28(%ebp)
+# Variable Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -1881,7 +1929,9 @@ cmp %eax, %ebx
 je while_end_15
 # Assignment
 # Plus
+# Variable
 push -28(%ebp)
+# Variable Ends
 push $1
 pop  %ebx
 pop  %eax
@@ -1892,7 +1942,9 @@ pop %eax
 mov %eax, -28(%ebp)
 # Assignment Ends
 # Assignment
+# Variable
 push -8(%ebp)
+# Variable Ends
 pop %eax
 mov %eax, -8(%ebp)
 # Assignment Ends
@@ -1909,7 +1961,9 @@ mov $0, %ebx
 cmp %eax, %ebx
 je else_16
 # Assignment
+# Variable
 push -4(%ebp)
+# Variable Ends
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
@@ -1922,7 +1976,9 @@ mov %eax, -8(%ebp)
 else_16:
 # Else
 # If
+# Variable
 push -8(%ebp)
+# Variable Ends
 pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
@@ -1948,18 +2004,22 @@ push $20
 pop  %eax
 neg  %eax
 push %eax
+# Negation Ends
 pop %eax
 mov %eax, -32(%ebp)
 # Assignment Ends
 # While
 while_18:
 # GreaterEqual
+# Variable
 push -32(%ebp)
+# Variable Ends
 # Negation
 push $48
 pop  %eax
 neg  %eax
 push %eax
+# Negation Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -1973,7 +2033,9 @@ cmp %eax, %ebx
 je while_end_18
 # Assignment
 # Minus
+# Variable
 push -32(%ebp)
+# Variable Ends
 push $2
 pop  %ebx
 pop  %eax
@@ -1984,7 +2046,9 @@ pop %eax
 mov %eax, -32(%ebp)
 # Assignment Ends
 # Assignment
+# Variable
 push -4(%ebp)
+# Variable Ends
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
@@ -2026,7 +2090,9 @@ mov %eax, -36(%ebp)
 while_19:
 # Greater
 push $262220
+# Variable
 push -36(%ebp)
+# Variable Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -2040,7 +2106,9 @@ cmp %eax, %ebx
 je while_end_19
 # Assignment
 # Times
+# Variable
 push -36(%ebp)
+# Variable Ends
 push $4
 pop  %ebx
 pop  %eax
@@ -2064,7 +2132,9 @@ cmp %eax, %ebx
 je else_20
 # If
 # Not
+# Variable
 push -8(%ebp)
+# Variable Ends
 pop  %eax
 xor $1, %eax
 push %eax
@@ -2074,7 +2144,9 @@ mov $0, %ebx
 cmp %eax, %ebx
 je else_21
 # Assignment
+# Variable
 push -8(%ebp)
+# Variable Ends
 pop %eax
 mov %eax, -8(%ebp)
 # Assignment Ends
@@ -2084,7 +2156,9 @@ pop %eax
 mov %eax, -8(%ebp)
 # Assignment Ends
 # If
+# Variable
 push -8(%ebp)
+# Variable Ends
 pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
@@ -2097,7 +2171,9 @@ mov %eax, -40(%ebp)
 # While
 while_23:
 # Greater
+# Variable
 push -40(%ebp)
+# Variable Ends
 push $87
 mov $0, %edx
 pop %ebx
@@ -2112,7 +2188,9 @@ cmp %eax, %ebx
 je while_end_23
 # Assignment
 # Divide
+# Variable
 push -40(%ebp)
+# Variable Ends
 push $4
 pop  %ebx
 pop  %eax
@@ -2125,10 +2203,13 @@ mov %eax, -40(%ebp)
 # Assignment Ends
 # Assignment
 # Negation
+# Variable
 push -4(%ebp)
+# Variable Ends
 pop  %eax
 neg  %eax
 push %eax
+# Negation Ends
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
@@ -2140,7 +2221,9 @@ mov %eax, -44(%ebp)
 # While
 while_24:
 # GreaterEqual
+# Variable
 push -44(%ebp)
+# Variable Ends
 push $84
 mov $0, %edx
 pop %ebx
@@ -2155,7 +2238,9 @@ cmp %eax, %ebx
 je while_end_24
 # Assignment
 # Divide
+# Variable
 push -44(%ebp)
+# Variable Ends
 push $2
 pop  %ebx
 pop  %eax
@@ -2178,12 +2263,16 @@ jmp while_23
 while_end_23:
 # While Ends
 # Assignment
+# Variable
 push -8(%ebp)
+# Variable Ends
 pop %eax
 mov %eax, -8(%ebp)
 # Assignment Ends
 # Assignment
+# Variable
 push -4(%ebp)
+# Variable Ends
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
@@ -2197,13 +2286,17 @@ mov $0, %ebx
 cmp %eax, %ebx
 je else_25
 # If
+# Variable
 push -8(%ebp)
+# Variable Ends
 pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je else_26
 # Assignment
+# Variable
 push -8(%ebp)
+# Variable Ends
 pop %eax
 mov %eax, -8(%ebp)
 # Assignment Ends
@@ -2238,7 +2331,9 @@ if_end_22:
 else_21:
 # Else
 # If
+# Variable
 push -8(%ebp)
+# Variable Ends
 pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
@@ -2251,7 +2346,9 @@ mov %eax, -48(%ebp)
 # While
 while_28:
 # GreaterEqual
+# Variable
 push -48(%ebp)
+# Variable Ends
 push $71
 mov $0, %edx
 pop %ebx
@@ -2266,12 +2363,15 @@ cmp %eax, %ebx
 je while_end_28
 # Assignment
 # Plus
+# Variable
 push -48(%ebp)
+# Variable Ends
 # Negation
 push $4
 pop  %eax
 neg  %eax
 push %eax
+# Negation Ends
 pop  %ebx
 pop  %eax
 add  %ebx, %eax
@@ -2281,7 +2381,9 @@ pop %eax
 mov %eax, -48(%ebp)
 # Assignment Ends
 # Print
+# Variable
 push -4(%ebp)
+# Variable Ends
 push $printstr
 call printf
 add $8, %esp
@@ -2291,7 +2393,9 @@ while_end_28:
 # While Ends
 # Assignment
 # GreaterEqual
+# Variable
 push -4(%ebp)
+# Variable Ends
 push $125
 mov $0, %edx
 pop %ebx
@@ -2321,7 +2425,9 @@ mov %eax, -4(%ebp)
 else_29:
 # Else
 # If
+# Variable
 push -8(%ebp)
+# Variable Ends
 pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
@@ -2348,14 +2454,20 @@ else_30:
 if_end_30:
 # If Ends
 # Assignment
+# Variable
 push -8(%ebp)
+# Variable Ends
 pop %eax
 mov %eax, -8(%ebp)
 # Assignment Ends
 # Print
 # Minus
+# Variable
 push -4(%ebp)
+# Variable Ends
+# Variable
 push -4(%ebp)
+# Variable Ends
 pop  %ebx
 pop  %eax
 sub  %ebx, %eax
@@ -2376,7 +2488,9 @@ mov %eax, -52(%ebp)
 while_31:
 # GreaterEqual
 push $102
+# Variable
 push -52(%ebp)
+# Variable Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -2390,7 +2504,9 @@ cmp %eax, %ebx
 je while_end_31
 # Assignment
 # Times
+# Variable
 push -52(%ebp)
+# Variable Ends
 push $3
 pop  %ebx
 pop  %eax
@@ -2402,8 +2518,12 @@ mov %eax, -52(%ebp)
 # Assignment Ends
 # Assignment
 # Times
+# Variable
 push -4(%ebp)
+# Variable Ends
+# Variable
 push -4(%ebp)
+# Variable Ends
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax
@@ -2433,12 +2553,16 @@ jmp while_19
 while_end_19:
 # While Ends
 # Assignment
+# Variable
 push -8(%ebp)
+# Variable Ends
 pop %eax
 mov %eax, -8(%ebp)
 # Assignment Ends
 # Print
+# Variable
 push -8(%ebp)
+# Variable Ends
 push $printstr
 call printf
 add $8, %esp
@@ -2449,6 +2573,7 @@ push $9
 pop  %eax
 neg  %eax
 push %eax
+# Negation Ends
 pop %eax
 mov %eax, -56(%ebp)
 # Assignment Ends
@@ -2456,7 +2581,9 @@ mov %eax, -56(%ebp)
 while_32:
 # GreaterEqual
 push $11
+# Variable
 push -56(%ebp)
+# Variable Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -2470,12 +2597,15 @@ cmp %eax, %ebx
 je while_end_32
 # Assignment
 # Minus
+# Variable
 push -56(%ebp)
+# Variable Ends
 # Negation
 push $10
 pop  %eax
 neg  %eax
 push %eax
+# Negation Ends
 pop  %ebx
 pop  %eax
 sub  %ebx, %eax
@@ -2485,7 +2615,9 @@ pop %eax
 mov %eax, -56(%ebp)
 # Assignment Ends
 # Assignment
+# Variable
 push -4(%ebp)
+# Variable Ends
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
@@ -2501,7 +2633,9 @@ mov %eax, -60(%ebp)
 while_33:
 # GreaterEqual
 push $246
+# Variable
 push -60(%ebp)
+# Variable Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -2515,7 +2649,9 @@ cmp %eax, %ebx
 je while_end_33
 # Assignment
 # Plus
+# Variable
 push -60(%ebp)
+# Variable Ends
 push $9
 pop  %ebx
 pop  %eax
@@ -2533,7 +2669,9 @@ add $8, %esp
 # Print Ends
 # Print
 # Divide
+# Variable
 push -4(%ebp)
+# Variable Ends
 push $23
 pop  %ebx
 pop  %eax
@@ -2550,7 +2688,9 @@ while_end_33:
 # While Ends
 # Print
 # Divide
+# Variable
 push -4(%ebp)
+# Variable Ends
 push $167
 pop  %ebx
 pop  %eax
@@ -2569,7 +2709,9 @@ mov $0, %ebx
 cmp %eax, %ebx
 je else_34
 # Print
+# Variable
 push -8(%ebp)
+# Variable Ends
 push $printstr
 call printf
 add $8, %esp
@@ -2582,7 +2724,9 @@ add $8, %esp
 # Print Ends
 # Print
 # GreaterEqual
+# Variable
 push -4(%ebp)
+# Variable Ends
 push $1
 mov $0, %edx
 pop %ebx
@@ -2603,7 +2747,9 @@ if_end_34:
 # Plus
 # Times
 push $18
+# Variable
 push -4(%ebp)
+# Variable Ends
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax
@@ -2621,7 +2767,9 @@ mov %eax, -4(%ebp)
 # Assignment
 # And
 push $1
+# Variable
 push -8(%ebp)
+# Variable Ends
 pop  %ebx
 pop  %eax
 and  %ebx, %eax

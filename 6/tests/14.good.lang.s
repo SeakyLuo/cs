@@ -12,15 +12,21 @@ push %edi
 push %esi
 push %ebx
 # If
+# Variable
 push 16(%ebp)
+# Variable Ends
 pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je else_0
 # Assignment
 # Times
+# Variable
 push 12(%ebp)
+# Variable Ends
+# Variable
 push 12(%ebp)
+# Variable Ends
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax
@@ -34,7 +40,9 @@ else_0:
 # Else
 # Assignment
 # Divide
+# Variable
 push 12(%ebp)
+# Variable Ends
 push $2
 pop  %ebx
 pop  %eax
@@ -48,7 +56,9 @@ mov %eax, -4(%ebp)
 if_end_0:
 # If Ends
 # Return Statement
+# Variable
 push -4(%ebp)
+# Variable Ends
 pop %eax
 # Return Statement Ends
 pop %ebx
@@ -71,17 +81,14 @@ push %ebx
 push %eax
 push %ecx
 push %edx
-add $8, %esp
 push $1
 push $5
 push 8(%ebp)
 call classA_f0
-add $4, %esp
-sub $8, %esp
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 push $printstr
 call printf
@@ -92,17 +99,14 @@ add $8, %esp
 push %eax
 push %ecx
 push %edx
-add $8, %esp
 push $0
 push $6
 push 8(%ebp)
 call classA_f0
-add $4, %esp
-sub $8, %esp
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 push $printstr
 call printf
@@ -130,15 +134,12 @@ push %ebx
 push %eax
 push %ecx
 push %edx
-add $0, %esp
 push -4(%ebp)
 call classA_doAll
 add $4, %esp
-sub $0, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # Call Ends
 pop %ebx

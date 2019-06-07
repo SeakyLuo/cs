@@ -25,7 +25,9 @@ mov %eax, -8(%ebp)
 while_0:
 # Greater
 push $5
+# Variable
 push -4(%ebp)
+# Variable Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -40,8 +42,12 @@ je while_end_0
 # Assignment
 # Plus
 # Times
+# Variable
 push -8(%ebp)
+# Variable Ends
+# Variable
 push -4(%ebp)
+# Variable Ends
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax
@@ -58,7 +64,9 @@ mov %eax, -8(%ebp)
 # Assignment Ends
 # Assignment
 # Plus
+# Variable
 push -4(%ebp)
+# Variable Ends
 push $1
 pop  %ebx
 pop  %eax
@@ -69,7 +77,9 @@ pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
 # Print
+# Variable
 push -8(%ebp)
+# Variable Ends
 push $printstr
 call printf
 add $8, %esp

@@ -177,7 +177,7 @@ Expr: Expr T_PLUS Expr { $$ = new PlusNode($1, $3); }
     | T_NUM { $$ = new IntegerLiteralNode($1); }
     | T_TRUE { $$ = new BooleanLiteralNode($1); }
     | T_FALSE { $$ = new BooleanLiteralNode($1); }
-    | T_NEW T_ID { $$ = new NewNode($2, NULL); }
+    | T_NEW T_ID { $$ = new NewNode($2, new std::list<ExpressionNode*>()); }
     | T_NEW T_ID '(' ArgList ')' { $$ = new NewNode($2, $4); }
     ;
 

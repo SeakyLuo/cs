@@ -12,7 +12,9 @@ push %edi
 push %esi
 push %ebx
 # Assignment
+# Variable
 push 12(%ebp)
+# Variable Ends
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 0(%ebx)
@@ -36,13 +38,17 @@ push %edi
 push %esi
 push %ebx
 # Assignment
+# Variable
 push 12(%ebp)
+# Variable Ends
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 0(%ebx)
 # Assignment Ends
 # Assignment
+# Variable
 push 16(%ebp)
+# Variable Ends
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 4(%ebx)
@@ -77,15 +83,12 @@ push %ecx
 push %edx
 push $1
 push $12
-push 8(%ebp)
+push 16(%esp)
 call classB_classB
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends

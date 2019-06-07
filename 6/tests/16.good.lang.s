@@ -13,10 +13,14 @@ push %esi
 push %ebx
 # Assignment
 # Minus
+# Variable
 push 12(%ebp)
+# Variable Ends
 # Times
 # Divide
+# Variable
 push 12(%ebp)
+# Variable Ends
 push $2
 pop  %ebx
 pop  %eax
@@ -40,7 +44,9 @@ mov %eax, -8(%ebp)
 # Assignment Ends
 # If
 # Equal
+# Variable
 push -8(%ebp)
+# Variable Ends
 push $1
 mov $0, %edx
 pop %ebx
@@ -56,8 +62,12 @@ je else_0
 # Assignment
 # Minus
 # Times
+# Variable
 push 12(%ebp)
+# Variable Ends
+# Variable
 push 12(%ebp)
+# Variable Ends
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax
@@ -77,7 +87,9 @@ else_0:
 # Else
 # Assignment
 # Divide
+# Variable
 push 12(%ebp)
+# Variable Ends
 push $2
 pop  %ebx
 pop  %eax
@@ -91,7 +103,9 @@ mov %eax, -4(%ebp)
 if_end_0:
 # If Ends
 # Return Statement
+# Variable
 push -4(%ebp)
+# Variable Ends
 pop %eax
 # Return Statement Ends
 pop %ebx
@@ -114,72 +128,57 @@ push %ebx
 push %eax
 push %ecx
 push %edx
-add $4, %esp
 # MethodCall
 push %eax
 push %ecx
 push %edx
-add $4, %esp
 # MethodCall
 push %eax
 push %ecx
 push %edx
-add $4, %esp
 # MethodCall
 push %eax
 push %ecx
 push %edx
-add $4, %esp
 # MethodCall
 push %eax
 push %ecx
 push %edx
-add $4, %esp
 push $5
 push 8(%ebp)
 call classA_f0
-add $4, %esp
-sub $4, %esp
+add $8, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 push 8(%ebp)
 call classA_f0
-add $4, %esp
-sub $4, %esp
+add $8, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 push 8(%ebp)
 call classA_f0
-add $4, %esp
-sub $4, %esp
+add $8, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 push 8(%ebp)
 call classA_f0
-add $4, %esp
-sub $4, %esp
+add $8, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 push 8(%ebp)
 call classA_f0
-add $4, %esp
-sub $4, %esp
+add $8, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 push $printstr
 call printf
@@ -207,15 +206,12 @@ push %ebx
 push %eax
 push %ecx
 push %edx
-add $0, %esp
 push -4(%ebp)
 call classA_doAll
 add $4, %esp
-sub $0, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # Call Ends
 pop %ebx

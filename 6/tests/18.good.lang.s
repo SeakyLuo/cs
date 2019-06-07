@@ -13,8 +13,10 @@ push %esi
 push %ebx
 # Assignment
 # Times
+# Variable
 mov 8(%ebp), %ebx
 push 0(%ebx)
+# Variable Ends
 push $2
 pop  %ebx
 pop  %eax
@@ -27,8 +29,10 @@ mov %eax, 0(%ebx)
 # Assignment Ends
 # Assignment
 # Plus
+# Variable
 mov 8(%ebp), %ebx
 push 4(%ebx)
+# Variable Ends
 push $1
 pop  %ebx
 pop  %eax
@@ -108,15 +112,12 @@ dowhile_0:
 push %eax
 push %ecx
 push %edx
-add $0, %esp
 push -4(%ebp)
 call classA_inc
 add $4, %esp
-sub $0, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # Call Ends
 # Print
@@ -139,7 +140,9 @@ add $8, %esp
 # Print Ends
 # Assignment
 # Plus
+# Variable
 push -8(%ebp)
+# Variable Ends
 push $1
 pop  %ebx
 pop  %eax
@@ -151,7 +154,9 @@ mov %eax, -8(%ebp)
 # Assignment Ends
 # Greater
 push $5
+# Variable
 push -8(%ebp)
+# Variable Ends
 mov $0, %edx
 pop %ebx
 pop %eax

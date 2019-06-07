@@ -273,14 +273,9 @@ void CodeGenerator::visitMethodCallNode(MethodCallNode* node) {
     std::cout << "# MethodCall\n";
     std::cout << "push %eax\npush %ecx\npush %edx\n";
     int args = node->expression_list ? node->expression_list->size() : 0;
-    bool isConstructor = classTable->count(node->identifier_1->name);
     // push arguments
-    if (node->expression_list){
-        // add self pointer ?
-        std::cout << "add $" << 4 * args << ", %esp\n";
-        for (auto iter = node->expression_list->rbegin(); iter != node->expression_list->rend(); ++iter)
-            (*iter)->accept(this);
-    }
+    for (auto iter = node->expression_list->rbegin(); iter != node->expression_list->rend(); ++iter)
+        (*iter)->accept(this);
     std::string className, methodName;
     if (node->identifier_2){
         methodName = node->identifier_2->name;
@@ -293,25 +288,24 @@ void CodeGenerator::visitMethodCallNode(MethodCallNode* node) {
         std::cout << "push " << info.offset << "(%ebp)\n";
     }else{
         methodName = node->identifier_1->name;
-        // if constructor
-        className = classTable->count(methodName) ? methodName : currentClassName;
         // self pointer
-        std::cout << "push 8(%ebp)\n";
+        if (classTable->count(methodName)){
+            // constructor
+            className =  methodName;
+            std::cout << "push " << 8 + 4 * args << "(%esp)\n";
+        }else{
+            className =  currentClassName;
+            std::cout << "push 8(%ebp)\n";
+        }
     }
     std::cout << "call " << className << "_" << methodName << "\n";
-    std::cout << "add $4, %esp\n";
-    // std::cout << "ret\n";
     // pop arguments
-    for (int i = args; i > 0; --i){
-        std::cout << "pop " << "%eax\n"; // where to put them?
-    }
-    // std::cout << "sub $" << 4 * args << ", %esp\n";
+    std::cout << "add $" << 4 * (args + 1) << ", %esp\n";
     std::cout << "pop %edx\npop %ecx\n";
     std::cout << "xchg %eax, (%esp)\n";
-    std::cout << "push %eax\n";
+    // std::cout << "push %eax\n";
     std::cout << "# MethodCall Ends\n";
 }
-
 
 void CodeGenerator::visitMemberAccessNode(MemberAccessNode* node) {
     std::cout << "# MemberAccess\n";

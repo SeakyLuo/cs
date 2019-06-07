@@ -18,7 +18,9 @@ mov %eax, -4(%ebp)
 # Assignment Ends
 # Assignment
 # Plus
+# Variable
 push -4(%ebp)
+# Variable Ends
 push $1
 pop  %ebx
 pop  %eax
@@ -30,7 +32,9 @@ mov %eax, -8(%ebp)
 # Assignment Ends
 # Assignment
 # Plus
+# Variable
 push -8(%ebp)
+# Variable Ends
 push $1
 pop  %ebx
 pop  %eax
@@ -42,7 +46,9 @@ mov %eax, -4(%ebp)
 # Assignment Ends
 # If
 # Equal
+# Variable
 push -8(%ebp)
+# Variable Ends
 push $2
 mov $0, %edx
 pop %ebx
@@ -74,7 +80,9 @@ if_end_0:
 # If Ends
 # If
 # Equal
+# Variable
 push -4(%ebp)
+# Variable Ends
 push $2
 mov $0, %edx
 pop %ebx
@@ -108,7 +116,9 @@ if_end_1:
 # And
 # Greater
 push $3
+# Variable
 push -4(%ebp)
+# Variable Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -118,7 +128,9 @@ push %edx
 # Greater Ends
 # Greater
 push $3
+# Variable
 push -8(%ebp)
+# Variable Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -156,7 +168,9 @@ if_end_2:
 # Or
 # Greater
 push $3
+# Variable
 push -4(%ebp)
+# Variable Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -166,7 +180,9 @@ push %edx
 # Greater Ends
 # Greater
 push $3
+# Variable
 push -8(%ebp)
+# Variable Ends
 mov $0, %edx
 pop %ebx
 pop %eax

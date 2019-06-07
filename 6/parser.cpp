@@ -1770,7 +1770,7 @@ yyreduce:
 
   case 70:
 #line 180 "parser.y" /* yacc.c:1646  */
-    { (yyval.expression_ptr) = new NewNode((yyvsp[0].identifier_ptr), NULL); }
+    { (yyval.expression_ptr) = new NewNode((yyvsp[0].identifier_ptr), new std::list<ExpressionNode*>()); }
 #line 1775 "parser.cpp" /* yacc.c:1646  */
     break;
 

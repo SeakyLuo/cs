@@ -13,8 +13,12 @@ push %esi
 push %ebx
 # Print
 # Times
+# Variable
 push 12(%ebp)
+# Variable Ends
+# Variable
 push 12(%ebp)
+# Variable Ends
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax
@@ -44,16 +48,13 @@ push %ebx
 push %eax
 push %ecx
 push %edx
-add $4, %esp
 push $5
 push 8(%ebp)
 call classA_f0
-add $4, %esp
-sub $4, %esp
+add $8, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # Call Ends
 # Call
@@ -61,16 +62,13 @@ push %eax
 push %eax
 push %ecx
 push %edx
-add $4, %esp
 push $6
 push 8(%ebp)
 call classA_f0
-add $4, %esp
-sub $4, %esp
+add $8, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # Call Ends
 pop %ebx
@@ -95,15 +93,12 @@ push %ebx
 push %eax
 push %ecx
 push %edx
-add $0, %esp
 push -4(%ebp)
 call classA_doAll
 add $4, %esp
-sub $0, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # Call Ends
 pop %ebx

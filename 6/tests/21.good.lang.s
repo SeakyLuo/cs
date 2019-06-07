@@ -12,7 +12,9 @@ push %edi
 push %esi
 push %ebx
 # Assignment
+# Variable
 push 12(%ebp)
+# Variable Ends
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 0(%ebx)
@@ -58,15 +60,19 @@ push %edi
 push %esi
 push %ebx
 # Assignment
+# Variable
 mov 8(%ebp), %ebx
 push 0(%ebx)
+# Variable Ends
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
 # Assignment
 # Plus
+# Variable
 mov 8(%ebp), %ebx
 push 0(%ebx)
+# Variable Ends
 # MemberAccess
 mov 12(%ebp), %ebx
 push 0(%ebx)
@@ -81,8 +87,10 @@ mov 8(%ebp), %ebx
 mov %eax, 0(%ebx)
 # Assignment Ends
 # Print
+# Variable
 mov 8(%ebp), %ebx
 push 0(%ebx)
+# Variable Ends
 push $printstr
 call printf
 add $8, %esp
@@ -97,17 +105,15 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
-add $4, %esp
+# Variable
 push -4(%ebp)
-push 8(%ebp)
+# Variable Ends
+push 12(%esp)
 call classA_classA
-add $4, %esp
-pop %eax
-sub $4, %esp
+add $8, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -145,42 +151,34 @@ add $8, %esp
 push %eax
 push %ecx
 push %edx
-add $4, %esp
 # MethodCall
 push %eax
 push %ecx
 push %edx
-add $4, %esp
 # MethodCall
 push %eax
 push %ecx
 push %edx
-add $4, %esp
 # MethodCall
 push %eax
 push %ecx
 push %edx
-add $4, %esp
 # MethodCall
 push %eax
 push %ecx
 push %edx
-add $4, %esp
 # MethodCall
 push %eax
 push %ecx
 push %edx
-add $4, %esp
 # MethodCall
 push %eax
 push %ecx
 push %edx
-add $4, %esp
 # MethodCall
 push %eax
 push %ecx
 push %edx
-add $4, %esp
 # New
 push $4
 call malloc
@@ -190,99 +188,71 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
-add $4, %esp
 push $1
-push 8(%ebp)
+push 12(%esp)
 call classA_classA
-add $4, %esp
-pop %eax
-sub $4, %esp
+add $8, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
 push 8(%ebp)
 call classB_fib
-add $4, %esp
-pop %eax
-sub $4, %esp
+add $8, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 push 8(%ebp)
 call classB_fib
-add $4, %esp
-pop %eax
-sub $4, %esp
+add $8, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 push 8(%ebp)
 call classB_fib
-add $4, %esp
-pop %eax
-sub $4, %esp
+add $8, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 push 8(%ebp)
 call classB_fib
-add $4, %esp
-pop %eax
-sub $4, %esp
+add $8, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 push 8(%ebp)
 call classB_fib
-add $4, %esp
-pop %eax
-sub $4, %esp
+add $8, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 push 8(%ebp)
 call classB_fib
-add $4, %esp
-pop %eax
-sub $4, %esp
+add $8, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 push 8(%ebp)
 call classB_fib
-add $4, %esp
-pop %eax
-sub $4, %esp
+add $8, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 push 8(%ebp)
 call classB_fib
-add $4, %esp
-pop %eax
-sub $4, %esp
+add $8, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # Call Ends
 pop %ebx
@@ -312,15 +282,12 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
-add $0, %esp
-push 8(%ebp)
+push 8(%esp)
 call classB_classB
 add $4, %esp
-sub $0, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -332,15 +299,12 @@ mov %eax, -4(%ebp)
 push %eax
 push %ecx
 push %edx
-add $0, %esp
 push -4(%ebp)
 call classB_dofib
 add $4, %esp
-sub $0, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # Call Ends
 pop %ebx

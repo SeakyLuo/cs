@@ -130,6 +130,16 @@ void TypeCheck::visitClassNode(ClassNode* node) {
     node->visit_children(this);
 }
 
+bool mismatchChecker(std::string expected, std::string found){
+    if (expected == found) return false;
+    for (auto superClassName = (*classTable)[found].superClassName;
+        superClassName == expected;
+        superClassName = (*classTable)[superClassName].superClassName){
+            if (superClassName.empty()) return true;
+    }
+    return false;
+}
+
 void TypeCheck::visitMethodNode(MethodNode* node) {
     currentParameterOffset = 12;
     currentLocalOffset = 0;
@@ -145,13 +155,8 @@ void TypeCheck::visitMethodNode(MethodNode* node) {
     std::string returnStatementType = node->methodbody->returnstatement ? node->methodbody->returnstatement->expression->objectClassName : "None";
     if (methodName == currentClassName && returnBaseType != bt_none)
         typeError(constructor_returns_type);
-    if (returnStatementType != returnTypeName){
-        for (auto superClassName = (*classTable)[returnStatementType].superClassName;
-            superClassName == returnTypeName;
-            superClassName = (*classTable)[superClassName].superClassName){
-                if (superClassName.empty()) typeError(return_type_mismatch);
-        }
-    }
+    if (mismatchChecker(returnTypeName, returnStatementType))
+        typeError(return_type_mismatch);
     if (currentClassName == "Main" && methodName == "main" && returnBaseType != bt_none)
         typeError(main_method_incorrect_signature);
     MethodInfo info;
@@ -406,7 +411,7 @@ void TypeCheck::visitMethodCallNode(MethodCallNode* node) {
     auto f = found->begin();
     auto e = expected->begin();
     for (; f != found->end() && e != expected->end(); ++f, ++e){
-        if ((*f)->objectClassName != e->objectClassName){
+        if (mismatchChecker(e->objectClassName, (*f)->objectClassName)){
             typeError(argument_type_mismatch);
         }
     }
@@ -494,10 +499,10 @@ void TypeCheck::visitNewNode(NewNode* node) {
         auto f = found->begin();
         auto e = expected->begin();
         for (; f != found->end() && e != expected->end(); ++f, ++e)
-            if ((*f)->objectClassName != e->objectClassName)
+            if (mismatchChecker(e->objectClassName, (*f)->objectClassName))
                 typeError(argument_type_mismatch);
     }else{
-        if (found != NULL && found->size()) typeError(argument_number_mismatch);
+        if (found->size()) typeError(argument_number_mismatch);
     }
     node->basetype = bt_object;
     node->objectClassName = className;

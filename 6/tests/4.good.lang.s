@@ -26,7 +26,9 @@ mov %eax, -4(%ebp)
 # Assignment
 # Minus
 # Times
+# Variable
 push -4(%ebp)
+# Variable Ends
 push $4
 pop  %ebx
 pop  %eax
@@ -45,8 +47,12 @@ mov %eax, -8(%ebp)
 # Print
 # Divide
 # Times
+# Variable
 push -4(%ebp)
+# Variable Ends
+# Variable
 push -8(%ebp)
+# Variable Ends
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax

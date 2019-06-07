@@ -12,7 +12,9 @@ push %edi
 push %esi
 push %ebx
 # Assignment
+# Variable
 push 12(%ebp)
+# Variable Ends
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 0(%ebx)
@@ -35,8 +37,10 @@ push %esi
 push %ebx
 # Assignment
 # Times
+# Variable
 mov 8(%ebp), %ebx
 push 0(%ebx)
+# Variable Ends
 push $2
 pop  %ebx
 pop  %eax
@@ -69,19 +73,21 @@ push %ebx
 push %eax
 push %ecx
 push %edx
+# Variable
 push 12(%ebp)
-push 8(%ebp)
+# Variable Ends
+push 12(%esp)
 call classA_classA
-add $4, %esp
-pop %eax
+add $8, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # Call Ends
 # Assignment
+# Variable
 push 16(%ebp)
+# Variable Ends
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 4(%ebx)
@@ -105,8 +111,10 @@ push %ebx
 # Assignment
 # Minus
 # Times
+# Variable
 mov 8(%ebp), %ebx
 push 4(%ebx)
+# Variable Ends
 push $2
 pop  %ebx
 pop  %eax
@@ -141,7 +149,9 @@ push %edi
 push %esi
 push %ebx
 # Return Statement
+# Variable
 push 12(%ebp)
+# Variable Ends
 pop %eax
 # Return Statement Ends
 pop %ebx
@@ -173,15 +183,12 @@ push %ecx
 push %edx
 push $5
 push $4
-push 8(%ebp)
+push 16(%esp)
 call classB_classB
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -193,15 +200,15 @@ mov %eax, -4(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -4(%ebp)
+# Variable Ends
 push -12(%ebp)
 call CastClass_BtoA
-add $4, %esp
-pop %eax
+add $8, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -8(%ebp)
@@ -235,7 +242,6 @@ add $4, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # Call Ends
 # Print
@@ -267,7 +273,6 @@ add $4, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # Call Ends
 # Print

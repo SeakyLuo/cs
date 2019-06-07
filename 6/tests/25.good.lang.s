@@ -12,14 +12,18 @@ push %edi
 push %esi
 push %ebx
 # Assignment
+# Variable
 push 12(%ebp)
+# Variable Ends
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 0(%ebx)
 # Assignment Ends
 # Assignment
 # Plus
+# Variable
 push 16(%ebp)
+# Variable Ends
 push $127
 pop  %ebx
 pop  %eax
@@ -31,7 +35,9 @@ mov 8(%ebp), %ebx
 mov %eax, 4(%ebx)
 # Assignment Ends
 # Assignment
+# Variable
 push 20(%ebp)
+# Variable Ends
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 8(%ebx)
@@ -53,16 +59,20 @@ push %edi
 push %esi
 push %ebx
 # Print
+# Variable
 mov 8(%ebp), %ebx
 push 0(%ebx)
+# Variable Ends
 push $printstr
 call printf
 add $8, %esp
 # Print Ends
 # Print
 # Minus
+# Variable
 mov 8(%ebp), %ebx
 push 4(%ebx)
+# Variable Ends
 push $127
 pop  %ebx
 pop  %eax
@@ -74,8 +84,10 @@ call printf
 add $8, %esp
 # Print Ends
 # Print
+# Variable
 mov 8(%ebp), %ebx
 push 8(%ebx)
+# Variable Ends
 push $printstr
 call printf
 add $8, %esp
@@ -105,29 +117,31 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
+# Variable
 mov 8(%ebp), %ebx
 push 8(%ebx)
+# Variable Ends
 # Minus
+# Variable
 mov 8(%ebp), %ebx
 push 4(%ebx)
+# Variable Ends
 push $127
 pop  %ebx
 pop  %eax
 sub  %ebx, %eax
 push %eax
 # Minus Ends
+# Variable
 mov 8(%ebp), %ebx
 push 0(%ebx)
-push 8(%ebp)
+# Variable Ends
+push 20(%esp)
 call Float_Float
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -163,16 +177,12 @@ push %edx
 push $0
 push $0
 push $0
-push 8(%ebp)
+push 20(%esp)
 call Float_Float
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -211,7 +221,6 @@ add $4, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -4(%ebp)
@@ -227,7 +236,6 @@ add $4, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -8(%ebp)
@@ -246,7 +254,6 @@ add $4, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -4(%ebp)
@@ -262,7 +269,6 @@ add $4, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -8(%ebp)
@@ -335,6 +341,7 @@ push $1
 pop  %eax
 neg  %eax
 push %eax
+# Negation Ends
 # MemberAccess
 mov -4(%ebp), %ebx
 push 8(%ebx)
@@ -368,6 +375,7 @@ push $1
 pop  %eax
 neg  %eax
 push %eax
+# Negation Ends
 # MemberAccess
 mov -8(%ebp), %ebx
 push 8(%ebx)
@@ -386,14 +394,18 @@ else_2:
 if_end_2:
 # If Ends
 # Assignment
+# Variable
 push -16(%ebp)
+# Variable Ends
 pop %eax
 mov %eax, -20(%ebp)
 # Assignment Ends
 # While
 while_3:
 # Greater
+# Variable
 push -20(%ebp)
+# Variable Ends
 push $0
 mov $0, %edx
 pop %ebx
@@ -408,7 +420,9 @@ cmp %eax, %ebx
 je while_end_3
 # Assignment
 # Minus
+# Variable
 push -20(%ebp)
+# Variable Ends
 push $1
 pop  %ebx
 pop  %eax
@@ -491,6 +505,7 @@ push $1
 pop  %eax
 neg  %eax
 push %eax
+# Negation Ends
 # MemberAccess
 mov -12(%ebp), %ebx
 push 8(%ebx)
@@ -681,7 +696,9 @@ mov %eax, 4(%ebx)
 if_end_5:
 # If Ends
 # Return Statement
+# Variable
 push -12(%ebp)
+# Variable Ends
 pop %eax
 # Return Statement Ends
 pop %ebx
@@ -737,29 +754,24 @@ pop  %eax
 xor $1, %eax
 push %eax
 # Not Ends
-push 8(%ebp)
+push 20(%esp)
 call Float_Float
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
+# Variable
 push 12(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_add
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 # Return Statement Ends
@@ -791,16 +803,12 @@ push %edx
 push $0
 push $0
 push $0
-push 8(%ebp)
+push 20(%esp)
 call Float_Float
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -1045,7 +1053,9 @@ mov 12(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
 # Times
+# Variable
 push -12(%ebp)
+# Variable Ends
 push $4096
 pop  %ebx
 pop  %eax
@@ -1083,7 +1093,9 @@ mov 16(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
 # Times
+# Variable
 push -16(%ebp)
+# Variable Ends
 push $4096
 pop  %ebx
 pop  %eax
@@ -1100,8 +1112,12 @@ mov %eax, -28(%ebp)
 # Assignment Ends
 # Assignment
 # Times
+# Variable
 push -12(%ebp)
+# Variable Ends
+# Variable
 push -16(%ebp)
+# Variable Ends
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax
@@ -1113,16 +1129,24 @@ mov %eax, -8(%ebp)
 # Assignment
 # Plus
 # Times
+# Variable
 push -12(%ebp)
+# Variable Ends
+# Variable
 push -28(%ebp)
+# Variable Ends
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax
 push %eax
 # Times Ends
 # Times
+# Variable
 push -16(%ebp)
+# Variable Ends
+# Variable
 push -24(%ebp)
+# Variable Ends
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax
@@ -1138,9 +1162,13 @@ mov %eax, -20(%ebp)
 # Assignment Ends
 # Assignment
 # Plus
+# Variable
 push -8(%ebp)
+# Variable Ends
 # Divide
+# Variable
 push -20(%ebp)
+# Variable Ends
 push $4096
 pop  %ebx
 pop  %eax
@@ -1158,9 +1186,13 @@ mov %eax, -8(%ebp)
 # Assignment Ends
 # Assignment
 # Minus
+# Variable
 push -20(%ebp)
+# Variable Ends
 # Divide
+# Variable
 push -20(%ebp)
+# Variable Ends
 push $4096
 pop  %ebx
 pop  %eax
@@ -1177,7 +1209,9 @@ pop %eax
 mov %eax, -20(%ebp)
 # Assignment Ends
 # Assignment
+# Variable
 push -8(%ebp)
+# Variable Ends
 pop %eax
 mov -4(%ebp), %ebx
 mov %eax, 8(%ebx)
@@ -1279,7 +1313,9 @@ mov -4(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
 # Divide
+# Variable
 push -20(%ebp)
+# Variable Ends
 push $1024
 pop  %ebx
 pop  %eax
@@ -1298,9 +1334,13 @@ mov %eax, 8(%ebx)
 # Assignment Ends
 # Assignment
 # Minus
+# Variable
 push -20(%ebp)
+# Variable Ends
 # Divide
+# Variable
 push -20(%ebp)
+# Variable Ends
 push $1024
 pop  %ebx
 pop  %eax
@@ -1318,7 +1358,9 @@ mov %eax, -20(%ebp)
 # Assignment Ends
 # Assignment
 # Times
+# Variable
 push -20(%ebp)
+# Variable Ends
 push $2
 pop  %ebx
 pop  %eax
@@ -1441,7 +1483,9 @@ mov %eax, 8(%ebx)
 if_end_8:
 # If Ends
 # Return Statement
+# Variable
 push -4(%ebp)
+# Variable Ends
 pop %eax
 # Return Statement Ends
 pop %ebx
@@ -1472,16 +1516,12 @@ push %edx
 push $0
 push $0
 push $0
-push 8(%ebp)
+push 20(%esp)
 call Float_Float
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -1861,7 +1901,9 @@ mov -4(%ebp), %ebx
 mov %eax, 8(%ebx)
 # Assignment Ends
 # Return Statement
+# Variable
 push -4(%ebp)
+# Variable Ends
 pop %eax
 # Return Statement Ends
 pop %ebx
@@ -1968,7 +2010,9 @@ if_end_18:
 # If
 # And
 # Not
+# Variable
 push -4(%ebp)
+# Variable Ends
 pop  %eax
 xor $1, %eax
 push %eax
@@ -2015,7 +2059,9 @@ if_end_19:
 # If
 # And
 # Not
+# Variable
 push -4(%ebp)
+# Variable Ends
 pop  %eax
 xor $1, %eax
 push %eax
@@ -2062,7 +2108,9 @@ if_end_20:
 # If
 # And
 # Not
+# Variable
 push -4(%ebp)
+# Variable Ends
 pop  %eax
 xor $1, %eax
 push %eax
@@ -2104,7 +2152,9 @@ if_end_21:
 # If
 # And
 # Not
+# Variable
 push -4(%ebp)
+# Variable Ends
 pop  %eax
 xor $1, %eax
 push %eax
@@ -2164,7 +2214,9 @@ cmp %eax, %ebx
 je else_23
 # Assignment
 # Not
+# Variable
 push -8(%ebp)
+# Variable Ends
 pop  %eax
 xor $1, %eax
 push %eax
@@ -2177,7 +2229,9 @@ else_23:
 if_end_23:
 # If Ends
 # Return Statement
+# Variable
 push -8(%ebp)
+# Variable Ends
 pop %eax
 # Return Statement Ends
 pop %ebx
@@ -2208,16 +2262,12 @@ push %edx
 push $3012692
 push $1
 push $0
-push 8(%ebp)
+push 20(%esp)
 call Float_Float
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -2237,16 +2287,12 @@ push %edx
 push $0
 push $0
 push $0
-push 8(%ebp)
+push 20(%esp)
 call Float_Float
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -2266,16 +2312,12 @@ push %edx
 push $0
 push $0
 push $0
-push 8(%ebp)
+push 20(%esp)
 call Float_Float
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -2295,16 +2337,12 @@ push %edx
 push $0
 push $0
 push $0
-push 8(%ebp)
+push 20(%esp)
 call Float_Float
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -2322,7 +2360,6 @@ add $4, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -24(%ebp)
@@ -2362,17 +2399,14 @@ push $1
 pop  %eax
 neg  %eax
 push %eax
+# Negation Ends
 push $0
-push 8(%ebp)
+push 20(%esp)
 call Float_Float
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -2395,17 +2429,14 @@ push $2
 pop  %eax
 neg  %eax
 push %eax
+# Negation Ends
 push $0
-push 8(%ebp)
+push 20(%esp)
 call Float_Float
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -2428,17 +2459,14 @@ push $2
 pop  %eax
 neg  %eax
 push %eax
+# Negation Ends
 push $0
-push 8(%ebp)
+push 20(%esp)
 call Float_Float
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -2461,17 +2489,14 @@ push $3
 pop  %eax
 neg  %eax
 push %eax
+# Negation Ends
 push $0
-push 8(%ebp)
+push 20(%esp)
 call Float_Float
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -2494,17 +2519,14 @@ push $3
 pop  %eax
 neg  %eax
 push %eax
+# Negation Ends
 push $0
-push 8(%ebp)
+push 20(%esp)
 call Float_Float
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -2517,17 +2539,18 @@ while_25:
 push %eax
 push %ecx
 push %edx
+# Variable
 push -24(%ebp)
+# Variable Ends
+# Variable
 push -16(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_lt
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov $0, %ebx
@@ -2538,17 +2561,18 @@ je while_end_25
 push %eax
 push %ecx
 push %edx
+# Variable
 push -12(%ebp)
+# Variable Ends
+# Variable
 push -20(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_mult
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -20(%ebp)
@@ -2558,17 +2582,18 @@ mov %eax, -20(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -16(%ebp)
+# Variable Ends
+# Variable
 push -24(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_sub
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -24(%ebp)
@@ -2581,17 +2606,18 @@ while_end_25:
 push %eax
 push %ecx
 push %edx
+# Variable
 push -24(%ebp)
+# Variable Ends
+# Variable
 push -28(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_mult
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -28(%ebp)
@@ -2601,17 +2627,18 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -48(%ebp)
+# Variable Ends
+# Variable
 push -28(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_mult
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -28(%ebp)
@@ -2621,17 +2648,18 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -16(%ebp)
+# Variable Ends
+# Variable
 push -28(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_add
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -28(%ebp)
@@ -2641,17 +2669,18 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -24(%ebp)
+# Variable Ends
+# Variable
 push -28(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_mult
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -28(%ebp)
@@ -2661,17 +2690,18 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -44(%ebp)
+# Variable Ends
+# Variable
 push -28(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_mult
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -28(%ebp)
@@ -2681,17 +2711,18 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -16(%ebp)
+# Variable Ends
+# Variable
 push -28(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_add
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -28(%ebp)
@@ -2701,17 +2732,18 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -24(%ebp)
+# Variable Ends
+# Variable
 push -28(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_mult
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -28(%ebp)
@@ -2721,17 +2753,18 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -40(%ebp)
+# Variable Ends
+# Variable
 push -28(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_mult
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -28(%ebp)
@@ -2741,17 +2774,18 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -16(%ebp)
+# Variable Ends
+# Variable
 push -28(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_add
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -28(%ebp)
@@ -2761,17 +2795,18 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -24(%ebp)
+# Variable Ends
+# Variable
 push -28(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_mult
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -28(%ebp)
@@ -2781,17 +2816,18 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -36(%ebp)
+# Variable Ends
+# Variable
 push -28(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_mult
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -28(%ebp)
@@ -2801,17 +2837,18 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -16(%ebp)
+# Variable Ends
+# Variable
 push -28(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_add
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -28(%ebp)
@@ -2821,17 +2858,18 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -24(%ebp)
+# Variable Ends
+# Variable
 push -28(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_mult
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -28(%ebp)
@@ -2841,17 +2879,18 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -32(%ebp)
+# Variable Ends
+# Variable
 push -28(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_mult
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -28(%ebp)
@@ -2861,17 +2900,18 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -16(%ebp)
+# Variable Ends
+# Variable
 push -28(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_add
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -28(%ebp)
@@ -2881,17 +2921,18 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -24(%ebp)
+# Variable Ends
+# Variable
 push -28(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_mult
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -28(%ebp)
@@ -2901,17 +2942,18 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -16(%ebp)
+# Variable Ends
+# Variable
 push -28(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_add
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -28(%ebp)
@@ -2921,17 +2963,18 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -20(%ebp)
+# Variable Ends
+# Variable
 push -28(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_mult
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -28(%ebp)
@@ -2950,17 +2993,18 @@ je else_26
 push %eax
 push %ecx
 push %edx
+# Variable
 push -28(%ebp)
+# Variable Ends
+# Variable
 push -16(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_div
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -28(%ebp)
@@ -2970,7 +3014,9 @@ else_26:
 if_end_26:
 # If Ends
 # Return Statement
+# Variable
 push -28(%ebp)
+# Variable Ends
 pop %eax
 # Return Statement Ends
 pop %ebx
@@ -3004,17 +3050,14 @@ push $1
 pop  %eax
 neg  %eax
 push %eax
+# Negation Ends
 push $0
-push 8(%ebp)
+push 20(%esp)
 call Float_Float
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -3034,16 +3077,12 @@ push %edx
 push $0
 push $0
 push $0
-push 8(%ebp)
+push 20(%esp)
 call Float_Float
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -3066,17 +3105,14 @@ push $1
 pop  %eax
 neg  %eax
 push %eax
+# Negation Ends
 push $0
-push 8(%ebp)
+push 20(%esp)
 call Float_Float
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -3099,17 +3135,14 @@ push $1
 pop  %eax
 neg  %eax
 push %eax
+# Negation Ends
 push $0
-push 8(%ebp)
+push 20(%esp)
 call Float_Float
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -3132,17 +3165,14 @@ push $1
 pop  %eax
 neg  %eax
 push %eax
+# Negation Ends
 push $0
-push 8(%ebp)
+push 20(%esp)
 call Float_Float
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -3165,17 +3195,14 @@ push $1
 pop  %eax
 neg  %eax
 push %eax
+# Negation Ends
 push $0
-push 8(%ebp)
+push 20(%esp)
 call Float_Float
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -3198,17 +3225,14 @@ push $127
 pop  %eax
 neg  %eax
 push %eax
+# Negation Ends
 push $0
-push 8(%ebp)
+push 20(%esp)
 call Float_Float
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -3233,7 +3257,9 @@ mov %eax, -40(%ebp)
 # While
 while_27:
 # Greater
+# Variable
 push -40(%ebp)
+# Variable Ends
 push $0
 mov $0, %edx
 pop %ebx
@@ -3251,24 +3277,27 @@ je while_end_27
 push %eax
 push %ecx
 push %edx
+# Variable
 push -36(%ebp)
+# Variable Ends
+# Variable
 push -12(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_add
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -12(%ebp)
 # Assignment Ends
 # Assignment
 # Minus
+# Variable
 push -40(%ebp)
+# Variable Ends
 push $1
 pop  %ebx
 pop  %eax
@@ -3286,17 +3315,18 @@ while_end_27:
 push %eax
 push %ecx
 push %edx
+# Variable
 push -4(%ebp)
+# Variable Ends
+# Variable
 push -12(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_mult
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -12(%ebp)
@@ -3317,16 +3347,12 @@ push 8(%ebx)
 # MemberAccess Ends
 push $0
 push $0
-push 8(%ebp)
+push 20(%esp)
 call Float_Float
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -3338,17 +3364,18 @@ mov %eax, -8(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -36(%ebp)
+# Variable Ends
+# Variable
 push -8(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_sub
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -8(%ebp)
@@ -3358,17 +3385,18 @@ mov %eax, -8(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -32(%ebp)
+# Variable Ends
+# Variable
 push -8(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_mult
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -16(%ebp)
@@ -3378,17 +3406,18 @@ mov %eax, -16(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -16(%ebp)
+# Variable Ends
+# Variable
 push -36(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_add
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -16(%ebp)
@@ -3398,17 +3427,18 @@ mov %eax, -16(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -8(%ebp)
+# Variable Ends
+# Variable
 push -16(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_mult
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -16(%ebp)
@@ -3418,17 +3448,18 @@ mov %eax, -16(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -28(%ebp)
+# Variable Ends
+# Variable
 push -16(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_mult
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -16(%ebp)
@@ -3438,17 +3469,18 @@ mov %eax, -16(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -16(%ebp)
+# Variable Ends
+# Variable
 push -36(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_sub
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -16(%ebp)
@@ -3458,17 +3490,18 @@ mov %eax, -16(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -8(%ebp)
+# Variable Ends
+# Variable
 push -16(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_mult
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -16(%ebp)
@@ -3478,17 +3511,18 @@ mov %eax, -16(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -24(%ebp)
+# Variable Ends
+# Variable
 push -16(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_mult
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -16(%ebp)
@@ -3498,17 +3532,18 @@ mov %eax, -16(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -16(%ebp)
+# Variable Ends
+# Variable
 push -36(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_add
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -16(%ebp)
@@ -3518,17 +3553,18 @@ mov %eax, -16(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -8(%ebp)
+# Variable Ends
+# Variable
 push -16(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_mult
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -16(%ebp)
@@ -3538,17 +3574,18 @@ mov %eax, -16(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -20(%ebp)
+# Variable Ends
+# Variable
 push -16(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_mult
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -16(%ebp)
@@ -3558,17 +3595,18 @@ mov %eax, -16(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -16(%ebp)
+# Variable Ends
+# Variable
 push -36(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_sub
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -16(%ebp)
@@ -3578,17 +3616,18 @@ mov %eax, -16(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -8(%ebp)
+# Variable Ends
+# Variable
 push -16(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_mult
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -16(%ebp)
@@ -3598,17 +3637,18 @@ mov %eax, -16(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -16(%ebp)
+# Variable Ends
+# Variable
 push -12(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_add
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 # Return Statement Ends
@@ -3640,35 +3680,32 @@ push %edx
 push %eax
 push %ecx
 push %edx
+# Variable
 push 12(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_ln
-add $4, %esp
-pop %eax
+add $8, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
+# Variable
 push 16(%ebp)
+# Variable Ends
 push 8(%ebp)
 call FloatOps_mult
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 push 8(%ebp)
 call FloatOps_exp
-add $4, %esp
-pop %eax
+add $8, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 # Return Statement Ends
@@ -3702,16 +3739,12 @@ push %edx
 push $4194304
 push $0
 push $0
-push 8(%ebp)
+push 20(%esp)
 call Float_Float
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -3731,16 +3764,12 @@ push %edx
 push $4613734
 push $2
 push $0
-push 8(%ebp)
+push 20(%esp)
 call Float_Float
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -3752,17 +3781,18 @@ mov %eax, -8(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -8(%ebp)
+# Variable Ends
+# Variable
 push -4(%ebp)
+# Variable Ends
 push -16(%ebp)
 call FloatOps_add
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -12(%ebp)
@@ -3778,7 +3808,6 @@ add $4, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # Call Ends
 # Assignment
@@ -3786,17 +3815,18 @@ push %eax
 push %eax
 push %ecx
 push %edx
+# Variable
 push -8(%ebp)
+# Variable Ends
+# Variable
 push -4(%ebp)
+# Variable Ends
 push -16(%ebp)
 call FloatOps_mult
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -12(%ebp)
@@ -3812,7 +3842,6 @@ add $4, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # Call Ends
 # Assignment
@@ -3820,17 +3849,18 @@ push %eax
 push %eax
 push %ecx
 push %edx
+# Variable
 push -8(%ebp)
+# Variable Ends
+# Variable
 push -4(%ebp)
+# Variable Ends
 push -16(%ebp)
 call FloatOps_div
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -12(%ebp)
@@ -3846,7 +3876,6 @@ add $4, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # Call Ends
 # Assignment
@@ -3854,15 +3883,15 @@ push %eax
 push %eax
 push %ecx
 push %edx
+# Variable
 push -8(%ebp)
+# Variable Ends
 push -16(%ebp)
 call FloatOps_exp
-add $4, %esp
-pop %eax
+add $8, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -12(%ebp)
@@ -3878,7 +3907,6 @@ add $4, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # Call Ends
 # Assignment
@@ -3886,15 +3914,15 @@ push %eax
 push %eax
 push %ecx
 push %edx
+# Variable
 push -8(%ebp)
+# Variable Ends
 push -16(%ebp)
 call FloatOps_ln
-add $4, %esp
-pop %eax
+add $8, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -12(%ebp)
@@ -3910,7 +3938,6 @@ add $4, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # Call Ends
 # Assignment
@@ -3918,17 +3945,18 @@ push %eax
 push %eax
 push %ecx
 push %edx
+# Variable
 push -8(%ebp)
+# Variable Ends
+# Variable
 push -4(%ebp)
+# Variable Ends
 push -16(%ebp)
 call FloatOps_pow
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -12(%ebp)
@@ -3944,7 +3972,6 @@ add $4, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # Call Ends
 # Assignment
@@ -3960,16 +3987,12 @@ push %edx
 push $0
 push $0
 push $0
-push 8(%ebp)
+push 20(%esp)
 call Float_Float
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -3989,16 +4012,12 @@ push %edx
 push $754975
 push $0
 push $0
-push 8(%ebp)
+push 20(%esp)
 call Float_Float
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -4018,16 +4037,12 @@ push %edx
 push $786432
 push $5
 push $0
-push 8(%ebp)
+push 20(%esp)
 call Float_Float
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -4047,16 +4062,12 @@ push %edx
 push $1851392
 push $12
 push $0
-push 8(%ebp)
+push 20(%esp)
 call Float_Float
-add $4, %esp
-pop %eax
-pop %eax
-pop %eax
+add $16, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # ConstructorCall Ends
 # New Ends
@@ -4072,17 +4083,18 @@ push %edx
 push %eax
 push %ecx
 push %edx
+# Variable
 push -24(%ebp)
+# Variable Ends
+# Variable
 push -20(%ebp)
+# Variable Ends
 push -16(%ebp)
 call FloatOps_sub
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # MethodCall
 push %eax
@@ -4092,38 +4104,35 @@ push %edx
 push %eax
 push %ecx
 push %edx
+# Variable
 push -28(%ebp)
+# Variable Ends
+# Variable
 push -24(%ebp)
+# Variable Ends
 push -16(%ebp)
 call FloatOps_pow
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
+# Variable
 push -20(%ebp)
+# Variable Ends
 push -16(%ebp)
 call FloatOps_sub
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 push -16(%ebp)
 call FloatOps_div
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -36(%ebp)
@@ -4133,17 +4142,18 @@ mov %eax, -36(%ebp)
 push %eax
 push %ecx
 push %edx
+# Variable
 push -32(%ebp)
+# Variable Ends
+# Variable
 push -36(%ebp)
+# Variable Ends
 push -16(%ebp)
 call FloatOps_mult
-add $4, %esp
-pop %eax
-pop %eax
+add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 pop %eax
 mov %eax, -36(%ebp)
@@ -4159,7 +4169,6 @@ add $4, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-push %eax
 # MethodCall Ends
 # Call Ends
 pop %ebx
