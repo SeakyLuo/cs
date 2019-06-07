@@ -17,6 +17,30 @@ pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 0(%ebx)
 # Assignment Ends
+mov 8(%ebp), %eax
+pop %ebx
+pop %esi
+pop %edi
+mov %ebp, %esp
+pop %ebp
+ret
+# Method classA Ends
+# Class classA Ends
+# Class classB
+# Method classB
+classB_classB:
+push %ebp
+mov %esp, %ebp
+sub $0, %esp
+push %edi
+push %esi
+push %ebx
+# Assignment
+push 12(%ebp)
+pop %eax
+mov 8(%ebp), %ebx
+mov %eax, 0(%ebx)
+# Assignment Ends
 # Assignment
 push 16(%ebp)
 pop %eax
@@ -30,57 +54,14 @@ pop %edi
 mov %ebp, %esp
 pop %ebp
 ret
-# Method classA Ends
-# Method inc
-classA_inc:
-push %ebp
-mov %esp, %ebp
-sub $0, %esp
-push %edi
-push %esi
-push %ebx
-# Assignment
-# Times
-mov 8(%ebp), %ebx
-push 0(%ebx)
-push $2
-pop  %ebx
-pop  %eax
-imul  %ebx, %eax
-push %eax
-# Times Ends
-pop %eax
-mov 8(%ebp), %ebx
-mov %eax, 0(%ebx)
-# Assignment Ends
-# Assignment
-# Plus
-mov 8(%ebp), %ebx
-push 4(%ebx)
-push $1
-pop  %ebx
-pop  %eax
-add  %ebx, %eax
-push %eax
-# Plus Ends
-pop %eax
-mov 8(%ebp), %ebx
-mov %eax, 4(%ebx)
-# Assignment Ends
-pop %ebx
-pop %esi
-pop %edi
-mov %ebp, %esp
-pop %ebp
-ret
-# Method inc Ends
-# Class classA Ends
+# Method classB Ends
+# Class classB Ends
 # Class Main
 # Method main
 Main_main:
 push %ebp
 mov %esp, %ebp
-sub $8, %esp
+sub $4, %esp
 push %edi
 push %esi
 push %ebx
@@ -94,14 +75,13 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
-add $8 , %esp
-push $4
-push $3
+push $1
+push $12
 push 8(%ebp)
-call classA_classA
+call classB_classB
 add $4, %esp
-pop %edx
-pop %edx
+pop %eax
+pop %eax
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
@@ -126,40 +106,6 @@ add $8, %esp
 mov -4(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends
-push $printstr
-call printf
-add $8, %esp
-# Print Ends
-# Call
-# MethodCall
-push %eax
-push %ecx
-push %edx
-add $0 , %esp
-push -4(%ebp)
-call classA_inc
-add $4, %esp
-pop %edx
-pop %ecx
-xchg %eax, (%esp)
-push %eax
-# MethodCall Ends
-# Call Ends
-# Print
-# Times
-# MemberAccess
-mov -4(%ebp), %ebx
-push 0(%ebx)
-# MemberAccess Ends
-# MemberAccess
-mov -4(%ebp), %ebx
-push 4(%ebx)
-# MemberAccess Ends
-pop  %ebx
-pop  %eax
-imul  %ebx, %eax
-push %eax
-# Times Ends
 push $printstr
 call printf
 add $8, %esp

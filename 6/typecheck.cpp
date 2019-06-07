@@ -145,8 +145,13 @@ void TypeCheck::visitMethodNode(MethodNode* node) {
     std::string returnStatementType = node->methodbody->returnstatement ? node->methodbody->returnstatement->expression->objectClassName : "None";
     if (methodName == currentClassName && returnBaseType != bt_none)
         typeError(constructor_returns_type);
-    if (returnTypeName != returnStatementType)
-        typeError(return_type_mismatch);
+    if (returnStatementType != returnTypeName){
+        for (auto superClassName = (*classTable)[returnStatementType].superClassName;
+            superClassName == returnTypeName;
+            superClassName = (*classTable)[superClassName].superClassName){
+                if (superClassName.empty()) typeError(return_type_mismatch);
+        }
+    }
     if (currentClassName == "Main" && methodName == "main" && returnBaseType != bt_none)
         typeError(main_method_incorrect_signature);
     MethodInfo info;
@@ -492,7 +497,7 @@ void TypeCheck::visitNewNode(NewNode* node) {
             if ((*f)->objectClassName != e->objectClassName)
                 typeError(argument_type_mismatch);
     }else{
-        if (found->size()) typeError(argument_number_mismatch);
+        if (found != NULL && found->size()) typeError(argument_number_mismatch);
     }
     node->basetype = bt_object;
     node->objectClassName = className;

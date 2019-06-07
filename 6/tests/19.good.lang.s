@@ -94,14 +94,13 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
-add $8 , %esp
+add $8, %esp
 push $4
 push $3
 push 8(%ebp)
 call classA_classA
 add $4, %esp
-pop %edx
-pop %edx
+sub $8, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
@@ -135,10 +134,11 @@ add $8, %esp
 push %eax
 push %ecx
 push %edx
-add $0 , %esp
+add $0, %esp
 push -4(%ebp)
 call classA_inc
 add $4, %esp
+sub $0, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
