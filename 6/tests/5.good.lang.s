@@ -2,8 +2,8 @@
 printstr: .asciz "%d\n"
 .text
 .globl Main_main
-# Class
-# Method
+# Class Main
+# Method main
 Main_main:
 push %ebp
 mov %esp, %ebp
@@ -22,23 +22,28 @@ pop  %ebx
 pop  %eax
 add  %ebx, %eax
 push %eax
+# Plus Ends
 push $3
 pop  %ebx
 pop  %eax
 add  %ebx, %eax
 push %eax
+# Plus Ends
 push $4
 pop  %ebx
 pop  %eax
 sub  %ebx, %eax
 push %eax
+# Minus Ends
 push $5
 pop  %ebx
 pop  %eax
 add  %ebx, %eax
 push %eax
+# Plus Ends
 pop %eax
 mov -4(%ebp), %eax
+# Assignment Ends
 # Assignment
 # Times
 # Times
@@ -48,13 +53,16 @@ pop  %ebx
 pop  %eax
 imul  %ebx, %eax
 push %eax
+# Times Ends
 push -4(%ebp)
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax
 push %eax
+# Times Ends
 pop %eax
 mov -8(%ebp), %eax
+# Assignment Ends
 # Assignment
 # Plus
 # Divide
@@ -65,6 +73,7 @@ pop  %eax
 cdq
 idiv %ebx
 push %eax
+# Divide Ends
 # Times
 push $5
 push -4(%ebp)
@@ -72,12 +81,15 @@ pop  %ebx
 pop  %eax
 imul  %ebx, %eax
 push %eax
+# Times Ends
 pop  %ebx
 pop  %eax
 add  %ebx, %eax
 push %eax
+# Plus Ends
 pop %eax
 mov -12(%ebp), %eax
+# Assignment Ends
 # Assignment
 # Divide
 # Times
@@ -88,6 +100,7 @@ pop  %ebx
 pop  %eax
 add  %ebx, %eax
 push %eax
+# Plus Ends
 # Minus
 push -12(%ebp)
 push $1
@@ -95,18 +108,22 @@ pop  %ebx
 pop  %eax
 sub  %ebx, %eax
 push %eax
+# Minus Ends
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax
 push %eax
+# Times Ends
 push $2
 pop  %ebx
 pop  %eax
 cdq
 idiv %ebx
 push %eax
+# Divide Ends
 pop %eax
 mov -4(%ebp), %eax
+# Assignment Ends
 # Assignment
 # Divide
 # Times
@@ -116,14 +133,17 @@ pop  %ebx
 pop  %eax
 imul  %ebx, %eax
 push %eax
+# Times Ends
 push $100
 pop  %ebx
 pop  %eax
 cdq
 idiv %ebx
 push %eax
+# Divide Ends
 pop %eax
 mov -8(%ebp), %eax
+# Assignment Ends
 # Assignment
 # Times
 # Minus
@@ -133,6 +153,7 @@ pop  %ebx
 pop  %eax
 sub  %ebx, %eax
 push %eax
+# Minus Ends
 # Plus
 push -8(%ebp)
 push -4(%ebp)
@@ -140,30 +161,38 @@ pop  %ebx
 pop  %eax
 add  %ebx, %eax
 push %eax
+# Plus Ends
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax
 push %eax
+# Times Ends
 pop %eax
 mov -12(%ebp), %eax
+# Assignment Ends
 # Print
 push -4(%ebp)
 push $printstr
 call printf
 add $8, %esp
+# Print Ends
 # Print
 push -8(%ebp)
 push $printstr
 call printf
 add $8, %esp
+# Print Ends
 # Print
 push -12(%ebp)
 push $printstr
 call printf
 add $8, %esp
+# Print Ends
 pop %ebx
 pop %esi
 pop %edi
 mov %ebp, %esp
 pop %ebp
 ret
+# Method main Ends
+# Class Main Ends

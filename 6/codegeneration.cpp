@@ -13,30 +13,30 @@ void CodeGenerator::visitProgramNode(ProgramNode* node) {
 }
 
 void CodeGenerator::visitClassNode(ClassNode* node) {
-    std::cout << "# Class\n";
     currentClassName = node->identifier_1->name;
+    std::cout << "# Class " << currentClassName << "\n";
     currentClassInfo = (*classTable)[currentClassName];
     node->visit_children(this);
+    std::cout << "# Class " << currentClassName << " Ends\n";
 }
 
 void CodeGenerator::visitMethodNode(MethodNode* node) {
-    std::cout << "# Method\n";
     currentMethodName = node->identifier->name;
+    std::cout << "# Method " << currentMethodName << "\n";
     currentMethodInfo = (*currentClassInfo.methods)[currentMethodName];
     std::cout << currentClassName << "_" << currentMethodName << ":\n";
-
     std::cout << "push %ebp\n";
     std::cout << "mov %esp, %ebp\n";
     std::cout << "sub $" << currentMethodInfo.localsSize << ", %esp\n";
     std::cout << "push %edi\npush %esi\npush %ebx\n";
     node->visit_children(this);
-  	if (currentMethodName == currentClassName)
-		std::cout << " mov 8(%ebp), %eax\n";
+  	// if (currentMethodName == currentClassName)
+	// 	std::cout << " mov 8(%ebp), %eax\n";
     std::cout << "pop %ebx\npop %esi\npop %edi\n";
     std::cout << "mov %ebp, %esp\n";
     std::cout << "pop %ebp\n";
     std::cout << "ret\n";
-
+    std::cout << "# Method " << currentMethodName << " Ends\n";
 }
 
 void CodeGenerator::visitMethodBodyNode(MethodBodyNode* node) {
@@ -55,6 +55,7 @@ void CodeGenerator::visitReturnStatementNode(ReturnStatementNode* node) {
     std::cout << "# Return Statement\n";
     node->visit_children(this);
     std::cout << "pop %eax\n";
+    std::cout << "# Return Statement Ends\n";
 }
 
 void CodeGenerator::visitAssignmentNode(AssignmentNode* node) {
@@ -82,11 +83,13 @@ void CodeGenerator::visitAssignmentNode(AssignmentNode* node) {
             std::cout << "mov " << offset << "(%ebx), %eax\n";
         }
     }
+    std::cout << "# Assignment Ends\n";
 }
 
 void CodeGenerator::visitCallNode(CallNode* node) {
     std::cout << "# Call\n";
     node->visit_children(this);
+    std::cout << "# Call Ends\n";
 }
 
 void CodeGenerator::visitIfElseNode(IfElseNode* node) {
@@ -109,6 +112,7 @@ void CodeGenerator::visitIfElseNode(IfElseNode* node) {
             iter->accept(this);
     }
     std::cout << "if_end_" << label << ":\n";
+    std::cout << "# If Ends\n";
 }
 
 void CodeGenerator::visitWhileNode(WhileNode* node) {
@@ -124,6 +128,7 @@ void CodeGenerator::visitWhileNode(WhileNode* node) {
         iter->accept(this);
     std::cout << "jmp while_" << label << "\n";
     std::cout << "while_end_" << label << ":\n";
+    std::cout << "# While Ends\n";
 }
 
 void CodeGenerator::visitPrintNode(PrintNode* node) {
@@ -132,12 +137,13 @@ void CodeGenerator::visitPrintNode(PrintNode* node) {
     std::cout << "push $printstr\n";
 	std::cout << "call printf\n";
 	std::cout << "add $8, %esp\n";
+    std::cout << "# Print Ends\n";
 }
 
 void CodeGenerator::visitDoWhileNode(DoWhileNode* node) {
     std::cout << "# DoWhile\n";
     int label = nextLabel();
-    std::cout << "dowhile_" << label << "\n";
+    std::cout << "dowhile_" << label << ":\n";
     for (auto iter: *(node->statement_list))
         iter->accept(this);
     node->expression->accept(this);
@@ -147,10 +153,11 @@ void CodeGenerator::visitDoWhileNode(DoWhileNode* node) {
     std::cout << "je dowhile_end_" << label << "\n";
     std::cout << "jmp dowhile_" << label << "\n";
     std::cout << "dowhile_end_" << label << ":\n";
+    std::cout << "# DoWhile Ends\n";
 }
 
 void CodeGenerator::visitPlusNode(PlusNode* node) {
-    std::cout << "# Plus Begins\n";
+    std::cout << "# Plus\n";
     node->visit_children(this);
     std::cout << "pop  %ebx\n";
     std::cout << "pop  %eax\n";
@@ -160,7 +167,7 @@ void CodeGenerator::visitPlusNode(PlusNode* node) {
 }
 
 void CodeGenerator::visitMinusNode(MinusNode* node) {
-    std::cout << "# Minus Begins\n";
+    std::cout << "# Minus\n";
     node->visit_children(this);
     std::cout << "pop  %ebx\n";
     std::cout << "pop  %eax\n";
@@ -170,7 +177,7 @@ void CodeGenerator::visitMinusNode(MinusNode* node) {
 }
 
 void CodeGenerator::visitTimesNode(TimesNode* node) {
-    std::cout << "# Times Begins\n";
+    std::cout << "# Times\n";
     node->visit_children(this);
     std::cout << "pop  %ebx\n";
     std::cout << "pop  %eax\n";
@@ -180,7 +187,7 @@ void CodeGenerator::visitTimesNode(TimesNode* node) {
 }
 
 void CodeGenerator::visitDivideNode(DivideNode* node) {
-    std::cout << "# Divide Begins\n";
+    std::cout << "# Divide\n";
     node->visit_children(this);
     std::cout << "pop  %ebx\n";
     std::cout << "pop  %eax\n";
@@ -191,7 +198,7 @@ void CodeGenerator::visitDivideNode(DivideNode* node) {
 }
 
 void CodeGenerator::visitGreaterNode(GreaterNode* node) {
-    std::cout << "# Greater Begins\n";
+    std::cout << "# Greater\n";
     node->visit_children(this);
     std::cout << "mov $0, %edx\n";
     std::cout << "pop %ebx\n";
@@ -203,7 +210,7 @@ void CodeGenerator::visitGreaterNode(GreaterNode* node) {
 }
 
 void CodeGenerator::visitGreaterEqualNode(GreaterEqualNode* node) {
-    std::cout << "# GreaterEqual Begins\n";
+    std::cout << "# GreaterEqual\n";
     node->visit_children(this);
     std::cout << "mov $0, %edx\n";
     std::cout << "pop %ebx\n";
@@ -215,7 +222,7 @@ void CodeGenerator::visitGreaterEqualNode(GreaterEqualNode* node) {
 }
 
 void CodeGenerator::visitEqualNode(EqualNode* node) {
-    std::cout << "# Equal Begins\n";
+    std::cout << "# Equal\n";
     node->visit_children(this);
     std::cout << "mov $0, %edx\n";
     std::cout << "pop %ebx\n";
@@ -227,7 +234,7 @@ void CodeGenerator::visitEqualNode(EqualNode* node) {
 }
 
 void CodeGenerator::visitAndNode(AndNode* node) {
-    std::cout << "# And Begins\n";
+    std::cout << "# And\n";
     node->visit_children(this);
     std::cout << "pop  %ebx\n";
     std::cout << "pop  %eax\n";
@@ -237,7 +244,7 @@ void CodeGenerator::visitAndNode(AndNode* node) {
 }
 
 void CodeGenerator::visitOrNode(OrNode* node) {
-    std::cout << "# Or Begins\n";
+    std::cout << "# Or\n";
     node->visit_children(this);
     std::cout << "pop  %ebx\n";
     std::cout << "pop  %eax\n";
@@ -247,7 +254,7 @@ void CodeGenerator::visitOrNode(OrNode* node) {
 }
 
 void CodeGenerator::visitNotNode(NotNode* node) {
-    std::cout << "# Not Begins\n";
+    std::cout << "# Not\n";
     node->visit_children(this);
     std::cout << "pop  %eax\n";
     std::cout << "xor $1, %eax\n";

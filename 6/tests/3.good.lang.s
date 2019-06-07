@@ -2,8 +2,8 @@
 printstr: .asciz "%d\n"
 .text
 .globl Main_main
-# Class
-# Method
+# Class Main
+# Method main
 Main_main:
 push %ebp
 mov %esp, %ebp
@@ -19,8 +19,10 @@ pop  %ebx
 pop  %eax
 sub  %ebx, %eax
 push %eax
+# Minus Ends
 pop %eax
 mov -4(%ebp), %eax
+# Assignment Ends
 # Print
 # Times
 push -4(%ebp)
@@ -29,12 +31,16 @@ pop  %ebx
 pop  %eax
 imul  %ebx, %eax
 push %eax
+# Times Ends
 push $printstr
 call printf
 add $8, %esp
+# Print Ends
 pop %ebx
 pop %esi
 pop %edi
 mov %ebp, %esp
 pop %ebp
 ret
+# Method main Ends
+# Class Main Ends
