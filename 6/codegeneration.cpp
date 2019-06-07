@@ -31,6 +31,7 @@ void CodeGenerator::visitMethodNode(MethodNode* node) {
     std::cout << "push %edi\npush %esi\npush %ebx\n";
     node->visit_children(this);
     // if constructor, return self pointer
+    // move to new ?
   	if (currentMethodName == currentClassName)
 		std::cout << "mov 8(%ebp), %eax\n";
     std::cout << "pop %ebx\npop %esi\npop %edi\n";
