@@ -42,7 +42,7 @@ add  %ebx, %eax
 push %eax
 # Plus Ends
 pop %eax
-mov -4(%ebp), %eax
+mov %eax, -4(%ebp)
 # Assignment Ends
 # Assignment
 # Times
@@ -61,7 +61,7 @@ imul  %ebx, %eax
 push %eax
 # Times Ends
 pop %eax
-mov -8(%ebp), %eax
+mov %eax, -8(%ebp)
 # Assignment Ends
 # Assignment
 # Plus
@@ -88,7 +88,7 @@ add  %ebx, %eax
 push %eax
 # Plus Ends
 pop %eax
-mov -12(%ebp), %eax
+mov %eax, -12(%ebp)
 # Assignment Ends
 # Assignment
 # Divide
@@ -122,7 +122,7 @@ idiv %ebx
 push %eax
 # Divide Ends
 pop %eax
-mov -4(%ebp), %eax
+mov %eax, -4(%ebp)
 # Assignment Ends
 # Assignment
 # Divide
@@ -142,7 +142,7 @@ idiv %ebx
 push %eax
 # Divide Ends
 pop %eax
-mov -8(%ebp), %eax
+mov %eax, -8(%ebp)
 # Assignment Ends
 # Assignment
 # Times
@@ -168,7 +168,7 @@ imul  %ebx, %eax
 push %eax
 # Times Ends
 pop %eax
-mov -12(%ebp), %eax
+mov %eax, -12(%ebp)
 # Assignment Ends
 # Print
 push -4(%ebp)

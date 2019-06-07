@@ -14,7 +14,7 @@ push %ebx
 # Assignment
 push $1
 pop %eax
-mov -4(%ebp), %eax
+mov %eax, -4(%ebp)
 # Assignment Ends
 # Assignment
 # Plus
@@ -26,7 +26,7 @@ add  %ebx, %eax
 push %eax
 # Plus Ends
 pop %eax
-mov -8(%ebp), %eax
+mov %eax, -8(%ebp)
 # Assignment Ends
 # If
 # Equal

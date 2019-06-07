@@ -72,15 +72,15 @@ void CodeGenerator::visitAssignmentNode(AssignmentNode* node) {
             offset = (*currentClassInfo.members)[variableName].offset;
         }
         std::cout << "mov " << offset << "(%ebp), %ebx\n";
-    	std::cout << "mov " << memberOffset << "(%ebx), %eax\n";
+    	std::cout << "mov %eax, " << memberOffset << "(%ebx)\n";
     }else{
         if (currentMethodInfo.variables->count(variableName)){
             offset = (*currentMethodInfo.variables)[variableName].offset;
-            std::cout << "mov " << offset << "(%ebp), %eax\n";
+            std::cout << "mov %eax, " << offset << "(%ebp)\n";
         }else{
             offset = (*currentClassInfo.members)[variableName].offset;
             std::cout << "mov 8(%ebp), %ebx\n";
-            std::cout << "mov " << offset << "(%ebx), %eax\n";
+            std::cout << "mov %eax, " << offset << "(%ebx)\n";
         }
     }
     std::cout << "# Assignment Ends\n";

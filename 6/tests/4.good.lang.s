@@ -21,7 +21,7 @@ sub  %ebx, %eax
 push %eax
 # Minus Ends
 pop %eax
-mov -4(%ebp), %eax
+mov %eax, -4(%ebp)
 # Assignment Ends
 # Assignment
 # Minus
@@ -40,7 +40,7 @@ sub  %ebx, %eax
 push %eax
 # Minus Ends
 pop %eax
-mov -8(%ebp), %eax
+mov %eax, -8(%ebp)
 # Assignment Ends
 # Print
 # Divide

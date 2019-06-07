@@ -14,12 +14,12 @@ push %ebx
 # Assignment
 push $0
 pop %eax
-mov -4(%ebp), %eax
+mov %eax, -4(%ebp)
 # Assignment Ends
 # Assignment
 push $0
 pop %eax
-mov -8(%ebp), %eax
+mov %eax, -8(%ebp)
 # Assignment Ends
 # While
 while_0:
@@ -54,7 +54,7 @@ add  %ebx, %eax
 push %eax
 # Plus Ends
 pop %eax
-mov -8(%ebp), %eax
+mov %eax, -8(%ebp)
 # Assignment Ends
 # Assignment
 # Plus
@@ -66,7 +66,7 @@ add  %ebx, %eax
 push %eax
 # Plus Ends
 pop %eax
-mov -4(%ebp), %eax
+mov %eax, -4(%ebp)
 # Assignment Ends
 # Print
 push -8(%ebp)

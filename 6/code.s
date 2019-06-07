@@ -2,111 +2,64 @@
 printstr: .asciz "%d\n"
 .text
 .globl Main_main
- Counter_count:
-# Startup Method
- push %ebp
- mov %esp, %ebp
- sub $0, %esp
- push %edi
- push %esi
- push %ebx
-# Done Method Startup
-
-# Assignment
-# Plus
-push $1
+# Class classA
+# Method doAll
+classA_doAll:
+push %ebp
+mov %esp, %ebp
+sub $0, %esp
+push %edi
+push %esi
+push %ebx
+# Print
+# Times
+push $5
+push $6
 pop  %ebx
 pop  %eax
-add  %ebx, %eax
+imul  %ebx, %eax
 push %eax
-mov 8(%ebp), %ebx
-mov %eax, 0(%ebx)
-# Return Statement
-pop %eax
-# Cleanup Method
- pop %ebx
- pop %esi
- pop %edi
- mov %ebp, %esp
- pop %ebp
- ret
-# Done Method Cleanup
-
- Counter_Counter:
-# Startup Method
- push %ebp
- mov %esp, %ebp
- sub $0, %esp
- push %edi
- push %esi
- push %ebx
-# Done Method Startup
-
-# Assignment
-push $0
-mov 8(%ebp), %ebx
-mov %eax, 0(%ebx)
- mov 8(%ebp), %eax
-# Cleanup Method
- pop %ebx
- pop %esi
- pop %edi
- mov %ebp, %esp
- pop %ebp
- ret
-# Done Method Cleanup
-
- Main_main:
-# Startup Method
- push %ebp
- mov %esp, %ebp
- sub $4, %esp
- push %edi
- push %esi
- push %ebx
-# Done Method Startup
-
-# Assignment
-# New
-push $4
-call malloc
-add $4, %esp
-push %eax
-mov %eax, -4(%ebp)
-# Print
+# Times Ends
+push $printstr
+call printf
+add $8, %esp
+# Print Ends
+pop %ebx
+pop %esi
+pop %edi
+mov %ebp, %esp
+pop %ebp
+ret
+# Method doAll Ends
+# Class classA Ends
+# Class Main
+# Method main
+Main_main:
+push %ebp
+mov %esp, %ebp
+sub $4, %esp
+push %edi
+push %esi
+push %ebx
+# Call
 # MethodCall
 push %eax;
 push %ecx;
 push %edx;
-ret
+mov -4(%ebp), %ebx
+push 8(%ebx)
+call Main_doAll
 ret
 xchg %eax, %esp
 pop %eax;
 pop %ecx;
 pop %edx;
-push $printstr
-call printf
-add $8, %esp
-# Print
-# MethodCall
-push %eax;
-push %ecx;
-push %edx;
+# Call Ends
+pop %ebx
+pop %esi
+pop %edi
+mov %ebp, %esp
+pop %ebp
 ret
-ret
-xchg %eax, %esp
-pop %eax;
-pop %ecx;
-pop %edx;
-push $printstr
-call printf
-add $8, %esp
-# Cleanup Method
- pop %ebx
- pop %esi
- pop %edi
- mov %ebp, %esp
- pop %ebp
- ret
-# Done Method Cleanup
-
+# Method main Ends
+# Class Main Ends

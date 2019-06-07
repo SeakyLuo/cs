@@ -21,7 +21,7 @@ sub  %ebx, %eax
 push %eax
 # Minus Ends
 pop %eax
-mov -4(%ebp), %eax
+mov %eax, -4(%ebp)
 # Assignment Ends
 # Print
 # Times
