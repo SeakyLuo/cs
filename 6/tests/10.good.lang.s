@@ -43,17 +43,18 @@ push %esi
 push %ebx
 # Call
 # MethodCall
-push %eax;
-push %ecx;
-push %edx;
+push %eax
+push %ecx
+push %edx
 mov -4(%ebp), %ebx
 push 8(%ebx)
-call Main_doAll
+call classA_doAll
 ret
-xchg %eax, %esp
-pop %eax;
-pop %ecx;
-pop %edx;
+xchg %eax, (%esp)
+pop %eax
+pop %ecx
+pop %edx
+# MethodCall Ends
 # Call Ends
 pop %ebx
 pop %esi
