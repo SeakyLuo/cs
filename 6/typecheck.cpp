@@ -83,9 +83,8 @@ void inheritanceHelper(ClassTable* classTable, MethodTable* methodTable, Variabl
     if (className.empty()) return;
     ClassInfo info = (*classTable)[className];
     inheritanceHelper(classTable, methodTable, variableTable, info.superClassName, offset);
-    for (auto iter: (*info.methods)){
+    for (auto iter: (*info.methods))
         (*methodTable)[iter.first] = iter.second;
-    }
     for (auto iter: (*info.members)){
         VariableInfo vi = iter.second;
         vi.offset = offset;
@@ -130,13 +129,12 @@ void TypeCheck::visitClassNode(ClassNode* node) {
     node->visit_children(this);
 }
 
-bool mismatchChecker(std::string expected, std::string found){
+bool mismatchChecker(ClassTable* classTable, std::string expected, std::string found){
     if (expected == found) return false;
     for (auto superClassName = (*classTable)[found].superClassName;
         superClassName == expected;
-        superClassName = (*classTable)[superClassName].superClassName){
+        superClassName = (*classTable)[superClassName].superClassName)
             if (superClassName.empty()) return true;
-    }
     return false;
 }
 
@@ -155,7 +153,7 @@ void TypeCheck::visitMethodNode(MethodNode* node) {
     std::string returnStatementType = node->methodbody->returnstatement ? node->methodbody->returnstatement->expression->objectClassName : "None";
     if (methodName == currentClassName && returnBaseType != bt_none)
         typeError(constructor_returns_type);
-    if (mismatchChecker(returnTypeName, returnStatementType))
+    if (mismatchChecker(classTable, returnTypeName, returnStatementType))
         typeError(return_type_mismatch);
     if (currentClassName == "Main" && methodName == "main" && returnBaseType != bt_none)
         typeError(main_method_incorrect_signature);
@@ -410,11 +408,9 @@ void TypeCheck::visitMethodCallNode(MethodCallNode* node) {
         typeError(argument_number_mismatch);
     auto f = found->begin();
     auto e = expected->begin();
-    for (; f != found->end() && e != expected->end(); ++f, ++e){
-        if (mismatchChecker(e->objectClassName, (*f)->objectClassName)){
+    for (; f != found->end() && e != expected->end(); ++f, ++e)
+        if (mismatchChecker(classTable, e->objectClassName, (*f)->objectClassName))
             typeError(argument_type_mismatch);
-        }
-    }
     type = (*(*classTable)[className].methods)[methodName].returnType;
     node->basetype = type.baseType;
     node->objectClassName = type.objectClassName;
@@ -499,7 +495,7 @@ void TypeCheck::visitNewNode(NewNode* node) {
         auto f = found->begin();
         auto e = expected->begin();
         for (; f != found->end() && e != expected->end(); ++f, ++e)
-            if (mismatchChecker(e->objectClassName, (*f)->objectClassName))
+            if (mismatchChecker(classTable, e->objectClassName, (*f)->objectClassName))
                 typeError(argument_type_mismatch);
     }else{
         if (found->size()) typeError(argument_number_mismatch);
