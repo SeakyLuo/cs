@@ -143,6 +143,46 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
+# Print
+# MemberAccess
+mov -4(%ebp), %ebx
+push 4(%ebx)
+# MemberAccess Ends
+push $printstr
+call printf
+add $8, %esp
+# Print Ends
+# Call
+# MethodCall
+push %eax
+push %ecx
+push %edx
+push -4(%ebp)
+call classB_f0
+add $4, %esp
+pop %edx
+pop %ecx
+xchg %eax, (%esp)
+# MethodCall Ends
+# Call Ends
+# Print
+# MemberAccess
+mov -4(%ebp), %ebx
+push 0(%ebx)
+# MemberAccess Ends
+push $printstr
+call printf
+add $8, %esp
+# Print Ends
+# Print
+# MemberAccess
+mov -4(%ebp), %ebx
+push 4(%ebx)
+# MemberAccess Ends
+push $printstr
+call printf
+add $8, %esp
+# Print Ends
 pop %ebx
 pop %esi
 pop %edi

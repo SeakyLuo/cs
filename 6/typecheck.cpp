@@ -79,12 +79,10 @@ void TypeCheck::visitProgramNode(ProgramNode* node) {
     node->visit_children(this);
 }
 
-void inheritanceHelper(ClassTable* classTable, MethodTable* methodTable, VariableTable* variableTable, std::string className, int& offset){
+void inheritanceHelper(ClassTable* classTable, VariableTable* variableTable, std::string className, int& offset){
     if (className.empty()) return;
     ClassInfo info = (*classTable)[className];
-    inheritanceHelper(classTable, methodTable, variableTable, info.superClassName, offset);
-    for (auto iter: (*info.methods))
-        (*methodTable)[iter.first] = iter.second;
+    inheritanceHelper(classTable, variableTable, info.superClassName, offset);
     for (auto iter: (*info.members)){
         VariableInfo vi = iter.second;
         vi.offset = offset;
@@ -116,7 +114,7 @@ void TypeCheck::visitClassNode(ClassNode* node) {
     info.methods = currentMethodTable;
     info.members = new VariableTable();
     if (node->identifier_2)
-        inheritanceHelper(classTable, info.methods, info.members, info.superClassName, currentMemberOffset);
+        inheritanceHelper(classTable, info.members, info.superClassName, currentMemberOffset);
     for (auto iter: *(node->declaration_list)){
         VariableInfo vi;
         vi.offset = currentMemberOffset;

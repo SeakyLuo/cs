@@ -273,7 +273,7 @@ void CodeGenerator::visitNegationNode(NegationNode* node) {
 void CodeGenerator::visitMethodCallNode(MethodCallNode* node) {
     std::cout << "# MethodCall\n";
     std::cout << "push %eax\npush %ecx\npush %edx\n";
-    int args = node->expression_list ? node->expression_list->size() : 0;
+    int args = node->expression_list->size();
     // push arguments
     for (auto iter = node->expression_list->rbegin(); iter != node->expression_list->rend(); ++iter)
         (*iter)->accept(this);
@@ -295,7 +295,9 @@ void CodeGenerator::visitMethodCallNode(MethodCallNode* node) {
             className =  methodName;
             std::cout << "push " << 8 + 4 * args << "(%esp)\n";
         }else{
-            className =  currentClassName;
+            for (className =  currentClassName;
+                 (*classTable)[className]->count(methodName);
+                 className = (*classTable)[className].superClassName){}
             std::cout << "push 8(%ebp)\n";
         }
     }
