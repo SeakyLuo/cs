@@ -64,16 +64,16 @@ add $8, %esp
 # Print Ends
 # Call
 # MethodCall
-push %eax;
-push %ecx;
-push %edx;
+push %eax
+push %ecx
+push %edx
 push 8(%ebp)
 call classA_f0
 ret
 xchg %eax, (%esp)
-pop %eax;
-pop %ecx;
-pop %edx;
+pop %edx
+pop %ecx
+pop %eax
 # MethodCall Ends
 # Call Ends
 # Print
@@ -108,17 +108,17 @@ push %esi
 push %ebx
 # Call
 # MethodCall
-push %eax;
-push %ecx;
-push %edx;
+push %eax
+push %ecx
+push %edx
 mov -4(%ebp), %ebx
 push 8(%ebx)
 call classA_doAll
 ret
 xchg %eax, (%esp)
-pop %eax;
-pop %ecx;
-pop %edx;
+pop %edx
+pop %ecx
+pop %eax
 # MethodCall Ends
 # Call Ends
 pop %ebx

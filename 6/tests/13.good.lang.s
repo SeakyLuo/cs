@@ -49,9 +49,9 @@ mov %eax, -8(%ebp)
 # Assignment Ends
 # Print
 # MethodCall
-push %eax;
-push %ecx;
-push %edx;
+push %eax
+push %ecx
+push %edx
 push $5
 push -4(%ebp)
 push 8(%ebp)
@@ -60,9 +60,9 @@ push $5
 ret
 pop -4(%ebp)
 xchg %eax, (%esp)
-pop %eax;
-pop %ecx;
-pop %edx;
+pop %edx
+pop %ecx
+pop %eax
 # MethodCall Ends
 push $printstr
 call printf
@@ -70,9 +70,9 @@ add $8, %esp
 # Print Ends
 # Print
 # MethodCall
-push %eax;
-push %ecx;
-push %edx;
+push %eax
+push %ecx
+push %edx
 push $6
 push -4(%ebp)
 push 8(%ebp)
@@ -81,9 +81,9 @@ push $6
 ret
 pop -4(%ebp)
 xchg %eax, (%esp)
-pop %eax;
-pop %ecx;
-pop %edx;
+pop %edx
+pop %ecx
+pop %eax
 # MethodCall Ends
 push $printstr
 call printf
@@ -121,17 +121,17 @@ push %esi
 push %ebx
 # Call
 # MethodCall
-push %eax;
-push %ecx;
-push %edx;
+push %eax
+push %ecx
+push %edx
 mov -4(%ebp), %ebx
 push 8(%ebx)
 call classA_doAll
 ret
 xchg %eax, (%esp)
-pop %eax;
-pop %ecx;
-pop %edx;
+pop %edx
+pop %ecx
+pop %eax
 # MethodCall Ends
 # Call Ends
 pop %ebx

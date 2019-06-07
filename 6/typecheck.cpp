@@ -478,10 +478,10 @@ void TypeCheck::visitBooleanLiteralNode(BooleanLiteralNode* node) {
 
 void TypeCheck::visitNewNode(NewNode* node) {
     node->visit_children(this);
-    if (!classTable->count(node->identifier->name))
+    std::string className = node->identifier->name;
+    if (!classTable->count(className))
         typeError(undefined_class);
     auto found = node->expression_list;
-    std::string className = node->identifier->name;
     if ((*classTable)[className].methods->count(className)){
         auto expected = (*(*classTable)[className].methods)[className].parameters;
         if (found->size() != expected->size())

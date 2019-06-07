@@ -30,8 +30,9 @@ void CodeGenerator::visitMethodNode(MethodNode* node) {
     std::cout << "sub $" << currentMethodInfo.localsSize << ", %esp\n";
     std::cout << "push %edi\npush %esi\npush %ebx\n";
     node->visit_children(this);
-  	// if (currentMethodName == currentClassName)
-	// 	std::cout << " mov 8(%ebp), %eax\n";
+    // if constructor, return self
+  	if (currentMethodName == currentClassName)
+		std::cout << " mov 8(%ebp), %eax\n";
     std::cout << "pop %ebx\npop %esi\npop %edi\n";
     std::cout << "mov %ebp, %esp\n";
     std::cout << "pop %ebp\n";
@@ -299,13 +300,12 @@ void CodeGenerator::visitMethodCallNode(MethodCallNode* node) {
         std::cout << "push 8(%ebp)\n";
     }
     std::cout << "call " << className << "_" << methodName << "\n";
-    node->visit_children(this);
     std::cout << "ret\n";
     for (int i = node->expression_list->size(); i > 0; --i){
         std::cout << "pop " << i * (-4) << "(%ebp)\n";
     }
+    std::cout << "pop %edx\npop %ecx\n";
     std::cout << "xchg %eax, (%esp)\n";
-    std::cout << "pop %eax\npop %ecx\npop %edx\n";
     std::cout << "# MethodCall Ends\n";
 }
 

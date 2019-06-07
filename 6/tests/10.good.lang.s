@@ -51,9 +51,9 @@ push 8(%ebx)
 call classA_doAll
 ret
 xchg %eax, (%esp)
-pop %eax
-pop %ecx
 pop %edx
+pop %ecx
+pop %eax
 # MethodCall Ends
 # Call Ends
 pop %ebx
