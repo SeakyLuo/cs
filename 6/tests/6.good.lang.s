@@ -4,7 +4,7 @@ printstr: .asciz "%d\n"
 .globl Main_main
 # Class
 # Method
- Main_main:
+Main_main:
 push %ebp
 mov %esp, %ebp
 sub $8, %esp
@@ -13,29 +13,25 @@ push %esi
 push %ebx
 # Assignment
 push $1
- pop %eax
-mov %eax, -4(%ebp)
-#End Assignment
+pop %eax
+mov -4(%ebp), %eax
 # Assignment
 # Plus
-# variable
- push -4(%ebp)
+push -4(%ebp)
 push $1
 pop  %ebx
 pop  %eax
 add  %ebx, %eax
 push %eax
- pop %eax
-mov %eax, -8(%ebp)
-#End Assignment
+pop %eax
+mov -8(%ebp), %eax
 # If
 # Equal
-# variable
- push -8(%ebp)
+push -8(%ebp)
 push $2
 mov $0, %edx
- pop %ebx
- pop %eax
+pop %ebx
+pop %eax
 cmp %ebx, %eax
 sete %dl
 push %edx
@@ -48,9 +44,9 @@ push $1
 push $printstr
 call printf
 add $8, %esp
- jmp end_label0
+ jmp if_end_0
 else_0:
- end_label0:
+if_end_0:
 # Print
 push $0
 push $printstr

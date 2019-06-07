@@ -4,7 +4,7 @@ printstr: .asciz "%d\n"
 .globl Main_main
 # Class
 # Method
- Main_main:
+Main_main:
 push %ebp
 mov %esp, %ebp
 sub $0, %esp

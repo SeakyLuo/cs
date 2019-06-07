@@ -4,7 +4,7 @@ printstr: .asciz "%d\n"
 .globl Main_main
 # Class
 # Method
- Main_main:
+Main_main:
 push %ebp
 mov %esp, %ebp
 sub $8, %esp
@@ -19,14 +19,12 @@ pop  %ebx
 pop  %eax
 sub  %ebx, %eax
 push %eax
- pop %eax
-mov %eax, -4(%ebp)
-#End Assignment
+pop %eax
+mov -4(%ebp), %eax
 # Assignment
 # Minus
 # Times
-# variable
- push -4(%ebp)
+push -4(%ebp)
 push $4
 pop  %ebx
 pop  %eax
@@ -37,16 +35,13 @@ pop  %ebx
 pop  %eax
 sub  %ebx, %eax
 push %eax
- pop %eax
-mov %eax, -8(%ebp)
-#End Assignment
+pop %eax
+mov -8(%ebp), %eax
 # Print
 # Divide
 # Times
-# variable
- push -4(%ebp)
-# variable
- push -8(%ebp)
+push -4(%ebp)
+push -8(%ebp)
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax

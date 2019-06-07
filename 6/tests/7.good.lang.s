@@ -4,7 +4,7 @@ printstr: .asciz "%d\n"
 .globl Main_main
 # Class
 # Method
- Main_main:
+Main_main:
 push %ebp
 mov %esp, %ebp
 sub $8, %esp
@@ -13,41 +13,35 @@ push %esi
 push %ebx
 # Assignment
 push $1
- pop %eax
-mov %eax, -4(%ebp)
-#End Assignment
+pop %eax
+mov -4(%ebp), %eax
 # Assignment
 # Plus
-# variable
- push -4(%ebp)
+push -4(%ebp)
 push $1
 pop  %ebx
 pop  %eax
 add  %ebx, %eax
 push %eax
- pop %eax
-mov %eax, -8(%ebp)
-#End Assignment
+pop %eax
+mov -8(%ebp), %eax
 # Assignment
 # Plus
-# variable
- push -8(%ebp)
+push -8(%ebp)
 push $1
 pop  %ebx
 pop  %eax
 add  %ebx, %eax
 push %eax
- pop %eax
-mov %eax, -4(%ebp)
-#End Assignment
+pop %eax
+mov -4(%ebp), %eax
 # If
 # Equal
-# variable
- push -8(%ebp)
+push -8(%ebp)
 push $2
 mov $0, %edx
- pop %ebx
- pop %eax
+pop %ebx
+pop %eax
 cmp %ebx, %eax
 sete %dl
 push %edx
@@ -60,7 +54,7 @@ push $0
 push $printstr
 call printf
 add $8, %esp
- jmp end_label0
+ jmp if_end_0
 else_0:
 # Else
 # Print
@@ -68,15 +62,14 @@ push $1
 push $printstr
 call printf
 add $8, %esp
- end_label0:
+if_end_0:
 # If
 # Equal
-# variable
- push -4(%ebp)
+push -4(%ebp)
 push $2
 mov $0, %edx
- pop %ebx
- pop %eax
+pop %ebx
+pop %eax
 cmp %ebx, %eax
 sete %dl
 push %edx
@@ -89,7 +82,7 @@ push $2
 push $printstr
 call printf
 add $8, %esp
- jmp end_label1
+ jmp if_end_1
 else_1:
 # Else
 # Print
@@ -97,26 +90,24 @@ push $3
 push $printstr
 call printf
 add $8, %esp
- end_label1:
+if_end_1:
 # If
 # And
 # Greater
 push $3
-# variable
- push -4(%ebp)
+push -4(%ebp)
 mov $0, %edx
- pop %ebx
- pop %eax
+pop %ebx
+pop %eax
 cmp %ebx, %eax
 setg %dl
 push %edx
 # Greater
 push $3
-# variable
- push -8(%ebp)
+push -8(%ebp)
 mov $0, %edx
- pop %ebx
- pop %eax
+pop %ebx
+pop %eax
 cmp %ebx, %eax
 setg %dl
 push %edx
@@ -133,7 +124,7 @@ push $4
 push $printstr
 call printf
 add $8, %esp
- jmp end_label2
+ jmp if_end_2
 else_2:
 # Else
 # Print
@@ -141,26 +132,24 @@ push $5
 push $printstr
 call printf
 add $8, %esp
- end_label2:
+if_end_2:
 # If
 # Or
 # Greater
 push $3
-# variable
- push -4(%ebp)
+push -4(%ebp)
 mov $0, %edx
- pop %ebx
- pop %eax
+pop %ebx
+pop %eax
 cmp %ebx, %eax
 setg %dl
 push %edx
 # Greater
 push $3
-# variable
- push -8(%ebp)
+push -8(%ebp)
 mov $0, %edx
- pop %ebx
- pop %eax
+pop %ebx
+pop %eax
 cmp %ebx, %eax
 setg %dl
 push %edx
@@ -177,7 +166,7 @@ push $6
 push $printstr
 call printf
 add $8, %esp
- jmp end_label3
+ jmp if_end_3
 else_3:
 # Else
 # Print
@@ -185,7 +174,7 @@ push $7
 push $printstr
 call printf
 add $8, %esp
- end_label3:
+if_end_3:
 pop %ebx
 pop %esi
 pop %edi

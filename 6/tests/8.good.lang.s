@@ -4,7 +4,7 @@ printstr: .asciz "%d\n"
 .globl Main_main
 # Class
 # Method
- Main_main:
+Main_main:
 push %ebp
 mov %esp, %ebp
 sub $8, %esp
@@ -13,23 +13,20 @@ push %esi
 push %ebx
 # Assignment
 push $0
- pop %eax
-mov %eax, -4(%ebp)
-#End Assignment
+pop %eax
+mov -4(%ebp), %eax
 # Assignment
 push $0
- pop %eax
-mov %eax, -8(%ebp)
-#End Assignment
+pop %eax
+mov -8(%ebp), %eax
 # While
 while_0:
 # Greater
 push $5
-# variable
- push -4(%ebp)
+push -4(%ebp)
 mov $0, %edx
- pop %ebx
- pop %eax
+pop %ebx
+pop %eax
 cmp %ebx, %eax
 setg %dl
 push %edx
@@ -40,10 +37,8 @@ je while_end_0
 # Assignment
 # Plus
 # Times
-# variable
- push -8(%ebp)
-# variable
- push -4(%ebp)
+push -8(%ebp)
+push -4(%ebp)
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax
@@ -53,24 +48,20 @@ pop  %ebx
 pop  %eax
 add  %ebx, %eax
 push %eax
- pop %eax
-mov %eax, -8(%ebp)
-#End Assignment
+pop %eax
+mov -8(%ebp), %eax
 # Assignment
 # Plus
-# variable
- push -4(%ebp)
+push -4(%ebp)
 push $1
 pop  %ebx
 pop  %eax
 add  %ebx, %eax
 push %eax
- pop %eax
-mov %eax, -4(%ebp)
-#End Assignment
+pop %eax
+mov -4(%ebp), %eax
 # Print
-# variable
- push -8(%ebp)
+push -8(%ebp)
 push $printstr
 call printf
 add $8, %esp

@@ -79,14 +79,17 @@ void TypeCheck::visitProgramNode(ProgramNode* node) {
     node->visit_children(this);
 }
 
-void inheritanceHelper(ClassTable* classTable, VariableTable* table, std::string className, int& offset){
+void inheritanceHelper(ClassTable* classTable, MethodTable* methodTable, VariableTable* variableTable, std::string className, int& offset){
     if (className.empty()) return;
-    classinfo info = (*classTable)[className];
-    inheritanceHelper(classTable, table, info.superClassName, offset);
+    ClassInfo info = (*classTable)[className];
+    inheritanceHelper(classTable, methodTable, variableTable, info.superClassName, offset);
+    for (auto iter: (*info.methods)){
+        (*methodTable)[iter.first] = iter.second;
+    }
     for (auto iter: (*info.members)){
-        variableinfo vi = iter.second;
+        VariableInfo vi = iter.second;
         vi.offset = offset;
-        (*table)[iter.first] = vi;
+        (*variableTable)[iter.first] = vi;
         offset += 4;
     }
 }
@@ -114,7 +117,7 @@ void TypeCheck::visitClassNode(ClassNode* node) {
     info.methods = currentMethodTable;
     info.members = new VariableTable();
     if (node->identifier_2)
-        inheritanceHelper(classTable, info.members, info.superClassName, currentMemberOffset);
+        inheritanceHelper(classTable, info.methods, info.members, info.superClassName, currentMemberOffset);
     for (auto iter: *(node->declaration_list)){
         VariableInfo vi;
         vi.offset = currentMemberOffset;
@@ -489,7 +492,7 @@ void TypeCheck::visitNewNode(NewNode* node) {
             if ((*f)->objectClassName != e->objectClassName)
                 typeError(argument_type_mismatch);
     }else{
-        typeError(undefined_method);
+        if (found->size()) typeError(argument_number_mismatch);
     }
     node->basetype = bt_object;
     node->objectClassName = className;
