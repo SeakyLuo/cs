@@ -279,7 +279,7 @@ void CodeGenerator::visitMethodCallNode(MethodCallNode* node) {
     auto iter = node->expression_list->rbegin();
     for (int i = 1; i <= node->expression_list->size(); ++i, ++iter){
         (*iter)->accept(this);
-        std::cout << "push " << i * (-4) << "(%ebp)\n";
+        // std::cout << "push " << i * (-4) << "(%ebp)\n";
     }
     std::string className, methodName;
     if (node->identifier_2){
@@ -292,18 +292,19 @@ void CodeGenerator::visitMethodCallNode(MethodCallNode* node) {
             info = (*currentClassInfo.members)[variableName];
         }
         className = info.type.objectClassName;
-        std::cout << "mov " << info.offset << "(%ebp), %ebx\n";
-        std::cout << "push 8(%ebx)\n";
+        std::cout << "push " << info.offset << "(%ebp)\n";
     }else{
         className = currentClassName;
         methodName = node->identifier_1->name;
         std::cout << "push 8(%ebp)\n";
     }
     std::cout << "call " << className << "_" << methodName << "\n";
-    std::cout << "ret\n";
-    for (int i = node->expression_list->size(); i > 0; --i){
-        std::cout << "pop " << i * (-4) << "(%ebp)\n";
-    }
+    std::cout << "add $4, %esp\n";
+    // std::cout << "add $" << node->expression_list->size() * 4 << ", %esp\n";
+    // std::cout << "ret\n";
+    // for (int i = node->expression_list->size(); i > 0; --i){
+    //     std::cout << "pop " << i * (-4) << "(%ebp)\n";
+    // }
     std::cout << "pop %edx\npop %ecx\n";
     std::cout << "xchg %eax, (%esp)\n";
     std::cout << "# MethodCall Ends\n";
@@ -323,6 +324,7 @@ void CodeGenerator::visitMemberAccessNode(MemberAccessNode* node) {
     std::cout << "mov " << info.offset << "(%ebp), %ebx\n";
     int memberOffset = (*(*classTable)[info.type.objectClassName].members)[node->identifier_2->name].offset;
     std::cout << "push " << memberOffset << "(%ebx)\n";
+    std::cout << "# MemberAccess Ends\n";
 }
 
 
