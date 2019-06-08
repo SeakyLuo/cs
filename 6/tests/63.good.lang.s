@@ -108,7 +108,7 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
- jmp if_end_0
+jmp if_end_0
 else_0:
 if_end_0:
 # If Ends
@@ -249,7 +249,6 @@ pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 8(%ebx)
 # Assignment Ends
-mov 8(%ebp), %eax
 pop %ebx
 pop %esi
 pop %edi
@@ -290,6 +289,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -390,7 +390,7 @@ pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
 # Call Ends
- jmp if_end_1
+jmp if_end_1
 else_1:
 # Else
 # Assignment
@@ -625,7 +625,6 @@ pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 16(%ebx)
 # Assignment Ends
-mov 8(%ebp), %eax
 pop %ebx
 pop %esi
 pop %edi
@@ -677,6 +676,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -731,7 +731,7 @@ push %ecx
 push %edx
 push $207
 push -8(%ebp)
-call class1_f1
+call class0_f1
 add $8, %esp
 pop %edx
 pop %ecx
@@ -801,7 +801,7 @@ mov -8(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
 push -8(%ebp)
-call class1_f1
+call class0_f1
 add $8, %esp
 pop %edx
 pop %ecx
@@ -1140,7 +1140,7 @@ idiv %ebx
 push %eax
 # Divide Ends
 push -8(%ebp)
-call class1_f0
+call class0_f0
 add $12, %esp
 pop %edx
 pop %ecx
@@ -1155,7 +1155,7 @@ push $1
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
- jmp if_end_11
+jmp if_end_11
 else_11:
 # Else
 # Assignment
@@ -1178,7 +1178,7 @@ push $1
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
- jmp if_end_12
+jmp if_end_12
 else_12:
 if_end_12:
 # If Ends
@@ -1192,7 +1192,7 @@ mov -8(%ebp), %ebx
 push 12(%ebx)
 # MemberAccess Ends
 push -8(%ebp)
-call class1_f1
+call class0_f1
 add $8, %esp
 pop %edx
 pop %ecx
@@ -1201,7 +1201,7 @@ xchg %eax, (%esp)
 # Call Ends
 if_end_11:
 # If Ends
- jmp if_end_10
+jmp if_end_10
 else_10:
 # Else
 # Assignment
@@ -1327,7 +1327,7 @@ pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
 push -8(%ebp)
-call class1_f1
+call class0_f1
 add $8, %esp
 pop %edx
 pop %ecx
@@ -1361,7 +1361,7 @@ push %ecx
 push %edx
 push $73
 push -8(%ebp)
-call class1_f1
+call class0_f1
 add $8, %esp
 pop %edx
 pop %ecx
@@ -1388,7 +1388,7 @@ add  %ebx, %eax
 push %eax
 # Plus Ends
 push -8(%ebp)
-call class1_f1
+call class0_f1
 add $8, %esp
 pop %edx
 pop %ecx
@@ -1404,11 +1404,11 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
- jmp if_end_15
+jmp if_end_15
 else_15:
 if_end_15:
 # If Ends
- jmp if_end_14
+jmp if_end_14
 else_14:
 # Else
 # If
@@ -1495,7 +1495,7 @@ pop %eax
 mov -8(%ebp), %ebx
 mov %eax, 16(%ebx)
 # Assignment Ends
- jmp if_end_19
+jmp if_end_19
 else_19:
 if_end_19:
 # If Ends
@@ -1505,7 +1505,7 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
- jmp if_end_17
+jmp if_end_17
 else_17:
 # Else
 # Call
@@ -1515,7 +1515,7 @@ push %ecx
 push %edx
 push $133
 push -8(%ebp)
-call class1_f1
+call class0_f1
 add $8, %esp
 pop %edx
 pop %ecx
@@ -1536,7 +1536,7 @@ sub  %ebx, %eax
 push %eax
 # Minus Ends
 push -8(%ebp)
-call class1_f1
+call class0_f1
 add $8, %esp
 pop %edx
 pop %ecx
@@ -1562,7 +1562,7 @@ pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
 push -8(%ebp)
-call class1_f1
+call class0_f1
 add $8, %esp
 pop %edx
 pop %ecx
@@ -1664,7 +1664,7 @@ push %ecx
 push %edx
 push $42
 push -8(%ebp)
-call class1_f1
+call class0_f1
 add $8, %esp
 pop %edx
 pop %ecx
@@ -1700,7 +1700,7 @@ idiv %ebx
 push %eax
 # Divide Ends
 push -8(%ebp)
-call class1_f1
+call class0_f1
 add $8, %esp
 pop %edx
 pop %ecx
@@ -1717,7 +1717,7 @@ mov -8(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
 push -8(%ebp)
-call class1_f1
+call class0_f1
 add $8, %esp
 pop %edx
 pop %ecx
@@ -1731,7 +1731,7 @@ push %ecx
 push %edx
 push $103
 push -8(%ebp)
-call class1_f1
+call class0_f1
 add $8, %esp
 pop %edx
 pop %ecx
@@ -1824,7 +1824,7 @@ mov %eax, 16(%ebx)
 jmp while_22
 while_end_22:
 # While Ends
- jmp if_end_21
+jmp if_end_21
 else_21:
 if_end_21:
 # If Ends

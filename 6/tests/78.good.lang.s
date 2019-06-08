@@ -252,7 +252,6 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
-mov 8(%ebp), %eax
 pop %ebx
 pop %esi
 pop %edi
@@ -322,6 +321,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -460,7 +460,7 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
- jmp if_end_2
+jmp if_end_2
 else_2:
 if_end_2:
 # If Ends

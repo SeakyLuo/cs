@@ -228,7 +228,7 @@ mov %eax, -16(%ebp)
 jmp while_1
 while_end_1:
 # While Ends
- jmp if_end_0
+jmp if_end_0
 else_0:
 if_end_0:
 # If Ends
@@ -283,7 +283,7 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
- jmp if_end_3
+jmp if_end_3
 else_3:
 # Else
 # Print
@@ -397,7 +397,7 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
- jmp if_end_4
+jmp if_end_4
 else_4:
 if_end_4:
 # If Ends
@@ -514,7 +514,7 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
- jmp if_end_7
+jmp if_end_7
 else_7:
 # Else
 # Assignment
@@ -598,7 +598,7 @@ push -4(%ebp)
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
- jmp if_end_9
+jmp if_end_9
 else_9:
 # Else
 # Assignment
@@ -637,7 +637,7 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
- jmp if_end_10
+jmp if_end_10
 else_10:
 if_end_10:
 # If Ends
@@ -705,7 +705,7 @@ add $8, %esp
 # Print Ends
 if_end_7:
 # If Ends
- jmp if_end_5
+jmp if_end_5
 else_5:
 if_end_5:
 # If Ends
@@ -1023,7 +1023,6 @@ push %eax
 pop %eax
 mov %eax, -16(%ebp)
 # Assignment Ends
-mov 8(%ebp), %eax
 pop %ebx
 pop %esi
 pop %edi
@@ -1467,7 +1466,7 @@ while_end_14:
 jmp while_13
 while_end_13:
 # While Ends
- jmp if_end_12
+jmp if_end_12
 else_12:
 # Else
 # If
@@ -1500,7 +1499,7 @@ push %eax
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
- jmp if_end_15
+jmp if_end_15
 else_15:
 if_end_15:
 # If Ends
@@ -1520,7 +1519,7 @@ add $8, %esp
 # Print Ends
 if_end_12:
 # If Ends
- jmp if_end_11
+jmp if_end_11
 else_11:
 if_end_11:
 # If Ends
@@ -1886,11 +1885,11 @@ while_end_24:
 jmp while_23
 while_end_23:
 # While Ends
- jmp if_end_20
+jmp if_end_20
 else_20:
 if_end_20:
 # If Ends
- jmp if_end_19
+jmp if_end_19
 else_19:
 if_end_19:
 # If Ends
@@ -1915,7 +1914,7 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
- jmp if_end_18
+jmp if_end_18
 else_18:
 # Else
 # Assignment
@@ -1958,7 +1957,6 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
-mov 8(%ebp), %eax
 pop %ebx
 pop %esi
 pop %edi
@@ -2133,6 +2131,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -2198,7 +2197,7 @@ add $8, %esp
 jmp while_26
 while_end_26:
 # While Ends
- jmp if_end_25
+jmp if_end_25
 else_25:
 # Else
 # Assignment
@@ -2335,7 +2334,6 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
-mov 8(%ebp), %eax
 pop %ebx
 pop %esi
 pop %edi
@@ -2417,6 +2415,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -2541,7 +2540,7 @@ mov %eax, 12(%ebx)
 jmp while_30
 while_end_30:
 # While Ends
- jmp if_end_29
+jmp if_end_29
 else_29:
 if_end_29:
 # If Ends
@@ -2799,7 +2798,7 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
- jmp if_end_33
+jmp if_end_33
 else_33:
 # Else
 # Assignment
@@ -2855,6 +2854,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -3155,7 +3155,6 @@ add $8, %esp
 jmp while_36
 while_end_36:
 # While Ends
-mov 8(%ebp), %eax
 pop %ebx
 pop %esi
 pop %edi
@@ -3238,6 +3237,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -3277,7 +3277,6 @@ xchg %eax, (%esp)
 pop %eax
 mov %eax, -8(%ebp)
 # Assignment Ends
-mov 8(%ebp), %eax
 pop %ebx
 pop %esi
 pop %edi
@@ -3342,6 +3341,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -3391,6 +3391,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -3545,7 +3546,7 @@ mov %eax, -4(%ebp)
 jmp while_39
 while_end_39:
 # While Ends
- jmp if_end_37
+jmp if_end_37
 else_37:
 if_end_37:
 # If Ends
@@ -3648,7 +3649,7 @@ xchg %eax, (%esp)
 pop %eax
 mov %eax, -16(%ebp)
 # Assignment Ends
- jmp if_end_41
+jmp if_end_41
 else_41:
 # Else
 # Assignment
@@ -3854,7 +3855,7 @@ push %eax
 pop %eax
 mov %eax, -8(%ebp)
 # Assignment Ends
- jmp if_end_45
+jmp if_end_45
 else_45:
 # Else
 # Assignment
@@ -3937,7 +3938,7 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
- jmp if_end_47
+jmp if_end_47
 else_47:
 # Else
 # Print
@@ -3968,7 +3969,7 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
- jmp if_end_46
+jmp if_end_46
 else_46:
 # Else
 # Assignment

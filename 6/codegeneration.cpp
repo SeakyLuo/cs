@@ -99,7 +99,7 @@ void CodeGenerator::visitIfElseNode(IfElseNode* node) {
     for (auto iter: *(node->statement_list_1))
         iter->accept(this);
     // else
-    std::cout << " jmp if_end_" << label << "\n";
+    std::cout << "jmp if_end_" << label << "\n";
     std::cout << "else_" << label << ":\n";
     if (node->statement_list_2){
         std::cout << "# Else\n";
@@ -302,7 +302,6 @@ void CodeGenerator::visitMethodCallNode(MethodCallNode* node) {
     std::cout << "add $" << 4 * (args + 1) << ", %esp\n";
     std::cout << "pop %edx\npop %ecx\n";
     std::cout << "xchg %eax, (%esp)\n";
-    // std::cout << "push %eax\n";
     std::cout << "# MethodCall Ends\n";
 }
 
@@ -373,6 +372,7 @@ void CodeGenerator::visitBooleanTypeNode(BooleanTypeNode* node) {
 }
 
 void CodeGenerator::visitObjectTypeNode(ObjectTypeNode* node) {
+    node->visit_children(this);
 }
 
 void CodeGenerator::visitNoneNode(NoneNode* node) {

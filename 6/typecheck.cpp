@@ -376,7 +376,9 @@ void TypeCheck::visitMethodCallNode(MethodCallNode* node) {
                 className = currentClassName;
     CompoundType type;
     bool global;
-    if (!variableName.empty()){
+    if (variableName.empty()){
+        if (classTable->count(methodName)) className = methodName;
+    }else{
         if (global = !currentVariableTable->count(variableName)){
             while (!(*classTable)[className].members->count(variableName)){
                 className = (*classTable)[className].superClassName;
@@ -391,7 +393,7 @@ void TypeCheck::visitMethodCallNode(MethodCallNode* node) {
         if (type.baseType != bt_object)
             typeError(not_object);
     }
-    if (!currentMethodTable->count(methodName)){
+    if (!currentMethodTable->count(methodName) && !classTable->count(methodName)){
         if (variableName.empty())
             typeError(undefined_method);
         while (!(*classTable)[className].methods->count(methodName)){

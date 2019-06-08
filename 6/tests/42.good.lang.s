@@ -69,7 +69,7 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
- jmp if_end_0
+jmp if_end_0
 else_0:
 if_end_0:
 # If Ends
@@ -97,7 +97,7 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
- jmp if_end_1
+jmp if_end_1
 else_1:
 if_end_1:
 # If Ends
@@ -206,7 +206,7 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
- jmp if_end_3
+jmp if_end_3
 else_3:
 # Else
 # Assignment
@@ -444,7 +444,7 @@ add $8, %esp
 jmp while_6
 while_end_6:
 # While Ends
- jmp if_end_5
+jmp if_end_5
 else_5:
 # Else
 # Assignment
@@ -627,7 +627,6 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
-mov 8(%ebp), %eax
 pop %ebx
 pop %esi
 pop %edi
@@ -695,6 +694,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -786,6 +786,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -870,7 +871,6 @@ pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
 # Call Ends
-mov 8(%ebp), %eax
 pop %ebx
 pop %esi
 pop %edi
@@ -910,6 +910,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -931,7 +932,7 @@ mov -4(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
 push -4(%ebp)
-call class1_f3
+call class0_f3
 add $8, %esp
 pop %edx
 pop %ecx
@@ -960,7 +961,7 @@ imul  %ebx, %eax
 push %eax
 # Times Ends
 push -4(%ebp)
-call class1_f3
+call class0_f3
 add $8, %esp
 pop %edx
 pop %ecx
@@ -986,7 +987,7 @@ mov -4(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
 push -4(%ebp)
-call class1_f3
+call class0_f3
 add $8, %esp
 pop %edx
 pop %ecx
@@ -1092,7 +1093,7 @@ neg  %eax
 push %eax
 # Negation Ends
 push -4(%ebp)
-call class1_f3
+call class0_f3
 add $8, %esp
 pop %edx
 pop %ecx
@@ -1161,7 +1162,7 @@ imul  %ebx, %eax
 push %eax
 # Times Ends
 push -4(%ebp)
-call class1_f3
+call class0_f3
 add $8, %esp
 pop %edx
 pop %ecx
@@ -1232,7 +1233,7 @@ mov -4(%ebp), %ebx
 push 16(%ebx)
 # MemberAccess Ends
 push -4(%ebp)
-call class1_f3
+call class0_f3
 add $8, %esp
 pop %edx
 pop %ecx
@@ -1249,14 +1250,14 @@ push %ecx
 push %edx
 push $47
 push -4(%ebp)
-call class1_f3
+call class0_f3
 add $8, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
 # Call Ends
- jmp if_end_9
+jmp if_end_9
 else_9:
 # Else
 # Assignment
@@ -1283,7 +1284,7 @@ neg  %eax
 push %eax
 # Negation Ends
 push -4(%ebp)
-call class1_f3
+call class0_f3
 add $8, %esp
 pop %edx
 pop %ecx
@@ -1308,14 +1309,14 @@ mov -4(%ebp), %ebx
 push 0(%ebx)
 # MemberAccess Ends
 push -4(%ebp)
-call class1_f3
+call class0_f3
 add $8, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
 # Call Ends
- jmp if_end_11
+jmp if_end_11
 else_11:
 # Else
 # If
@@ -1339,7 +1340,7 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
- jmp if_end_12
+jmp if_end_12
 else_12:
 # Else
 # Call
@@ -1364,7 +1365,7 @@ sub  %ebx, %eax
 push %eax
 # Minus Ends
 push -4(%ebp)
-call class1_f3
+call class0_f3
 add $8, %esp
 pop %edx
 pop %ecx
@@ -1395,7 +1396,7 @@ add  %ebx, %eax
 push %eax
 # Plus Ends
 push -4(%ebp)
-call class1_f3
+call class0_f3
 add $8, %esp
 pop %edx
 pop %ecx
@@ -1449,7 +1450,7 @@ push %ecx
 push %edx
 push $115
 push -4(%ebp)
-call class1_f3
+call class0_f3
 add $8, %esp
 pop %edx
 pop %ecx
@@ -1466,7 +1467,7 @@ push %ecx
 push %edx
 push $112
 push -4(%ebp)
-call class1_f3
+call class0_f3
 add $8, %esp
 pop %edx
 pop %ecx
@@ -1547,7 +1548,7 @@ neg  %eax
 push %eax
 # Negation Ends
 push -4(%ebp)
-call class1_f3
+call class0_f3
 add $8, %esp
 pop %edx
 pop %ecx
@@ -1605,7 +1606,7 @@ add $8, %esp
 jmp while_16
 while_end_16:
 # While Ends
- jmp if_end_15
+jmp if_end_15
 else_15:
 if_end_15:
 # If Ends
@@ -1631,7 +1632,7 @@ mov -4(%ebp), %ebx
 push 0(%ebx)
 # MemberAccess Ends
 push -4(%ebp)
-call class1_f3
+call class0_f3
 add $8, %esp
 pop %edx
 pop %ecx
@@ -1705,7 +1706,7 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
- jmp if_end_18
+jmp if_end_18
 else_18:
 if_end_18:
 # If Ends
@@ -1739,7 +1740,7 @@ push %ecx
 push %edx
 push $106
 push -4(%ebp)
-call class1_f3
+call class0_f3
 add $8, %esp
 pop %edx
 pop %ecx

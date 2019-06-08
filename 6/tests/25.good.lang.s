@@ -241,7 +241,7 @@ xchg %eax, (%esp)
 pop %eax
 mov %eax, -8(%ebp)
 # Assignment Ends
- jmp if_end_0
+jmp if_end_0
 else_0:
 # Else
 # Assignment
@@ -356,7 +356,7 @@ pop %eax
 mov -4(%ebp), %ebx
 mov %eax, 8(%ebx)
 # Assignment Ends
- jmp if_end_1
+jmp if_end_1
 else_1:
 if_end_1:
 # If Ends
@@ -390,7 +390,7 @@ pop %eax
 mov -8(%ebp), %ebx
 mov %eax, 8(%ebx)
 # Assignment Ends
- jmp if_end_2
+jmp if_end_2
 else_2:
 if_end_2:
 # If Ends
@@ -526,7 +526,7 @@ pop %eax
 mov -12(%ebp), %ebx
 mov %eax, 0(%ebx)
 # Assignment Ends
- jmp if_end_4
+jmp if_end_4
 else_4:
 # Else
 # Assignment
@@ -685,7 +685,7 @@ pop %eax
 mov -12(%ebp), %ebx
 mov %eax, 8(%ebx)
 # Assignment Ends
- jmp if_end_5
+jmp if_end_5
 else_5:
 # Else
 # Assignment
@@ -911,7 +911,7 @@ pop %eax
 mov -4(%ebp), %ebx
 mov %eax, 8(%ebx)
 # Assignment Ends
- jmp if_end_8
+jmp if_end_8
 else_8:
 # Else
 # If
@@ -964,7 +964,7 @@ pop %eax
 mov -4(%ebp), %ebx
 mov %eax, 0(%ebx)
 # Assignment Ends
- jmp if_end_9
+jmp if_end_9
 else_9:
 # Else
 # Assignment
@@ -1431,7 +1431,7 @@ mov %eax, 4(%ebx)
 jmp while_12
 while_end_12:
 # While Ends
- jmp if_end_10
+jmp if_end_10
 else_10:
 if_end_10:
 # If Ends
@@ -1582,7 +1582,7 @@ pop %eax
 mov -4(%ebp), %ebx
 mov %eax, 0(%ebx)
 # Assignment Ends
- jmp if_end_13
+jmp if_end_13
 else_13:
 # Else
 # Assignment
@@ -1884,7 +1884,7 @@ mov %eax, 4(%ebx)
 jmp while_16
 while_end_16:
 # While Ends
- jmp if_end_14
+jmp if_end_14
 else_14:
 if_end_14:
 # If Ends
@@ -1969,7 +1969,7 @@ push $1
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
- jmp if_end_17
+jmp if_end_17
 else_17:
 if_end_17:
 # If Ends
@@ -2007,7 +2007,7 @@ push $1
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
- jmp if_end_18
+jmp if_end_18
 else_18:
 if_end_18:
 # If Ends
@@ -2056,7 +2056,7 @@ push $1
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
- jmp if_end_19
+jmp if_end_19
 else_19:
 if_end_19:
 # If Ends
@@ -2105,7 +2105,7 @@ push $1
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
- jmp if_end_20
+jmp if_end_20
 else_20:
 if_end_20:
 # If Ends
@@ -2149,7 +2149,7 @@ push $1
 pop %eax
 mov %eax, -8(%ebp)
 # Assignment Ends
- jmp if_end_21
+jmp if_end_21
 else_21:
 if_end_21:
 # If Ends
@@ -2193,7 +2193,7 @@ push $0
 pop %eax
 mov %eax, -8(%ebp)
 # Assignment Ends
- jmp if_end_22
+jmp if_end_22
 else_22:
 if_end_22:
 # If Ends
@@ -2228,7 +2228,7 @@ push %eax
 pop %eax
 mov %eax, -8(%ebp)
 # Assignment Ends
- jmp if_end_23
+jmp if_end_23
 else_23:
 if_end_23:
 # If Ends
@@ -2387,7 +2387,7 @@ pop %eax
 mov -24(%ebp), %ebx
 mov %eax, 0(%ebx)
 # Assignment Ends
- jmp if_end_24
+jmp if_end_24
 else_24:
 if_end_24:
 # If Ends
@@ -3022,7 +3022,7 @@ xchg %eax, (%esp)
 pop %eax
 mov %eax, -28(%ebp)
 # Assignment Ends
- jmp if_end_26
+jmp if_end_26
 else_26:
 if_end_26:
 # If Ends

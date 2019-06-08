@@ -115,7 +115,7 @@ push -16(%ebp)
 pop %eax
 mov %eax, -16(%ebp)
 # Assignment Ends
- jmp if_end_0
+jmp if_end_0
 else_0:
 if_end_0:
 # If Ends
@@ -242,7 +242,6 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
-mov 8(%ebp), %eax
 pop %ebx
 pop %esi
 pop %edi
@@ -429,11 +428,11 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
- jmp if_end_3
+jmp if_end_3
 else_3:
 if_end_3:
 # If Ends
- jmp if_end_2
+jmp if_end_2
 else_2:
 if_end_2:
 # If Ends

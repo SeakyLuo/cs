@@ -1,6 +1,3 @@
-# Class Main
-# Class class0
-# Class class1
 .data
 printstr: .asciz "%d\n"
 .text
@@ -369,7 +366,7 @@ je dowhile_end_3
 jmp dowhile_3
 dowhile_end_3:
 # DoWhile Ends
- jmp if_end_2
+jmp if_end_2
 else_2:
 # Else
 # Print
@@ -382,14 +379,13 @@ add $8, %esp
 # Print Ends
 if_end_2:
 # If Ends
- jmp if_end_1
+jmp if_end_1
 else_1:
 if_end_1:
 # If Ends
 jmp while_0
 while_end_0:
 # While Ends
-mov 8(%ebp), %eax
 pop %ebx
 pop %esi
 pop %edi
@@ -468,6 +464,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -590,6 +587,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -641,6 +639,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 push $169
@@ -811,6 +810,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -908,7 +908,7 @@ push $90
 pop %eax
 mov %eax, -12(%ebp)
 # Assignment Ends
- jmp if_end_6
+jmp if_end_6
 else_6:
 # Else
 # Assignment
@@ -979,15 +979,14 @@ pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
 # Call Ends
- jmp if_end_7
+jmp if_end_7
 else_7:
 if_end_7:
 # If Ends
- jmp if_end_5
+jmp if_end_5
 else_5:
 if_end_5:
 # If Ends
-mov 8(%ebp), %eax
 pop %ebx
 pop %esi
 pop %edi
@@ -1051,6 +1050,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -1149,7 +1149,7 @@ mov %eax, -4(%ebp)
 jmp while_9
 while_end_9:
 # While Ends
- jmp if_end_8
+jmp if_end_8
 else_8:
 if_end_8:
 # If Ends

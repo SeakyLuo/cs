@@ -3,7 +3,7 @@ FLEX	= flex
 CC		= gcc
 CXX		= g++
 OFLAGS  = -std=c++11
-FLAGS   = -Ofast # add the -g flag to compile with debugging output for gdb
+FLAGS   = -Ofast -g # add the -g flag to compile with debugging output for gdb
 TARGET	= lang
 
 OBJS = ast.o parser.o lexer.o typecheck.o codegen.o main.o
@@ -28,7 +28,7 @@ ast.cpp:
 
 ast.o: ast.cpp
 	$(CXX) $(OFLAGS) $(FLAGS) -c -o ast.o ast.cpp
-	
+
 typecheck.o: typecheck.cpp typecheck.hpp
 	$(CXX) $(OFLAGS) $(FLAGS) -c -o typecheck.o typecheck.cpp
 

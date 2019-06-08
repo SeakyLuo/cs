@@ -67,7 +67,7 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
- jmp if_end_0
+jmp if_end_0
 else_0:
 # Else
 # Print
@@ -101,7 +101,7 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
- jmp if_end_1
+jmp if_end_1
 else_1:
 # Else
 # Print
@@ -153,7 +153,7 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
- jmp if_end_2
+jmp if_end_2
 else_2:
 # Else
 # Print
@@ -205,7 +205,7 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
- jmp if_end_3
+jmp if_end_3
 else_3:
 # Else
 # Print

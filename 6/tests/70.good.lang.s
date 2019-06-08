@@ -93,7 +93,6 @@ push $0
 pop %eax
 mov %eax, -8(%ebp)
 # Assignment Ends
-mov 8(%ebp), %eax
 pop %ebx
 pop %esi
 pop %edi
@@ -140,6 +139,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -441,7 +441,7 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
- jmp if_end_6
+jmp if_end_6
 else_6:
 if_end_6:
 # If Ends
@@ -468,7 +468,7 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
- jmp if_end_3
+jmp if_end_3
 else_3:
 if_end_3:
 # If Ends
@@ -481,7 +481,7 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
- jmp if_end_1
+jmp if_end_1
 else_1:
 # Else
 # Assignment
@@ -742,7 +742,7 @@ while_end_10:
 jmp while_9
 while_end_9:
 # While Ends
- jmp if_end_8
+jmp if_end_8
 else_8:
 # Else
 # Assignment

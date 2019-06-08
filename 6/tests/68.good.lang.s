@@ -95,7 +95,7 @@ push -12(%ebp)
 pop %eax
 mov %eax, -8(%ebp)
 # Assignment Ends
- jmp if_end_0
+jmp if_end_0
 else_0:
 if_end_0:
 # If Ends
@@ -170,7 +170,7 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
- jmp if_end_1
+jmp if_end_1
 else_1:
 if_end_1:
 # If Ends
@@ -322,7 +322,7 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
- jmp if_end_4
+jmp if_end_4
 else_4:
 if_end_4:
 # If Ends
@@ -334,7 +334,7 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
- jmp if_end_3
+jmp if_end_3
 else_3:
 # Else
 # Assignment
@@ -769,11 +769,10 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
- jmp if_end_5
+jmp if_end_5
 else_5:
 if_end_5:
 # If Ends
-mov 8(%ebp), %eax
 pop %ebx
 pop %esi
 pop %edi
@@ -889,6 +888,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -921,6 +921,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -989,6 +990,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -1136,6 +1138,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -1180,6 +1183,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -1243,6 +1247,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -1422,6 +1427,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -1543,11 +1549,10 @@ pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
 # Call Ends
- jmp if_end_8
+jmp if_end_8
 else_8:
 if_end_8:
 # If Ends
-mov 8(%ebp), %eax
 pop %ebx
 pop %esi
 pop %edi
@@ -1599,6 +1604,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -1621,6 +1627,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -1656,6 +1663,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -1713,6 +1721,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -1799,6 +1808,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -1844,6 +1854,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -1926,6 +1937,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -1948,6 +1960,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -2046,7 +2059,7 @@ pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
 # Call Ends
- jmp if_end_9
+jmp if_end_9
 else_9:
 # Else
 # Assignment
@@ -2127,7 +2140,7 @@ pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
 # Call Ends
- jmp if_end_12
+jmp if_end_12
 else_12:
 # Else
 # Call
@@ -2182,7 +2195,7 @@ mov %eax, -12(%ebp)
 # Assignment Ends
 if_end_12:
 # If Ends
- jmp if_end_11
+jmp if_end_11
 else_11:
 if_end_11:
 # If Ends
@@ -2236,7 +2249,6 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
-mov 8(%ebp), %eax
 pop %ebx
 pop %esi
 pop %edi
@@ -2308,6 +2320,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -2333,6 +2346,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -2365,6 +2379,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -2432,7 +2447,7 @@ push -24(%ebp)
 pop %eax
 mov %eax, -24(%ebp)
 # Assignment Ends
- jmp if_end_13
+jmp if_end_13
 else_13:
 # Else
 # Print
@@ -2560,7 +2575,7 @@ push %eax
 push -16(%ebp)
 # Variable Ends
 push -20(%ebp)
-call class2_f5
+call class1_f5
 add $24, %esp
 pop %edx
 pop %ecx
@@ -2601,14 +2616,14 @@ sete %dl
 push %edx
 # Equal Ends
 push -20(%ebp)
-call class2_f5
+call class1_f5
 add $24, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
 # Call Ends
- jmp if_end_15
+jmp if_end_15
 else_15:
 # Else
 # If
@@ -2634,7 +2649,7 @@ push $0
 pop %eax
 mov %eax, -16(%ebp)
 # Assignment Ends
- jmp if_end_16
+jmp if_end_16
 else_16:
 if_end_16:
 # If Ends
@@ -2707,7 +2722,7 @@ push %eax
 push %ecx
 push %edx
 push 12(%ebp)
-call class2_f6
+call class1_f6
 add $4, %esp
 pop %edx
 pop %ecx
@@ -2957,7 +2972,7 @@ push 24(%ebp)
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
- jmp if_end_19
+jmp if_end_19
 else_19:
 if_end_19:
 # If Ends
@@ -3124,6 +3139,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 push 8(%ebp)
@@ -3136,7 +3152,6 @@ xchg %eax, (%esp)
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
-mov 8(%ebp), %eax
 pop %ebx
 pop %esi
 pop %edi
@@ -3209,6 +3224,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -3267,7 +3283,7 @@ push 24(%ebx)
 # MemberAccess Ends
 push $0
 push -4(%ebp)
-call class2_f5
+call class1_f5
 add $24, %esp
 pop %edx
 pop %ecx
@@ -3360,7 +3376,7 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
- jmp if_end_20
+jmp if_end_20
 else_20:
 if_end_20:
 # If Ends
@@ -3370,7 +3386,7 @@ push %eax
 push %ecx
 push %edx
 push -4(%ebp)
-call class2_f6
+call class1_f6
 add $4, %esp
 pop %edx
 pop %ecx
@@ -3397,7 +3413,7 @@ push 28(%ebx)
 # MemberAccess Ends
 push $0
 push -4(%ebp)
-call class2_f5
+call class1_f5
 add $24, %esp
 pop %edx
 pop %ecx

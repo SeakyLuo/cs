@@ -206,7 +206,6 @@ push $201
 pop %eax
 mov %eax, -16(%ebp)
 # Assignment Ends
-mov 8(%ebp), %eax
 pop %ebx
 pop %esi
 pop %edi
@@ -430,7 +429,7 @@ push -4(%ebp)
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
- jmp if_end_3
+jmp if_end_3
 else_3:
 # Else
 # Assignment
@@ -455,7 +454,7 @@ mov %eax, -4(%ebp)
 # Assignment Ends
 if_end_3:
 # If Ends
- jmp if_end_2
+jmp if_end_2
 else_2:
 if_end_2:
 # If Ends
@@ -569,7 +568,7 @@ push -4(%ebp)
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
- jmp if_end_6
+jmp if_end_6
 else_6:
 # Else
 # Print
@@ -657,7 +656,7 @@ push $0
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
- jmp if_end_8
+jmp if_end_8
 else_8:
 if_end_8:
 # If Ends
