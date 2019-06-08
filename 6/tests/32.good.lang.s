@@ -562,6 +562,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+add $4, %esp
 # Call Ends
 # Return Statement
 # Or
@@ -777,6 +778,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+add $4, %esp
 # Call Ends
 pop %ebx
 pop %esi

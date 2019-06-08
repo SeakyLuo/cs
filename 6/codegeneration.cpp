@@ -84,6 +84,7 @@ void CodeGenerator::visitAssignmentNode(AssignmentNode* node) {
 void CodeGenerator::visitCallNode(CallNode* node) {
     std::cout << "# Call\n";
     node->visit_children(this);
+    std::cout << "add $4, %esp\n";
     std::cout << "# Call Ends\n";
 }
 
@@ -128,7 +129,7 @@ void CodeGenerator::visitWhileNode(WhileNode* node) {
 
 void CodeGenerator::visitPrintNode(PrintNode* node) {
     std::cout << "# Print\n";
-    node->visit_children(this);
+    node->expression->accept(this);
     std::cout << "push $printstr\n";
 	std::cout << "call printf\n";
 	std::cout << "add $8, %esp\n";
@@ -352,8 +353,8 @@ void CodeGenerator::visitNewNode(NewNode* node) {
     std::cout << "call malloc\n";
     std::cout << "add $4, %esp\n";
     if ((*classTable)[className].methods->count(className)){
-        MethodCallNode* methodcall = new MethodCallNode(node->identifier, NULL, node->expression_list);
         std::cout << "# ConstructorCall\n";
+        MethodCallNode* methodcall = new MethodCallNode(node->identifier, NULL, node->expression_list);
         visitMethodCallNode(methodcall);
         std::cout << "push %eax\n";
         std::cout << "# ConstructorCall Ends\n";

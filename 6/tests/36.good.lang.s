@@ -139,8 +139,8 @@ add $24, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-# MethodCall Ends
 push %eax
+# MethodCall Ends
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -361,8 +361,8 @@ add $24, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
-# MethodCall Ends
 push %eax
+# MethodCall Ends
 # ConstructorCall Ends
 # New Ends
 pop %eax

@@ -1994,6 +1994,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+add $4, %esp
 # Call Ends
 # If
 push $0
@@ -2204,6 +2205,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+add $4, %esp
 # Call Ends
 # Assignment
 # Variable
@@ -2324,6 +2326,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+add $4, %esp
 # Call Ends
 jmp while_28
 while_end_28:
@@ -2405,6 +2408,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+add $4, %esp
 # Call Ends
 jmp if_end_33
 else_33:
@@ -2793,6 +2797,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+add $4, %esp
 # Call Ends
 pop %ebx
 pop %esi
