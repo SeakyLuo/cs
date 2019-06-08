@@ -1,3 +1,6 @@
+# Class Main
+# Class class0
+# Class class1
 .data
 printstr: .asciz "%d\n"
 .text

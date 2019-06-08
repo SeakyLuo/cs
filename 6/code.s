@@ -19,7 +19,14 @@ pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 0(%ebx)
 # Assignment Ends
-mov 8(%ebp), %eax
+# Assignment
+# Variable
+push 16(%ebp)
+# Variable Ends
+pop %eax
+mov 8(%ebp), %ebx
+mov %eax, 4(%ebx)
+# Assignment Ends
 pop %ebx
 pop %esi
 pop %edi
@@ -27,8 +34,8 @@ mov %ebp, %esp
 pop %ebp
 ret
 # Method classA Ends
-# Method f0
-classA_f0:
+# Method inc
+classA_inc:
 push %ebp
 mov %esp, %ebp
 sub $0, %esp
@@ -51,62 +58,36 @@ pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 0(%ebx)
 # Assignment Ends
-pop %ebx
-pop %esi
-pop %edi
-mov %ebp, %esp
-pop %ebp
-ret
-# Method f0 Ends
-# Class classA Ends
-# Class classB
-# Method classB
-classB_classB:
-push %ebp
-mov %esp, %ebp
-sub $0, %esp
-push %edi
-push %esi
-push %ebx
-# Call
-# MethodCall
-push %eax
-push %ecx
-push %edx
-# Variable
-push 12(%ebp)
-# Variable Ends
-push 12(%esp)
-call classA_classA
-add $8, %esp
-pop %edx
-pop %ecx
-xchg %eax, (%esp)
-# MethodCall Ends
-# Call Ends
 # Assignment
+# Plus
 # Variable
-push 16(%ebp)
+mov 8(%ebp), %ebx
+push 4(%ebx)
 # Variable Ends
+push $1
+pop  %ebx
+pop  %eax
+add  %ebx, %eax
+push %eax
+# Plus Ends
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 4(%ebx)
 # Assignment Ends
-mov 8(%ebp), %eax
 pop %ebx
 pop %esi
 pop %edi
 mov %ebp, %esp
 pop %ebp
 ret
-# Method classB Ends
-# Class classB Ends
+# Method inc Ends
+# Class classA Ends
 # Class Main
 # Method main
 Main_main:
 push %ebp
 mov %esp, %ebp
-sub $4, %esp
+sub $8, %esp
 push %edi
 push %esi
 push %ebx
@@ -120,15 +101,16 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
-push $1
-push $12
+push $4
+push $3
 push 16(%esp)
-call classB_classB
+call classA_classA
 add $12, %esp
 pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -158,7 +140,7 @@ push %eax
 push %ecx
 push %edx
 push -4(%ebp)
-call classB_f0
+call classA_inc
 add $4, %esp
 pop %edx
 pop %ecx
@@ -166,19 +148,20 @@ xchg %eax, (%esp)
 # MethodCall Ends
 # Call Ends
 # Print
+# Times
 # MemberAccess
 mov -4(%ebp), %ebx
 push 0(%ebx)
 # MemberAccess Ends
-push $printstr
-call printf
-add $8, %esp
-# Print Ends
-# Print
 # MemberAccess
 mov -4(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends
+pop  %ebx
+pop  %eax
+imul  %ebx, %eax
+push %eax
+# Times Ends
 push $printstr
 call printf
 add $8, %esp

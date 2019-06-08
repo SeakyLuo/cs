@@ -452,7 +452,6 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
-mov 8(%ebp), %eax
 pop %ebx
 pop %esi
 pop %edi
@@ -504,6 +503,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -877,6 +877,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -1051,6 +1052,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -1164,6 +1166,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -1327,7 +1330,6 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
-mov 8(%ebp), %eax
 pop %ebx
 pop %esi
 pop %edi
@@ -1383,6 +1385,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -1919,7 +1922,6 @@ add $8, %esp
 else_16:
 if_end_16:
 # If Ends
-mov 8(%ebp), %eax
 pop %ebx
 pop %esi
 pop %edi

@@ -30,10 +30,6 @@ void CodeGenerator::visitMethodNode(MethodNode* node) {
     std::cout << "sub $" << currentMethodInfo.localsSize << ", %esp\n";
     std::cout << "push %edi\npush %esi\npush %ebx\n";
     node->visit_children(this);
-    // if constructor, return self pointer
-    // move to new ?
-  	if (currentMethodName == currentClassName)
-		std::cout << "mov 8(%ebp), %eax\n";
     std::cout << "pop %ebx\npop %esi\npop %edi\n";
     std::cout << "mov %ebp, %esp\n";
     std::cout << "pop %ebp\n";
@@ -295,12 +291,12 @@ void CodeGenerator::visitMethodCallNode(MethodCallNode* node) {
             className =  methodName;
             std::cout << "push " << 8 + 4 * args << "(%esp)\n";
         }else{
-            for (className =  currentClassName;
-                 (*classTable)[className]->count(methodName);
-                 className = (*classTable)[className].superClassName){}
+            className =  currentClassName;
             std::cout << "push 8(%ebp)\n";
         }
     }
+    for (;(*classTable)[className].methods->count(methodName) == 0;
+         className = (*classTable)[className].superClassName){}
     std::cout << "call " << className << "_" << methodName << "\n";
     // pop arguments
     std::cout << "add $" << 4 * (args + 1) << ", %esp\n";
@@ -357,9 +353,10 @@ void CodeGenerator::visitNewNode(NewNode* node) {
     std::cout << "call malloc\n";
     std::cout << "add $4, %esp\n";
     if ((*classTable)[className].methods->count(className)){
-        MethodCallNode* mcNode = new MethodCallNode(node->identifier, NULL, node->expression_list);
+        MethodCallNode* methodcall = new MethodCallNode(node->identifier, NULL, node->expression_list);
         std::cout << "# ConstructorCall\n";
-        visitMethodCallNode(mcNode);
+        visitMethodCallNode(methodcall);
+        std::cout << "push %eax\n";
         std::cout << "# ConstructorCall Ends\n";
     }else{
         std::cout << "push %eax\n";

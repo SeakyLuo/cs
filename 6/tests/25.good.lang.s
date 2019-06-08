@@ -42,7 +42,6 @@ pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 8(%ebx)
 # Assignment Ends
-mov 8(%ebp), %eax
 pop %ebx
 pop %esi
 pop %edi
@@ -143,6 +142,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -184,6 +184,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -761,6 +762,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 # Variable
@@ -810,6 +812,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -1523,6 +1526,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -2269,6 +2273,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -2294,6 +2299,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -2319,6 +2325,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -2344,6 +2351,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -2408,6 +2416,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -2438,6 +2447,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -2468,6 +2478,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -2498,6 +2509,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -2528,6 +2540,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -3059,6 +3072,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -3084,6 +3098,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -3114,6 +3129,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -3144,6 +3160,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -3174,6 +3191,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -3204,6 +3222,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -3234,6 +3253,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -3354,6 +3374,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -3746,6 +3767,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -3771,6 +3793,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -3994,6 +4017,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -4019,6 +4043,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -4044,6 +4069,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -4069,6 +4095,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax

@@ -1507,7 +1507,6 @@ push $106
 pop %eax
 mov %eax, -8(%ebp)
 # Assignment Ends
-mov 8(%ebp), %eax
 pop %ebx
 pop %esi
 pop %edi
@@ -1962,6 +1961,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -2572,7 +2572,6 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
-mov 8(%ebp), %eax
 pop %ebx
 pop %esi
 pop %edi
@@ -2681,6 +2680,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -2710,6 +2710,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -2733,6 +2734,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
@@ -2792,7 +2794,6 @@ pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
 # Call Ends
-mov 8(%ebp), %eax
 pop %ebx
 pop %esi
 pop %edi
@@ -2873,6 +2874,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+push %eax
 # ConstructorCall Ends
 # New Ends
 pop %eax
