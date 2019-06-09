@@ -67,14 +67,17 @@ sub $0, %esp
 push %edi
 push %esi
 push %ebx
-# Call
+# Assignment
+# New
+push $4
+call malloc
+add $4, %esp
+# ConstructorCall
 # MethodCall
 push %eax
 push %ecx
 push %edx
-# Variable
-push 12(%ebp)
-# Variable Ends
+push $5
 push 12(%esp)
 call classA_classA
 add $8, %esp
@@ -82,16 +85,22 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
-# Call Ends
-# Assignment
-# Variable
-push 16(%ebp)
-# Variable Ends
+push %eax
+# ConstructorCall Ends
+# New Ends
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 4(%ebx)
 # Assignment Ends
+# Print
+# MemberAccess
+mov 4(%ebp), %ebx
+push 0(%ebx)
+# MemberAccess Ends
+push $printstr
+call printf
+add $8, %esp
+# Print Ends
 pop %ebx
 pop %esi
 pop %edi
@@ -134,56 +143,6 @@ push %eax
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
-# Print
-# MemberAccess
-mov -4(%ebp), %ebx
-push 0(%ebx)
-# MemberAccess Ends
-push $printstr
-call printf
-add $8, %esp
-# Print Ends
-# Print
-# MemberAccess
-mov -4(%ebp), %ebx
-push 4(%ebx)
-# MemberAccess Ends
-push $printstr
-call printf
-add $8, %esp
-# Print Ends
-# Call
-# MethodCall
-push %eax
-push %ecx
-push %edx
-push -4(%ebp)
-call classA_f0
-add $4, %esp
-pop %edx
-pop %ecx
-xchg %eax, (%esp)
-# MethodCall Ends
-add $4, %esp
-# Call Ends
-# Print
-# MemberAccess
-mov -4(%ebp), %ebx
-push 0(%ebx)
-# MemberAccess Ends
-push $printstr
-call printf
-add $8, %esp
-# Print Ends
-# Print
-# MemberAccess
-mov -4(%ebp), %ebx
-push 4(%ebx)
-# MemberAccess Ends
-push $printstr
-call printf
-add $8, %esp
-# Print Ends
 pop %ebx
 pop %esi
 pop %edi

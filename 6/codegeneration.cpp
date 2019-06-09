@@ -354,6 +354,8 @@ void CodeGenerator::visitNewNode(NewNode* node) {
     std::cout << "add $4, %esp\n";
     if ((*classTable)[className].methods->count(className)){
         std::cout << "# ConstructorCall\n";
+        // std::cout << "call " << className << "_" << className << "\n";
+        // std::cout << "add $" << 4 * (node->expression_list->size() + 1) << ", %esp\n";
         MethodCallNode* methodcall = new MethodCallNode(node->identifier, NULL, node->expression_list);
         visitMethodCallNode(methodcall);
         std::cout << "push %eax\n";
