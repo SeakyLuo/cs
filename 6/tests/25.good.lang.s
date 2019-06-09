@@ -12,7 +12,7 @@ push %edi
 push %esi
 push %ebx
 # Assignment
-# Variable
+# Variable s
 push 12(%ebp)
 # Variable Ends
 pop %eax
@@ -21,7 +21,7 @@ mov %eax, 0(%ebx)
 # Assignment Ends
 # Assignment
 # Plus
-# Variable
+# Variable e
 push 16(%ebp)
 # Variable Ends
 push $127
@@ -35,7 +35,7 @@ mov 8(%ebp), %ebx
 mov %eax, 4(%ebx)
 # Assignment Ends
 # Assignment
-# Variable
+# Variable f
 push 20(%ebp)
 # Variable Ends
 pop %eax
@@ -58,7 +58,7 @@ push %edi
 push %esi
 push %ebx
 # Print
-# Variable
+# Variable sign
 mov 8(%ebp), %ebx
 push 0(%ebx)
 # Variable Ends
@@ -68,7 +68,7 @@ add $8, %esp
 # Print Ends
 # Print
 # Minus
-# Variable
+# Variable exp
 mov 8(%ebp), %ebx
 push 4(%ebx)
 # Variable Ends
@@ -83,7 +83,7 @@ call printf
 add $8, %esp
 # Print Ends
 # Print
-# Variable
+# Variable frac
 mov 8(%ebp), %ebx
 push 8(%ebx)
 # Variable Ends
@@ -116,12 +116,13 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable frac
 mov 8(%ebp), %ebx
 push 8(%ebx)
 # Variable Ends
 # Minus
-# Variable
+# Variable exp
 mov 8(%ebp), %ebx
 push 4(%ebx)
 # Variable Ends
@@ -131,10 +132,11 @@ pop  %eax
 sub  %ebx, %eax
 push %eax
 # Minus Ends
-# Variable
+# Variable sign
 mov 8(%ebp), %ebx
 push 0(%ebx)
 # Variable Ends
+# Arguments Pushed
 push 20(%esp)
 call Float_Float
 add $16, %esp
@@ -174,9 +176,11 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 push $0
 push $0
 push $0
+# Arguments Pushed
 push 20(%esp)
 call Float_Float
 add $16, %esp
@@ -190,13 +194,13 @@ push %eax
 pop %eax
 mov %eax, -12(%ebp)
 # Assignment Ends
-# If
+# IfElse
 # Greater
-# MemberAccess
+# MemberAccess f2.exp
 mov 16(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends
-# MemberAccess
+# MemberAccess f1.exp
 mov 12(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends
@@ -211,11 +215,14 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je else_0
+# If
 # Assignment
 # MethodCall
 push %eax
 push %ecx
 push %edx
+# Push Arguments
+# Arguments Pushed
 push 16(%ebp)
 call Float_copy
 add $4, %esp
@@ -231,6 +238,8 @@ mov %eax, -4(%ebp)
 push %eax
 push %ecx
 push %edx
+# Push Arguments
+# Arguments Pushed
 push 12(%ebp)
 call Float_copy
 add $4, %esp
@@ -241,14 +250,17 @@ xchg %eax, (%esp)
 pop %eax
 mov %eax, -8(%ebp)
 # Assignment Ends
-jmp if_end_0
-else_0:
+# If Ends
+jmp ifelse_0
 # Else
+else_0:
 # Assignment
 # MethodCall
 push %eax
 push %ecx
 push %edx
+# Push Arguments
+# Arguments Pushed
 push 12(%ebp)
 call Float_copy
 add $4, %esp
@@ -264,6 +276,8 @@ mov %eax, -4(%ebp)
 push %eax
 push %ecx
 push %edx
+# Push Arguments
+# Arguments Pushed
 push 16(%ebp)
 call Float_copy
 add $4, %esp
@@ -274,15 +288,16 @@ xchg %eax, (%esp)
 pop %eax
 mov %eax, -8(%ebp)
 # Assignment Ends
-if_end_0:
+# Else Ends
+ifelse_0:
 # If Ends
 # Assignment
 # Minus
-# MemberAccess
+# MemberAccess x.exp
 mov -4(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends
-# MemberAccess
+# MemberAccess y.exp
 mov -8(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends
@@ -297,7 +312,7 @@ mov %eax, -16(%ebp)
 # Assignment
 # Plus
 push $8388608
-# MemberAccess
+# MemberAccess x.frac
 mov -4(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -313,7 +328,7 @@ mov %eax, 8(%ebx)
 # Assignment
 # Plus
 push $8388608
-# MemberAccess
+# MemberAccess y.frac
 mov -8(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -326,8 +341,8 @@ pop %eax
 mov -8(%ebp), %ebx
 mov %eax, 8(%ebx)
 # Assignment Ends
-# If
-# MemberAccess
+# IfElse
+# MemberAccess x.sign
 mov -4(%ebp), %ebx
 push 0(%ebx)
 # MemberAccess Ends
@@ -335,6 +350,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je else_1
+# If
 # Assignment
 # Times
 # Negation
@@ -343,7 +359,7 @@ pop  %eax
 neg  %eax
 push %eax
 # Negation Ends
-# MemberAccess
+# MemberAccess x.frac
 mov -4(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -356,12 +372,15 @@ pop %eax
 mov -4(%ebp), %ebx
 mov %eax, 8(%ebx)
 # Assignment Ends
-jmp if_end_1
-else_1:
-if_end_1:
 # If Ends
-# If
-# MemberAccess
+jmp ifelse_1
+# Else
+else_1:
+# Else Ends
+ifelse_1:
+# If Ends
+# IfElse
+# MemberAccess y.sign
 mov -8(%ebp), %ebx
 push 0(%ebx)
 # MemberAccess Ends
@@ -369,6 +388,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je else_2
+# If
 # Assignment
 # Times
 # Negation
@@ -377,7 +397,7 @@ pop  %eax
 neg  %eax
 push %eax
 # Negation Ends
-# MemberAccess
+# MemberAccess y.frac
 mov -8(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -390,12 +410,15 @@ pop %eax
 mov -8(%ebp), %ebx
 mov %eax, 8(%ebx)
 # Assignment Ends
-jmp if_end_2
+# If Ends
+jmp ifelse_2
+# Else
 else_2:
-if_end_2:
+# Else Ends
+ifelse_2:
 # If Ends
 # Assignment
-# Variable
+# Variable diff
 push -16(%ebp)
 # Variable Ends
 pop %eax
@@ -404,7 +427,7 @@ mov %eax, -20(%ebp)
 # While
 while_3:
 # Greater
-# Variable
+# Variable i
 push -20(%ebp)
 # Variable Ends
 push $0
@@ -421,7 +444,7 @@ cmp %eax, %ebx
 je while_end_3
 # Assignment
 # Minus
-# Variable
+# Variable i
 push -20(%ebp)
 # Variable Ends
 push $1
@@ -435,7 +458,7 @@ mov %eax, -20(%ebp)
 # Assignment Ends
 # Assignment
 # Divide
-# MemberAccess
+# MemberAccess y.frac
 mov -8(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -455,11 +478,11 @@ while_end_3:
 # While Ends
 # Assignment
 # Plus
-# MemberAccess
+# MemberAccess x.frac
 mov -4(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
-# MemberAccess
+# MemberAccess y.frac
 mov -8(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -473,7 +496,7 @@ mov -12(%ebp), %ebx
 mov %eax, 8(%ebx)
 # Assignment Ends
 # Assignment
-# MemberAccess
+# MemberAccess x.exp
 mov -4(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends
@@ -481,10 +504,10 @@ pop %eax
 mov -12(%ebp), %ebx
 mov %eax, 4(%ebx)
 # Assignment Ends
-# If
+# IfElse
 # Greater
 push $0
-# MemberAccess
+# MemberAccess result.frac
 mov -12(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -499,6 +522,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je else_4
+# If
 # Assignment
 # Times
 # Negation
@@ -507,7 +531,7 @@ pop  %eax
 neg  %eax
 push %eax
 # Negation Ends
-# MemberAccess
+# MemberAccess result.frac
 mov -12(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -526,21 +550,23 @@ pop %eax
 mov -12(%ebp), %ebx
 mov %eax, 0(%ebx)
 # Assignment Ends
-jmp if_end_4
-else_4:
+# If Ends
+jmp ifelse_4
 # Else
+else_4:
 # Assignment
 push $0
 pop %eax
 mov -12(%ebp), %ebx
 mov %eax, 0(%ebx)
 # Assignment Ends
-if_end_4:
+# Else Ends
+ifelse_4:
 # If Ends
-# If
+# IfElse
 # Not
 # Equal
-# MemberAccess
+# MemberAccess result.frac
 mov -12(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -560,11 +586,12 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je else_5
+# If
 # While
 while_6:
 # Greater
 push $8388608
-# MemberAccess
+# MemberAccess result.frac
 mov -12(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -581,7 +608,7 @@ cmp %eax, %ebx
 je while_end_6
 # Assignment
 # Times
-# MemberAccess
+# MemberAccess result.frac
 mov -12(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -597,7 +624,7 @@ mov %eax, 8(%ebx)
 # Assignment Ends
 # Assignment
 # Minus
-# MemberAccess
+# MemberAccess result.exp
 mov -12(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends
@@ -617,7 +644,7 @@ while_end_6:
 # While
 while_7:
 # GreaterEqual
-# MemberAccess
+# MemberAccess result.frac
 mov -12(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -635,7 +662,7 @@ cmp %eax, %ebx
 je while_end_7
 # Assignment
 # Divide
-# MemberAccess
+# MemberAccess result.frac
 mov -12(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -652,7 +679,7 @@ mov %eax, 8(%ebx)
 # Assignment Ends
 # Assignment
 # Plus
-# MemberAccess
+# MemberAccess result.exp
 mov -12(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends
@@ -671,7 +698,7 @@ while_end_7:
 # While Ends
 # Assignment
 # Minus
-# MemberAccess
+# MemberAccess result.frac
 mov -12(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -685,19 +712,21 @@ pop %eax
 mov -12(%ebp), %ebx
 mov %eax, 8(%ebx)
 # Assignment Ends
-jmp if_end_5
-else_5:
+# If Ends
+jmp ifelse_5
 # Else
+else_5:
 # Assignment
 push $0
 pop %eax
 mov -12(%ebp), %ebx
 mov %eax, 4(%ebx)
 # Assignment Ends
-if_end_5:
+# Else Ends
+ifelse_5:
 # If Ends
 # Return Statement
-# Variable
+# Variable result
 push -12(%ebp)
 # Variable Ends
 pop %eax
@@ -722,6 +751,7 @@ push %ebx
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 # New
 push $12
 call malloc
@@ -731,12 +761,13 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
-# MemberAccess
+# Push Arguments
+# MemberAccess f2.frac
 mov 16(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
 # Minus
-# MemberAccess
+# MemberAccess f2.exp
 mov 16(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends
@@ -747,7 +778,7 @@ sub  %ebx, %eax
 push %eax
 # Minus Ends
 # Not
-# MemberAccess
+# MemberAccess f2.sign
 mov 16(%ebp), %ebx
 push 0(%ebx)
 # MemberAccess Ends
@@ -755,6 +786,7 @@ pop  %eax
 xor $1, %eax
 push %eax
 # Not Ends
+# Arguments Pushed
 push 20(%esp)
 call Float_Float
 add $16, %esp
@@ -765,9 +797,10 @@ xchg %eax, (%esp)
 push %eax
 # ConstructorCall Ends
 # New Ends
-# Variable
+# Variable f1
 push 12(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_add
 add $12, %esp
@@ -802,9 +835,11 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 push $0
 push $0
 push $0
+# Arguments Pushed
 push 20(%esp)
 call Float_Float
 add $16, %esp
@@ -818,11 +853,11 @@ push %eax
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
-# If
+# IfElse
 # Or
 # And
 # Equal
-# MemberAccess
+# MemberAccess f1.exp
 mov 12(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends
@@ -835,7 +870,7 @@ sete %dl
 push %edx
 # Equal Ends
 # Equal
-# MemberAccess
+# MemberAccess f1.frac
 mov 12(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -854,7 +889,7 @@ push %eax
 # And Ends
 # And
 # Equal
-# MemberAccess
+# MemberAccess f2.exp
 mov 16(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends
@@ -867,7 +902,7 @@ sete %dl
 push %edx
 # Equal Ends
 # Equal
-# MemberAccess
+# MemberAccess f2.frac
 mov 16(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -893,6 +928,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je else_8
+# If
 # Assignment
 push $0
 pop %eax
@@ -911,17 +947,18 @@ pop %eax
 mov -4(%ebp), %ebx
 mov %eax, 8(%ebx)
 # Assignment Ends
-jmp if_end_8
-else_8:
+# If Ends
+jmp ifelse_8
 # Else
-# If
+else_8:
+# IfElse
 # And
 # Or
-# MemberAccess
+# MemberAccess f1.sign
 mov 12(%ebp), %ebx
 push 0(%ebx)
 # MemberAccess Ends
-# MemberAccess
+# MemberAccess f2.sign
 mov 16(%ebp), %ebx
 push 0(%ebx)
 # MemberAccess Ends
@@ -932,11 +969,11 @@ push %eax
 # Or Ends
 # Not
 # And
-# MemberAccess
+# MemberAccess f1.sign
 mov 12(%ebp), %ebx
 push 0(%ebx)
 # MemberAccess Ends
-# MemberAccess
+# MemberAccess f2.sign
 mov 16(%ebp), %ebx
 push 0(%ebx)
 # MemberAccess Ends
@@ -958,31 +995,34 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je else_9
+# If
 # Assignment
 push $1
 pop %eax
 mov -4(%ebp), %ebx
 mov %eax, 0(%ebx)
 # Assignment Ends
-jmp if_end_9
-else_9:
+# If Ends
+jmp ifelse_9
 # Else
+else_9:
 # Assignment
 push $0
 pop %eax
 mov -4(%ebp), %ebx
 mov %eax, 0(%ebx)
 # Assignment Ends
-if_end_9:
+# Else Ends
+ifelse_9:
 # If Ends
 # Assignment
 # Minus
 # Plus
-# MemberAccess
+# MemberAccess f1.exp
 mov 12(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends
-# MemberAccess
+# MemberAccess f2.exp
 mov 16(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends
@@ -1003,7 +1043,7 @@ mov %eax, 4(%ebx)
 # Assignment Ends
 # Assignment
 # Plus
-# MemberAccess
+# MemberAccess f1.frac
 mov 12(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -1019,7 +1059,7 @@ mov %eax, 8(%ebx)
 # Assignment Ends
 # Assignment
 # Plus
-# MemberAccess
+# MemberAccess f2.frac
 mov 16(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -1035,7 +1075,7 @@ mov %eax, 8(%ebx)
 # Assignment Ends
 # Assignment
 # Divide
-# MemberAccess
+# MemberAccess f1.frac
 mov 12(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -1051,12 +1091,12 @@ mov %eax, -12(%ebp)
 # Assignment Ends
 # Assignment
 # Minus
-# MemberAccess
+# MemberAccess f1.frac
 mov 12(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
 # Times
-# Variable
+# Variable hi1
 push -12(%ebp)
 # Variable Ends
 push $4096
@@ -1075,7 +1115,7 @@ mov %eax, -24(%ebp)
 # Assignment Ends
 # Assignment
 # Divide
-# MemberAccess
+# MemberAccess f2.frac
 mov 16(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -1091,12 +1131,12 @@ mov %eax, -16(%ebp)
 # Assignment Ends
 # Assignment
 # Minus
-# MemberAccess
+# MemberAccess f2.frac
 mov 16(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
 # Times
-# Variable
+# Variable hi2
 push -16(%ebp)
 # Variable Ends
 push $4096
@@ -1115,10 +1155,10 @@ mov %eax, -28(%ebp)
 # Assignment Ends
 # Assignment
 # Times
-# Variable
+# Variable hi1
 push -12(%ebp)
 # Variable Ends
-# Variable
+# Variable hi2
 push -16(%ebp)
 # Variable Ends
 pop  %ebx
@@ -1132,10 +1172,10 @@ mov %eax, -8(%ebp)
 # Assignment
 # Plus
 # Times
-# Variable
+# Variable hi1
 push -12(%ebp)
 # Variable Ends
-# Variable
+# Variable lo2
 push -28(%ebp)
 # Variable Ends
 pop  %ebx
@@ -1144,10 +1184,10 @@ imul  %ebx, %eax
 push %eax
 # Times Ends
 # Times
-# Variable
+# Variable hi2
 push -16(%ebp)
 # Variable Ends
-# Variable
+# Variable lo1
 push -24(%ebp)
 # Variable Ends
 pop  %ebx
@@ -1165,11 +1205,11 @@ mov %eax, -20(%ebp)
 # Assignment Ends
 # Assignment
 # Plus
-# Variable
+# Variable hi
 push -8(%ebp)
 # Variable Ends
 # Divide
-# Variable
+# Variable lo
 push -20(%ebp)
 # Variable Ends
 push $4096
@@ -1189,11 +1229,11 @@ mov %eax, -8(%ebp)
 # Assignment Ends
 # Assignment
 # Minus
-# Variable
+# Variable lo
 push -20(%ebp)
 # Variable Ends
 # Divide
-# Variable
+# Variable lo
 push -20(%ebp)
 # Variable Ends
 push $4096
@@ -1212,7 +1252,7 @@ pop %eax
 mov %eax, -20(%ebp)
 # Assignment Ends
 # Assignment
-# Variable
+# Variable hi
 push -8(%ebp)
 # Variable Ends
 pop %eax
@@ -1221,7 +1261,7 @@ mov %eax, 8(%ebx)
 # Assignment Ends
 # Assignment
 # Plus
-# MemberAccess
+# MemberAccess result.exp
 mov -4(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends
@@ -1235,10 +1275,10 @@ pop %eax
 mov -4(%ebp), %ebx
 mov %eax, 4(%ebx)
 # Assignment Ends
-# If
+# IfElse
 # Not
 # Equal
-# MemberAccess
+# MemberAccess result.frac
 mov -4(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -1258,11 +1298,12 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je else_10
+# If
 # While
 while_11:
 # Greater
 push $8388608
-# MemberAccess
+# MemberAccess result.frac
 mov -4(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -1279,7 +1320,7 @@ cmp %eax, %ebx
 je while_end_11
 # Assignment
 # Times
-# MemberAccess
+# MemberAccess result.frac
 mov -4(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -1295,7 +1336,7 @@ mov %eax, 8(%ebx)
 # Assignment Ends
 # Assignment
 # Minus
-# MemberAccess
+# MemberAccess result.exp
 mov -4(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends
@@ -1311,12 +1352,12 @@ mov %eax, 4(%ebx)
 # Assignment Ends
 # Assignment
 # Plus
-# MemberAccess
+# MemberAccess result.frac
 mov -4(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
 # Divide
-# Variable
+# Variable lo
 push -20(%ebp)
 # Variable Ends
 push $1024
@@ -1337,11 +1378,11 @@ mov %eax, 8(%ebx)
 # Assignment Ends
 # Assignment
 # Minus
-# Variable
+# Variable lo
 push -20(%ebp)
 # Variable Ends
 # Divide
-# Variable
+# Variable lo
 push -20(%ebp)
 # Variable Ends
 push $1024
@@ -1361,7 +1402,7 @@ mov %eax, -20(%ebp)
 # Assignment Ends
 # Assignment
 # Times
-# Variable
+# Variable lo
 push -20(%ebp)
 # Variable Ends
 push $2
@@ -1379,7 +1420,7 @@ while_end_11:
 # While
 while_12:
 # GreaterEqual
-# MemberAccess
+# MemberAccess result.frac
 mov -4(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -1397,7 +1438,7 @@ cmp %eax, %ebx
 je while_end_12
 # Assignment
 # Divide
-# MemberAccess
+# MemberAccess result.frac
 mov -4(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -1414,7 +1455,7 @@ mov %eax, 8(%ebx)
 # Assignment Ends
 # Assignment
 # Plus
-# MemberAccess
+# MemberAccess result.exp
 mov -4(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends
@@ -1431,13 +1472,16 @@ mov %eax, 4(%ebx)
 jmp while_12
 while_end_12:
 # While Ends
-jmp if_end_10
+# If Ends
+jmp ifelse_10
+# Else
 else_10:
-if_end_10:
+# Else Ends
+ifelse_10:
 # If Ends
 # Assignment
 # Minus
-# MemberAccess
+# MemberAccess result.frac
 mov -4(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -1453,7 +1497,7 @@ mov %eax, 8(%ebx)
 # Assignment Ends
 # Assignment
 # Minus
-# MemberAccess
+# MemberAccess f1.frac
 mov 12(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -1469,7 +1513,7 @@ mov %eax, 8(%ebx)
 # Assignment Ends
 # Assignment
 # Minus
-# MemberAccess
+# MemberAccess f2.frac
 mov 16(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -1483,10 +1527,11 @@ pop %eax
 mov 16(%ebp), %ebx
 mov %eax, 8(%ebx)
 # Assignment Ends
-if_end_8:
+# Else Ends
+ifelse_8:
 # If Ends
 # Return Statement
-# Variable
+# Variable result
 push -4(%ebp)
 # Variable Ends
 pop %eax
@@ -1516,9 +1561,11 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 push $0
 push $0
 push $0
+# Arguments Pushed
 push 20(%esp)
 call Float_Float
 add $16, %esp
@@ -1532,14 +1579,14 @@ push %eax
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
-# If
+# IfElse
 # And
 # Or
-# MemberAccess
+# MemberAccess f1.sign
 mov 12(%ebp), %ebx
 push 0(%ebx)
 # MemberAccess Ends
-# MemberAccess
+# MemberAccess f2.sign
 mov 16(%ebp), %ebx
 push 0(%ebx)
 # MemberAccess Ends
@@ -1550,11 +1597,11 @@ push %eax
 # Or Ends
 # Not
 # And
-# MemberAccess
+# MemberAccess f1.sign
 mov 12(%ebp), %ebx
 push 0(%ebx)
 # MemberAccess Ends
-# MemberAccess
+# MemberAccess f2.sign
 mov 16(%ebp), %ebx
 push 0(%ebx)
 # MemberAccess Ends
@@ -1576,31 +1623,34 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je else_13
+# If
 # Assignment
 push $1
 pop %eax
 mov -4(%ebp), %ebx
 mov %eax, 0(%ebx)
 # Assignment Ends
-jmp if_end_13
-else_13:
+# If Ends
+jmp ifelse_13
 # Else
+else_13:
 # Assignment
 push $0
 pop %eax
 mov -4(%ebp), %ebx
 mov %eax, 0(%ebx)
 # Assignment Ends
-if_end_13:
+# Else Ends
+ifelse_13:
 # If Ends
 # Assignment
 # Plus
 # Minus
-# MemberAccess
+# MemberAccess f1.exp
 mov 12(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends
-# MemberAccess
+# MemberAccess f2.exp
 mov 16(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends
@@ -1621,7 +1671,7 @@ mov %eax, 4(%ebx)
 # Assignment Ends
 # Assignment
 # Plus
-# MemberAccess
+# MemberAccess f1.frac
 mov 12(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -1637,7 +1687,7 @@ mov %eax, 8(%ebx)
 # Assignment Ends
 # Assignment
 # Plus
-# MemberAccess
+# MemberAccess f2.frac
 mov 16(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -1653,7 +1703,7 @@ mov %eax, 8(%ebx)
 # Assignment Ends
 # Assignment
 # Times
-# MemberAccess
+# MemberAccess f1.frac
 mov 12(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -1669,11 +1719,11 @@ mov %eax, 8(%ebx)
 # Assignment Ends
 # Assignment
 # Divide
-# MemberAccess
+# MemberAccess f1.frac
 mov 12(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
-# MemberAccess
+# MemberAccess f2.frac
 mov 16(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -1689,7 +1739,7 @@ mov %eax, 8(%ebx)
 # Assignment Ends
 # Assignment
 # Plus
-# MemberAccess
+# MemberAccess result.exp
 mov -4(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends
@@ -1705,7 +1755,7 @@ mov %eax, 4(%ebx)
 # Assignment Ends
 # Assignment
 # Divide
-# MemberAccess
+# MemberAccess f1.frac
 mov 12(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -1722,7 +1772,7 @@ mov %eax, 8(%ebx)
 # Assignment Ends
 # Assignment
 # Minus
-# MemberAccess
+# MemberAccess f1.frac
 mov 12(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -1738,7 +1788,7 @@ mov %eax, 8(%ebx)
 # Assignment Ends
 # Assignment
 # Minus
-# MemberAccess
+# MemberAccess f2.frac
 mov 16(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -1752,10 +1802,10 @@ pop %eax
 mov 16(%ebp), %ebx
 mov %eax, 8(%ebx)
 # Assignment Ends
-# If
+# IfElse
 # Not
 # Equal
-# MemberAccess
+# MemberAccess result.frac
 mov -4(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -1775,11 +1825,12 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je else_14
+# If
 # While
 while_15:
 # Greater
 push $8388608
-# MemberAccess
+# MemberAccess result.frac
 mov -4(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -1796,7 +1847,7 @@ cmp %eax, %ebx
 je while_end_15
 # Assignment
 # Times
-# MemberAccess
+# MemberAccess result.frac
 mov -4(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -1812,7 +1863,7 @@ mov %eax, 8(%ebx)
 # Assignment Ends
 # Assignment
 # Minus
-# MemberAccess
+# MemberAccess result.exp
 mov -4(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends
@@ -1832,7 +1883,7 @@ while_end_15:
 # While
 while_16:
 # GreaterEqual
-# MemberAccess
+# MemberAccess result.frac
 mov -4(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -1850,7 +1901,7 @@ cmp %eax, %ebx
 je while_end_16
 # Assignment
 # Divide
-# MemberAccess
+# MemberAccess result.frac
 mov -4(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -1867,7 +1918,7 @@ mov %eax, 8(%ebx)
 # Assignment Ends
 # Assignment
 # Plus
-# MemberAccess
+# MemberAccess result.exp
 mov -4(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends
@@ -1884,13 +1935,16 @@ mov %eax, 4(%ebx)
 jmp while_16
 while_end_16:
 # While Ends
-jmp if_end_14
+# If Ends
+jmp ifelse_14
+# Else
 else_14:
-if_end_14:
+# Else Ends
+ifelse_14:
 # If Ends
 # Assignment
 # Minus
-# MemberAccess
+# MemberAccess result.frac
 mov -4(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -1905,7 +1959,7 @@ mov -4(%ebp), %ebx
 mov %eax, 8(%ebx)
 # Assignment Ends
 # Return Statement
-# Variable
+# Variable result
 push -4(%ebp)
 # Variable Ends
 pop %eax
@@ -1935,14 +1989,14 @@ push $0
 pop %eax
 mov %eax, -8(%ebp)
 # Assignment Ends
-# If
+# IfElse
 # And
-# MemberAccess
+# MemberAccess f1.sign
 mov 12(%ebp), %ebx
 push 0(%ebx)
 # MemberAccess Ends
 # Not
-# MemberAccess
+# MemberAccess f2.sign
 mov 16(%ebp), %ebx
 push 0(%ebx)
 # MemberAccess Ends
@@ -1959,6 +2013,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je else_17
+# If
 # Assignment
 push $1
 pop %eax
@@ -1969,14 +2024,17 @@ push $1
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
-jmp if_end_17
-else_17:
-if_end_17:
 # If Ends
-# If
+jmp ifelse_17
+# Else
+else_17:
+# Else Ends
+ifelse_17:
+# If Ends
+# IfElse
 # And
 # Not
-# MemberAccess
+# MemberAccess f1.sign
 mov 12(%ebp), %ebx
 push 0(%ebx)
 # MemberAccess Ends
@@ -1984,7 +2042,7 @@ pop  %eax
 xor $1, %eax
 push %eax
 # Not Ends
-# MemberAccess
+# MemberAccess f2.sign
 mov 16(%ebp), %ebx
 push 0(%ebx)
 # MemberAccess Ends
@@ -1997,6 +2055,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je else_18
+# If
 # Assignment
 push $0
 pop %eax
@@ -2007,14 +2066,17 @@ push $1
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
-jmp if_end_18
-else_18:
-if_end_18:
 # If Ends
-# If
+jmp ifelse_18
+# Else
+else_18:
+# Else Ends
+ifelse_18:
+# If Ends
+# IfElse
 # And
 # Not
-# Variable
+# Variable done
 push -4(%ebp)
 # Variable Ends
 pop  %eax
@@ -2022,11 +2084,11 @@ xor $1, %eax
 push %eax
 # Not Ends
 # Greater
-# MemberAccess
+# MemberAccess f2.exp
 mov 16(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends
-# MemberAccess
+# MemberAccess f1.exp
 mov 12(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends
@@ -2046,6 +2108,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je else_19
+# If
 # Assignment
 push $1
 pop %eax
@@ -2056,14 +2119,17 @@ push $1
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
-jmp if_end_19
-else_19:
-if_end_19:
 # If Ends
-# If
+jmp ifelse_19
+# Else
+else_19:
+# Else Ends
+ifelse_19:
+# If Ends
+# IfElse
 # And
 # Not
-# Variable
+# Variable done
 push -4(%ebp)
 # Variable Ends
 pop  %eax
@@ -2071,11 +2137,11 @@ xor $1, %eax
 push %eax
 # Not Ends
 # Greater
-# MemberAccess
+# MemberAccess f1.exp
 mov 12(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends
-# MemberAccess
+# MemberAccess f2.exp
 mov 16(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends
@@ -2095,6 +2161,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je else_20
+# If
 # Assignment
 push $0
 pop %eax
@@ -2105,14 +2172,17 @@ push $1
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
-jmp if_end_20
-else_20:
-if_end_20:
 # If Ends
-# If
+jmp ifelse_20
+# Else
+else_20:
+# Else Ends
+ifelse_20:
+# If Ends
+# IfElse
 # And
 # Not
-# Variable
+# Variable done
 push -4(%ebp)
 # Variable Ends
 pop  %eax
@@ -2120,11 +2190,11 @@ xor $1, %eax
 push %eax
 # Not Ends
 # Greater
-# MemberAccess
+# MemberAccess f2.frac
 mov 16(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
-# MemberAccess
+# MemberAccess f1.frac
 mov 12(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -2144,19 +2214,23 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je else_21
+# If
 # Assignment
 push $1
 pop %eax
 mov %eax, -8(%ebp)
 # Assignment Ends
-jmp if_end_21
-else_21:
-if_end_21:
 # If Ends
-# If
+jmp ifelse_21
+# Else
+else_21:
+# Else Ends
+ifelse_21:
+# If Ends
+# IfElse
 # And
 # Not
-# Variable
+# Variable done
 push -4(%ebp)
 # Variable Ends
 pop  %eax
@@ -2164,11 +2238,11 @@ xor $1, %eax
 push %eax
 # Not Ends
 # Greater
-# MemberAccess
+# MemberAccess f1.frac
 mov 12(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
-# MemberAccess
+# MemberAccess f2.frac
 mov 16(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
@@ -2188,22 +2262,26 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je else_22
+# If
 # Assignment
 push $0
 pop %eax
 mov %eax, -8(%ebp)
 # Assignment Ends
-jmp if_end_22
-else_22:
-if_end_22:
 # If Ends
-# If
+jmp ifelse_22
+# Else
+else_22:
+# Else Ends
+ifelse_22:
+# If Ends
+# IfElse
 # And
-# MemberAccess
+# MemberAccess f1.sign
 mov 12(%ebp), %ebx
 push 0(%ebx)
 # MemberAccess Ends
-# MemberAccess
+# MemberAccess f2.sign
 mov 16(%ebp), %ebx
 push 0(%ebx)
 # MemberAccess Ends
@@ -2216,9 +2294,10 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je else_23
+# If
 # Assignment
 # Not
-# Variable
+# Variable result
 push -8(%ebp)
 # Variable Ends
 pop  %eax
@@ -2228,12 +2307,15 @@ push %eax
 pop %eax
 mov %eax, -8(%ebp)
 # Assignment Ends
-jmp if_end_23
+# If Ends
+jmp ifelse_23
+# Else
 else_23:
-if_end_23:
+# Else Ends
+ifelse_23:
 # If Ends
 # Return Statement
-# Variable
+# Variable result
 push -8(%ebp)
 # Variable Ends
 pop %eax
@@ -2263,9 +2345,11 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 push $3012692
 push $1
 push $0
+# Arguments Pushed
 push 20(%esp)
 call Float_Float
 add $16, %esp
@@ -2289,9 +2373,11 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 push $0
 push $0
 push $0
+# Arguments Pushed
 push 20(%esp)
 call Float_Float
 add $16, %esp
@@ -2315,9 +2401,11 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 push $0
 push $0
 push $0
+# Arguments Pushed
 push 20(%esp)
 call Float_Float
 add $16, %esp
@@ -2341,9 +2429,11 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 push $0
 push $0
 push $0
+# Arguments Pushed
 push 20(%esp)
 call Float_Float
 add $16, %esp
@@ -2362,6 +2452,8 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
+# Push Arguments
+# Arguments Pushed
 push 12(%ebp)
 call Float_copy
 add $4, %esp
@@ -2372,8 +2464,8 @@ xchg %eax, (%esp)
 pop %eax
 mov %eax, -24(%ebp)
 # Assignment Ends
-# If
-# MemberAccess
+# IfElse
+# MemberAccess tmp.sign
 mov -24(%ebp), %ebx
 push 0(%ebx)
 # MemberAccess Ends
@@ -2381,15 +2473,19 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je else_24
+# If
 # Assignment
 push $0
 pop %eax
 mov -24(%ebp), %ebx
 mov %eax, 0(%ebx)
 # Assignment Ends
-jmp if_end_24
+# If Ends
+jmp ifelse_24
+# Else
 else_24:
-if_end_24:
+# Else Ends
+ifelse_24:
 # If Ends
 # Assignment
 # New
@@ -2401,6 +2497,7 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 push $0
 # Negation
 push $1
@@ -2409,6 +2506,7 @@ neg  %eax
 push %eax
 # Negation Ends
 push $0
+# Arguments Pushed
 push 20(%esp)
 call Float_Float
 add $16, %esp
@@ -2432,6 +2530,7 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 push $2796203
 # Negation
 push $2
@@ -2440,6 +2539,7 @@ neg  %eax
 push %eax
 # Negation Ends
 push $0
+# Arguments Pushed
 push 20(%esp)
 call Float_Float
 add $16, %esp
@@ -2463,6 +2563,7 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 push $0
 # Negation
 push $2
@@ -2471,6 +2572,7 @@ neg  %eax
 push %eax
 # Negation Ends
 push $0
+# Arguments Pushed
 push 20(%esp)
 call Float_Float
 add $16, %esp
@@ -2494,6 +2596,7 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 push $5033165
 # Negation
 push $3
@@ -2502,6 +2605,7 @@ neg  %eax
 push %eax
 # Negation Ends
 push $0
+# Arguments Pushed
 push 20(%esp)
 call Float_Float
 add $16, %esp
@@ -2525,6 +2629,7 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 push $2796203
 # Negation
 push $3
@@ -2533,6 +2638,7 @@ neg  %eax
 push %eax
 # Negation Ends
 push $0
+# Arguments Pushed
 push 20(%esp)
 call Float_Float
 add $16, %esp
@@ -2552,12 +2658,14 @@ while_25:
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable tmp
 push -24(%ebp)
 # Variable Ends
-# Variable
+# Variable one
 push -16(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_lt
 add $12, %esp
@@ -2574,12 +2682,14 @@ je while_end_25
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable e
 push -12(%ebp)
 # Variable Ends
-# Variable
+# Variable base
 push -20(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
 add $12, %esp
@@ -2595,12 +2705,14 @@ mov %eax, -20(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable one
 push -16(%ebp)
 # Variable Ends
-# Variable
+# Variable tmp
 push -24(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_sub
 add $12, %esp
@@ -2619,12 +2731,14 @@ while_end_25:
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable tmp
 push -24(%ebp)
 # Variable Ends
-# Variable
+# Variable result
 push -28(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
 add $12, %esp
@@ -2640,12 +2754,14 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable c6
 push -48(%ebp)
 # Variable Ends
-# Variable
+# Variable result
 push -28(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
 add $12, %esp
@@ -2661,12 +2777,14 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable one
 push -16(%ebp)
 # Variable Ends
-# Variable
+# Variable result
 push -28(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_add
 add $12, %esp
@@ -2682,12 +2800,14 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable tmp
 push -24(%ebp)
 # Variable Ends
-# Variable
+# Variable result
 push -28(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
 add $12, %esp
@@ -2703,12 +2823,14 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable c5
 push -44(%ebp)
 # Variable Ends
-# Variable
+# Variable result
 push -28(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
 add $12, %esp
@@ -2724,12 +2846,14 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable one
 push -16(%ebp)
 # Variable Ends
-# Variable
+# Variable result
 push -28(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_add
 add $12, %esp
@@ -2745,12 +2869,14 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable tmp
 push -24(%ebp)
 # Variable Ends
-# Variable
+# Variable result
 push -28(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
 add $12, %esp
@@ -2766,12 +2892,14 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable c4
 push -40(%ebp)
 # Variable Ends
-# Variable
+# Variable result
 push -28(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
 add $12, %esp
@@ -2787,12 +2915,14 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable one
 push -16(%ebp)
 # Variable Ends
-# Variable
+# Variable result
 push -28(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_add
 add $12, %esp
@@ -2808,12 +2938,14 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable tmp
 push -24(%ebp)
 # Variable Ends
-# Variable
+# Variable result
 push -28(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
 add $12, %esp
@@ -2829,12 +2961,14 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable c3
 push -36(%ebp)
 # Variable Ends
-# Variable
+# Variable result
 push -28(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
 add $12, %esp
@@ -2850,12 +2984,14 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable one
 push -16(%ebp)
 # Variable Ends
-# Variable
+# Variable result
 push -28(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_add
 add $12, %esp
@@ -2871,12 +3007,14 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable tmp
 push -24(%ebp)
 # Variable Ends
-# Variable
+# Variable result
 push -28(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
 add $12, %esp
@@ -2892,12 +3030,14 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable c2
 push -32(%ebp)
 # Variable Ends
-# Variable
+# Variable result
 push -28(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
 add $12, %esp
@@ -2913,12 +3053,14 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable one
 push -16(%ebp)
 # Variable Ends
-# Variable
+# Variable result
 push -28(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_add
 add $12, %esp
@@ -2934,12 +3076,14 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable tmp
 push -24(%ebp)
 # Variable Ends
-# Variable
+# Variable result
 push -28(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
 add $12, %esp
@@ -2955,12 +3099,14 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable one
 push -16(%ebp)
 # Variable Ends
-# Variable
+# Variable result
 push -28(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_add
 add $12, %esp
@@ -2976,12 +3122,14 @@ mov %eax, -28(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable base
 push -20(%ebp)
 # Variable Ends
-# Variable
+# Variable result
 push -28(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
 add $12, %esp
@@ -2992,8 +3140,8 @@ xchg %eax, (%esp)
 pop %eax
 mov %eax, -28(%ebp)
 # Assignment Ends
-# If
-# MemberAccess
+# IfElse
+# MemberAccess f.sign
 mov 12(%ebp), %ebx
 push 0(%ebx)
 # MemberAccess Ends
@@ -3001,17 +3149,20 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je else_26
+# If
 # Assignment
 # MethodCall
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable result
 push -28(%ebp)
 # Variable Ends
-# Variable
+# Variable one
 push -16(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_div
 add $12, %esp
@@ -3022,12 +3173,15 @@ xchg %eax, (%esp)
 pop %eax
 mov %eax, -28(%ebp)
 # Assignment Ends
-jmp if_end_26
+# If Ends
+jmp ifelse_26
+# Else
 else_26:
-if_end_26:
+# Else Ends
+ifelse_26:
 # If Ends
 # Return Statement
-# Variable
+# Variable result
 push -28(%ebp)
 # Variable Ends
 pop %eax
@@ -3057,6 +3211,7 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 push $3240472
 # Negation
 push $1
@@ -3065,6 +3220,7 @@ neg  %eax
 push %eax
 # Negation Ends
 push $0
+# Arguments Pushed
 push 20(%esp)
 call Float_Float
 add $16, %esp
@@ -3088,9 +3244,11 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 push $0
 push $0
 push $0
+# Arguments Pushed
 push 20(%esp)
 call Float_Float
 add $16, %esp
@@ -3114,6 +3272,7 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 push $0
 # Negation
 push $1
@@ -3122,6 +3281,7 @@ neg  %eax
 push %eax
 # Negation Ends
 push $0
+# Arguments Pushed
 push 20(%esp)
 call Float_Float
 add $16, %esp
@@ -3145,6 +3305,7 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 push $2796203
 # Negation
 push $1
@@ -3153,6 +3314,7 @@ neg  %eax
 push %eax
 # Negation Ends
 push $0
+# Arguments Pushed
 push 20(%esp)
 call Float_Float
 add $16, %esp
@@ -3176,6 +3338,7 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 push $4194304
 # Negation
 push $1
@@ -3184,6 +3347,7 @@ neg  %eax
 push %eax
 # Negation Ends
 push $0
+# Arguments Pushed
 push 20(%esp)
 call Float_Float
 add $16, %esp
@@ -3207,6 +3371,7 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 push $5033165
 # Negation
 push $1
@@ -3215,6 +3380,7 @@ neg  %eax
 push %eax
 # Negation Ends
 push $0
+# Arguments Pushed
 push 20(%esp)
 call Float_Float
 add $16, %esp
@@ -3238,6 +3404,7 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 push $0
 # Negation
 push $127
@@ -3246,6 +3413,7 @@ neg  %eax
 push %eax
 # Negation Ends
 push $0
+# Arguments Pushed
 push 20(%esp)
 call Float_Float
 add $16, %esp
@@ -3261,7 +3429,7 @@ mov %eax, -12(%ebp)
 # Assignment Ends
 # Assignment
 # Minus
-# MemberAccess
+# MemberAccess f.exp
 mov 12(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends
@@ -3277,7 +3445,7 @@ mov %eax, -40(%ebp)
 # While
 while_27:
 # Greater
-# Variable
+# Variable i
 push -40(%ebp)
 # Variable Ends
 push $0
@@ -3297,12 +3465,14 @@ je while_end_27
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable one
 push -36(%ebp)
 # Variable Ends
-# Variable
+# Variable base
 push -12(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_add
 add $12, %esp
@@ -3315,7 +3485,7 @@ mov %eax, -12(%ebp)
 # Assignment Ends
 # Assignment
 # Minus
-# Variable
+# Variable i
 push -40(%ebp)
 # Variable Ends
 push $1
@@ -3335,12 +3505,14 @@ while_end_27:
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable log2
 push -4(%ebp)
 # Variable Ends
-# Variable
+# Variable base
 push -12(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
 add $12, %esp
@@ -3361,12 +3533,14 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
-# MemberAccess
+# Push Arguments
+# MemberAccess f.frac
 mov 12(%ebp), %ebx
 push 8(%ebx)
 # MemberAccess Ends
 push $0
 push $0
+# Arguments Pushed
 push 20(%esp)
 call Float_Float
 add $16, %esp
@@ -3385,12 +3559,14 @@ mov %eax, -8(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable one
 push -36(%ebp)
 # Variable Ends
-# Variable
+# Variable x
 push -8(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_sub
 add $12, %esp
@@ -3406,12 +3582,14 @@ mov %eax, -8(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable c5
 push -32(%ebp)
 # Variable Ends
-# Variable
+# Variable x
 push -8(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
 add $12, %esp
@@ -3427,12 +3605,14 @@ mov %eax, -16(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable result
 push -16(%ebp)
 # Variable Ends
-# Variable
+# Variable one
 push -36(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_add
 add $12, %esp
@@ -3448,12 +3628,14 @@ mov %eax, -16(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable x
 push -8(%ebp)
 # Variable Ends
-# Variable
+# Variable result
 push -16(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
 add $12, %esp
@@ -3469,12 +3651,14 @@ mov %eax, -16(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable c4
 push -28(%ebp)
 # Variable Ends
-# Variable
+# Variable result
 push -16(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
 add $12, %esp
@@ -3490,12 +3674,14 @@ mov %eax, -16(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable result
 push -16(%ebp)
 # Variable Ends
-# Variable
+# Variable one
 push -36(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_sub
 add $12, %esp
@@ -3511,12 +3697,14 @@ mov %eax, -16(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable x
 push -8(%ebp)
 # Variable Ends
-# Variable
+# Variable result
 push -16(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
 add $12, %esp
@@ -3532,12 +3720,14 @@ mov %eax, -16(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable c3
 push -24(%ebp)
 # Variable Ends
-# Variable
+# Variable result
 push -16(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
 add $12, %esp
@@ -3553,12 +3743,14 @@ mov %eax, -16(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable result
 push -16(%ebp)
 # Variable Ends
-# Variable
+# Variable one
 push -36(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_add
 add $12, %esp
@@ -3574,12 +3766,14 @@ mov %eax, -16(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable x
 push -8(%ebp)
 # Variable Ends
-# Variable
+# Variable result
 push -16(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
 add $12, %esp
@@ -3595,12 +3789,14 @@ mov %eax, -16(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable c2
 push -20(%ebp)
 # Variable Ends
-# Variable
+# Variable result
 push -16(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
 add $12, %esp
@@ -3616,12 +3812,14 @@ mov %eax, -16(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable result
 push -16(%ebp)
 # Variable Ends
-# Variable
+# Variable one
 push -36(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_sub
 add $12, %esp
@@ -3637,12 +3835,14 @@ mov %eax, -16(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable x
 push -8(%ebp)
 # Variable Ends
-# Variable
+# Variable result
 push -16(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
 add $12, %esp
@@ -3658,12 +3858,14 @@ mov %eax, -16(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable result
 push -16(%ebp)
 # Variable Ends
-# Variable
+# Variable base
 push -12(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_add
 add $12, %esp
@@ -3693,17 +3895,21 @@ push %ebx
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 # MethodCall
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 # MethodCall
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable f1
 push 12(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_ln
 add $8, %esp
@@ -3711,9 +3917,10 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-# Variable
+# Variable f2
 push 16(%ebp)
 # Variable Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
 add $12, %esp
@@ -3721,6 +3928,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+# Arguments Pushed
 push 8(%ebp)
 call FloatOps_exp
 add $8, %esp
@@ -3757,9 +3965,11 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 push $4194304
 push $0
 push $0
+# Arguments Pushed
 push 20(%esp)
 call Float_Float
 add $16, %esp
@@ -3783,9 +3993,11 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 push $4613734
 push $2
 push $0
+# Arguments Pushed
 push 20(%esp)
 call Float_Float
 add $16, %esp
@@ -3804,12 +4016,14 @@ mov %eax, -8(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable f2
 push -8(%ebp)
 # Variable Ends
-# Variable
+# Variable f1
 push -4(%ebp)
 # Variable Ends
+# Arguments Pushed
 push -16(%ebp)
 call FloatOps_add
 add $12, %esp
@@ -3825,6 +4039,8 @@ mov %eax, -12(%ebp)
 push %eax
 push %ecx
 push %edx
+# Push Arguments
+# Arguments Pushed
 push -12(%ebp)
 call Float_printval
 add $4, %esp
@@ -3839,12 +4055,14 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable f2
 push -8(%ebp)
 # Variable Ends
-# Variable
+# Variable f1
 push -4(%ebp)
 # Variable Ends
+# Arguments Pushed
 push -16(%ebp)
 call FloatOps_mult
 add $12, %esp
@@ -3860,6 +4078,8 @@ mov %eax, -12(%ebp)
 push %eax
 push %ecx
 push %edx
+# Push Arguments
+# Arguments Pushed
 push -12(%ebp)
 call Float_printval
 add $4, %esp
@@ -3874,12 +4094,14 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable f2
 push -8(%ebp)
 # Variable Ends
-# Variable
+# Variable f1
 push -4(%ebp)
 # Variable Ends
+# Arguments Pushed
 push -16(%ebp)
 call FloatOps_div
 add $12, %esp
@@ -3895,6 +4117,8 @@ mov %eax, -12(%ebp)
 push %eax
 push %ecx
 push %edx
+# Push Arguments
+# Arguments Pushed
 push -12(%ebp)
 call Float_printval
 add $4, %esp
@@ -3909,9 +4133,11 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable f2
 push -8(%ebp)
 # Variable Ends
+# Arguments Pushed
 push -16(%ebp)
 call FloatOps_exp
 add $8, %esp
@@ -3927,6 +4153,8 @@ mov %eax, -12(%ebp)
 push %eax
 push %ecx
 push %edx
+# Push Arguments
+# Arguments Pushed
 push -12(%ebp)
 call Float_printval
 add $4, %esp
@@ -3941,9 +4169,11 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable f2
 push -8(%ebp)
 # Variable Ends
+# Arguments Pushed
 push -16(%ebp)
 call FloatOps_ln
 add $8, %esp
@@ -3959,6 +4189,8 @@ mov %eax, -12(%ebp)
 push %eax
 push %ecx
 push %edx
+# Push Arguments
+# Arguments Pushed
 push -12(%ebp)
 call Float_printval
 add $4, %esp
@@ -3973,12 +4205,14 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable f2
 push -8(%ebp)
 # Variable Ends
-# Variable
+# Variable f1
 push -4(%ebp)
 # Variable Ends
+# Arguments Pushed
 push -16(%ebp)
 call FloatOps_pow
 add $12, %esp
@@ -3994,6 +4228,8 @@ mov %eax, -12(%ebp)
 push %eax
 push %ecx
 push %edx
+# Push Arguments
+# Arguments Pushed
 push -12(%ebp)
 call Float_printval
 add $4, %esp
@@ -4013,9 +4249,11 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 push $0
 push $0
 push $0
+# Arguments Pushed
 push 20(%esp)
 call Float_Float
 add $16, %esp
@@ -4039,9 +4277,11 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 push $754975
 push $0
 push $0
+# Arguments Pushed
 push 20(%esp)
 call Float_Float
 add $16, %esp
@@ -4065,9 +4305,11 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 push $786432
 push $5
 push $0
+# Arguments Pushed
 push 20(%esp)
 call Float_Float
 add $16, %esp
@@ -4091,9 +4333,11 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 push $1851392
 push $12
 push $0
+# Arguments Pushed
 push 20(%esp)
 call Float_Float
 add $16, %esp
@@ -4112,16 +4356,19 @@ mov %eax, -32(%ebp)
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 # MethodCall
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable r
 push -24(%ebp)
 # Variable Ends
-# Variable
+# Variable one
 push -20(%ebp)
 # Variable Ends
+# Arguments Pushed
 push -16(%ebp)
 call FloatOps_sub
 add $12, %esp
@@ -4133,16 +4380,19 @@ xchg %eax, (%esp)
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 # MethodCall
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable N
 push -28(%ebp)
 # Variable Ends
-# Variable
+# Variable r
 push -24(%ebp)
 # Variable Ends
+# Arguments Pushed
 push -16(%ebp)
 call FloatOps_pow
 add $12, %esp
@@ -4150,9 +4400,10 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-# Variable
+# Variable one
 push -20(%ebp)
 # Variable Ends
+# Arguments Pushed
 push -16(%ebp)
 call FloatOps_sub
 add $12, %esp
@@ -4160,6 +4411,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+# Arguments Pushed
 push -16(%ebp)
 call FloatOps_div
 add $12, %esp
@@ -4175,12 +4427,14 @@ mov %eax, -36(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable Amt
 push -32(%ebp)
 # Variable Ends
-# Variable
+# Variable res
 push -36(%ebp)
 # Variable Ends
+# Arguments Pushed
 push -16(%ebp)
 call FloatOps_mult
 add $12, %esp
@@ -4196,6 +4450,8 @@ mov %eax, -36(%ebp)
 push %eax
 push %ecx
 push %edx
+# Push Arguments
+# Arguments Pushed
 push -36(%ebp)
 call Float_printval
 add $4, %esp

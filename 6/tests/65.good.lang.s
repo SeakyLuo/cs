@@ -2035,6 +2035,7 @@ mov %eax, -20(%ebp)
 # Assignment
 # MemberAccess
 mov 8(%ebp), %ebx
+mov 8(%ebx), %ebx
 push 4(%ebx)
 # MemberAccess Ends
 pop %eax
@@ -2147,6 +2148,7 @@ mov %eax, 8(%ebx)
 # If
 # MemberAccess
 mov 8(%ebp), %ebx
+mov 8(%ebx), %ebx
 push 8(%ebx)
 # MemberAccess Ends
 pop %eax
@@ -2194,6 +2196,7 @@ mov %eax, -4(%ebp)
 # Print
 # MemberAccess
 mov 8(%ebp), %ebx
+mov 8(%ebx), %ebx
 push 8(%ebx)
 # MemberAccess Ends
 push $printstr
@@ -2290,6 +2293,7 @@ while_end_27:
 # GreaterEqual
 # MemberAccess
 mov 8(%ebp), %ebx
+mov 8(%ebx), %ebx
 push 4(%ebx)
 # MemberAccess Ends
 # Variable
@@ -2738,7 +2742,8 @@ mov %eax, -16(%ebp)
 # Print
 # Minus
 # MemberAccess
-mov 4(%ebp), %ebx
+mov 8(%ebp), %ebx
+mov 4(%ebx), %ebx
 push 20(%ebx)
 # MemberAccess Ends
 push $241
@@ -2753,7 +2758,8 @@ add $8, %esp
 # Print Ends
 # Print
 # MemberAccess
-mov 4(%ebp), %ebx
+mov 8(%ebp), %ebx
+mov 4(%ebx), %ebx
 push 12(%ebx)
 # MemberAccess Ends
 push $printstr
@@ -2810,7 +2816,8 @@ else_33:
 # Else
 # Assignment
 # MemberAccess
-mov 4(%ebp), %ebx
+mov 8(%ebp), %ebx
+mov 4(%ebx), %ebx
 push 4(%ebx)
 # MemberAccess Ends
 pop %eax
@@ -2991,7 +2998,8 @@ mov %eax, -16(%ebp)
 # Print
 # Minus
 # MemberAccess
-mov 4(%ebp), %ebx
+mov 8(%ebp), %ebx
+mov 4(%ebx), %ebx
 push 4(%ebx)
 # MemberAccess Ends
 push $62
@@ -3012,13 +3020,15 @@ push %eax
 push %ecx
 push %edx
 # MemberAccess
-mov 4(%ebp), %ebx
+mov 8(%ebp), %ebx
+mov 4(%ebx), %ebx
 push 8(%ebx)
 # MemberAccess Ends
 # Minus
 push $232
 # MemberAccess
-mov 4(%ebp), %ebx
+mov 8(%ebp), %ebx
+mov 4(%ebx), %ebx
 push 0(%ebx)
 # MemberAccess Ends
 pop  %ebx
@@ -3028,7 +3038,8 @@ push %eax
 # Minus Ends
 # Plus
 # MemberAccess
-mov 4(%ebp), %ebx
+mov 8(%ebp), %ebx
+mov 4(%ebx), %ebx
 push 12(%ebx)
 # MemberAccess Ends
 # Variable
@@ -3080,7 +3091,8 @@ add $8, %esp
 # Assignment
 # GreaterEqual
 # MemberAccess
-mov 4(%ebp), %ebx
+mov 8(%ebp), %ebx
+mov 4(%ebx), %ebx
 push 16(%ebx)
 # MemberAccess Ends
 push $64
@@ -3140,7 +3152,8 @@ push %edx
 # Minus
 push $145
 # MemberAccess
-mov 4(%ebp), %ebx
+mov 8(%ebp), %ebx
+mov 4(%ebx), %ebx
 push 4(%ebx)
 # MemberAccess Ends
 pop  %ebx

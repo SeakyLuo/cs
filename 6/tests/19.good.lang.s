@@ -12,7 +12,7 @@ push %edi
 push %esi
 push %ebx
 # Assignment
-# Variable
+# Variable xarg
 push 12(%ebp)
 # Variable Ends
 pop %eax
@@ -20,7 +20,7 @@ mov 8(%ebp), %ebx
 mov %eax, 0(%ebx)
 # Assignment Ends
 # Assignment
-# Variable
+# Variable yarg
 push 16(%ebp)
 # Variable Ends
 pop %eax
@@ -44,7 +44,7 @@ push %esi
 push %ebx
 # Assignment
 # Times
-# Variable
+# Variable x
 mov 8(%ebp), %ebx
 push 0(%ebx)
 # Variable Ends
@@ -60,7 +60,7 @@ mov %eax, 0(%ebx)
 # Assignment Ends
 # Assignment
 # Plus
-# Variable
+# Variable y
 mov 8(%ebp), %ebx
 push 4(%ebx)
 # Variable Ends
@@ -101,8 +101,10 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 push $4
 push $3
+# Arguments Pushed
 push 16(%esp)
 call classA_classA
 add $12, %esp
@@ -117,7 +119,7 @@ pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
 # Print
-# MemberAccess
+# MemberAccess a.x
 mov -4(%ebp), %ebx
 push 0(%ebx)
 # MemberAccess Ends
@@ -126,7 +128,7 @@ call printf
 add $8, %esp
 # Print Ends
 # Print
-# MemberAccess
+# MemberAccess a.y
 mov -4(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends
@@ -139,6 +141,8 @@ add $8, %esp
 push %eax
 push %ecx
 push %edx
+# Push Arguments
+# Arguments Pushed
 push -4(%ebp)
 call classA_inc
 add $4, %esp
@@ -150,11 +154,11 @@ add $4, %esp
 # Call Ends
 # Print
 # Times
-# MemberAccess
+# MemberAccess a.x
 mov -4(%ebp), %ebx
 push 0(%ebx)
 # MemberAccess Ends
-# MemberAccess
+# MemberAccess a.y
 mov -4(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends

@@ -944,7 +944,8 @@ mov %eax, -4(%ebp)
 # Print
 # Minus
 # MemberAccess
-mov 12(%ebp), %ebx
+mov 8(%ebp), %ebx
+mov 12(%ebx), %ebx
 push 8(%ebx)
 # MemberAccess Ends
 push $119
@@ -961,7 +962,8 @@ add $8, %esp
 # GreaterEqual
 push $94
 # MemberAccess
-mov 12(%ebp), %ebx
+mov 8(%ebp), %ebx
+mov 12(%ebx), %ebx
 push 8(%ebx)
 # MemberAccess Ends
 mov $0, %edx

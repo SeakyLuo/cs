@@ -492,6 +492,7 @@ je else_7
 # Print
 # MemberAccess
 mov 8(%ebp), %ebx
+mov 8(%ebx), %ebx
 push 0(%ebx)
 # MemberAccess Ends
 push $printstr
@@ -568,6 +569,7 @@ while_end_8:
 # If
 # MemberAccess
 mov 8(%ebp), %ebx
+mov 8(%ebx), %ebx
 push 0(%ebx)
 # MemberAccess Ends
 pop %eax
@@ -810,6 +812,7 @@ mov %eax, -24(%ebp)
 # Print
 # MemberAccess
 mov 8(%ebp), %ebx
+mov 8(%ebx), %ebx
 push 0(%ebx)
 # MemberAccess Ends
 push $printstr
@@ -1023,6 +1026,7 @@ if_end_19:
 # Print
 # MemberAccess
 mov 8(%ebp), %ebx
+mov 8(%ebx), %ebx
 push 0(%ebx)
 # MemberAccess Ends
 push $printstr
@@ -1269,6 +1273,7 @@ add $8, %esp
 # Assignment
 # MemberAccess
 mov 8(%ebp), %ebx
+mov 8(%ebx), %ebx
 push 0(%ebx)
 # MemberAccess Ends
 pop %eax

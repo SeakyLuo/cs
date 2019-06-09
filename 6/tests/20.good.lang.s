@@ -41,7 +41,7 @@ push %edi
 push %esi
 push %ebx
 # Assignment
-# Variable
+# Variable xval
 push 12(%ebp)
 # Variable Ends
 pop %eax
@@ -49,7 +49,7 @@ mov 8(%ebp), %ebx
 mov %eax, 0(%ebx)
 # Assignment Ends
 # Assignment
-# Variable
+# Variable yval
 push 16(%ebp)
 # Variable Ends
 pop %eax
@@ -81,6 +81,8 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
+# Push Arguments
+# Arguments Pushed
 push 8(%esp)
 call classA_classA
 add $4, %esp
@@ -96,11 +98,11 @@ mov %eax, -4(%ebp)
 # Assignment Ends
 # Assignment
 # Plus
-# MemberAccess
+# MemberAccess a.x
 mov 12(%ebp), %ebx
 push 0(%ebx)
 # MemberAccess Ends
-# Variable
+# Variable xplus
 mov 8(%ebp), %ebx
 push 0(%ebx)
 # Variable Ends
@@ -115,11 +117,11 @@ mov %eax, 0(%ebx)
 # Assignment Ends
 # Assignment
 # Plus
-# MemberAccess
+# MemberAccess a.y
 mov 12(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends
-# Variable
+# Variable yplus
 mov 8(%ebp), %ebx
 push 4(%ebx)
 # Variable Ends
@@ -133,7 +135,7 @@ mov -4(%ebp), %ebx
 mov %eax, 4(%ebx)
 # Assignment Ends
 # Return Statement
-# Variable
+# Variable aNew
 push -4(%ebp)
 # Variable Ends
 pop %eax
@@ -165,6 +167,8 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
+# Push Arguments
+# Arguments Pushed
 push 8(%esp)
 call classA_classA
 add $4, %esp
@@ -200,8 +204,10 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 push $22
 push $16
+# Arguments Pushed
 push 16(%esp)
 call classB_classB
 add $12, %esp
@@ -220,9 +226,11 @@ mov %eax, -12(%ebp)
 push %eax
 push %ecx
 push %edx
-# Variable
+# Push Arguments
+# Variable a1
 push -4(%ebp)
 # Variable Ends
+# Arguments Pushed
 push -12(%ebp)
 call classB_makeA
 add $8, %esp
@@ -234,7 +242,7 @@ pop %eax
 mov %eax, -8(%ebp)
 # Assignment Ends
 # Print
-# MemberAccess
+# MemberAccess a1.x
 mov -4(%ebp), %ebx
 push 0(%ebx)
 # MemberAccess Ends
@@ -243,7 +251,7 @@ call printf
 add $8, %esp
 # Print Ends
 # Print
-# MemberAccess
+# MemberAccess a1.y
 mov -4(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends
@@ -252,7 +260,7 @@ call printf
 add $8, %esp
 # Print Ends
 # Print
-# MemberAccess
+# MemberAccess b.xplus
 mov -12(%ebp), %ebx
 push 0(%ebx)
 # MemberAccess Ends
@@ -261,7 +269,7 @@ call printf
 add $8, %esp
 # Print Ends
 # Print
-# MemberAccess
+# MemberAccess b.yplus
 mov -12(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends
@@ -270,7 +278,7 @@ call printf
 add $8, %esp
 # Print Ends
 # Print
-# MemberAccess
+# MemberAccess a2.x
 mov -8(%ebp), %ebx
 push 0(%ebx)
 # MemberAccess Ends
@@ -279,7 +287,7 @@ call printf
 add $8, %esp
 # Print Ends
 # Print
-# MemberAccess
+# MemberAccess a2.y
 mov -8(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends

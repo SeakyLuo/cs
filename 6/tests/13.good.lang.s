@@ -13,10 +13,10 @@ push %esi
 push %ebx
 # Return Statement
 # Times
-# Variable
+# Variable x
 push 12(%ebp)
 # Variable Ends
-# Variable
+# Variable x
 push 12(%ebp)
 # Variable Ends
 pop  %ebx
@@ -56,7 +56,9 @@ mov %eax, -8(%ebp)
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 push $5
+# Arguments Pushed
 push 8(%ebp)
 call classA_f0
 add $8, %esp
@@ -73,7 +75,9 @@ add $8, %esp
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 push $6
+# Arguments Pushed
 push 8(%ebp)
 call classA_f0
 add $8, %esp
@@ -87,10 +91,10 @@ add $8, %esp
 # Print Ends
 # Print
 # Plus
-# Variable
+# Variable x
 push -4(%ebp)
 # Variable Ends
-# Variable
+# Variable y
 push -8(%ebp)
 # Variable Ends
 pop  %ebx
@@ -124,6 +128,8 @@ push %ebx
 push %eax
 push %ecx
 push %edx
+# Push Arguments
+# Arguments Pushed
 push -4(%ebp)
 call classA_doAll
 add $4, %esp

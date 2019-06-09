@@ -25,7 +25,7 @@ mov %eax, -4(%ebp)
 # Assignment Ends
 # Print
 # Times
-# Variable
+# Variable x
 push -4(%ebp)
 # Variable Ends
 push $2

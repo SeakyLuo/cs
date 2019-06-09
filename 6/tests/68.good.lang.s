@@ -1094,7 +1094,8 @@ add $4, %esp
 # Call Ends
 # Print
 # MemberAccess
-mov 20(%ebp), %ebx
+mov 8(%ebp), %ebx
+mov 20(%ebx), %ebx
 push 8(%ebx)
 # MemberAccess Ends
 push $printstr

@@ -67,8 +67,13 @@ void CodeGenerator::visitAssignmentNode(AssignmentNode* node) {
                         (*currentClassInfo.members)[variableName];
     int offset = info.offset;
     if (node->identifier_2){
+        if (isLocal){
+            std::cout << "mov " << info.offset << "(%ebp), %ebx\n";
+        }else{
+            std::cout << "mov 8(%ebp), %ebx\n";
+            std::cout << "mov " << info.offset << "(%ebx), %ebx\n";
+        }
         int memberOffset = (*(*classTable)[info.type.objectClassName].members)[node->identifier_2->name].offset;
-        std::cout << "mov " << offset << "(%ebp), %ebx\n";
     	std::cout << "mov %eax, " << memberOffset << "(%ebx)\n";
     }else{
         if (isLocal){
@@ -89,25 +94,24 @@ void CodeGenerator::visitCallNode(CallNode* node) {
 }
 
 void CodeGenerator::visitIfElseNode(IfElseNode* node) {
-    std::cout << "# If\n";
+    std::cout << "# IfElse\n";
     node->expression->accept(this);
     std::cout << "pop %eax\n";
     std::cout << "mov $0, %ebx\n";
     std::cout << "cmp %eax, %ebx\n";
     int label = nextLabel();
     std::cout << "je else_" << label << "\n";
-    // if
+    std::cout << "# If\n";
     for (auto iter: *(node->statement_list_1))
         iter->accept(this);
-    // else
-    std::cout << "jmp if_end_" << label << "\n";
+    std::cout << "# If Ends\n";
+    std::cout << "jmp ifelse_" << label << "\n";
+    std::cout << "# Else\n";
     std::cout << "else_" << label << ":\n";
-    if (node->statement_list_2){
-        std::cout << "# Else\n";
-        for (auto iter: *(node->statement_list_2))
-            iter->accept(this);
-    }
-    std::cout << "if_end_" << label << ":\n";
+    for (auto iter: *(node->statement_list_2))
+        iter->accept(this);
+    std::cout << "# Else Ends\n";
+    std::cout << "ifelse_" << label << ":\n";
     std::cout << "# If Ends\n";
 }
 
@@ -270,11 +274,12 @@ void CodeGenerator::visitNegationNode(NegationNode* node) {
 void CodeGenerator::visitMethodCallNode(MethodCallNode* node) {
     std::cout << "# MethodCall\n";
     std::cout << "push %eax\npush %ecx\npush %edx\n";
-    int args = node->expression_list->size();
-    // push arguments
+    std::cout << "# Push Arguments\n";
     for (auto iter = node->expression_list->rbegin(); iter != node->expression_list->rend(); ++iter)
         (*iter)->accept(this);
+    std::cout << "# Arguments Pushed\n";
     std::string className, methodName;
+    int args = node->expression_list->size();
     if (node->identifier_2){
         methodName = node->identifier_2->name;
         std::string variableName = node->identifier_1->name;
@@ -296,10 +301,11 @@ void CodeGenerator::visitMethodCallNode(MethodCallNode* node) {
             std::cout << "push 8(%ebp)\n";
         }
     }
+    // find the class which has the method
     for (;(*classTable)[className].methods->count(methodName) == 0;
          className = (*classTable)[className].superClassName){}
     std::cout << "call " << className << "_" << methodName << "\n";
-    // pop arguments
+    // pop arguments including self pointer
     std::cout << "add $" << 4 * (args + 1) << ", %esp\n";
     std::cout << "pop %edx\npop %ecx\n";
     std::cout << "xchg %eax, (%esp)\n";
@@ -307,24 +313,31 @@ void CodeGenerator::visitMethodCallNode(MethodCallNode* node) {
 }
 
 void CodeGenerator::visitMemberAccessNode(MemberAccessNode* node) {
-    std::cout << "# MemberAccess\n";
+    std::string variableName = node->identifier_1->name,
+                memberName = node->identifier_2->name;
+    std::cout << "# MemberAccess " << variableName << "." << memberName << "\n";
     node->visit_children(this);
-    std::string variableName = node->identifier_1->name;
-    VariableInfo info = currentMethodInfo.variables->count(variableName) ?
+    bool isLocal = currentMethodInfo.variables->count(variableName);
+    VariableInfo info = isLocal?
                         (*currentMethodInfo.variables)[variableName] :
                         (*currentClassInfo.members)[variableName];
-    std::cout << "mov " << info.offset << "(%ebp), %ebx\n";
-    int memberOffset = (*(*classTable)[info.type.objectClassName].members)[node->identifier_2->name].offset;
+    if (isLocal){
+        std::cout << "mov " << info.offset << "(%ebp), %ebx\n";
+    }else{
+        std::cout << "mov 8(%ebp), %ebx\n";
+        std::cout << "mov " << info.offset << "(%ebx), %ebx\n";
+    }
+    int memberOffset = (*(*classTable)[info.type.objectClassName].members)[memberName].offset;
     std::cout << "push " << memberOffset << "(%ebx)\n";
     std::cout << "# MemberAccess Ends\n";
 }
 
 
 void CodeGenerator::visitVariableNode(VariableNode* node) {
-    std::cout << "# Variable\n";
+    std::string variableName = node->identifier->name;
+    std::cout << "# Variable " << variableName << "\n";
     node->visit_children(this);
     int offset;
-    std::string variableName = node->identifier->name;
     if (currentMethodInfo.variables->count(variableName)){
         offset = (*currentMethodInfo.variables)[variableName].offset;
         std::cout << "push " << offset << "(%ebp)\n";
@@ -354,6 +367,8 @@ void CodeGenerator::visitNewNode(NewNode* node) {
     std::cout << "add $4, %esp\n";
     if ((*classTable)[className].methods->count(className)){
         std::cout << "# ConstructorCall\n";
+        // for (auto iter: *(node->expression_list))
+        //     iter->accept(this);
         // std::cout << "call " << className << "_" << className << "\n";
         // std::cout << "add $" << 4 * (node->expression_list->size() + 1) << ", %esp\n";
         MethodCallNode* methodcall = new MethodCallNode(node->identifier, NULL, node->expression_list);

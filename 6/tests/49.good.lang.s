@@ -1238,7 +1238,8 @@ mov %eax, -8(%ebp)
 # Assignment Ends
 # If
 # MemberAccess
-mov 16(%ebp), %ebx
+mov 8(%ebp), %ebx
+mov 16(%ebx), %ebx
 push 4(%ebx)
 # MemberAccess Ends
 pop %eax
@@ -1857,7 +1858,8 @@ mov %eax, -8(%ebp)
 # Greater
 # Plus
 # MemberAccess
-mov 16(%ebp), %ebx
+mov 8(%ebp), %ebx
+mov 16(%ebx), %ebx
 push 0(%ebx)
 # MemberAccess Ends
 # Variable
@@ -2008,7 +2010,8 @@ add $4, %esp
 # Call Ends
 # Print
 # MemberAccess
-mov 4(%ebp), %ebx
+mov 8(%ebp), %ebx
+mov 4(%ebx), %ebx
 push 12(%ebx)
 # MemberAccess Ends
 push $printstr
@@ -2248,7 +2251,8 @@ push %ecx
 push %edx
 # Minus
 # MemberAccess
-mov 4(%ebp), %ebx
+mov 8(%ebp), %ebx
+mov 4(%ebx), %ebx
 push 12(%ebx)
 # MemberAccess Ends
 push $218
@@ -2275,7 +2279,8 @@ neg  %eax
 push %eax
 # Negation Ends
 # MemberAccess
-mov 4(%ebp), %ebx
+mov 8(%ebp), %ebx
+mov 4(%ebx), %ebx
 push 12(%ebx)
 # MemberAccess Ends
 pop  %ebx
@@ -2298,7 +2303,8 @@ while_end_18:
 # While Ends
 # Return Statement
 # MemberAccess
-mov 4(%ebp), %ebx
+mov 8(%ebp), %ebx
+mov 4(%ebx), %ebx
 push 12(%ebx)
 # MemberAccess Ends
 pop %eax
@@ -2513,7 +2519,8 @@ mov %eax, -12(%ebp)
 # Print
 # Minus
 # MemberAccess
-mov 4(%ebp), %ebx
+mov 8(%ebp), %ebx
+mov 4(%ebx), %ebx
 push 0(%ebx)
 # MemberAccess Ends
 push $229

@@ -869,7 +869,8 @@ if_end_5:
 # If Ends
 # Print
 # MemberAccess
-mov 0(%ebp), %ebx
+mov 8(%ebp), %ebx
+mov 0(%ebx), %ebx
 push 4(%ebx)
 # MemberAccess Ends
 push $printstr

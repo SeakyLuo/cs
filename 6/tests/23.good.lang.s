@@ -12,7 +12,7 @@ push %edi
 push %esi
 push %ebx
 # Assignment
-# Variable
+# Variable val
 push 12(%ebp)
 # Variable Ends
 pop %eax
@@ -36,7 +36,7 @@ push %esi
 push %ebx
 # Assignment
 # Times
-# Variable
+# Variable x
 mov 8(%ebp), %ebx
 push 0(%ebx)
 # Variable Ends
@@ -67,17 +67,16 @@ sub $0, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
-# New
-push $4
-call malloc
-add $4, %esp
-# ConstructorCall
+# Call
 # MethodCall
 push %eax
 push %ecx
 push %edx
-push $5
+# Push Arguments
+# Variable val1
+push 12(%ebp)
+# Variable Ends
+# Arguments Pushed
 push 12(%esp)
 call classA_classA
 add $8, %esp
@@ -85,22 +84,16 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-push %eax
-# ConstructorCall Ends
-# New Ends
+add $4, %esp
+# Call Ends
+# Assignment
+# Variable val2
+push 16(%ebp)
+# Variable Ends
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 4(%ebx)
 # Assignment Ends
-# Print
-# MemberAccess
-mov 4(%ebp), %ebx
-push 0(%ebx)
-# MemberAccess Ends
-push $printstr
-call printf
-add $8, %esp
-# Print Ends
 pop %ebx
 pop %esi
 pop %edi
@@ -128,8 +121,10 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 push $1
 push $12
+# Arguments Pushed
 push 16(%esp)
 call classB_classB
 add $12, %esp
@@ -143,6 +138,58 @@ push %eax
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
+# Print
+# MemberAccess b.x
+mov -4(%ebp), %ebx
+push 0(%ebx)
+# MemberAccess Ends
+push $printstr
+call printf
+add $8, %esp
+# Print Ends
+# Print
+# MemberAccess b.y
+mov -4(%ebp), %ebx
+push 4(%ebx)
+# MemberAccess Ends
+push $printstr
+call printf
+add $8, %esp
+# Print Ends
+# Call
+# MethodCall
+push %eax
+push %ecx
+push %edx
+# Push Arguments
+# Arguments Pushed
+push -4(%ebp)
+call classA_f0
+add $4, %esp
+pop %edx
+pop %ecx
+xchg %eax, (%esp)
+# MethodCall Ends
+add $4, %esp
+# Call Ends
+# Print
+# MemberAccess b.x
+mov -4(%ebp), %ebx
+push 0(%ebx)
+# MemberAccess Ends
+push $printstr
+call printf
+add $8, %esp
+# Print Ends
+# Print
+# MemberAccess b.y
+mov -4(%ebp), %ebx
+push 4(%ebx)
+# MemberAccess Ends
+push $printstr
+call printf
+add $8, %esp
+# Print Ends
 pop %ebx
 pop %esi
 pop %edi

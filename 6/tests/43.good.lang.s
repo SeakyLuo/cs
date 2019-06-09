@@ -4269,7 +4269,8 @@ push %eax
 push %ecx
 push %edx
 # MemberAccess
-mov 4(%ebp), %ebx
+mov 8(%ebp), %ebx
+mov 4(%ebx), %ebx
 push 4(%ebx)
 # MemberAccess Ends
 # New

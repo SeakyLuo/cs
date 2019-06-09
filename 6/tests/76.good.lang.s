@@ -1888,7 +1888,8 @@ add $8, %esp
 # Print Ends
 # Assignment
 # MemberAccess
-mov 0(%ebp), %ebx
+mov 8(%ebp), %ebx
+mov 0(%ebx), %ebx
 push 0(%ebx)
 # MemberAccess Ends
 pop %eax
@@ -1896,7 +1897,8 @@ mov %eax, -8(%ebp)
 # Assignment Ends
 # Assignment
 # MemberAccess
-mov 0(%ebp), %ebx
+mov 8(%ebp), %ebx
+mov 0(%ebx), %ebx
 push 0(%ebx)
 # MemberAccess Ends
 pop %eax
@@ -2185,7 +2187,8 @@ push 24(%ebp)
 # Variable Ends
 # GreaterEqual
 # MemberAccess
-mov 0(%ebp), %ebx
+mov 8(%ebp), %ebx
+mov 0(%ebx), %ebx
 push 0(%ebx)
 # MemberAccess Ends
 push $99
@@ -2605,11 +2608,13 @@ push %ecx
 push %edx
 # Times
 # MemberAccess
-mov 0(%ebp), %ebx
+mov 8(%ebp), %ebx
+mov 0(%ebx), %ebx
 push 0(%ebx)
 # MemberAccess Ends
 # MemberAccess
-mov 0(%ebp), %ebx
+mov 8(%ebp), %ebx
+mov 0(%ebx), %ebx
 push 0(%ebx)
 # MemberAccess Ends
 pop  %ebx
@@ -2735,7 +2740,8 @@ add  %ebx, %eax
 push %eax
 # Plus Ends
 # MemberAccess
-mov 0(%ebp), %ebx
+mov 8(%ebp), %ebx
+mov 0(%ebx), %ebx
 push 0(%ebx)
 # MemberAccess Ends
 mov $0, %edx

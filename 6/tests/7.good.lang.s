@@ -18,7 +18,7 @@ mov %eax, -4(%ebp)
 # Assignment Ends
 # Assignment
 # Plus
-# Variable
+# Variable x
 push -4(%ebp)
 # Variable Ends
 push $1
@@ -32,7 +32,7 @@ mov %eax, -8(%ebp)
 # Assignment Ends
 # Assignment
 # Plus
-# Variable
+# Variable y
 push -8(%ebp)
 # Variable Ends
 push $1
@@ -44,9 +44,9 @@ push %eax
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
-# If
+# IfElse
 # Equal
-# Variable
+# Variable y
 push -8(%ebp)
 # Variable Ends
 push $2
@@ -61,26 +61,29 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je else_0
+# If
 # Print
 push $0
 push $printstr
 call printf
 add $8, %esp
 # Print Ends
-jmp if_end_0
-else_0:
+# If Ends
+jmp ifelse_0
 # Else
+else_0:
 # Print
 push $1
 push $printstr
 call printf
 add $8, %esp
 # Print Ends
-if_end_0:
+# Else Ends
+ifelse_0:
 # If Ends
-# If
+# IfElse
 # Equal
-# Variable
+# Variable x
 push -4(%ebp)
 # Variable Ends
 push $2
@@ -95,28 +98,31 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je else_1
+# If
 # Print
 push $2
 push $printstr
 call printf
 add $8, %esp
 # Print Ends
-jmp if_end_1
-else_1:
+# If Ends
+jmp ifelse_1
 # Else
+else_1:
 # Print
 push $3
 push $printstr
 call printf
 add $8, %esp
 # Print Ends
-if_end_1:
+# Else Ends
+ifelse_1:
 # If Ends
-# If
+# IfElse
 # And
 # Greater
 push $3
-# Variable
+# Variable x
 push -4(%ebp)
 # Variable Ends
 mov $0, %edx
@@ -128,7 +134,7 @@ push %edx
 # Greater Ends
 # Greater
 push $3
-# Variable
+# Variable y
 push -8(%ebp)
 # Variable Ends
 mov $0, %edx
@@ -147,28 +153,31 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je else_2
+# If
 # Print
 push $4
 push $printstr
 call printf
 add $8, %esp
 # Print Ends
-jmp if_end_2
-else_2:
+# If Ends
+jmp ifelse_2
 # Else
+else_2:
 # Print
 push $5
 push $printstr
 call printf
 add $8, %esp
 # Print Ends
-if_end_2:
+# Else Ends
+ifelse_2:
 # If Ends
-# If
+# IfElse
 # Or
 # Greater
 push $3
-# Variable
+# Variable x
 push -4(%ebp)
 # Variable Ends
 mov $0, %edx
@@ -180,7 +189,7 @@ push %edx
 # Greater Ends
 # Greater
 push $3
-# Variable
+# Variable y
 push -8(%ebp)
 # Variable Ends
 mov $0, %edx
@@ -199,22 +208,25 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je else_3
+# If
 # Print
 push $6
 push $printstr
 call printf
 add $8, %esp
 # Print Ends
-jmp if_end_3
-else_3:
+# If Ends
+jmp ifelse_3
 # Else
+else_3:
 # Print
 push $7
 push $printstr
 call printf
 add $8, %esp
 # Print Ends
-if_end_3:
+# Else Ends
+ifelse_3:
 # If Ends
 pop %ebx
 pop %esi

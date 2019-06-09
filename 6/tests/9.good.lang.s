@@ -30,7 +30,7 @@ mov %eax, -12(%ebp)
 while_0:
 # GreaterEqual
 push $8
-# Variable
+# Variable i
 push -4(%ebp)
 # Variable Ends
 mov $0, %edx
@@ -47,12 +47,12 @@ je while_end_0
 # Assignment
 # Greater
 # Minus
-# Variable
+# Variable i
 push -4(%ebp)
 # Variable Ends
 # Times
 # Divide
-# Variable
+# Variable i
 push -4(%ebp)
 # Variable Ends
 push $2
@@ -86,7 +86,7 @@ mov %eax, -12(%ebp)
 # Assignment Ends
 # Assignment
 # Plus
-# Variable
+# Variable i
 push -4(%ebp)
 # Variable Ends
 push $1
@@ -98,17 +98,18 @@ push %eax
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
-# If
-# Variable
+# IfElse
+# Variable cond
 push -12(%ebp)
 # Variable Ends
 pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je else_1
+# If
 # Assignment
 # Times
-# Variable
+# Variable x
 push -8(%ebp)
 # Variable Ends
 push $2
@@ -120,12 +121,13 @@ push %eax
 pop %eax
 mov %eax, -8(%ebp)
 # Assignment Ends
-jmp if_end_1
-else_1:
+# If Ends
+jmp ifelse_1
 # Else
+else_1:
 # Assignment
 # Plus
-# Variable
+# Variable x
 push -8(%ebp)
 # Variable Ends
 push $1
@@ -137,10 +139,11 @@ push %eax
 pop %eax
 mov %eax, -8(%ebp)
 # Assignment Ends
-if_end_1:
+# Else Ends
+ifelse_1:
 # If Ends
 # Print
-# Variable
+# Variable x
 push -8(%ebp)
 # Variable Ends
 push $printstr

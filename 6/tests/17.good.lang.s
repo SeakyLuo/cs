@@ -38,11 +38,11 @@ mov %eax, 4(%ebx)
 # Print
 # Minus
 # Times
-# MemberAccess
+# MemberAccess a.x
 mov -4(%ebp), %ebx
 push 0(%ebx)
 # MemberAccess Ends
-# MemberAccess
+# MemberAccess a.y
 mov -4(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends

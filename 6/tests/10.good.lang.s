@@ -46,6 +46,8 @@ push %ebx
 push %eax
 push %ecx
 push %edx
+# Push Arguments
+# Arguments Pushed
 push -4(%ebp)
 call classA_doAll
 add $4, %esp

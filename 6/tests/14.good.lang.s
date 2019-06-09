@@ -11,20 +11,21 @@ sub $4, %esp
 push %edi
 push %esi
 push %ebx
-# If
-# Variable
+# IfElse
+# Variable y
 push 16(%ebp)
 # Variable Ends
 pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je else_0
+# If
 # Assignment
 # Times
-# Variable
+# Variable x
 push 12(%ebp)
 # Variable Ends
-# Variable
+# Variable x
 push 12(%ebp)
 # Variable Ends
 pop  %ebx
@@ -35,12 +36,13 @@ push %eax
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
-jmp if_end_0
-else_0:
+# If Ends
+jmp ifelse_0
 # Else
+else_0:
 # Assignment
 # Divide
-# Variable
+# Variable x
 push 12(%ebp)
 # Variable Ends
 push $2
@@ -53,10 +55,11 @@ push %eax
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
-if_end_0:
+# Else Ends
+ifelse_0:
 # If Ends
 # Return Statement
-# Variable
+# Variable val
 push -4(%ebp)
 # Variable Ends
 pop %eax
@@ -81,8 +84,10 @@ push %ebx
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 push $1
 push $5
+# Arguments Pushed
 push 8(%ebp)
 call classA_f0
 add $12, %esp
@@ -99,8 +104,10 @@ add $8, %esp
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 push $0
 push $6
+# Arguments Pushed
 push 8(%ebp)
 call classA_f0
 add $12, %esp
@@ -134,6 +141,8 @@ push %ebx
 push %eax
 push %ecx
 push %edx
+# Push Arguments
+# Arguments Pushed
 push -4(%ebp)
 call classA_doAll
 add $4, %esp

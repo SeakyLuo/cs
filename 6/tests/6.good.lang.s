@@ -18,7 +18,7 @@ mov %eax, -4(%ebp)
 # Assignment Ends
 # Assignment
 # Plus
-# Variable
+# Variable x
 push -4(%ebp)
 # Variable Ends
 push $1
@@ -30,9 +30,9 @@ push %eax
 pop %eax
 mov %eax, -8(%ebp)
 # Assignment Ends
-# If
+# IfElse
 # Equal
-# Variable
+# Variable y
 push -8(%ebp)
 # Variable Ends
 push $2
@@ -47,15 +47,19 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je else_0
+# If
 # Print
 push $1
 push $printstr
 call printf
 add $8, %esp
 # Print Ends
-jmp if_end_0
+# If Ends
+jmp ifelse_0
+# Else
 else_0:
-if_end_0:
+# Else Ends
+ifelse_0:
 # If Ends
 # Print
 push $0

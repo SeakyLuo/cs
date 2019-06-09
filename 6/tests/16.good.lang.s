@@ -13,12 +13,12 @@ push %esi
 push %ebx
 # Assignment
 # Minus
-# Variable
+# Variable x
 push 12(%ebp)
 # Variable Ends
 # Times
 # Divide
-# Variable
+# Variable x
 push 12(%ebp)
 # Variable Ends
 push $2
@@ -42,9 +42,9 @@ push %eax
 pop %eax
 mov %eax, -8(%ebp)
 # Assignment Ends
-# If
+# IfElse
 # Equal
-# Variable
+# Variable mod2
 push -8(%ebp)
 # Variable Ends
 push $1
@@ -59,13 +59,14 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je else_0
+# If
 # Assignment
 # Minus
 # Times
-# Variable
+# Variable x
 push 12(%ebp)
 # Variable Ends
-# Variable
+# Variable x
 push 12(%ebp)
 # Variable Ends
 pop  %ebx
@@ -82,12 +83,13 @@ push %eax
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
-jmp if_end_0
-else_0:
+# If Ends
+jmp ifelse_0
 # Else
+else_0:
 # Assignment
 # Divide
-# Variable
+# Variable x
 push 12(%ebp)
 # Variable Ends
 push $2
@@ -100,10 +102,11 @@ push %eax
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
-if_end_0:
+# Else Ends
+ifelse_0:
 # If Ends
 # Return Statement
-# Variable
+# Variable val
 push -4(%ebp)
 # Variable Ends
 pop %eax
@@ -128,23 +131,29 @@ push %ebx
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 # MethodCall
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 # MethodCall
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 # MethodCall
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 # MethodCall
 push %eax
 push %ecx
 push %edx
+# Push Arguments
 push $5
+# Arguments Pushed
 push 8(%ebp)
 call classA_f0
 add $8, %esp
@@ -152,6 +161,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+# Arguments Pushed
 push 8(%ebp)
 call classA_f0
 add $8, %esp
@@ -159,6 +169,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+# Arguments Pushed
 push 8(%ebp)
 call classA_f0
 add $8, %esp
@@ -166,6 +177,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+# Arguments Pushed
 push 8(%ebp)
 call classA_f0
 add $8, %esp
@@ -173,6 +185,7 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
+# Arguments Pushed
 push 8(%ebp)
 call classA_f0
 add $8, %esp
@@ -206,6 +219,8 @@ push %ebx
 push %eax
 push %ecx
 push %edx
+# Push Arguments
+# Arguments Pushed
 push -4(%ebp)
 call classA_doAll
 add $4, %esp

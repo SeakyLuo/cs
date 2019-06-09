@@ -141,7 +141,7 @@ Args: Args ',' Expr { $$ = $1; $$->push_back($3); }
     | Expr { $$ = new std::list<ExpressionNode*>(); $$->push_back($1); }
     ;
 
-If: T_IF Expr '{' Block '}' { $$ = new IfElseNode($2, $4, NULL); }
+If: T_IF Expr '{' Block '}' { $$ = new IfElseNode($2, $4, new std::list<StatementNode*>()); }
   | T_IF Expr '{' Block '}' T_ELSE '{' Block '}' { $$ = new IfElseNode($2, $4, $8); }
   ;
 

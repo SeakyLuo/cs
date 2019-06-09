@@ -1306,7 +1306,8 @@ add $8, %esp
 push 12(%ebp)
 # Variable Ends
 # MemberAccess
-mov 24(%ebp), %ebx
+mov 8(%ebp), %ebx
+mov 24(%ebx), %ebx
 push 0(%ebx)
 # MemberAccess Ends
 pop  %ebx

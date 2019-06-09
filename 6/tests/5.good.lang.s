@@ -47,10 +47,10 @@ mov %eax, -4(%ebp)
 # Assignment
 # Times
 # Times
-# Variable
+# Variable x
 push -4(%ebp)
 # Variable Ends
-# Variable
+# Variable x
 push -4(%ebp)
 # Variable Ends
 pop  %ebx
@@ -58,7 +58,7 @@ pop  %eax
 imul  %ebx, %eax
 push %eax
 # Times Ends
-# Variable
+# Variable x
 push -4(%ebp)
 # Variable Ends
 pop  %ebx
@@ -73,7 +73,7 @@ mov %eax, -8(%ebp)
 # Plus
 # Divide
 push $5
-# Variable
+# Variable x
 push -4(%ebp)
 # Variable Ends
 pop  %ebx
@@ -84,7 +84,7 @@ push %eax
 # Divide Ends
 # Times
 push $5
-# Variable
+# Variable x
 push -4(%ebp)
 # Variable Ends
 pop  %ebx
@@ -104,7 +104,7 @@ mov %eax, -12(%ebp)
 # Divide
 # Times
 # Plus
-# Variable
+# Variable z
 push -12(%ebp)
 # Variable Ends
 push $1
@@ -114,7 +114,7 @@ add  %ebx, %eax
 push %eax
 # Plus Ends
 # Minus
-# Variable
+# Variable z
 push -12(%ebp)
 # Variable Ends
 push $1
@@ -141,10 +141,10 @@ mov %eax, -4(%ebp)
 # Assignment
 # Divide
 # Times
-# Variable
+# Variable x
 push -4(%ebp)
 # Variable Ends
-# Variable
+# Variable x
 push -4(%ebp)
 # Variable Ends
 pop  %ebx
@@ -165,10 +165,10 @@ mov %eax, -8(%ebp)
 # Assignment
 # Times
 # Minus
-# Variable
+# Variable y
 push -8(%ebp)
 # Variable Ends
-# Variable
+# Variable x
 push -4(%ebp)
 # Variable Ends
 pop  %ebx
@@ -177,10 +177,10 @@ sub  %ebx, %eax
 push %eax
 # Minus Ends
 # Plus
-# Variable
+# Variable y
 push -8(%ebp)
 # Variable Ends
-# Variable
+# Variable x
 push -4(%ebp)
 # Variable Ends
 pop  %ebx
@@ -197,7 +197,7 @@ pop %eax
 mov %eax, -12(%ebp)
 # Assignment Ends
 # Print
-# Variable
+# Variable x
 push -4(%ebp)
 # Variable Ends
 push $printstr
@@ -205,7 +205,7 @@ call printf
 add $8, %esp
 # Print Ends
 # Print
-# Variable
+# Variable y
 push -8(%ebp)
 # Variable Ends
 push $printstr
@@ -213,7 +213,7 @@ call printf
 add $8, %esp
 # Print Ends
 # Print
-# Variable
+# Variable z
 push -12(%ebp)
 # Variable Ends
 push $printstr

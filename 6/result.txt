@@ -12,32 +12,7 @@ push %edi
 push %esi
 push %ebx
 # Assignment
-# Variable val
-push 12(%ebp)
-# Variable Ends
-pop %eax
-mov 8(%ebp), %ebx
-mov %eax, 0(%ebx)
-# Assignment Ends
-pop %ebx
-pop %esi
-pop %edi
-mov %ebp, %esp
-pop %ebp
-ret
-# Method classA Ends
-# Class classA Ends
-# Class classB
-# Method classB
-classB_classB:
-push %ebp
-mov %esp, %ebp
-sub $0, %esp
-push %edi
-push %esi
-push %ebx
-# Assignment
-# Variable val1
+# Variable
 push 12(%ebp)
 # Variable Ends
 pop %eax
@@ -45,7 +20,7 @@ mov 8(%ebp), %ebx
 mov %eax, 0(%ebx)
 # Assignment Ends
 # Assignment
-# Variable val2
+# Variable
 push 16(%ebp)
 # Variable Ends
 pop %eax
@@ -58,14 +33,61 @@ pop %edi
 mov %ebp, %esp
 pop %ebp
 ret
-# Method classB Ends
-# Class classB Ends
+# Method classA Ends
+# Method inc
+classA_inc:
+push %ebp
+mov %esp, %ebp
+sub $0, %esp
+push %edi
+push %esi
+push %ebx
+# Assignment
+# Times
+# Variable
+mov 8(%ebp), %ebx
+push 0(%ebx)
+# Variable Ends
+push $2
+pop  %ebx
+pop  %eax
+imul  %ebx, %eax
+push %eax
+# Times Ends
+pop %eax
+mov 8(%ebp), %ebx
+mov %eax, 0(%ebx)
+# Assignment Ends
+# Assignment
+# Plus
+# Variable
+mov 8(%ebp), %ebx
+push 4(%ebx)
+# Variable Ends
+push $1
+pop  %ebx
+pop  %eax
+add  %ebx, %eax
+push %eax
+# Plus Ends
+pop %eax
+mov 8(%ebp), %ebx
+mov %eax, 4(%ebx)
+# Assignment Ends
+pop %ebx
+pop %esi
+pop %edi
+mov %ebp, %esp
+pop %ebp
+ret
+# Method inc Ends
+# Class classA Ends
 # Class Main
 # Method main
 Main_main:
 push %ebp
 mov %esp, %ebp
-sub $4, %esp
+sub $8, %esp
 push %edi
 push %esi
 push %ebx
@@ -79,12 +101,10 @@ add $4, %esp
 push %eax
 push %ecx
 push %edx
-# Push Arguments
-push $1
-push $12
-# Arguments Pushed
+push $4
+push $3
 push 16(%esp)
-call classB_classB
+call classA_classA
 add $12, %esp
 pop %edx
 pop %ecx
@@ -97,7 +117,7 @@ pop %eax
 mov %eax, -4(%ebp)
 # Assignment Ends
 # Print
-# MemberAccess b.x
+# MemberAccess
 mov -4(%ebp), %ebx
 push 0(%ebx)
 # MemberAccess Ends
@@ -106,10 +126,43 @@ call printf
 add $8, %esp
 # Print Ends
 # Print
-# MemberAccess b.y
+# MemberAccess
 mov -4(%ebp), %ebx
 push 4(%ebx)
 # MemberAccess Ends
+push $printstr
+call printf
+add $8, %esp
+# Print Ends
+# Call
+# MethodCall
+push %eax
+push %ecx
+push %edx
+push -4(%ebp)
+call classA_inc
+add $4, %esp
+pop %edx
+pop %ecx
+xchg %eax, (%esp)
+# MethodCall Ends
+add $4, %esp
+# Call Ends
+# Print
+# Times
+# MemberAccess
+mov -4(%ebp), %ebx
+push 0(%ebx)
+# MemberAccess Ends
+# MemberAccess
+mov -4(%ebp), %ebx
+push 4(%ebx)
+# MemberAccess Ends
+pop  %ebx
+pop  %eax
+imul  %ebx, %eax
+push %eax
+# Times Ends
 push $printstr
 call printf
 add $8, %esp
