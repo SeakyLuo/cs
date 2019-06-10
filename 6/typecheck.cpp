@@ -85,10 +85,10 @@ void inheritanceHelper(ClassTable* classTable, VariableTable* variableTable, std
     inheritanceHelper(classTable, variableTable, info.superClassName, offset);
     for (auto iter: (*info.members)){
         VariableInfo vi = iter.second;
-        vi.offset = offset;
+        vi.offset += offset;
         (*variableTable)[iter.first] = vi;
-        offset += 4;
     }
+    offset += 4 * info.members->size();
 }
 
 void TypeCheck::visitClassNode(ClassNode* node) {
@@ -96,7 +96,8 @@ void TypeCheck::visitClassNode(ClassNode* node) {
     currentVariableTable = NULL;
     currentMemberOffset = 0;
     currentClassName = node->identifier_1->name;
-    if (node->identifier_2 && !classTable->count(node->identifier_2->name))
+    std::string superClassName = node->identifier_2 ? node->identifier_2->name : "";
+    if (node->identifier_2 && !classTable->count(superClassName))
         typeError(undefined_class);
     if (currentClassName == "Main"){
         if (node->declaration_list->size()) typeError(main_class_members_present);
@@ -110,11 +111,14 @@ void TypeCheck::visitClassNode(ClassNode* node) {
         if (!mainFunc) typeError(no_main_method);
     }
     classinfo info;
-    info.superClassName = (node->identifier_2) ? node->identifier_2->name : "";
+    info.superClassName = superClassName;
     info.methods = currentMethodTable;
     info.members = new VariableTable();
-    if (node->identifier_2)
-        inheritanceHelper(classTable, info.members, info.superClassName, currentMemberOffset);
+    if (node->identifier_2){
+        for (auto iter: (*(*classTable)[superClassName].members))
+            (*info.members)[iter.first] = iter.second;
+        currentMemberOffset = 4 * (*classTable)[superClassName].members->size();
+    }
     for (auto iter: *(node->declaration_list)){
         VariableInfo vi;
         vi.offset = currentMemberOffset;

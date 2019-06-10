@@ -14,7 +14,7 @@ push %ebx
 # Assignment to x
 # Variable xarg
 push 12(%ebp)
-# VariablexargEnds
+# Variable xarg Ends
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 0(%ebx)
@@ -22,7 +22,7 @@ mov %eax, 0(%ebx)
 # Assignment to y
 # Variable yarg
 push 16(%ebp)
-# VariableyargEnds
+# Variable yarg Ends
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 4(%ebx)
@@ -47,7 +47,7 @@ push %ebx
 # Variable x
 mov 8(%ebp), %ebx
 push 0(%ebx)
-# VariablexEnds
+# Variable x Ends
 push $2
 pop  %ebx
 pop  %eax
@@ -63,7 +63,7 @@ mov %eax, 0(%ebx)
 # Variable y
 mov 8(%ebp), %ebx
 push 4(%ebx)
-# VariableyEnds
+# Variable y Ends
 push $1
 pop  %ebx
 pop  %eax

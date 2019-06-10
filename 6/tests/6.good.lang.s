@@ -20,7 +20,7 @@ mov %eax, -4(%ebp)
 # Plus
 # Variable x
 push -4(%ebp)
-# VariablexEnds
+# Variable x Ends
 push $1
 pop  %ebx
 pop  %eax
@@ -34,7 +34,7 @@ mov %eax, -8(%ebp)
 # Equal
 # Variable y
 push -8(%ebp)
-# VariableyEnds
+# Variable y Ends
 push $2
 mov $0, %edx
 pop %ebx

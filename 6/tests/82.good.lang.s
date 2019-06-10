@@ -118,7 +118,7 @@ mov %eax, -12(%ebp)
 # Print
 # Variable arg2
 push 20(%ebp)
-# Variablearg2Ends
+# Variable arg2 Ends
 push $printstr
 call printf
 add $8, %esp
@@ -133,7 +133,7 @@ je else_0
 # Print
 # Variable arg0
 push 12(%ebp)
-# Variablearg0Ends
+# Variable arg0 Ends
 push $printstr
 call printf
 add $8, %esp
@@ -143,7 +143,7 @@ add $8, %esp
 push $0
 # Variable local0
 push -4(%ebp)
-# Variablelocal0Ends
+# Variable local0 Ends
 pop  %ebx
 pop  %eax
 and  %ebx, %eax
@@ -165,7 +165,7 @@ push %edx
 push $226
 # Variable local1
 push -8(%ebp)
-# Variablelocal1Ends
+# Variable local1 Ends
 push $249
 # Arguments Pushed
 push 8(%ebp)
@@ -190,7 +190,7 @@ add $8, %esp
 # Variable member3
 mov 8(%ebp), %ebx
 push 12(%ebx)
-# Variablemember3Ends
+# Variable member3 Ends
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment to local0 Ends
@@ -218,7 +218,7 @@ ifelse_0:
 # Variable member0
 mov 8(%ebp), %ebx
 push 0(%ebx)
-# Variablemember0Ends
+# Variable member0 Ends
 pop %eax
 # Return Statement Ends
 pop %ebx
@@ -282,7 +282,7 @@ mov %eax, -12(%ebp)
 # Variable member3
 mov 8(%ebp), %ebx
 push 12(%ebx)
-# Variablemember3Ends
+# Variable member3 Ends
 push $printstr
 call printf
 add $8, %esp
@@ -291,7 +291,7 @@ add $8, %esp
 # Variable member3
 mov 8(%ebp), %ebx
 push 12(%ebx)
-# Variablemember3Ends
+# Variable member3 Ends
 pop %eax
 mov %eax, -8(%ebp)
 # Assignment to local1 Ends
@@ -307,7 +307,7 @@ push $0
 # Variable member3
 mov 8(%ebp), %ebx
 push 12(%ebx)
-# Variablemember3Ends
+# Variable member3 Ends
 pop  %ebx
 pop  %eax
 and  %ebx, %eax
@@ -391,7 +391,7 @@ mov %eax, 8(%ebx)
 # Variable member4
 mov 8(%ebp), %ebx
 push 16(%ebx)
-# Variablemember4Ends
+# Variable member4 Ends
 push $printstr
 call printf
 add $8, %esp
@@ -406,7 +406,7 @@ while_2:
 # GreaterEqual
 # Variable i0
 push -4(%ebp)
-# Variablei0Ends
+# Variable i0 Ends
 push $67
 mov $0, %edx
 pop %ebx
@@ -423,7 +423,7 @@ je while_end_2
 # Minus
 # Variable i0
 push -4(%ebp)
-# Variablei0Ends
+# Variable i0 Ends
 push $1
 pop  %ebx
 pop  %eax
@@ -449,7 +449,7 @@ while_3:
 push $83
 # Variable i1
 push -8(%ebp)
-# Variablei1Ends
+# Variable i1 Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -465,7 +465,7 @@ je while_end_3
 # Minus
 # Variable i1
 push -8(%ebp)
-# Variablei1Ends
+# Variable i1 Ends
 # Negation
 push $9
 pop  %eax
@@ -501,7 +501,7 @@ push %eax
 # Negation Ends
 # Variable i2
 push -12(%ebp)
-# Variablei2Ends
+# Variable i2 Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -517,7 +517,7 @@ je while_end_4
 # Plus
 # Variable i2
 push -12(%ebp)
-# Variablei2Ends
+# Variable i2 Ends
 push $5
 pop  %ebx
 pop  %eax
@@ -595,7 +595,7 @@ while_7:
 push $65514
 # Variable i3
 push -16(%ebp)
-# Variablei3Ends
+# Variable i3 Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -611,7 +611,7 @@ je while_end_7
 # Times
 # Variable i3
 push -16(%ebp)
-# Variablei3Ends
+# Variable i3 Ends
 push $4
 pop  %ebx
 pop  %eax
@@ -631,7 +631,7 @@ while_8:
 # Greater
 # Variable i4
 push -20(%ebp)
-# Variablei4Ends
+# Variable i4 Ends
 push $37
 mov $0, %edx
 pop %ebx
@@ -648,7 +648,7 @@ je while_end_8
 # Divide
 # Variable i4
 push -20(%ebp)
-# Variablei4Ends
+# Variable i4 Ends
 push $2
 pop  %ebx
 pop  %eax
@@ -683,7 +683,7 @@ je else_9
 # Variable member1
 mov 8(%ebp), %ebx
 push 4(%ebx)
-# Variablemember1Ends
+# Variable member1 Ends
 pop  %eax
 xor $1, %eax
 push %eax
@@ -718,7 +718,7 @@ while_10:
 push $144
 # Variable i5
 push -24(%ebp)
-# Variablei5Ends
+# Variable i5 Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -734,7 +734,7 @@ je while_end_10
 # Times
 # Variable i5
 push -24(%ebp)
-# Variablei5Ends
+# Variable i5 Ends
 push $3
 pop  %ebx
 pop  %eax
@@ -748,7 +748,7 @@ mov %eax, -24(%ebp)
 # Variable member2
 mov 8(%ebp), %ebx
 push 8(%ebx)
-# Variablemember2Ends
+# Variable member2 Ends
 push $printstr
 call printf
 add $8, %esp
@@ -757,10 +757,10 @@ add $8, %esp
 # Greater
 # Variable arg1
 push 16(%ebp)
-# Variablearg1Ends
+# Variable arg1 Ends
 # Variable arg3
 push 24(%ebp)
-# Variablearg3Ends
+# Variable arg3 Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -812,7 +812,7 @@ while_11:
 push $30
 # Variable i6
 push -28(%ebp)
-# Variablei6Ends
+# Variable i6 Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -828,7 +828,7 @@ je while_end_11
 # Plus
 # Variable i6
 push -28(%ebp)
-# Variablei6Ends
+# Variable i6 Ends
 push $3
 pop  %ebx
 pop  %eax
@@ -844,7 +844,7 @@ mov %eax, -28(%ebp)
 push $110
 # Variable arg3
 push 24(%ebp)
-# Variablearg3Ends
+# Variable arg3 Ends
 pop  %ebx
 pop  %eax
 cdq
@@ -902,7 +902,7 @@ while_12:
 push $262064
 # Variable i0
 push -8(%ebp)
-# Variablei0Ends
+# Variable i0 Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -918,7 +918,7 @@ je while_end_12
 # Times
 # Variable i0
 push -8(%ebp)
-# Variablei0Ends
+# Variable i0 Ends
 push $4
 pop  %ebx
 pop  %eax
@@ -949,7 +949,7 @@ while_end_12:
 # Negation
 # Variable local0
 push -4(%ebp)
-# Variablelocal0Ends
+# Variable local0 Ends
 pop  %eax
 neg  %eax
 push %eax
@@ -961,7 +961,7 @@ mov %eax, -4(%ebp)
 # Variable member5
 mov 8(%ebp), %ebx
 push 20(%ebx)
-# Variablemember5Ends
+# Variable member5 Ends
 pop %eax
 # Return Statement Ends
 pop %ebx
@@ -1086,7 +1086,7 @@ push 8(%ebx)
 # MemberAccess local1.member2 Ends
 # Variable arg3
 push 24(%ebp)
-# Variablearg3Ends
+# Variable arg3 Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -1106,7 +1106,7 @@ push $1
 # Variable member1
 mov 8(%ebp), %ebx
 push 4(%ebx)
-# Variablemember1Ends
+# Variable member1 Ends
 pop  %ebx
 pop  %eax
 and  %ebx, %eax
@@ -1134,7 +1134,7 @@ else_14:
 # Variable member2
 mov 8(%ebp), %ebx
 push 8(%ebx)
-# Variablemember2Ends
+# Variable member2 Ends
 push $74
 pop  %ebx
 pop  %eax
@@ -1144,7 +1144,7 @@ push %eax
 # Divide Ends
 # Variable arg3
 push 24(%ebp)
-# Variablearg3Ends
+# Variable arg3 Ends
 pop  %ebx
 pop  %eax
 sub  %ebx, %eax
@@ -1168,7 +1168,7 @@ while_15:
 push $16417
 # Variable i0
 push -16(%ebp)
-# Variablei0Ends
+# Variable i0 Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -1184,7 +1184,7 @@ je while_end_15
 # Times
 # Variable i0
 push -16(%ebp)
-# Variablei0Ends
+# Variable i0 Ends
 push $4
 pop  %ebx
 pop  %eax
@@ -1246,7 +1246,7 @@ while_16:
 # Greater
 # Variable i1
 push -20(%ebp)
-# Variablei1Ends
+# Variable i1 Ends
 push $58
 mov $0, %edx
 pop %ebx
@@ -1263,7 +1263,7 @@ je while_end_16
 # Divide
 # Variable i1
 push -20(%ebp)
-# Variablei1Ends
+# Variable i1 Ends
 push $3
 pop  %ebx
 pop  %eax
@@ -1287,7 +1287,7 @@ mov %eax, 0(%ebx)
 # Variable member2
 mov 8(%ebp), %ebx
 push 8(%ebx)
-# Variablemember2Ends
+# Variable member2 Ends
 push $printstr
 call printf
 add $8, %esp
@@ -1340,7 +1340,7 @@ add $8, %esp
 # Minus
 # Variable arg0
 push 12(%ebp)
-# Variablearg0Ends
+# Variable arg0 Ends
 # MemberAccess member6.member0
 mov 8(%ebp), %ebx
 mov 24(%ebx), %ebx
@@ -1516,7 +1516,7 @@ while_18:
 push $38
 # Variable i0
 push -24(%ebp)
-# Variablei0Ends
+# Variable i0 Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -1532,7 +1532,7 @@ je while_end_18
 # Times
 # Variable i0
 push -24(%ebp)
-# Variablei0Ends
+# Variable i0 Ends
 push $2
 pop  %ebx
 pop  %eax
@@ -1550,7 +1550,7 @@ push %edx
 # Pushing Arguments
 # Variable arg1
 push 16(%ebp)
-# Variablearg1Ends
+# Variable arg1 Ends
 # Arguments Pushed
 push 8(%ebp)
 call class1_f6
@@ -1564,7 +1564,7 @@ xchg %eax, (%esp)
 # Plus
 # Variable local2
 push -12(%ebp)
-# Variablelocal2Ends
+# Variable local2 Ends
 push $94
 pop  %ebx
 pop  %eax
@@ -1582,7 +1582,7 @@ push %edx
 # Pushing Arguments
 # Variable arg1
 push 16(%ebp)
-# Variablearg1Ends
+# Variable arg1 Ends
 # Arguments Pushed
 push 8(%ebp)
 call class1_f6
@@ -2035,7 +2035,7 @@ mov %eax, -12(%ebp)
 # Negation
 # Variable arg2
 push 20(%ebp)
-# Variablearg2Ends
+# Variable arg2 Ends
 pop  %eax
 neg  %eax
 push %eax
@@ -2099,7 +2099,7 @@ mov %eax, -4(%ebp)
 # Assignment to local3
 # Variable local4
 push -20(%ebp)
-# Variablelocal4Ends
+# Variable local4 Ends
 pop %eax
 mov %eax, -16(%ebp)
 # Assignment to local3 Ends
@@ -2120,10 +2120,10 @@ je else_19
 # Or
 # Variable local1
 push -8(%ebp)
-# Variablelocal1Ends
+# Variable local1 Ends
 # Variable local2
 push -12(%ebp)
-# Variablelocal2Ends
+# Variable local2 Ends
 pop  %ebx
 pop  %eax
 or   %ebx, %eax
@@ -2150,7 +2150,7 @@ while_21:
 # Greater
 # Variable i0
 push -28(%ebp)
-# Variablei0Ends
+# Variable i0 Ends
 push $6
 mov $0, %edx
 pop %ebx
@@ -2167,7 +2167,7 @@ je while_end_21
 # Minus
 # Variable i0
 push -28(%ebp)
-# Variablei0Ends
+# Variable i0 Ends
 push $3
 pop  %ebx
 pop  %eax
@@ -2193,10 +2193,10 @@ else_20:
 # Or
 # Variable local2
 push -12(%ebp)
-# Variablelocal2Ends
+# Variable local2 Ends
 # Variable local1
 push -8(%ebp)
-# Variablelocal1Ends
+# Variable local1 Ends
 pop  %ebx
 pop  %eax
 or   %ebx, %eax

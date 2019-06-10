@@ -27,7 +27,7 @@ while_0:
 push $5
 # Variable i
 push -4(%ebp)
-# VariableiEnds
+# Variable i Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -44,10 +44,10 @@ je while_end_0
 # Times
 # Variable x
 push -8(%ebp)
-# VariablexEnds
+# Variable x Ends
 # Variable i
 push -4(%ebp)
-# VariableiEnds
+# Variable i Ends
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax
@@ -66,7 +66,7 @@ mov %eax, -8(%ebp)
 # Plus
 # Variable i
 push -4(%ebp)
-# VariableiEnds
+# Variable i Ends
 push $1
 pop  %ebx
 pop  %eax
@@ -79,7 +79,7 @@ mov %eax, -4(%ebp)
 # Print
 # Variable x
 push -8(%ebp)
-# VariablexEnds
+# Variable x Ends
 push $printstr
 call printf
 add $8, %esp

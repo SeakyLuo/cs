@@ -43,7 +43,7 @@ push %ebx
 # Assignment to xplus
 # Variable xval
 push 12(%ebp)
-# VariablexvalEnds
+# Variable xval Ends
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 0(%ebx)
@@ -51,7 +51,7 @@ mov %eax, 0(%ebx)
 # Assignment to yplus
 # Variable yval
 push 16(%ebp)
-# VariableyvalEnds
+# Variable yval Ends
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 4(%ebx)
@@ -106,7 +106,7 @@ push 0(%ebx)
 # Variable xplus
 mov 8(%ebp), %ebx
 push 0(%ebx)
-# VariablexplusEnds
+# Variable xplus Ends
 pop  %ebx
 pop  %eax
 add  %ebx, %eax
@@ -125,7 +125,7 @@ push 4(%ebx)
 # Variable yplus
 mov 8(%ebp), %ebx
 push 4(%ebx)
-# VariableyplusEnds
+# Variable yplus Ends
 pop  %ebx
 pop  %eax
 add  %ebx, %eax
@@ -138,7 +138,7 @@ mov %eax, 4(%ebx)
 # Return Statement
 # Variable aNew
 push -4(%ebp)
-# VariableaNewEnds
+# Variable aNew Ends
 pop %eax
 # Return Statement Ends
 pop %ebx
@@ -232,7 +232,7 @@ push %edx
 # Pushing Arguments
 # Variable a1
 push -4(%ebp)
-# Variablea1Ends
+# Variable a1 Ends
 # Arguments Pushed
 push -12(%ebp)
 call classB_makeA

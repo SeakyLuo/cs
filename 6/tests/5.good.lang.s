@@ -49,10 +49,10 @@ mov %eax, -4(%ebp)
 # Times
 # Variable x
 push -4(%ebp)
-# VariablexEnds
+# Variable x Ends
 # Variable x
 push -4(%ebp)
-# VariablexEnds
+# Variable x Ends
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax
@@ -60,7 +60,7 @@ push %eax
 # Times Ends
 # Variable x
 push -4(%ebp)
-# VariablexEnds
+# Variable x Ends
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax
@@ -75,7 +75,7 @@ mov %eax, -8(%ebp)
 push $5
 # Variable x
 push -4(%ebp)
-# VariablexEnds
+# Variable x Ends
 pop  %ebx
 pop  %eax
 cdq
@@ -86,7 +86,7 @@ push %eax
 push $5
 # Variable x
 push -4(%ebp)
-# VariablexEnds
+# Variable x Ends
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax
@@ -106,7 +106,7 @@ mov %eax, -12(%ebp)
 # Plus
 # Variable z
 push -12(%ebp)
-# VariablezEnds
+# Variable z Ends
 push $1
 pop  %ebx
 pop  %eax
@@ -116,7 +116,7 @@ push %eax
 # Minus
 # Variable z
 push -12(%ebp)
-# VariablezEnds
+# Variable z Ends
 push $1
 pop  %ebx
 pop  %eax
@@ -143,10 +143,10 @@ mov %eax, -4(%ebp)
 # Times
 # Variable x
 push -4(%ebp)
-# VariablexEnds
+# Variable x Ends
 # Variable x
 push -4(%ebp)
-# VariablexEnds
+# Variable x Ends
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax
@@ -167,10 +167,10 @@ mov %eax, -8(%ebp)
 # Minus
 # Variable y
 push -8(%ebp)
-# VariableyEnds
+# Variable y Ends
 # Variable x
 push -4(%ebp)
-# VariablexEnds
+# Variable x Ends
 pop  %ebx
 pop  %eax
 sub  %ebx, %eax
@@ -179,10 +179,10 @@ push %eax
 # Plus
 # Variable y
 push -8(%ebp)
-# VariableyEnds
+# Variable y Ends
 # Variable x
 push -4(%ebp)
-# VariablexEnds
+# Variable x Ends
 pop  %ebx
 pop  %eax
 add  %ebx, %eax
@@ -199,7 +199,7 @@ mov %eax, -12(%ebp)
 # Print
 # Variable x
 push -4(%ebp)
-# VariablexEnds
+# Variable x Ends
 push $printstr
 call printf
 add $8, %esp
@@ -207,7 +207,7 @@ add $8, %esp
 # Print
 # Variable y
 push -8(%ebp)
-# VariableyEnds
+# Variable y Ends
 push $printstr
 call printf
 add $8, %esp
@@ -215,7 +215,7 @@ add $8, %esp
 # Print
 # Variable z
 push -12(%ebp)
-# VariablezEnds
+# Variable z Ends
 push $printstr
 call printf
 add $8, %esp

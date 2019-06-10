@@ -74,10 +74,10 @@ mov %eax, -12(%ebp)
 # Variable member0
 mov 8(%ebp), %ebx
 push 0(%ebx)
-# Variablemember0Ends
+# Variable member0 Ends
 # Variable local1
 push -8(%ebp)
-# Variablelocal1Ends
+# Variable local1 Ends
 pop  %ebx
 pop  %eax
 sub  %ebx, %eax
@@ -90,7 +90,7 @@ add $8, %esp
 # Assignment to local4
 # Variable local4
 push -20(%ebp)
-# Variablelocal4Ends
+# Variable local4 Ends
 pop %eax
 mov %eax, -20(%ebp)
 # Assignment to local4 Ends
@@ -187,7 +187,7 @@ mov %eax, -12(%ebp)
 # Divide
 # Variable local0
 push -4(%ebp)
-# Variablelocal0Ends
+# Variable local0 Ends
 push $60
 pop  %ebx
 pop  %eax

@@ -27,7 +27,7 @@ mov %eax, -4(%ebp)
 # Times
 # Variable x
 push -4(%ebp)
-# VariablexEnds
+# Variable x Ends
 push $2
 pop  %ebx
 pop  %eax

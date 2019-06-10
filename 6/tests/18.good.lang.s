@@ -16,7 +16,7 @@ push %ebx
 # Variable x
 mov 8(%ebp), %ebx
 push 0(%ebx)
-# VariablexEnds
+# Variable x Ends
 push $2
 pop  %ebx
 pop  %eax
@@ -32,7 +32,7 @@ mov %eax, 0(%ebx)
 # Variable y
 mov 8(%ebp), %ebx
 push 4(%ebx)
-# VariableyEnds
+# Variable y Ends
 push $1
 pop  %ebx
 pop  %eax
@@ -144,7 +144,7 @@ add $8, %esp
 # Plus
 # Variable i
 push -8(%ebp)
-# VariableiEnds
+# Variable i Ends
 push $1
 pop  %ebx
 pop  %eax
@@ -158,7 +158,7 @@ mov %eax, -8(%ebp)
 push $5
 # Variable i
 push -8(%ebp)
-# VariableiEnds
+# Variable i Ends
 mov $0, %edx
 pop %ebx
 pop %eax

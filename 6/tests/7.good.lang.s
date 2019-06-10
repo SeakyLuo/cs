@@ -20,7 +20,7 @@ mov %eax, -4(%ebp)
 # Plus
 # Variable x
 push -4(%ebp)
-# VariablexEnds
+# Variable x Ends
 push $1
 pop  %ebx
 pop  %eax
@@ -34,7 +34,7 @@ mov %eax, -8(%ebp)
 # Plus
 # Variable y
 push -8(%ebp)
-# VariableyEnds
+# Variable y Ends
 push $1
 pop  %ebx
 pop  %eax
@@ -48,7 +48,7 @@ mov %eax, -4(%ebp)
 # Equal
 # Variable y
 push -8(%ebp)
-# VariableyEnds
+# Variable y Ends
 push $2
 mov $0, %edx
 pop %ebx
@@ -85,7 +85,7 @@ ifelse_0:
 # Equal
 # Variable x
 push -4(%ebp)
-# VariablexEnds
+# Variable x Ends
 push $2
 mov $0, %edx
 pop %ebx
@@ -124,7 +124,7 @@ ifelse_1:
 push $3
 # Variable x
 push -4(%ebp)
-# VariablexEnds
+# Variable x Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -136,7 +136,7 @@ push %edx
 push $3
 # Variable y
 push -8(%ebp)
-# VariableyEnds
+# Variable y Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -179,7 +179,7 @@ ifelse_2:
 push $3
 # Variable x
 push -4(%ebp)
-# VariablexEnds
+# Variable x Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -191,7 +191,7 @@ push %edx
 push $3
 # Variable y
 push -8(%ebp)
-# VariableyEnds
+# Variable y Ends
 mov $0, %edx
 pop %ebx
 pop %eax

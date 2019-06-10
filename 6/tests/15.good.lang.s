@@ -14,7 +14,7 @@ push %ebx
 # IfElse
 # Variable y
 push 16(%ebp)
-# VariableyEnds
+# Variable y Ends
 pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
@@ -24,10 +24,10 @@ je else_0
 # Times
 # Variable x
 push 12(%ebp)
-# VariablexEnds
+# Variable x Ends
 # Variable x
 push 12(%ebp)
-# VariablexEnds
+# Variable x Ends
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax
@@ -44,7 +44,7 @@ else_0:
 # Divide
 # Variable x
 push 12(%ebp)
-# VariablexEnds
+# Variable x Ends
 push $2
 pop  %ebx
 pop  %eax
@@ -61,7 +61,7 @@ ifelse_0:
 # Return Statement
 # Variable val
 push -4(%ebp)
-# VariablevalEnds
+# Variable val Ends
 pop %eax
 # Return Statement Ends
 pop %ebx
@@ -95,7 +95,7 @@ while_1:
 push $5
 # Variable i
 push -4(%ebp)
-# VariableiEnds
+# Variable i Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -117,7 +117,7 @@ push %edx
 push $2
 # Variable i
 push -4(%ebp)
-# VariableiEnds
+# Variable i Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -127,7 +127,7 @@ push %edx
 # GreaterEqual Ends
 # Variable x
 push -8(%ebp)
-# VariablexEnds
+# Variable x Ends
 # Arguments Pushed
 push 8(%ebp)
 call classA_f0
@@ -143,7 +143,7 @@ mov %eax, -8(%ebp)
 # Plus
 # Variable i
 push -4(%ebp)
-# VariableiEnds
+# Variable i Ends
 push $1
 pop  %ebx
 pop  %eax
@@ -156,7 +156,7 @@ mov %eax, -4(%ebp)
 # Print
 # Variable x
 push -8(%ebp)
-# VariablexEnds
+# Variable x Ends
 push $printstr
 call printf
 add $8, %esp

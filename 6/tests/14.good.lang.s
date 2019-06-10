@@ -14,7 +14,7 @@ push %ebx
 # IfElse
 # Variable y
 push 16(%ebp)
-# VariableyEnds
+# Variable y Ends
 pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
@@ -24,10 +24,10 @@ je else_0
 # Times
 # Variable x
 push 12(%ebp)
-# VariablexEnds
+# Variable x Ends
 # Variable x
 push 12(%ebp)
-# VariablexEnds
+# Variable x Ends
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax
@@ -44,7 +44,7 @@ else_0:
 # Divide
 # Variable x
 push 12(%ebp)
-# VariablexEnds
+# Variable x Ends
 push $2
 pop  %ebx
 pop  %eax
@@ -61,7 +61,7 @@ ifelse_0:
 # Return Statement
 # Variable val
 push -4(%ebp)
-# VariablevalEnds
+# Variable val Ends
 pop %eax
 # Return Statement Ends
 pop %ebx

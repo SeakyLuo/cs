@@ -14,7 +14,7 @@ push %ebx
 # Assignment to x
 # Variable val
 push 12(%ebp)
-# VariablevalEnds
+# Variable val Ends
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 0(%ebx)
@@ -61,7 +61,7 @@ push %ebx
 # Variable x
 mov 8(%ebp), %ebx
 push 0(%ebx)
-# VariablexEnds
+# Variable x Ends
 pop %eax
 mov %eax, -4(%ebp)
 # Assignment to tmp Ends
@@ -70,7 +70,7 @@ mov %eax, -4(%ebp)
 # Variable x
 mov 8(%ebp), %ebx
 push 0(%ebx)
-# VariablexEnds
+# Variable x Ends
 # MemberAccess a.x
 mov 12(%ebp), %ebx
 push 0(%ebx)
@@ -88,7 +88,7 @@ mov %eax, 0(%ebx)
 # Variable x
 mov 8(%ebp), %ebx
 push 0(%ebx)
-# VariablexEnds
+# Variable x Ends
 push $printstr
 call printf
 add $8, %esp
@@ -106,7 +106,7 @@ push %edx
 # Pushing Arguments
 # Variable tmp
 push -4(%ebp)
-# VariabletmpEnds
+# Variable tmp Ends
 # Arguments Pushed
 # Class: classB Method: classA
 push 12(%esp)

@@ -20,7 +20,7 @@ mov %eax, -4(%ebp)
 # Times
 # Variable x
 push -4(%ebp)
-# VariablexEnds
+# Variable x Ends
 push $2
 pop  %ebx
 pop  %eax
@@ -55,7 +55,7 @@ mov %eax, -4(%ebp)
 # Plus
 # Variable x
 push -4(%ebp)
-# VariablexEnds
+# Variable x Ends
 push $1
 pop  %ebx
 pop  %eax
@@ -85,7 +85,7 @@ xchg %eax, (%esp)
 # Minus
 # Variable x
 push -4(%ebp)
-# VariablexEnds
+# Variable x Ends
 push $1
 pop  %ebx
 pop  %eax

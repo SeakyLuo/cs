@@ -15,10 +15,10 @@ push %ebx
 # Times
 # Variable x
 push 12(%ebp)
-# VariablexEnds
+# Variable x Ends
 # Variable x
 push 12(%ebp)
-# VariablexEnds
+# Variable x Ends
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax

@@ -15,12 +15,12 @@ push %ebx
 # Minus
 # Variable x
 push 12(%ebp)
-# VariablexEnds
+# Variable x Ends
 # Times
 # Divide
 # Variable x
 push 12(%ebp)
-# VariablexEnds
+# Variable x Ends
 push $2
 pop  %ebx
 pop  %eax
@@ -46,7 +46,7 @@ mov %eax, -8(%ebp)
 # Equal
 # Variable mod2
 push -8(%ebp)
-# Variablemod2Ends
+# Variable mod2 Ends
 push $1
 mov $0, %edx
 pop %ebx
@@ -65,10 +65,10 @@ je else_0
 # Times
 # Variable x
 push 12(%ebp)
-# VariablexEnds
+# Variable x Ends
 # Variable x
 push 12(%ebp)
-# VariablexEnds
+# Variable x Ends
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax
@@ -91,7 +91,7 @@ else_0:
 # Divide
 # Variable x
 push 12(%ebp)
-# VariablexEnds
+# Variable x Ends
 push $2
 pop  %ebx
 pop  %eax
@@ -108,7 +108,7 @@ ifelse_0:
 # Return Statement
 # Variable val
 push -4(%ebp)
-# VariablevalEnds
+# Variable val Ends
 pop %eax
 # Return Statement Ends
 pop %ebx

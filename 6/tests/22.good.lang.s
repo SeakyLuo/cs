@@ -14,7 +14,7 @@ push %ebx
 # Assignment to x
 # Variable val
 push 12(%ebp)
-# VariablevalEnds
+# Variable val Ends
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 0(%ebx)
@@ -39,7 +39,7 @@ push %ebx
 # Assignment to x
 # Variable val1
 push 12(%ebp)
-# Variableval1Ends
+# Variable val1 Ends
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 0(%ebx)
@@ -47,7 +47,7 @@ mov %eax, 0(%ebx)
 # Assignment to y
 # Variable val2
 push 16(%ebp)
-# Variableval2Ends
+# Variable val2 Ends
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 4(%ebx)

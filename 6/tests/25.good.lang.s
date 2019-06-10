@@ -14,7 +14,7 @@ push %ebx
 # Assignment to sign
 # Variable s
 push 12(%ebp)
-# VariablesEnds
+# Variable s Ends
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 0(%ebx)
@@ -23,7 +23,7 @@ mov %eax, 0(%ebx)
 # Plus
 # Variable e
 push 16(%ebp)
-# VariableeEnds
+# Variable e Ends
 push $127
 pop  %ebx
 pop  %eax
@@ -37,7 +37,7 @@ mov %eax, 4(%ebx)
 # Assignment to frac
 # Variable f
 push 20(%ebp)
-# VariablefEnds
+# Variable f Ends
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 8(%ebx)
@@ -61,7 +61,7 @@ push %ebx
 # Variable sign
 mov 8(%ebp), %ebx
 push 0(%ebx)
-# VariablesignEnds
+# Variable sign Ends
 push $printstr
 call printf
 add $8, %esp
@@ -71,7 +71,7 @@ add $8, %esp
 # Variable exp
 mov 8(%ebp), %ebx
 push 4(%ebx)
-# VariableexpEnds
+# Variable exp Ends
 push $127
 pop  %ebx
 pop  %eax
@@ -86,7 +86,7 @@ add $8, %esp
 # Variable frac
 mov 8(%ebp), %ebx
 push 8(%ebx)
-# VariablefracEnds
+# Variable frac Ends
 push $printstr
 call printf
 add $8, %esp
@@ -120,12 +120,12 @@ push %edx
 # Variable frac
 mov 8(%ebp), %ebx
 push 8(%ebx)
-# VariablefracEnds
+# Variable frac Ends
 # Minus
 # Variable exp
 mov 8(%ebp), %ebx
 push 4(%ebx)
-# VariableexpEnds
+# Variable exp Ends
 push $127
 pop  %ebx
 pop  %eax
@@ -135,7 +135,7 @@ push %eax
 # Variable sign
 mov 8(%ebp), %ebx
 push 0(%ebx)
-# VariablesignEnds
+# Variable sign Ends
 # Arguments Pushed
 # Class: Float Method: Float
 push 20(%esp)
@@ -422,7 +422,7 @@ ifelse_2:
 # Assignment to i
 # Variable diff
 push -16(%ebp)
-# VariablediffEnds
+# Variable diff Ends
 pop %eax
 mov %eax, -20(%ebp)
 # Assignment to i Ends
@@ -431,7 +431,7 @@ while_3:
 # Greater
 # Variable i
 push -20(%ebp)
-# VariableiEnds
+# Variable i Ends
 push $0
 mov $0, %edx
 pop %ebx
@@ -448,7 +448,7 @@ je while_end_3
 # Minus
 # Variable i
 push -20(%ebp)
-# VariableiEnds
+# Variable i Ends
 push $1
 pop  %ebx
 pop  %eax
@@ -730,7 +730,7 @@ ifelse_5:
 # Return Statement
 # Variable result
 push -12(%ebp)
-# VariableresultEnds
+# Variable result Ends
 pop %eax
 # Return Statement Ends
 pop %ebx
@@ -802,7 +802,7 @@ push %eax
 # New Float() Ends
 # Variable f1
 push 12(%ebp)
-# Variablef1Ends
+# Variable f1 Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_add
@@ -1102,7 +1102,7 @@ push 8(%ebx)
 # Times
 # Variable hi1
 push -12(%ebp)
-# Variablehi1Ends
+# Variable hi1 Ends
 push $4096
 pop  %ebx
 pop  %eax
@@ -1142,7 +1142,7 @@ push 8(%ebx)
 # Times
 # Variable hi2
 push -16(%ebp)
-# Variablehi2Ends
+# Variable hi2 Ends
 push $4096
 pop  %ebx
 pop  %eax
@@ -1161,10 +1161,10 @@ mov %eax, -28(%ebp)
 # Times
 # Variable hi1
 push -12(%ebp)
-# Variablehi1Ends
+# Variable hi1 Ends
 # Variable hi2
 push -16(%ebp)
-# Variablehi2Ends
+# Variable hi2 Ends
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax
@@ -1178,10 +1178,10 @@ mov %eax, -8(%ebp)
 # Times
 # Variable hi1
 push -12(%ebp)
-# Variablehi1Ends
+# Variable hi1 Ends
 # Variable lo2
 push -28(%ebp)
-# Variablelo2Ends
+# Variable lo2 Ends
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax
@@ -1190,10 +1190,10 @@ push %eax
 # Times
 # Variable hi2
 push -16(%ebp)
-# Variablehi2Ends
+# Variable hi2 Ends
 # Variable lo1
 push -24(%ebp)
-# Variablelo1Ends
+# Variable lo1 Ends
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax
@@ -1211,11 +1211,11 @@ mov %eax, -20(%ebp)
 # Plus
 # Variable hi
 push -8(%ebp)
-# VariablehiEnds
+# Variable hi Ends
 # Divide
 # Variable lo
 push -20(%ebp)
-# VariableloEnds
+# Variable lo Ends
 push $4096
 pop  %ebx
 pop  %eax
@@ -1235,11 +1235,11 @@ mov %eax, -8(%ebp)
 # Minus
 # Variable lo
 push -20(%ebp)
-# VariableloEnds
+# Variable lo Ends
 # Divide
 # Variable lo
 push -20(%ebp)
-# VariableloEnds
+# Variable lo Ends
 push $4096
 pop  %ebx
 pop  %eax
@@ -1258,7 +1258,7 @@ mov %eax, -20(%ebp)
 # Assignment to result
 # Variable hi
 push -8(%ebp)
-# VariablehiEnds
+# Variable hi Ends
 pop %eax
 mov -4(%ebp), %ebx
 mov %eax, 8(%ebx)
@@ -1363,7 +1363,7 @@ push 8(%ebx)
 # Divide
 # Variable lo
 push -20(%ebp)
-# VariableloEnds
+# Variable lo Ends
 push $1024
 pop  %ebx
 pop  %eax
@@ -1384,11 +1384,11 @@ mov %eax, 8(%ebx)
 # Minus
 # Variable lo
 push -20(%ebp)
-# VariableloEnds
+# Variable lo Ends
 # Divide
 # Variable lo
 push -20(%ebp)
-# VariableloEnds
+# Variable lo Ends
 push $1024
 pop  %ebx
 pop  %eax
@@ -1408,7 +1408,7 @@ mov %eax, -20(%ebp)
 # Times
 # Variable lo
 push -20(%ebp)
-# VariableloEnds
+# Variable lo Ends
 push $2
 pop  %ebx
 pop  %eax
@@ -1537,7 +1537,7 @@ ifelse_8:
 # Return Statement
 # Variable result
 push -4(%ebp)
-# VariableresultEnds
+# Variable result Ends
 pop %eax
 # Return Statement Ends
 pop %ebx
@@ -1966,7 +1966,7 @@ mov %eax, 8(%ebx)
 # Return Statement
 # Variable result
 push -4(%ebp)
-# VariableresultEnds
+# Variable result Ends
 pop %eax
 # Return Statement Ends
 pop %ebx
@@ -2083,7 +2083,7 @@ ifelse_18:
 # Not
 # Variable done
 push -4(%ebp)
-# VariabledoneEnds
+# Variable done Ends
 pop  %eax
 xor $1, %eax
 push %eax
@@ -2136,7 +2136,7 @@ ifelse_19:
 # Not
 # Variable done
 push -4(%ebp)
-# VariabledoneEnds
+# Variable done Ends
 pop  %eax
 xor $1, %eax
 push %eax
@@ -2189,7 +2189,7 @@ ifelse_20:
 # Not
 # Variable done
 push -4(%ebp)
-# VariabledoneEnds
+# Variable done Ends
 pop  %eax
 xor $1, %eax
 push %eax
@@ -2237,7 +2237,7 @@ ifelse_21:
 # Not
 # Variable done
 push -4(%ebp)
-# VariabledoneEnds
+# Variable done Ends
 pop  %eax
 xor $1, %eax
 push %eax
@@ -2304,7 +2304,7 @@ je else_23
 # Not
 # Variable result
 push -8(%ebp)
-# VariableresultEnds
+# Variable result Ends
 pop  %eax
 xor $1, %eax
 push %eax
@@ -2322,7 +2322,7 @@ ifelse_23:
 # Return Statement
 # Variable result
 push -8(%ebp)
-# VariableresultEnds
+# Variable result Ends
 pop %eax
 # Return Statement Ends
 pop %ebx
@@ -2675,10 +2675,10 @@ push %edx
 # Pushing Arguments
 # Variable tmp
 push -24(%ebp)
-# VariabletmpEnds
+# Variable tmp Ends
 # Variable one
 push -16(%ebp)
-# VariableoneEnds
+# Variable one Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_lt
@@ -2699,10 +2699,10 @@ push %edx
 # Pushing Arguments
 # Variable e
 push -12(%ebp)
-# VariableeEnds
+# Variable e Ends
 # Variable base
 push -20(%ebp)
-# VariablebaseEnds
+# Variable base Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
@@ -2722,10 +2722,10 @@ push %edx
 # Pushing Arguments
 # Variable one
 push -16(%ebp)
-# VariableoneEnds
+# Variable one Ends
 # Variable tmp
 push -24(%ebp)
-# VariabletmpEnds
+# Variable tmp Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_sub
@@ -2748,10 +2748,10 @@ push %edx
 # Pushing Arguments
 # Variable tmp
 push -24(%ebp)
-# VariabletmpEnds
+# Variable tmp Ends
 # Variable result
 push -28(%ebp)
-# VariableresultEnds
+# Variable result Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
@@ -2771,10 +2771,10 @@ push %edx
 # Pushing Arguments
 # Variable c6
 push -48(%ebp)
-# Variablec6Ends
+# Variable c6 Ends
 # Variable result
 push -28(%ebp)
-# VariableresultEnds
+# Variable result Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
@@ -2794,10 +2794,10 @@ push %edx
 # Pushing Arguments
 # Variable one
 push -16(%ebp)
-# VariableoneEnds
+# Variable one Ends
 # Variable result
 push -28(%ebp)
-# VariableresultEnds
+# Variable result Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_add
@@ -2817,10 +2817,10 @@ push %edx
 # Pushing Arguments
 # Variable tmp
 push -24(%ebp)
-# VariabletmpEnds
+# Variable tmp Ends
 # Variable result
 push -28(%ebp)
-# VariableresultEnds
+# Variable result Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
@@ -2840,10 +2840,10 @@ push %edx
 # Pushing Arguments
 # Variable c5
 push -44(%ebp)
-# Variablec5Ends
+# Variable c5 Ends
 # Variable result
 push -28(%ebp)
-# VariableresultEnds
+# Variable result Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
@@ -2863,10 +2863,10 @@ push %edx
 # Pushing Arguments
 # Variable one
 push -16(%ebp)
-# VariableoneEnds
+# Variable one Ends
 # Variable result
 push -28(%ebp)
-# VariableresultEnds
+# Variable result Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_add
@@ -2886,10 +2886,10 @@ push %edx
 # Pushing Arguments
 # Variable tmp
 push -24(%ebp)
-# VariabletmpEnds
+# Variable tmp Ends
 # Variable result
 push -28(%ebp)
-# VariableresultEnds
+# Variable result Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
@@ -2909,10 +2909,10 @@ push %edx
 # Pushing Arguments
 # Variable c4
 push -40(%ebp)
-# Variablec4Ends
+# Variable c4 Ends
 # Variable result
 push -28(%ebp)
-# VariableresultEnds
+# Variable result Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
@@ -2932,10 +2932,10 @@ push %edx
 # Pushing Arguments
 # Variable one
 push -16(%ebp)
-# VariableoneEnds
+# Variable one Ends
 # Variable result
 push -28(%ebp)
-# VariableresultEnds
+# Variable result Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_add
@@ -2955,10 +2955,10 @@ push %edx
 # Pushing Arguments
 # Variable tmp
 push -24(%ebp)
-# VariabletmpEnds
+# Variable tmp Ends
 # Variable result
 push -28(%ebp)
-# VariableresultEnds
+# Variable result Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
@@ -2978,10 +2978,10 @@ push %edx
 # Pushing Arguments
 # Variable c3
 push -36(%ebp)
-# Variablec3Ends
+# Variable c3 Ends
 # Variable result
 push -28(%ebp)
-# VariableresultEnds
+# Variable result Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
@@ -3001,10 +3001,10 @@ push %edx
 # Pushing Arguments
 # Variable one
 push -16(%ebp)
-# VariableoneEnds
+# Variable one Ends
 # Variable result
 push -28(%ebp)
-# VariableresultEnds
+# Variable result Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_add
@@ -3024,10 +3024,10 @@ push %edx
 # Pushing Arguments
 # Variable tmp
 push -24(%ebp)
-# VariabletmpEnds
+# Variable tmp Ends
 # Variable result
 push -28(%ebp)
-# VariableresultEnds
+# Variable result Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
@@ -3047,10 +3047,10 @@ push %edx
 # Pushing Arguments
 # Variable c2
 push -32(%ebp)
-# Variablec2Ends
+# Variable c2 Ends
 # Variable result
 push -28(%ebp)
-# VariableresultEnds
+# Variable result Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
@@ -3070,10 +3070,10 @@ push %edx
 # Pushing Arguments
 # Variable one
 push -16(%ebp)
-# VariableoneEnds
+# Variable one Ends
 # Variable result
 push -28(%ebp)
-# VariableresultEnds
+# Variable result Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_add
@@ -3093,10 +3093,10 @@ push %edx
 # Pushing Arguments
 # Variable tmp
 push -24(%ebp)
-# VariabletmpEnds
+# Variable tmp Ends
 # Variable result
 push -28(%ebp)
-# VariableresultEnds
+# Variable result Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
@@ -3116,10 +3116,10 @@ push %edx
 # Pushing Arguments
 # Variable one
 push -16(%ebp)
-# VariableoneEnds
+# Variable one Ends
 # Variable result
 push -28(%ebp)
-# VariableresultEnds
+# Variable result Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_add
@@ -3139,10 +3139,10 @@ push %edx
 # Pushing Arguments
 # Variable base
 push -20(%ebp)
-# VariablebaseEnds
+# Variable base Ends
 # Variable result
 push -28(%ebp)
-# VariableresultEnds
+# Variable result Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
@@ -3172,10 +3172,10 @@ push %edx
 # Pushing Arguments
 # Variable result
 push -28(%ebp)
-# VariableresultEnds
+# Variable result Ends
 # Variable one
 push -16(%ebp)
-# VariableoneEnds
+# Variable one Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_div
@@ -3197,7 +3197,7 @@ ifelse_26:
 # Return Statement
 # Variable result
 push -28(%ebp)
-# VariableresultEnds
+# Variable result Ends
 pop %eax
 # Return Statement Ends
 pop %ebx
@@ -3468,7 +3468,7 @@ while_27:
 # Greater
 # Variable i
 push -40(%ebp)
-# VariableiEnds
+# Variable i Ends
 push $0
 mov $0, %edx
 pop %ebx
@@ -3489,10 +3489,10 @@ push %edx
 # Pushing Arguments
 # Variable one
 push -36(%ebp)
-# VariableoneEnds
+# Variable one Ends
 # Variable base
 push -12(%ebp)
-# VariablebaseEnds
+# Variable base Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_add
@@ -3508,7 +3508,7 @@ mov %eax, -12(%ebp)
 # Minus
 # Variable i
 push -40(%ebp)
-# VariableiEnds
+# Variable i Ends
 push $1
 pop  %ebx
 pop  %eax
@@ -3529,10 +3529,10 @@ push %edx
 # Pushing Arguments
 # Variable log2
 push -4(%ebp)
-# Variablelog2Ends
+# Variable log2 Ends
 # Variable base
 push -12(%ebp)
-# VariablebaseEnds
+# Variable base Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
@@ -3584,10 +3584,10 @@ push %edx
 # Pushing Arguments
 # Variable one
 push -36(%ebp)
-# VariableoneEnds
+# Variable one Ends
 # Variable x
 push -8(%ebp)
-# VariablexEnds
+# Variable x Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_sub
@@ -3607,10 +3607,10 @@ push %edx
 # Pushing Arguments
 # Variable c5
 push -32(%ebp)
-# Variablec5Ends
+# Variable c5 Ends
 # Variable x
 push -8(%ebp)
-# VariablexEnds
+# Variable x Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
@@ -3630,10 +3630,10 @@ push %edx
 # Pushing Arguments
 # Variable result
 push -16(%ebp)
-# VariableresultEnds
+# Variable result Ends
 # Variable one
 push -36(%ebp)
-# VariableoneEnds
+# Variable one Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_add
@@ -3653,10 +3653,10 @@ push %edx
 # Pushing Arguments
 # Variable x
 push -8(%ebp)
-# VariablexEnds
+# Variable x Ends
 # Variable result
 push -16(%ebp)
-# VariableresultEnds
+# Variable result Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
@@ -3676,10 +3676,10 @@ push %edx
 # Pushing Arguments
 # Variable c4
 push -28(%ebp)
-# Variablec4Ends
+# Variable c4 Ends
 # Variable result
 push -16(%ebp)
-# VariableresultEnds
+# Variable result Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
@@ -3699,10 +3699,10 @@ push %edx
 # Pushing Arguments
 # Variable result
 push -16(%ebp)
-# VariableresultEnds
+# Variable result Ends
 # Variable one
 push -36(%ebp)
-# VariableoneEnds
+# Variable one Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_sub
@@ -3722,10 +3722,10 @@ push %edx
 # Pushing Arguments
 # Variable x
 push -8(%ebp)
-# VariablexEnds
+# Variable x Ends
 # Variable result
 push -16(%ebp)
-# VariableresultEnds
+# Variable result Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
@@ -3745,10 +3745,10 @@ push %edx
 # Pushing Arguments
 # Variable c3
 push -24(%ebp)
-# Variablec3Ends
+# Variable c3 Ends
 # Variable result
 push -16(%ebp)
-# VariableresultEnds
+# Variable result Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
@@ -3768,10 +3768,10 @@ push %edx
 # Pushing Arguments
 # Variable result
 push -16(%ebp)
-# VariableresultEnds
+# Variable result Ends
 # Variable one
 push -36(%ebp)
-# VariableoneEnds
+# Variable one Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_add
@@ -3791,10 +3791,10 @@ push %edx
 # Pushing Arguments
 # Variable x
 push -8(%ebp)
-# VariablexEnds
+# Variable x Ends
 # Variable result
 push -16(%ebp)
-# VariableresultEnds
+# Variable result Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
@@ -3814,10 +3814,10 @@ push %edx
 # Pushing Arguments
 # Variable c2
 push -20(%ebp)
-# Variablec2Ends
+# Variable c2 Ends
 # Variable result
 push -16(%ebp)
-# VariableresultEnds
+# Variable result Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
@@ -3837,10 +3837,10 @@ push %edx
 # Pushing Arguments
 # Variable result
 push -16(%ebp)
-# VariableresultEnds
+# Variable result Ends
 # Variable one
 push -36(%ebp)
-# VariableoneEnds
+# Variable one Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_sub
@@ -3860,10 +3860,10 @@ push %edx
 # Pushing Arguments
 # Variable x
 push -8(%ebp)
-# VariablexEnds
+# Variable x Ends
 # Variable result
 push -16(%ebp)
-# VariableresultEnds
+# Variable result Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
@@ -3883,10 +3883,10 @@ push %edx
 # Pushing Arguments
 # Variable result
 push -16(%ebp)
-# VariableresultEnds
+# Variable result Ends
 # Variable base
 push -12(%ebp)
-# VariablebaseEnds
+# Variable base Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_add
@@ -3930,7 +3930,7 @@ push %edx
 # Pushing Arguments
 # Variable f1
 push 12(%ebp)
-# Variablef1Ends
+# Variable f1 Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_ln
@@ -3941,7 +3941,7 @@ xchg %eax, (%esp)
 # MethodCall Ends
 # Variable f2
 push 16(%ebp)
-# Variablef2Ends
+# Variable f2 Ends
 # Arguments Pushed
 push 8(%ebp)
 call FloatOps_mult
@@ -4043,10 +4043,10 @@ push %edx
 # Pushing Arguments
 # Variable f2
 push -8(%ebp)
-# Variablef2Ends
+# Variable f2 Ends
 # Variable f1
 push -4(%ebp)
-# Variablef1Ends
+# Variable f1 Ends
 # Arguments Pushed
 push -16(%ebp)
 call FloatOps_add
@@ -4081,10 +4081,10 @@ push %edx
 # Pushing Arguments
 # Variable f2
 push -8(%ebp)
-# Variablef2Ends
+# Variable f2 Ends
 # Variable f1
 push -4(%ebp)
-# Variablef1Ends
+# Variable f1 Ends
 # Arguments Pushed
 push -16(%ebp)
 call FloatOps_mult
@@ -4119,10 +4119,10 @@ push %edx
 # Pushing Arguments
 # Variable f2
 push -8(%ebp)
-# Variablef2Ends
+# Variable f2 Ends
 # Variable f1
 push -4(%ebp)
-# Variablef1Ends
+# Variable f1 Ends
 # Arguments Pushed
 push -16(%ebp)
 call FloatOps_div
@@ -4157,7 +4157,7 @@ push %edx
 # Pushing Arguments
 # Variable f2
 push -8(%ebp)
-# Variablef2Ends
+# Variable f2 Ends
 # Arguments Pushed
 push -16(%ebp)
 call FloatOps_exp
@@ -4192,7 +4192,7 @@ push %edx
 # Pushing Arguments
 # Variable f2
 push -8(%ebp)
-# Variablef2Ends
+# Variable f2 Ends
 # Arguments Pushed
 push -16(%ebp)
 call FloatOps_ln
@@ -4227,10 +4227,10 @@ push %edx
 # Pushing Arguments
 # Variable f2
 push -8(%ebp)
-# Variablef2Ends
+# Variable f2 Ends
 # Variable f1
 push -4(%ebp)
-# Variablef1Ends
+# Variable f1 Ends
 # Arguments Pushed
 push -16(%ebp)
 call FloatOps_pow
@@ -4386,10 +4386,10 @@ push %edx
 # Pushing Arguments
 # Variable r
 push -24(%ebp)
-# VariablerEnds
+# Variable r Ends
 # Variable one
 push -20(%ebp)
-# VariableoneEnds
+# Variable one Ends
 # Arguments Pushed
 push -16(%ebp)
 call FloatOps_sub
@@ -4410,10 +4410,10 @@ push %edx
 # Pushing Arguments
 # Variable N
 push -28(%ebp)
-# VariableNEnds
+# Variable N Ends
 # Variable r
 push -24(%ebp)
-# VariablerEnds
+# Variable r Ends
 # Arguments Pushed
 push -16(%ebp)
 call FloatOps_pow
@@ -4424,7 +4424,7 @@ xchg %eax, (%esp)
 # MethodCall Ends
 # Variable one
 push -20(%ebp)
-# VariableoneEnds
+# Variable one Ends
 # Arguments Pushed
 push -16(%ebp)
 call FloatOps_sub
@@ -4452,10 +4452,10 @@ push %edx
 # Pushing Arguments
 # Variable Amt
 push -32(%ebp)
-# VariableAmtEnds
+# Variable Amt Ends
 # Variable res
 push -36(%ebp)
-# VariableresEnds
+# Variable res Ends
 # Arguments Pushed
 push -16(%ebp)
 call FloatOps_mult

@@ -28,7 +28,7 @@ mov %eax, -4(%ebp)
 # Times
 # Variable x
 push -4(%ebp)
-# VariablexEnds
+# Variable x Ends
 push $4
 pop  %ebx
 pop  %eax
@@ -49,10 +49,10 @@ mov %eax, -8(%ebp)
 # Times
 # Variable x
 push -4(%ebp)
-# VariablexEnds
+# Variable x Ends
 # Variable y
 push -8(%ebp)
-# VariableyEnds
+# Variable y Ends
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax
