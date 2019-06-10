@@ -4528,7 +4528,8 @@ neg  %eax
 push %eax
 # Negation Ends
 # Arguments Pushed
-push 4(%ebp)
+mov 8(%ebp), %ebx
+push 4(%ebx)
 call class2_f0
 add $16, %esp
 pop %edx

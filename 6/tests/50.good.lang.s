@@ -1054,7 +1054,8 @@ push %eax
 push $0
 push $0
 # Arguments Pushed
-push 12(%ebp)
+mov 8(%ebp), %ebx
+push 12(%ebx)
 call class0_f4
 add $20, %esp
 pop %edx

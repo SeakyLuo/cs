@@ -2481,7 +2481,8 @@ push %ecx
 push %edx
 # Pushing Arguments
 # Arguments Pushed
-push 0(%ebp)
+mov 8(%ebp), %ebx
+push 0(%ebx)
 call class0_f2
 add $4, %esp
 pop %edx
@@ -2548,7 +2549,8 @@ push %ecx
 push %edx
 # Pushing Arguments
 # Arguments Pushed
-push 32(%ebp)
+mov 8(%ebp), %ebx
+push 32(%ebx)
 call class0_f2
 add $4, %esp
 pop %edx
@@ -2899,7 +2901,8 @@ mov 32(%ebx), %ebx
 push 16(%ebx)
 # MemberAccess member6.member4 Ends
 # Arguments Pushed
-push 32(%ebp)
+mov 8(%ebp), %ebx
+push 32(%ebx)
 call class0_f1
 add $16, %esp
 pop %edx
@@ -2985,7 +2988,8 @@ push %ecx
 push %edx
 # Pushing Arguments
 # Arguments Pushed
-push 32(%ebp)
+mov 8(%ebp), %ebx
+push 32(%ebx)
 call class0_f2
 add $4, %esp
 pop %edx
@@ -3370,7 +3374,8 @@ xor $1, %eax
 push %eax
 # Not Ends
 # Arguments Pushed
-push 32(%ebp)
+mov 8(%ebp), %ebx
+push 32(%ebx)
 call class0_f1
 add $16, %esp
 pop %edx
@@ -3403,7 +3408,8 @@ push %ecx
 push %edx
 # Pushing Arguments
 # Arguments Pushed
-push 32(%ebp)
+mov 8(%ebp), %ebx
+push 32(%ebx)
 call class0_f2
 add $4, %esp
 pop %edx
@@ -3423,7 +3429,8 @@ push -8(%ebp)
 push $0
 push $1
 # Arguments Pushed
-push 32(%ebp)
+mov 8(%ebp), %ebx
+push 32(%ebx)
 call class0_f1
 add $16, %esp
 pop %edx

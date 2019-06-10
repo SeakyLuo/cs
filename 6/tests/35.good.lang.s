@@ -984,7 +984,8 @@ push 20(%ebp)
 # Variable arg2 Ends
 push $145
 # Arguments Pushed
-push 0(%ebp)
+mov 8(%ebp), %ebx
+push 0(%ebx)
 call class0_f0
 add $16, %esp
 pop %edx
@@ -1021,7 +1022,8 @@ setge %dl
 push %edx
 # GreaterEqual Ends
 # Arguments Pushed
-push 0(%ebp)
+mov 8(%ebp), %ebx
+push 0(%ebx)
 call class0_f1
 add $20, %esp
 pop %edx
@@ -1043,7 +1045,8 @@ push 16(%ebp)
 # Variable arg1 Ends
 push $92
 # Arguments Pushed
-push 0(%ebp)
+mov 8(%ebp), %ebx
+push 0(%ebx)
 call class0_f0
 add $16, %esp
 pop %edx
@@ -1152,7 +1155,8 @@ push 12(%ebp)
 # Variable arg0 Ends
 push $0
 # Arguments Pushed
-push 0(%ebp)
+mov 8(%ebp), %ebx
+push 0(%ebx)
 call class0_f1
 add $20, %esp
 pop %edx
@@ -1224,7 +1228,8 @@ idiv %ebx
 push %eax
 # Divide Ends
 # Arguments Pushed
-push 0(%ebp)
+mov 8(%ebp), %ebx
+push 0(%ebx)
 call class0_f0
 add $16, %esp
 pop %edx
@@ -1355,7 +1360,8 @@ xchg %eax, (%esp)
 # MethodCall Ends
 push $1
 # Arguments Pushed
-push 0(%ebp)
+mov 8(%ebp), %ebx
+push 0(%ebx)
 call class0_f1
 add $20, %esp
 pop %edx
@@ -1396,7 +1402,8 @@ sete %dl
 push %edx
 # Equal Ends
 # Arguments Pushed
-push 0(%ebp)
+mov 8(%ebp), %ebx
+push 0(%ebx)
 call class0_f1
 add $20, %esp
 pop %edx
@@ -1446,7 +1453,8 @@ push $88
 push -8(%ebp)
 # Variable local1 Ends
 # Arguments Pushed
-push 0(%ebp)
+mov 8(%ebp), %ebx
+push 0(%ebx)
 call class0_f0
 add $16, %esp
 pop %edx

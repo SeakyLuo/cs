@@ -3650,7 +3650,8 @@ push %edx
 push -4(%ebp)
 # Variable local0 Ends
 # Arguments Pushed
-push 16(%ebp)
+mov 8(%ebp), %ebx
+push 16(%ebx)
 call class1_f1
 add $8, %esp
 pop %edx
@@ -4231,7 +4232,8 @@ push %edx
 # Pushing Arguments
 push $0
 # Arguments Pushed
-push 16(%ebp)
+mov 8(%ebp), %ebx
+push 16(%ebx)
 call class1_f0
 add $8, %esp
 pop %edx
@@ -4292,7 +4294,8 @@ push %edx
 # Pushing Arguments
 push $240
 # Arguments Pushed
-push 16(%ebp)
+mov 8(%ebp), %ebx
+push 16(%ebx)
 call class1_f1
 add $8, %esp
 pop %edx

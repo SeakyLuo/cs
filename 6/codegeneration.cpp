@@ -282,12 +282,17 @@ void methodCallHandler(CodeGenerator* visitor, MethodCallNode* node, bool newObj
     if (node->identifier_2){
         methodName = node->identifier_2->name;
         std::string variableName = node->identifier_1->name;
-        VariableInfo info = visitor->currentMethodInfo.variables->count(variableName) ?
-                            (*visitor->currentMethodInfo.variables)[variableName] :
-                            (*visitor->currentClassInfo.members)[variableName];
-        className = info.type.objectClassName;
+        VariableInfo info;
         // self pointer
-        std::cout << "push " << info.offset << "(%ebp)\n";
+        if (visitor->currentMethodInfo.variables->count(variableName)){
+            info = (*visitor->currentMethodInfo.variables)[variableName];
+            std::cout << "push " << info.offset << "(%ebp)\n";
+        }else{
+            info = (*visitor->currentClassInfo.members)[variableName];
+            std::cout << "mov 8(%ebp), %ebx\n";
+            std::cout << "push " << info.offset << "(%ebx)\n";
+        }
+        className = info.type.objectClassName;
     }else{
         methodName = node->identifier_1->name;
         // self pointer

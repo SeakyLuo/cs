@@ -1235,7 +1235,8 @@ push %edx
 push -20(%ebp)
 # Variable local4 Ends
 # Arguments Pushed
-push 0(%ebp)
+mov 8(%ebp), %ebx
+push 0(%ebx)
 call class0_f3
 add $8, %esp
 pop %edx
@@ -1346,7 +1347,8 @@ mov 0(%ebx), %ebx
 push 0(%ebx)
 # MemberAccess member0.member0 Ends
 # Arguments Pushed
-push 0(%ebp)
+mov 8(%ebp), %ebx
+push 0(%ebx)
 call class0_f3
 add $8, %esp
 pop %edx
@@ -1476,7 +1478,8 @@ idiv %ebx
 push %eax
 # Divide Ends
 # Arguments Pushed
-push 0(%ebp)
+mov 8(%ebp), %ebx
+push 0(%ebx)
 call class0_f3
 add $8, %esp
 pop %edx
@@ -1571,7 +1574,8 @@ push %edx
 # Pushing Arguments
 push $129
 # Arguments Pushed
-push 0(%ebp)
+mov 8(%ebp), %ebx
+push 0(%ebx)
 call class0_f3
 add $8, %esp
 pop %edx
@@ -1878,7 +1882,8 @@ sub  %ebx, %eax
 push %eax
 # Minus Ends
 # Arguments Pushed
-push 16(%ebp)
+mov 8(%ebp), %ebx
+push 16(%ebx)
 call class0_f0
 add $12, %esp
 pop %edx

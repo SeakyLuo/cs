@@ -2933,7 +2933,8 @@ push %eax
 push 28(%ebp)
 # Variable arg4 Ends
 # Arguments Pushed
-push 16(%ebp)
+mov 8(%ebp), %ebx
+push 16(%ebx)
 call class2_f3
 add $12, %esp
 pop %edx

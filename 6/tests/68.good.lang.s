@@ -1117,7 +1117,8 @@ sete %dl
 push %edx
 # Equal Ends
 # Arguments Pushed
-push 20(%ebp)
+mov 8(%ebp), %ebx
+push 20(%ebx)
 call class0_f3
 add $8, %esp
 pop %edx
@@ -1600,7 +1601,8 @@ setg %dl
 push %edx
 # Greater Ends
 # Arguments Pushed
-push 20(%ebp)
+mov 8(%ebp), %ebx
+push 20(%ebx)
 call class0_f3
 add $8, %esp
 pop %edx

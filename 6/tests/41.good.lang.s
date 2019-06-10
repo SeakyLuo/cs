@@ -3192,7 +3192,8 @@ mov 8(%ebp), %ebx
 push 12(%ebx)
 # Variable member3 Ends
 # Arguments Pushed
-push 0(%ebp)
+mov 8(%ebp), %ebx
+push 0(%ebx)
 call class0_f3
 add $8, %esp
 pop %edx
@@ -3250,7 +3251,8 @@ add  %ebx, %eax
 push %eax
 # Plus Ends
 # Arguments Pushed
-push 0(%ebp)
+mov 8(%ebp), %ebx
+push 0(%ebx)
 call class0_f1
 add $16, %esp
 pop %edx
@@ -3307,7 +3309,8 @@ add  %ebx, %eax
 push %eax
 # Plus Ends
 # Arguments Pushed
-push 0(%ebp)
+mov 8(%ebp), %ebx
+push 0(%ebx)
 call class0_f2
 add $16, %esp
 pop %edx
@@ -3315,7 +3318,8 @@ pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
 # Arguments Pushed
-push 0(%ebp)
+mov 8(%ebp), %ebx
+push 0(%ebx)
 call class0_f1
 add $16, %esp
 pop %edx

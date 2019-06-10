@@ -1291,7 +1291,8 @@ mov 8(%ebp), %ebx
 push 0(%ebx)
 # Variable member0 Ends
 # Arguments Pushed
-push 12(%ebp)
+mov 8(%ebp), %ebx
+push 12(%ebx)
 call class0_f2
 add $24, %esp
 pop %edx

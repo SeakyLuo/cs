@@ -2073,7 +2073,8 @@ push %ecx
 push %edx
 # Pushing Arguments
 # Arguments Pushed
-push 4(%ebp)
+mov 8(%ebp), %ebx
+push 4(%ebx)
 call class1_f1
 add $4, %esp
 pop %edx

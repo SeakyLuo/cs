@@ -1521,7 +1521,8 @@ idiv %ebx
 push %eax
 # Divide Ends
 # Arguments Pushed
-push 16(%ebp)
+mov 8(%ebp), %ebx
+push 16(%ebx)
 call class0_f3
 add $16, %esp
 pop %edx
@@ -1631,7 +1632,8 @@ push %ecx
 push %edx
 # Pushing Arguments
 # Arguments Pushed
-push 16(%ebp)
+mov 8(%ebp), %ebx
+push 16(%ebx)
 call class0_f1
 add $4, %esp
 pop %edx
@@ -1660,7 +1662,8 @@ push %ecx
 push %edx
 # Pushing Arguments
 # Arguments Pushed
-push 16(%ebp)
+mov 8(%ebp), %ebx
+push 16(%ebx)
 call class0_f1
 add $4, %esp
 pop %edx
@@ -1675,7 +1678,8 @@ push %ecx
 push %edx
 # Pushing Arguments
 # Arguments Pushed
-push 16(%ebp)
+mov 8(%ebp), %ebx
+push 16(%ebx)
 call class0_f1
 add $4, %esp
 pop %edx

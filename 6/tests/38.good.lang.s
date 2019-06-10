@@ -873,7 +873,8 @@ push %edx
 # Pushing Arguments
 push $175
 # Arguments Pushed
-push 16(%ebp)
+mov 8(%ebp), %ebx
+push 16(%ebx)
 call class0_f1
 add $8, %esp
 pop %edx

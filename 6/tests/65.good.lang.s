@@ -2329,7 +2329,8 @@ push %edx
 # Pushing Arguments
 push $0
 # Arguments Pushed
-push 8(%ebp)
+mov 8(%ebp), %ebx
+push 8(%ebx)
 call class0_f4
 add $8, %esp
 pop %edx
@@ -3247,7 +3248,8 @@ sub  %ebx, %eax
 push %eax
 # Minus Ends
 # Arguments Pushed
-push 4(%ebp)
+mov 8(%ebp), %ebx
+push 4(%ebx)
 call class2_f0
 add $8, %esp
 pop %edx
@@ -3381,7 +3383,8 @@ push %edx
 # Pushing Arguments
 push $167
 # Arguments Pushed
-push 8(%ebp)
+mov 8(%ebp), %ebx
+push 8(%ebx)
 call class2_f0
 add $8, %esp
 pop %edx

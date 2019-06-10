@@ -1969,7 +1969,8 @@ push %edx
 # Pushing Arguments
 push $1
 # Arguments Pushed
-push 4(%ebp)
+mov 8(%ebp), %ebx
+push 4(%ebx)
 call class0_f1
 add $8, %esp
 pop %edx
@@ -2059,7 +2060,8 @@ push %edx
 push -16(%ebp)
 # Variable local3 Ends
 # Arguments Pushed
-push 4(%ebp)
+mov 8(%ebp), %ebx
+push 4(%ebx)
 call class0_f1
 add $8, %esp
 pop %edx
@@ -2097,7 +2099,8 @@ and  %ebx, %eax
 push %eax
 # And Ends
 # Arguments Pushed
-push 4(%ebp)
+mov 8(%ebp), %ebx
+push 4(%ebx)
 call class0_f1
 add $8, %esp
 pop %edx
@@ -2128,7 +2131,8 @@ push %ecx
 push %edx
 # Pushing Arguments
 # Arguments Pushed
-push 4(%ebp)
+mov 8(%ebp), %ebx
+push 4(%ebx)
 call class0_f2
 add $4, %esp
 pop %edx
@@ -2185,7 +2189,8 @@ push %edx
 push -8(%ebp)
 # Variable local1 Ends
 # Arguments Pushed
-push 4(%ebp)
+mov 8(%ebp), %ebx
+push 4(%ebx)
 call class0_f1
 add $8, %esp
 pop %edx
@@ -2229,7 +2234,8 @@ sete %dl
 push %edx
 # Equal Ends
 # Arguments Pushed
-push 4(%ebp)
+mov 8(%ebp), %ebx
+push 4(%ebx)
 call class0_f1
 add $8, %esp
 pop %edx
