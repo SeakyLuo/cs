@@ -1,0 +1,27 @@
+class0 {
+    class0() -> none {
+        print 123;
+    }
+}
+
+class1 {
+    class0	member0;
+    class1() -> none {
+        member0 = new class0();
+        print 456;
+    }
+}
+
+class2 extends class1 {
+    class2(integer arg0) -> none {
+        class1();
+    }
+}
+
+Main {
+    main() -> none {
+        class2 local1;
+        local1 = new class2(-1);
+    }
+}
+
