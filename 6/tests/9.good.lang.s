@@ -11,21 +11,21 @@ sub $12, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to i
 push $0
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to i Ends
+# Assignment to x
 push $1
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to x Ends
+# Assignment to cond
 push $0
 pop %eax
 mov %eax, -12(%ebp)
-# Assignment Ends
+# Assignment to cond Ends
 # While
 while_0:
 # GreaterEqual
@@ -44,7 +44,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je while_end_0
-# Assignment
+# Assignment to cond
 # Greater
 # Minus
 # Variable i
@@ -83,8 +83,8 @@ push %edx
 # Greater Ends
 pop %eax
 mov %eax, -12(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to cond Ends
+# Assignment to i
 # Plus
 # Variable i
 push -4(%ebp)
@@ -97,7 +97,7 @@ push %eax
 # Plus Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to i Ends
 # IfElse
 # Variable cond
 push -12(%ebp)
@@ -107,7 +107,7 @@ mov $0, %ebx
 cmp %eax, %ebx
 je else_1
 # If
-# Assignment
+# Assignment to x
 # Times
 # Variable x
 push -8(%ebp)
@@ -120,12 +120,12 @@ push %eax
 # Times Ends
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
+# Assignment to x Ends
 # If Ends
 jmp ifelse_1
 # Else
 else_1:
-# Assignment
+# Assignment to x
 # Plus
 # Variable x
 push -8(%ebp)
@@ -138,7 +138,7 @@ push %eax
 # Plus Ends
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
+# Assignment to x Ends
 # Else Ends
 ifelse_1:
 # If Ends

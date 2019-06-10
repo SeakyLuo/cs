@@ -11,11 +11,11 @@ sub $4, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to x
 push $6
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to x Ends
 # Print
 # Times
 # Variable x
@@ -46,11 +46,11 @@ sub $4, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to x
 push $10
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to x Ends
 # Print
 # Plus
 # Variable x

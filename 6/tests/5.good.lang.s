@@ -11,7 +11,7 @@ sub $12, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to x
 # Plus
 # Minus
 # Plus
@@ -43,8 +43,8 @@ push %eax
 # Plus Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to x Ends
+# Assignment to y
 # Times
 # Times
 # Variable x
@@ -68,8 +68,8 @@ push %eax
 # Times Ends
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to y Ends
+# Assignment to z
 # Plus
 # Divide
 push $5
@@ -99,8 +99,8 @@ push %eax
 # Plus Ends
 pop %eax
 mov %eax, -12(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to z Ends
+# Assignment to x
 # Divide
 # Times
 # Plus
@@ -137,8 +137,8 @@ push %eax
 # Divide Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to x Ends
+# Assignment to y
 # Divide
 # Times
 # Variable x
@@ -161,8 +161,8 @@ push %eax
 # Divide Ends
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to y Ends
+# Assignment to z
 # Times
 # Minus
 # Variable y
@@ -195,7 +195,7 @@ push %eax
 # Times Ends
 pop %eax
 mov %eax, -12(%ebp)
-# Assignment Ends
+# Assignment to z Ends
 # Print
 # Variable x
 push -4(%ebp)

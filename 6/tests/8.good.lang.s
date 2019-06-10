@@ -11,16 +11,16 @@ sub $8, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to i
 push $0
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to i Ends
+# Assignment to x
 push $0
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
+# Assignment to x Ends
 # While
 while_0:
 # Greater
@@ -39,7 +39,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je while_end_0
-# Assignment
+# Assignment to x
 # Plus
 # Times
 # Variable x
@@ -61,8 +61,8 @@ push %eax
 # Plus Ends
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to x Ends
+# Assignment to i
 # Plus
 # Variable i
 push -4(%ebp)
@@ -75,7 +75,7 @@ push %eax
 # Plus Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to i Ends
 # Print
 # Variable x
 push -8(%ebp)

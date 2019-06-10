@@ -11,18 +11,18 @@ sub $0, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to x
 push $0
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 0(%ebx)
-# Assignment Ends
-# Assignment
+# Assignment to x Ends
+# Assignment to y
 push $0
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 4(%ebx)
-# Assignment Ends
+# Assignment to y Ends
 pop %ebx
 pop %esi
 pop %edi
@@ -40,22 +40,22 @@ sub $0, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to xplus
 # Variable xval
 push 12(%ebp)
 # VariablexvalEnds
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 0(%ebx)
-# Assignment Ends
-# Assignment
+# Assignment to xplus Ends
+# Assignment to yplus
 # Variable yval
 push 16(%ebp)
 # VariableyvalEnds
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 4(%ebx)
-# Assignment Ends
+# Assignment to yplus Ends
 pop %ebx
 pop %esi
 pop %edi
@@ -71,7 +71,7 @@ sub $4, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to aNew
 # New classA()
 push $8
 call malloc
@@ -83,6 +83,7 @@ push %ecx
 push %edx
 # Pushing Arguments
 # Arguments Pushed
+# Class: classB Method: classA
 push 8(%esp)
 call classA_classA
 add $4, %esp
@@ -95,13 +96,13 @@ push %eax
 # New classA() Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to aNew Ends
+# Assignment to aNew
 # Plus
 # MemberAccess a.x
 mov 12(%ebp), %ebx
 push 0(%ebx)
-# MemberAccess Endsa.x
+# MemberAccess a.x Ends
 # Variable xplus
 mov 8(%ebp), %ebx
 push 0(%ebx)
@@ -114,13 +115,13 @@ push %eax
 pop %eax
 mov -4(%ebp), %ebx
 mov %eax, 0(%ebx)
-# Assignment Ends
-# Assignment
+# Assignment to aNew Ends
+# Assignment to aNew
 # Plus
 # MemberAccess a.y
 mov 12(%ebp), %ebx
 push 4(%ebx)
-# MemberAccess Endsa.y
+# MemberAccess a.y Ends
 # Variable yplus
 mov 8(%ebp), %ebx
 push 4(%ebx)
@@ -133,7 +134,7 @@ push %eax
 pop %eax
 mov -4(%ebp), %ebx
 mov %eax, 4(%ebx)
-# Assignment Ends
+# Assignment to aNew Ends
 # Return Statement
 # Variable aNew
 push -4(%ebp)
@@ -157,7 +158,7 @@ sub $12, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to a1
 # New classA()
 push $8
 call malloc
@@ -169,6 +170,7 @@ push %ecx
 push %edx
 # Pushing Arguments
 # Arguments Pushed
+# Class: Main Method: classA
 push 8(%esp)
 call classA_classA
 add $4, %esp
@@ -181,20 +183,20 @@ push %eax
 # New classA() Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to a1 Ends
+# Assignment to a1
 push $7
 pop %eax
 mov -4(%ebp), %ebx
 mov %eax, 0(%ebx)
-# Assignment Ends
-# Assignment
+# Assignment to a1 Ends
+# Assignment to a1
 push $8
 pop %eax
 mov -4(%ebp), %ebx
 mov %eax, 4(%ebx)
-# Assignment Ends
-# Assignment
+# Assignment to a1 Ends
+# Assignment to b
 # New classB()
 push $8
 call malloc
@@ -208,6 +210,7 @@ push %edx
 push $22
 push $16
 # Arguments Pushed
+# Class: Main Method: classB
 push 16(%esp)
 call classB_classB
 add $12, %esp
@@ -220,8 +223,8 @@ push %eax
 # New classB() Ends
 pop %eax
 mov %eax, -12(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to b Ends
+# Assignment to a2
 # MethodCall
 push %eax
 push %ecx
@@ -240,12 +243,12 @@ xchg %eax, (%esp)
 # MethodCall Ends
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
+# Assignment to a2 Ends
 # Print
 # MemberAccess a1.x
 mov -4(%ebp), %ebx
 push 0(%ebx)
-# MemberAccess Endsa1.x
+# MemberAccess a1.x Ends
 push $printstr
 call printf
 add $8, %esp
@@ -254,7 +257,7 @@ add $8, %esp
 # MemberAccess a1.y
 mov -4(%ebp), %ebx
 push 4(%ebx)
-# MemberAccess Endsa1.y
+# MemberAccess a1.y Ends
 push $printstr
 call printf
 add $8, %esp
@@ -263,7 +266,7 @@ add $8, %esp
 # MemberAccess b.xplus
 mov -12(%ebp), %ebx
 push 0(%ebx)
-# MemberAccess Endsb.xplus
+# MemberAccess b.xplus Ends
 push $printstr
 call printf
 add $8, %esp
@@ -272,7 +275,7 @@ add $8, %esp
 # MemberAccess b.yplus
 mov -12(%ebp), %ebx
 push 4(%ebx)
-# MemberAccess Endsb.yplus
+# MemberAccess b.yplus Ends
 push $printstr
 call printf
 add $8, %esp
@@ -281,7 +284,7 @@ add $8, %esp
 # MemberAccess a2.x
 mov -8(%ebp), %ebx
 push 0(%ebx)
-# MemberAccess Endsa2.x
+# MemberAccess a2.x Ends
 push $printstr
 call printf
 add $8, %esp
@@ -290,7 +293,7 @@ add $8, %esp
 # MemberAccess a2.y
 mov -8(%ebp), %ebx
 push 4(%ebx)
-# MemberAccess Endsa2.y
+# MemberAccess a2.y Ends
 push $printstr
 call printf
 add $8, %esp

@@ -57,10 +57,10 @@ void CodeGenerator::visitReturnStatementNode(ReturnStatementNode* node) {
 }
 
 void CodeGenerator::visitAssignmentNode(AssignmentNode* node) {
-    std::cout << "# Assignment\n";
+    std::string variableName = node->identifier_1->name;
+    std::cout << "# Assignment to " << variableName << "\n";
     node->visit_children(this);
     std::cout << "pop %eax\n";
-    std::string variableName = node->identifier_1->name;
     bool isLocal = currentMethodInfo.variables->count(variableName);
     VariableInfo info = isLocal ?
                         (*currentMethodInfo.variables)[variableName] :
@@ -83,12 +83,13 @@ void CodeGenerator::visitAssignmentNode(AssignmentNode* node) {
             std::cout << "mov %eax, " << offset << "(%ebx)\n";
         }
     }
-    std::cout << "# Assignment Ends\n";
+    std::cout << "# Assignment to " << variableName << " Ends\n";
 }
 
 void CodeGenerator::visitCallNode(CallNode* node) {
     std::cout << "# Call\n";
     node->visit_children(this);
+    // throw off return value ?
     std::cout << "add $4, %esp\n";
     std::cout << "# Call Ends\n";
 }
@@ -271,45 +272,53 @@ void CodeGenerator::visitNegationNode(NegationNode* node) {
     std::cout << "# Negation Ends\n";
 }
 
-void CodeGenerator::visitMethodCallNode(MethodCallNode* node) {
+void methodCallHandler(CodeGenerator* visitor, MethodCallNode* node, bool newObject){
     std::cout << "# MethodCall\n";
     std::cout << "push %eax\npush %ecx\npush %edx\n";
     std::cout << "# Pushing Arguments\n";
     for (auto iter = node->expression_list->rbegin(); iter != node->expression_list->rend(); ++iter)
-        (*iter)->accept(this);
+        (*iter)->accept(visitor);
     std::cout << "# Arguments Pushed\n";
     std::string className, methodName;
     int args = node->expression_list->size();
     if (node->identifier_2){
         methodName = node->identifier_2->name;
         std::string variableName = node->identifier_1->name;
-        VariableInfo info = currentMethodInfo.variables->count(variableName) ?
-                            (*currentMethodInfo.variables)[variableName] :
-                            (*currentClassInfo.members)[variableName];
+        VariableInfo info = visitor->currentMethodInfo.variables->count(variableName) ?
+                            (*visitor->currentMethodInfo.variables)[variableName] :
+                            (*visitor->currentClassInfo.members)[variableName];
         className = info.type.objectClassName;
         // self pointer
         std::cout << "push " << info.offset << "(%ebp)\n";
     }else{
         methodName = node->identifier_1->name;
         // self pointer
-        if (classTable->count(methodName)){
+        if (visitor->classTable->count(methodName)){
             // constructor
-            className =  methodName;
-            std::cout << "push " << 8 + 4 * args << "(%esp)\n";
+            className = methodName;
+            std::cout << "# Class: " << visitor->currentClassName << " Method: " << methodName << '\n';
+            if (newObject)
+                std::cout << "push " << 8 + 4 * args << "(%esp)\n";
+            else
+                std::cout << "push 8(%ebp)\n";
         }else{
-            className =  currentClassName;
+            className =  visitor->currentClassName;
             std::cout << "push 8(%ebp)\n";
         }
     }
     // find the class which has the method
-    for (;(*classTable)[className].methods->count(methodName) == 0;
-         className = (*classTable)[className].superClassName){}
+    for (;(*visitor->classTable)[className].methods->count(methodName) == 0;
+         className = (*visitor->classTable)[className].superClassName){}
     std::cout << "call " << className << "_" << methodName << "\n";
-    // pop arguments including self pointer
+    // pop arguments including the self pointer
     std::cout << "add $" << 4 * (args + 1) << ", %esp\n";
     std::cout << "pop %edx\npop %ecx\n";
     std::cout << "xchg %eax, (%esp)\n";
     std::cout << "# MethodCall Ends\n";
+}
+
+void CodeGenerator::visitMethodCallNode(MethodCallNode* node) {
+    methodCallHandler(this, node, false);
 }
 
 void CodeGenerator::visitMemberAccessNode(MemberAccessNode* node) {
@@ -329,7 +338,7 @@ void CodeGenerator::visitMemberAccessNode(MemberAccessNode* node) {
     }
     int memberOffset = (*(*classTable)[info.type.objectClassName].members)[memberName].offset;
     std::cout << "push " << memberOffset << "(%ebx)\n";
-    std::cout << "# MemberAccess Ends" << variableName << "." << memberName << "\n";
+    std::cout << "# MemberAccess " << variableName << "." << memberName << " Ends\n";
 }
 
 
@@ -365,12 +374,8 @@ void CodeGenerator::visitNewNode(NewNode* node) {
     std::cout << "add $4, %esp\n";
     if ((*classTable)[className].methods->count(className)){
         std::cout << "# Calling Constructor\n";
-        // for (auto iter: *(node->expression_list))
-        //     iter->accept(this);
-        // std::cout << "call " << className << "_" << className << "\n";
-        // std::cout << "add $" << 4 * (node->expression_list->size() + 1) << ", %esp\n";
         MethodCallNode* methodcall = new MethodCallNode(node->identifier, NULL, node->expression_list);
-        visitMethodCallNode(methodcall);
+        methodCallHandler(this, methodcall, true);
         std::cout << "push %eax\n";
         std::cout << "# Constructor Called\n";
     }else{

@@ -11,14 +11,14 @@ sub $0, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to x
 # Variable val
 push 12(%ebp)
 # VariablevalEnds
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 0(%ebx)
-# Assignment Ends
+# Assignment to x Ends
 pop %ebx
 pop %esi
 pop %edi
@@ -36,22 +36,22 @@ sub $0, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to x
 # Variable val1
 push 12(%ebp)
 # Variableval1Ends
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 0(%ebx)
-# Assignment Ends
-# Assignment
+# Assignment to x Ends
+# Assignment to y
 # Variable val2
 push 16(%ebp)
 # Variableval2Ends
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 4(%ebx)
-# Assignment Ends
+# Assignment to y Ends
 pop %ebx
 pop %esi
 pop %edi
@@ -69,7 +69,7 @@ sub $4, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to b
 # New classB()
 push $8
 call malloc
@@ -83,6 +83,7 @@ push %edx
 push $1
 push $12
 # Arguments Pushed
+# Class: Main Method: classB
 push 16(%esp)
 call classB_classB
 add $12, %esp
@@ -95,12 +96,12 @@ push %eax
 # New classB() Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to b Ends
 # Print
 # MemberAccess b.x
 mov -4(%ebp), %ebx
 push 0(%ebx)
-# MemberAccess Endsb.x
+# MemberAccess b.x Ends
 push $printstr
 call printf
 add $8, %esp
@@ -109,7 +110,7 @@ add $8, %esp
 # MemberAccess b.y
 mov -4(%ebp), %ebx
 push 4(%ebx)
-# MemberAccess Endsb.y
+# MemberAccess b.y Ends
 push $printstr
 call printf
 add $8, %esp

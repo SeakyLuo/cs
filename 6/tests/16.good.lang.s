@@ -11,7 +11,7 @@ sub $8, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to mod2
 # Minus
 # Variable x
 push 12(%ebp)
@@ -41,7 +41,7 @@ push %eax
 # Minus Ends
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
+# Assignment to mod2 Ends
 # IfElse
 # Equal
 # Variable mod2
@@ -60,7 +60,7 @@ mov $0, %ebx
 cmp %eax, %ebx
 je else_0
 # If
-# Assignment
+# Assignment to val
 # Minus
 # Times
 # Variable x
@@ -82,12 +82,12 @@ push %eax
 # Minus Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to val Ends
 # If Ends
 jmp ifelse_0
 # Else
 else_0:
-# Assignment
+# Assignment to val
 # Divide
 # Variable x
 push 12(%ebp)
@@ -101,7 +101,7 @@ push %eax
 # Divide Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to val Ends
 # Else Ends
 ifelse_0:
 # If Ends

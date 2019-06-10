@@ -20,7 +20,7 @@ mov $0, %ebx
 cmp %eax, %ebx
 je else_0
 # If
-# Assignment
+# Assignment to val
 # Times
 # Variable x
 push 12(%ebp)
@@ -35,12 +35,12 @@ push %eax
 # Times Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to val Ends
 # If Ends
 jmp ifelse_0
 # Else
 else_0:
-# Assignment
+# Assignment to val
 # Divide
 # Variable x
 push 12(%ebp)
@@ -54,7 +54,7 @@ push %eax
 # Divide Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to val Ends
 # Else Ends
 ifelse_0:
 # If Ends
@@ -79,16 +79,16 @@ sub $8, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to i
 push $0
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to i Ends
+# Assignment to x
 push $2
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
+# Assignment to x Ends
 # While
 while_1:
 # Greater
@@ -107,7 +107,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je while_end_1
-# Assignment
+# Assignment to x
 # MethodCall
 push %eax
 push %ecx
@@ -138,8 +138,8 @@ xchg %eax, (%esp)
 # MethodCall Ends
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to x Ends
+# Assignment to i
 # Plus
 # Variable i
 push -4(%ebp)
@@ -152,7 +152,7 @@ push %eax
 # Plus Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to i Ends
 # Print
 # Variable x
 push -8(%ebp)

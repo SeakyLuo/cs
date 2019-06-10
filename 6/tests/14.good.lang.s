@@ -20,7 +20,7 @@ mov $0, %ebx
 cmp %eax, %ebx
 je else_0
 # If
-# Assignment
+# Assignment to val
 # Times
 # Variable x
 push 12(%ebp)
@@ -35,12 +35,12 @@ push %eax
 # Times Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to val Ends
 # If Ends
 jmp ifelse_0
 # Else
 else_0:
-# Assignment
+# Assignment to val
 # Divide
 # Variable x
 push 12(%ebp)
@@ -54,7 +54,7 @@ push %eax
 # Divide Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to val Ends
 # Else Ends
 ifelse_0:
 # If Ends

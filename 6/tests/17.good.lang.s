@@ -13,7 +13,7 @@ sub $4, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to a
 # New classA()
 push $8
 call malloc
@@ -22,30 +22,30 @@ push %eax
 # New classA() Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to a Ends
+# Assignment to a
 push $5
 pop %eax
 mov -4(%ebp), %ebx
 mov %eax, 0(%ebx)
-# Assignment Ends
-# Assignment
+# Assignment to a Ends
+# Assignment to a
 push $6
 pop %eax
 mov -4(%ebp), %ebx
 mov %eax, 4(%ebx)
-# Assignment Ends
+# Assignment to a Ends
 # Print
 # Minus
 # Times
 # MemberAccess a.x
 mov -4(%ebp), %ebx
 push 0(%ebx)
-# MemberAccess Endsa.x
+# MemberAccess a.x Ends
 # MemberAccess a.y
 mov -4(%ebp), %ebx
 push 4(%ebx)
-# MemberAccess Endsa.y
+# MemberAccess a.y Ends
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax

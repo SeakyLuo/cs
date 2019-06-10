@@ -11,7 +11,7 @@ sub $4, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to x
 # Minus
 push $6
 push $4
@@ -22,7 +22,7 @@ push %eax
 # Minus Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to x Ends
 # Print
 # Times
 # Variable x

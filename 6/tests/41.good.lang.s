@@ -11,7 +11,7 @@ sub $24, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to local5
 # Minus
 push $99
 push $237
@@ -22,13 +22,13 @@ push %eax
 # Minus Ends
 pop %eax
 mov %eax, -24(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local5 Ends
+# Assignment to local4
 push $122
 pop %eax
 mov %eax, -20(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local4 Ends
+# Assignment to local1
 # Negation
 push $190
 pop  %eax
@@ -37,8 +37,8 @@ push %eax
 # Negation Ends
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local1 Ends
+# Assignment to local0
 # Times
 push $228
 push $44
@@ -49,8 +49,8 @@ push %eax
 # Times Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local0 Ends
+# Assignment to local3
 # And
 # Equal
 push $192
@@ -70,12 +70,12 @@ push %eax
 # And Ends
 pop %eax
 mov %eax, -16(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local3 Ends
+# Assignment to local2
 push $0
 pop %eax
 mov %eax, -12(%ebp)
-# Assignment Ends
+# Assignment to local2 Ends
 # IfElse
 # Variable local2
 push -12(%ebp)
@@ -85,13 +85,13 @@ mov $0, %ebx
 cmp %eax, %ebx
 je else_0
 # If
-# Assignment
+# Assignment to local3
 # Variable local2
 push -12(%ebp)
 # Variablelocal2Ends
 pop %eax
 mov %eax, -16(%ebp)
-# Assignment Ends
+# Assignment to local3 Ends
 # Print
 push $0
 push $printstr
@@ -105,11 +105,11 @@ else_0:
 # Else Ends
 ifelse_0:
 # If Ends
-# Assignment
+# Assignment to local1
 push $135
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
+# Assignment to local1 Ends
 # Return Statement
 # Variable arg0
 push 12(%ebp)
@@ -131,24 +131,24 @@ sub $20, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to local1
 push $169
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local1 Ends
+# Assignment to local0
 push $1
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local0 Ends
+# Assignment to local1
 # Variable arg0
 push 12(%ebp)
 # Variablearg0Ends
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local1 Ends
+# Assignment to i0
 # Negation
 push $63
 pop  %eax
@@ -157,7 +157,7 @@ push %eax
 # Negation Ends
 pop %eax
 mov %eax, -12(%ebp)
-# Assignment Ends
+# Assignment to i0 Ends
 # While
 while_1:
 # Greater
@@ -176,7 +176,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je while_end_1
-# Assignment
+# Assignment to i0
 # Plus
 # Variable i0
 push -12(%ebp)
@@ -189,12 +189,12 @@ push %eax
 # Plus Ends
 pop %eax
 mov %eax, -12(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to i0 Ends
+# Assignment to i1
 push $41
 pop %eax
 mov %eax, -16(%ebp)
-# Assignment Ends
+# Assignment to i1 Ends
 # While
 while_2:
 # GreaterEqual
@@ -213,7 +213,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je while_end_2
-# Assignment
+# Assignment to i1
 # Times
 # Variable i1
 push -16(%ebp)
@@ -226,8 +226,8 @@ push %eax
 # Times Ends
 pop %eax
 mov %eax, -16(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to i1 Ends
+# Assignment to i2
 # Negation
 push $9
 pop  %eax
@@ -236,7 +236,7 @@ push %eax
 # Negation Ends
 pop %eax
 mov %eax, -20(%ebp)
-# Assignment Ends
+# Assignment to i2 Ends
 # While
 while_3:
 # Greater
@@ -260,7 +260,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je while_end_3
-# Assignment
+# Assignment to i2
 # Plus
 # Variable i2
 push -20(%ebp)
@@ -278,7 +278,7 @@ push %eax
 # Plus Ends
 pop %eax
 mov %eax, -20(%ebp)
-# Assignment Ends
+# Assignment to i2 Ends
 # Print
 # Variable arg2
 push 20(%ebp)
@@ -287,11 +287,11 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
-# Assignment
+# Assignment to local1
 push $198
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
+# Assignment to local1 Ends
 jmp while_3
 while_end_3:
 # While Ends
@@ -344,14 +344,14 @@ add $8, %esp
 jmp while_1
 while_end_1:
 # While Ends
-# Assignment
+# Assignment to local1
 # Variable member2
 mov 8(%ebp), %ebx
 push 8(%ebx)
 # Variablemember2Ends
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
+# Assignment to local1 Ends
 pop %ebx
 pop %esi
 pop %edi
@@ -367,22 +367,22 @@ sub $24, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to local1
 push $125
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local1 Ends
+# Assignment to local0
 push $2
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local0 Ends
+# Assignment to local3
 push $1
 pop %eax
 mov %eax, -16(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local3 Ends
+# Assignment to local2
 # Negation
 push $251
 pop  %eax
@@ -391,7 +391,7 @@ push %eax
 # Negation Ends
 pop %eax
 mov %eax, -12(%ebp)
-# Assignment Ends
+# Assignment to local2 Ends
 # Print
 push $1
 push $printstr
@@ -423,16 +423,16 @@ mov $0, %ebx
 cmp %eax, %ebx
 je else_5
 # If
-# Assignment
+# Assignment to local1
 push $219
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local1 Ends
+# Assignment to i0
 push $2560
 pop %eax
 mov %eax, -20(%ebp)
-# Assignment Ends
+# Assignment to i0 Ends
 # While
 while_6:
 # Greater
@@ -451,7 +451,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je while_end_6
-# Assignment
+# Assignment to i0
 # Divide
 # Variable i0
 push -20(%ebp)
@@ -465,7 +465,7 @@ push %eax
 # Divide Ends
 pop %eax
 mov %eax, -20(%ebp)
-# Assignment Ends
+# Assignment to i0 Ends
 # Call
 # MethodCall
 push %eax
@@ -507,7 +507,7 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
-# Assignment
+# Assignment to i1
 # Negation
 push $68
 pop  %eax
@@ -516,7 +516,7 @@ push %eax
 # Negation Ends
 pop %eax
 mov %eax, -24(%ebp)
-# Assignment Ends
+# Assignment to i1 Ends
 # While
 while_7:
 # Greater
@@ -535,7 +535,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je while_end_7
-# Assignment
+# Assignment to i1
 # Times
 # Variable i1
 push -24(%ebp)
@@ -548,7 +548,7 @@ push %eax
 # Times Ends
 pop %eax
 mov %eax, -24(%ebp)
-# Assignment Ends
+# Assignment to i1 Ends
 # Call
 # MethodCall
 push %eax
@@ -585,7 +585,7 @@ else_5:
 # Else Ends
 ifelse_5:
 # If Ends
-# Assignment
+# Assignment to local1
 # Divide
 # Variable arg0
 push 12(%ebp)
@@ -599,7 +599,7 @@ push %eax
 # Divide Ends
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
+# Assignment to local1 Ends
 # Call
 # MethodCall
 push %eax
@@ -661,11 +661,11 @@ sub $36, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to local0
 push $130
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to local0 Ends
 # IfElse
 # Variable member0
 mov 8(%ebp), %ebx
@@ -676,7 +676,7 @@ mov $0, %ebx
 cmp %eax, %ebx
 je else_8
 # If
-# Assignment
+# Assignment to i0
 # Negation
 push $10
 pop  %eax
@@ -685,7 +685,7 @@ push %eax
 # Negation Ends
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
+# Assignment to i0 Ends
 # While
 while_9:
 # Greater
@@ -709,7 +709,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je while_end_9
-# Assignment
+# Assignment to i0
 # Minus
 # Variable i0
 push -8(%ebp)
@@ -722,7 +722,7 @@ push %eax
 # Minus Ends
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
+# Assignment to i0 Ends
 # Call
 # MethodCall
 push %eax
@@ -826,11 +826,11 @@ xchg %eax, (%esp)
 # MethodCall Ends
 add $4, %esp
 # Call Ends
-# Assignment
+# Assignment to i1
 push $58
 pop %eax
 mov %eax, -12(%ebp)
-# Assignment Ends
+# Assignment to i1 Ends
 # While
 while_10:
 # GreaterEqual
@@ -849,7 +849,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je while_end_10
-# Assignment
+# Assignment to i1
 # Minus
 # Variable i1
 push -12(%ebp)
@@ -867,7 +867,7 @@ push %eax
 # Minus Ends
 pop %eax
 mov %eax, -12(%ebp)
-# Assignment Ends
+# Assignment to i1 Ends
 # Print
 # Variable member1
 mov 8(%ebp), %ebx
@@ -933,11 +933,11 @@ xchg %eax, (%esp)
 # MethodCall Ends
 add $4, %esp
 # Call Ends
-# Assignment
+# Assignment to local0
 push $3
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to local0 Ends
 # If Ends
 jmp ifelse_8
 # Else
@@ -979,11 +979,11 @@ xchg %eax, (%esp)
 # MethodCall Ends
 add $4, %esp
 # Call Ends
-# Assignment
+# Assignment to i2
 push $22
 pop %eax
 mov %eax, -16(%ebp)
-# Assignment Ends
+# Assignment to i2 Ends
 # While
 while_12:
 # GreaterEqual
@@ -1002,7 +1002,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je while_end_12
-# Assignment
+# Assignment to i2
 # Minus
 # Variable i2
 push -16(%ebp)
@@ -1020,8 +1020,8 @@ push %eax
 # Minus Ends
 pop %eax
 mov %eax, -16(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to i2 Ends
+# Assignment to local0
 # MethodCall
 push %eax
 push %ecx
@@ -1052,7 +1052,7 @@ xchg %eax, (%esp)
 # MethodCall Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to local0 Ends
 jmp while_12
 while_end_12:
 # While Ends
@@ -1095,11 +1095,11 @@ else_11:
 # Else Ends
 ifelse_11:
 # If Ends
-# Assignment
+# Assignment to i3
 push $84992
 pop %eax
 mov %eax, -20(%ebp)
-# Assignment Ends
+# Assignment to i3 Ends
 # While
 while_13:
 # Greater
@@ -1118,7 +1118,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je while_end_13
-# Assignment
+# Assignment to i3
 # Divide
 # Variable i3
 push -20(%ebp)
@@ -1132,7 +1132,7 @@ push %eax
 # Divide Ends
 pop %eax
 mov %eax, -20(%ebp)
-# Assignment Ends
+# Assignment to i3 Ends
 # IfElse
 push $0
 pop %eax
@@ -1159,11 +1159,11 @@ xchg %eax, (%esp)
 # MethodCall Ends
 add $4, %esp
 # Call Ends
-# Assignment
+# Assignment to local0
 push $126
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to local0 Ends
 # Print
 # Variable member0
 mov 8(%ebp), %ebx
@@ -1205,11 +1205,11 @@ mov $0, %ebx
 cmp %eax, %ebx
 je else_15
 # If
-# Assignment
+# Assignment to local0
 push $151
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to local0 Ends
 # If Ends
 jmp ifelse_15
 # Else
@@ -1217,12 +1217,12 @@ else_15:
 # Else Ends
 ifelse_15:
 # If Ends
-# Assignment
+# Assignment to local0
 push $49
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local0 Ends
+# Assignment to i4
 # Negation
 push $60
 pop  %eax
@@ -1231,7 +1231,7 @@ push %eax
 # Negation Ends
 pop %eax
 mov %eax, -24(%ebp)
-# Assignment Ends
+# Assignment to i4 Ends
 # While
 while_16:
 # Greater
@@ -1250,7 +1250,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je while_end_16
-# Assignment
+# Assignment to i4
 # Plus
 # Variable i4
 push -24(%ebp)
@@ -1263,7 +1263,7 @@ push %eax
 # Plus Ends
 pop %eax
 mov %eax, -24(%ebp)
-# Assignment Ends
+# Assignment to i4 Ends
 # IfElse
 push $1
 pop %eax
@@ -1283,11 +1283,11 @@ mov $0, %ebx
 cmp %eax, %ebx
 je else_18
 # If
-# Assignment
+# Assignment to i5
 push $88
 pop %eax
 mov %eax, -28(%ebp)
-# Assignment Ends
+# Assignment to i5 Ends
 # While
 while_19:
 # GreaterEqual
@@ -1306,7 +1306,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je while_end_19
-# Assignment
+# Assignment to i5
 # Divide
 # Variable i5
 push -28(%ebp)
@@ -1320,7 +1320,7 @@ push %eax
 # Divide Ends
 pop %eax
 mov %eax, -28(%ebp)
-# Assignment Ends
+# Assignment to i5 Ends
 # Call
 # MethodCall
 push %eax
@@ -1385,7 +1385,7 @@ xchg %eax, (%esp)
 # MethodCall Ends
 add $4, %esp
 # Call Ends
-# Assignment
+# Assignment to local0
 # MethodCall
 push %eax
 push %ecx
@@ -1404,7 +1404,7 @@ xchg %eax, (%esp)
 # MethodCall Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to local0 Ends
 jmp while_19
 while_end_19:
 # While Ends
@@ -1432,7 +1432,7 @@ mov $0, %ebx
 cmp %eax, %ebx
 je else_21
 # If
-# Assignment
+# Assignment to local0
 # Times
 # Variable local0
 push -4(%ebp)
@@ -1445,7 +1445,7 @@ push %eax
 # Times Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to local0 Ends
 # Print
 push $0
 push $printstr
@@ -1488,14 +1488,14 @@ else_21:
 # Else Ends
 ifelse_21:
 # If Ends
-# Assignment
+# Assignment to local0
 # Variable member2
 mov 8(%ebp), %ebx
 push 8(%ebx)
 # Variablemember2Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to local0 Ends
 # Call
 # MethodCall
 push %eax
@@ -1529,7 +1529,7 @@ ifelse_20:
 jmp ifelse_17
 # Else
 else_17:
-# Assignment
+# Assignment to i6
 # Negation
 push $94
 pop  %eax
@@ -1538,7 +1538,7 @@ push %eax
 # Negation Ends
 pop %eax
 mov %eax, -32(%ebp)
-# Assignment Ends
+# Assignment to i6 Ends
 # While
 while_22:
 # GreaterEqual
@@ -1562,7 +1562,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je while_end_22
-# Assignment
+# Assignment to i6
 # Plus
 # Variable i6
 push -32(%ebp)
@@ -1575,12 +1575,12 @@ push %eax
 # Plus Ends
 pop %eax
 mov %eax, -32(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to i6 Ends
+# Assignment to i7
 push $1472
 pop %eax
 mov %eax, -36(%ebp)
-# Assignment Ends
+# Assignment to i7 Ends
 # While
 while_23:
 # Greater
@@ -1599,7 +1599,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je while_end_23
-# Assignment
+# Assignment to i7
 # Divide
 # Variable i7
 push -36(%ebp)
@@ -1613,7 +1613,7 @@ push %eax
 # Divide Ends
 pop %eax
 mov %eax, -36(%ebp)
-# Assignment Ends
+# Assignment to i7 Ends
 # Print
 push $0
 push $printstr
@@ -1740,15 +1740,15 @@ xchg %eax, (%esp)
 # MethodCall Ends
 add $4, %esp
 # Call Ends
-# Assignment
+# Assignment to local0
 push $132
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to local0 Ends
 # Else Ends
 ifelse_24:
 # If Ends
-# Assignment
+# Assignment to local0
 # Negation
 push $28
 pop  %eax
@@ -1757,14 +1757,14 @@ push %eax
 # Negation Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to local0 Ends
 jmp while_23
 while_end_23:
 # While Ends
 jmp while_22
 while_end_22:
 # While Ends
-# Assignment
+# Assignment to local0
 # Times
 push $250
 # Variable member1
@@ -1778,7 +1778,7 @@ push %eax
 # Times Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to local0 Ends
 # Call
 # MethodCall
 push %eax
@@ -1828,7 +1828,7 @@ while_end_13:
 # Else Ends
 ifelse_8:
 # If Ends
-# Assignment
+# Assignment to local0
 # Minus
 # Plus
 # Variable arg0
@@ -1854,12 +1854,12 @@ push %eax
 # Minus Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local0 Ends
+# Assignment to local0
 push $59
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to local0 Ends
 # Print
 # Variable member0
 mov 8(%ebp), %ebx
@@ -1901,7 +1901,7 @@ sub $28, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to member1
 # Minus
 push $173
 # Times
@@ -1920,8 +1920,8 @@ push %eax
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 4(%ebx)
-# Assignment Ends
-# Assignment
+# Assignment to member1 Ends
+# Assignment to member0
 # GreaterEqual
 push $190
 push $232
@@ -1935,19 +1935,19 @@ push %edx
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 0(%ebx)
-# Assignment Ends
-# Assignment
+# Assignment to member0 Ends
+# Assignment to member2
 push $153
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 8(%ebx)
-# Assignment Ends
-# Assignment
+# Assignment to member2 Ends
+# Assignment to local4
 push $8
 pop %eax
 mov %eax, -20(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local4 Ends
+# Assignment to local1
 # Negation
 push $187
 pop  %eax
@@ -1956,13 +1956,13 @@ push %eax
 # Negation Ends
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local1 Ends
+# Assignment to local0
 push $44
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local0 Ends
+# Assignment to local3
 # And
 push $1
 push $0
@@ -1973,8 +1973,8 @@ push %eax
 # And Ends
 pop %eax
 mov %eax, -16(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local3 Ends
+# Assignment to local2
 # GreaterEqual
 push $148
 push $52
@@ -1987,7 +1987,7 @@ push %edx
 # GreaterEqual Ends
 pop %eax
 mov %eax, -12(%ebp)
-# Assignment Ends
+# Assignment to local2 Ends
 # IfElse
 push $0
 pop %eax
@@ -1995,7 +1995,7 @@ mov $0, %ebx
 cmp %eax, %ebx
 je else_25
 # If
-# Assignment
+# Assignment to i0
 # Negation
 push $56
 pop  %eax
@@ -2004,7 +2004,7 @@ push %eax
 # Negation Ends
 pop %eax
 mov %eax, -24(%ebp)
-# Assignment Ends
+# Assignment to i0 Ends
 # While
 while_26:
 # GreaterEqual
@@ -2028,7 +2028,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je while_end_26
-# Assignment
+# Assignment to i0
 # Times
 # Variable i0
 push -24(%ebp)
@@ -2041,7 +2041,7 @@ push %eax
 # Times Ends
 pop %eax
 mov %eax, -24(%ebp)
-# Assignment Ends
+# Assignment to i0 Ends
 # IfElse
 # And
 # Variable local3
@@ -2061,7 +2061,7 @@ mov $0, %ebx
 cmp %eax, %ebx
 je else_27
 # If
-# Assignment
+# Assignment to local2
 # Greater
 push $99
 # Variable local1
@@ -2076,7 +2076,7 @@ push %edx
 # Greater Ends
 pop %eax
 mov %eax, -12(%ebp)
-# Assignment Ends
+# Assignment to local2 Ends
 # Call
 # MethodCall
 push %eax
@@ -2131,14 +2131,14 @@ else_27:
 # Else Ends
 ifelse_27:
 # If Ends
-# Assignment
+# Assignment to local1
 # Variable member1
 mov 8(%ebp), %ebx
 push 4(%ebx)
 # Variablemember1Ends
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
+# Assignment to local1 Ends
 # Print
 # Plus
 push $129
@@ -2192,11 +2192,11 @@ mov $0, %ebx
 cmp %eax, %ebx
 je else_28
 # If
-# Assignment
+# Assignment to local4
 push $73
 pop %eax
 mov %eax, -20(%ebp)
-# Assignment Ends
+# Assignment to local4 Ends
 # If Ends
 jmp ifelse_28
 # Else
@@ -2227,11 +2227,11 @@ mov $0, %ebx
 cmp %eax, %ebx
 je else_29
 # If
-# Assignment
+# Assignment to i1
 push $12
 pop %eax
 mov %eax, -28(%ebp)
-# Assignment Ends
+# Assignment to i1 Ends
 # While
 while_30:
 # GreaterEqual
@@ -2255,7 +2255,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je while_end_30
-# Assignment
+# Assignment to i1
 # Plus
 # Variable i1
 push -28(%ebp)
@@ -2273,7 +2273,7 @@ push %eax
 # Plus Ends
 pop %eax
 mov %eax, -28(%ebp)
-# Assignment Ends
+# Assignment to i1 Ends
 # IfElse
 # And
 # Variable member0
@@ -2300,13 +2300,13 @@ mov $0, %ebx
 cmp %eax, %ebx
 je else_31
 # If
-# Assignment
+# Assignment to local3
 # Variable local3
 push -16(%ebp)
 # Variablelocal3Ends
 pop %eax
 mov %eax, -16(%ebp)
-# Assignment Ends
+# Assignment to local3 Ends
 # If Ends
 jmp ifelse_31
 # Else
@@ -2378,11 +2378,11 @@ xchg %eax, (%esp)
 # MethodCall Ends
 add $4, %esp
 # Call Ends
-# Assignment
+# Assignment to local0
 push $235
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to local0 Ends
 # If Ends
 jmp ifelse_32
 # Else
@@ -2409,7 +2409,7 @@ add $8, %esp
 jmp ifelse_29
 # Else
 else_29:
-# Assignment
+# Assignment to local2
 # Greater
 push $113
 # Variable local0
@@ -2424,7 +2424,7 @@ push %edx
 # Greater Ends
 pop %eax
 mov %eax, -12(%ebp)
-# Assignment Ends
+# Assignment to local2 Ends
 # Else Ends
 ifelse_29:
 # If Ends
@@ -2445,7 +2445,7 @@ sub $24, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to local5
 # Plus
 # Negation
 push $74
@@ -2461,8 +2461,8 @@ push %eax
 # Plus Ends
 pop %eax
 mov %eax, -24(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local5 Ends
+# Assignment to local4
 # New class0()
 push $12
 call malloc
@@ -2491,6 +2491,7 @@ xor $1, %eax
 push %eax
 # Not Ends
 # Arguments Pushed
+# Class: class1 Method: class0
 push 28(%esp)
 call class0_class0
 add $24, %esp
@@ -2503,18 +2504,18 @@ push %eax
 # New class0() Ends
 pop %eax
 mov %eax, -20(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local4 Ends
+# Assignment to local1
 push $45
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local1 Ends
+# Assignment to local0
 push $111
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local0 Ends
+# Assignment to local3
 # New class0()
 push $12
 call malloc
@@ -2560,6 +2561,7 @@ setg %dl
 push %edx
 # Greater Ends
 # Arguments Pushed
+# Class: class1 Method: class0
 push 28(%esp)
 call class0_class0
 add $24, %esp
@@ -2572,29 +2574,29 @@ push %eax
 # New class0() Ends
 pop %eax
 mov %eax, -16(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local3 Ends
+# Assignment to local2
 push $78
 pop %eax
 mov %eax, -12(%ebp)
-# Assignment Ends
+# Assignment to local2 Ends
 # IfElse
 # MemberAccess local4.member0
 mov -20(%ebp), %ebx
 push 0(%ebx)
-# MemberAccess Endslocal4.member0
+# MemberAccess local4.member0 Ends
 pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je else_33
 # If
-# Assignment
+# Assignment to local0
 # Variable local0
 push -4(%ebp)
 # Variablelocal0Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to local0 Ends
 # If Ends
 jmp ifelse_33
 # Else
@@ -2645,13 +2647,13 @@ mov $0, %ebx
 cmp %eax, %ebx
 je else_35
 # If
-# Assignment
+# Assignment to local5
 # Variable local0
 push -4(%ebp)
 # Variablelocal0Ends
 pop %eax
 mov %eax, -24(%ebp)
-# Assignment Ends
+# Assignment to local5 Ends
 # If Ends
 jmp ifelse_35
 # Else
@@ -2704,7 +2706,7 @@ push %edx
 # MemberAccess local4.member0
 mov -20(%ebp), %ebx
 push 0(%ebx)
-# MemberAccess Endslocal4.member0
+# MemberAccess local4.member0 Ends
 # Variable member1
 mov 8(%ebp), %ebx
 push 4(%ebx)
@@ -2746,7 +2748,7 @@ push 16(%ebx)
 # MemberAccess local4.member1
 mov -20(%ebp), %ebx
 push 4(%ebx)
-# MemberAccess Endslocal4.member1
+# MemberAccess local4.member1 Ends
 pop  %eax
 neg  %eax
 push %eax
@@ -2782,7 +2784,7 @@ sub $16, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to local1
 # New class0()
 push $12
 call malloc
@@ -2799,6 +2801,7 @@ push $248
 push $1
 push $0
 # Arguments Pushed
+# Class: class1 Method: class0
 push 28(%esp)
 call class0_class0
 add $24, %esp
@@ -2811,13 +2814,13 @@ push %eax
 # New class0() Ends
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local1 Ends
+# Assignment to local0
 push $11
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local0 Ends
+# Assignment to local3
 # Times
 # Times
 # Negation
@@ -2840,8 +2843,8 @@ push %eax
 # Times Ends
 pop %eax
 mov %eax, -16(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local3 Ends
+# Assignment to local2
 # Plus
 push $70
 push $249
@@ -2852,7 +2855,7 @@ push %eax
 # Plus Ends
 pop %eax
 mov %eax, -12(%ebp)
-# Assignment Ends
+# Assignment to local2 Ends
 # Print
 push $6
 push $printstr
@@ -2868,12 +2871,12 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
-# Assignment
+# Assignment to local1
 push $82
 pop %eax
 mov -8(%ebp), %ebx
 mov %eax, 8(%ebx)
-# Assignment Ends
+# Assignment to local1 Ends
 # Print
 # Divide
 push $110
@@ -2922,12 +2925,12 @@ sub $20, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to local1
 push $169
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local1 Ends
+# Assignment to local0
 # New class0()
 push $12
 call malloc
@@ -2969,6 +2972,7 @@ push %eax
 push $1
 push $0
 # Arguments Pushed
+# Class: class1 Method: class0
 push 28(%esp)
 call class0_class0
 add $24, %esp
@@ -2981,17 +2985,17 @@ push %eax
 # New class0() Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local0 Ends
+# Assignment to local3
 push $165
 pop %eax
 mov %eax, -16(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local3 Ends
+# Assignment to local2
 push $0
 pop %eax
 mov %eax, -12(%ebp)
-# Assignment Ends
+# Assignment to local2 Ends
 # IfElse
 # Variable local2
 push -12(%ebp)
@@ -3010,7 +3014,7 @@ push %edx
 # MemberAccess local0.member0
 mov -4(%ebp), %ebx
 push 0(%ebx)
-# MemberAccess Endslocal0.member0
+# MemberAccess local0.member0 Ends
 # Plus
 push $26
 push $20
@@ -3039,7 +3043,7 @@ push %edx
 # MemberAccess local0.member0
 mov -4(%ebp), %ebx
 push 0(%ebx)
-# MemberAccess Endslocal0.member0
+# MemberAccess local0.member0 Ends
 push $157
 # Variable member1
 mov 8(%ebp), %ebx
@@ -3059,37 +3063,37 @@ add $4, %esp
 jmp ifelse_36
 # Else
 else_36:
-# Assignment
+# Assignment to local0
 # Variable local2
 push -12(%ebp)
 # Variablelocal2Ends
 pop %eax
 mov -4(%ebp), %ebx
 mov %eax, 0(%ebx)
-# Assignment Ends
+# Assignment to local0 Ends
 # Else Ends
 ifelse_36:
 # If Ends
-# Assignment
+# Assignment to local1
 # Variable local3
 push -16(%ebp)
 # Variablelocal3Ends
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local1 Ends
+# Assignment to local0
 # Variable local3
 push -16(%ebp)
 # Variablelocal3Ends
 pop %eax
 mov -4(%ebp), %ebx
 mov %eax, 4(%ebx)
-# Assignment Ends
-# Assignment
+# Assignment to local0 Ends
+# Assignment to i0
 push $14
 pop %eax
 mov %eax, -20(%ebp)
-# Assignment Ends
+# Assignment to i0 Ends
 # While
 while_37:
 # Greater
@@ -3108,7 +3112,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je while_end_37
-# Assignment
+# Assignment to i0
 # Minus
 # Variable i0
 push -20(%ebp)
@@ -3126,15 +3130,15 @@ push %eax
 # Minus Ends
 pop %eax
 mov %eax, -20(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to i0 Ends
+# Assignment to local3
 # Variable member4
 mov 8(%ebp), %ebx
 push 16(%ebx)
 # Variablemember4Ends
 pop %eax
 mov %eax, -16(%ebp)
-# Assignment Ends
+# Assignment to local3 Ends
 # Print
 # Variable local2
 push -12(%ebp)
@@ -3161,11 +3165,11 @@ sub $4, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to i0
 push $3969
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to i0 Ends
 # While
 while_38:
 # Greater
@@ -3184,7 +3188,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je while_end_38
-# Assignment
+# Assignment to i0
 # Divide
 # Variable i0
 push -4(%ebp)
@@ -3198,7 +3202,7 @@ push %eax
 # Divide Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to i0 Ends
 # IfElse
 # MethodCall
 push %eax
@@ -3256,7 +3260,7 @@ push $1
 mov 8(%ebp), %ebx
 mov 0(%ebx), %ebx
 push 8(%ebx)
-# MemberAccess Endsmember0.member2
+# MemberAccess member0.member2 Ends
 # Plus
 # Variable member1
 mov 8(%ebp), %ebx
@@ -3366,12 +3370,12 @@ sub $4, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to local0
 push $0
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local0 Ends
+# Assignment to local0
 # MethodCall
 push %eax
 push %ecx
@@ -3380,7 +3384,7 @@ push %edx
 # MemberAccess arg0.member2
 mov 12(%ebp), %ebx
 push 8(%ebx)
-# MemberAccess Endsarg0.member2
+# MemberAccess arg0.member2 Ends
 # Arguments Pushed
 push 8(%ebp)
 call class1_f3
@@ -3391,12 +3395,12 @@ xchg %eax, (%esp)
 # MethodCall Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to local0 Ends
 # Return Statement
 # MemberAccess arg0.member1
 mov 12(%ebp), %ebx
 push 4(%ebx)
-# MemberAccess Endsarg0.member1
+# MemberAccess arg0.member1 Ends
 pop %eax
 # Return Statement Ends
 pop %ebx
@@ -3414,19 +3418,19 @@ sub $12, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to member4
 push $242
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 16(%ebx)
-# Assignment Ends
-# Assignment
+# Assignment to member4 Ends
+# Assignment to member1
 push $157
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 4(%ebx)
-# Assignment Ends
-# Assignment
+# Assignment to member1 Ends
+# Assignment to member0
 # New class0()
 push $12
 call malloc
@@ -3448,6 +3452,7 @@ push $84
 push $1
 push $1
 # Arguments Pushed
+# Class: class1 Method: class0
 push 28(%esp)
 call class0_class0
 add $24, %esp
@@ -3461,8 +3466,8 @@ push %eax
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 0(%ebx)
-# Assignment Ends
-# Assignment
+# Assignment to member0 Ends
+# Assignment to member3
 # Times
 # Divide
 push $103
@@ -3482,14 +3487,14 @@ push %eax
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 12(%ebx)
-# Assignment Ends
-# Assignment
+# Assignment to member3 Ends
+# Assignment to member2
 push $1
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 8(%ebx)
-# Assignment Ends
-# Assignment
+# Assignment to member2 Ends
+# Assignment to local1
 # Equal
 push $55
 push $215
@@ -3502,30 +3507,30 @@ push %edx
 # Equal Ends
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local1 Ends
+# Assignment to local0
 push $0
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local0 Ends
+# Assignment to local2
 push $157
 pop %eax
 mov %eax, -12(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local2 Ends
+# Assignment to local1
 # Variable member2
 mov 8(%ebp), %ebx
 push 8(%ebx)
 # Variablemember2Ends
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local1 Ends
+# Assignment to local2
 push $220
 pop %eax
 mov %eax, -12(%ebp)
-# Assignment Ends
+# Assignment to local2 Ends
 # Print
 push $169
 push $printstr
@@ -3549,12 +3554,12 @@ sub $20, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to local4
 push $1
 pop %eax
 mov %eax, -20(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local4 Ends
+# Assignment to local1
 # Divide
 push $252
 push $120
@@ -3566,18 +3571,18 @@ push %eax
 # Divide Ends
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local1 Ends
+# Assignment to local0
 push $1
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local0 Ends
+# Assignment to local3
 push $1
 pop %eax
 mov %eax, -16(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local3 Ends
+# Assignment to local2
 # And
 push $1
 push $0
@@ -3588,8 +3593,8 @@ push %eax
 # And Ends
 pop %eax
 mov %eax, -12(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local2 Ends
+# Assignment to local0
 # GreaterEqual
 # Variable member4
 mov 8(%ebp), %ebx
@@ -3605,7 +3610,7 @@ push %edx
 # GreaterEqual Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to local0 Ends
 # Return Statement
 # Negation
 # Variable local1
@@ -3632,7 +3637,7 @@ sub $12, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to local1
 # Greater
 push $63
 push $9
@@ -3645,19 +3650,19 @@ push %edx
 # Greater Ends
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local1 Ends
+# Assignment to local0
 push $19
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local0 Ends
+# Assignment to local1
 # Variable local1
 push -8(%ebp)
 # Variablelocal1Ends
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
+# Assignment to local1 Ends
 # Call
 # MethodCall
 push %eax
@@ -3693,11 +3698,11 @@ xchg %eax, (%esp)
 # MethodCall Ends
 add $4, %esp
 # Call Ends
-# Assignment
+# Assignment to i0
 push $19683
 pop %eax
 mov %eax, -12(%ebp)
-# Assignment Ends
+# Assignment to i0 Ends
 # While
 while_40:
 # Greater
@@ -3716,7 +3721,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je while_end_40
-# Assignment
+# Assignment to i0
 # Divide
 # Variable i0
 push -12(%ebp)
@@ -3730,23 +3735,23 @@ push %eax
 # Divide Ends
 pop %eax
 mov %eax, -12(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to i0 Ends
+# Assignment to local1
 # MemberAccess arg1.member0
 mov 16(%ebp), %ebx
 push 0(%ebx)
-# MemberAccess Endsarg1.member0
+# MemberAccess arg1.member0 Ends
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
+# Assignment to local1 Ends
 jmp while_40
 while_end_40:
 # While Ends
-# Assignment
+# Assignment to local0
 push $51
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to local0 Ends
 # Return Statement
 push $31
 pop %eax
@@ -3766,16 +3771,16 @@ sub $4, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to local0
 push $1
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local0 Ends
+# Assignment to local0
 push $1
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to local0 Ends
 pop %ebx
 pop %esi
 pop %edi
@@ -3791,12 +3796,12 @@ sub $20, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to local4
 push $0
 pop %eax
 mov %eax, -20(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local4 Ends
+# Assignment to local1
 # New class0()
 push $12
 call malloc
@@ -3827,6 +3832,7 @@ and  %ebx, %eax
 push %eax
 # And Ends
 # Arguments Pushed
+# Class: class2 Method: class0
 push 28(%esp)
 call class0_class0
 add $24, %esp
@@ -3839,13 +3845,13 @@ push %eax
 # New class0() Ends
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local1 Ends
+# Assignment to local0
 push $1
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local0 Ends
+# Assignment to local3
 # Equal
 push $154
 # Minus
@@ -3865,12 +3871,12 @@ push %edx
 # Equal Ends
 pop %eax
 mov %eax, -16(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local3 Ends
+# Assignment to local2
 push $196
 pop %eax
 mov %eax, -12(%ebp)
-# Assignment Ends
+# Assignment to local2 Ends
 # Call
 # MethodCall
 push %eax
@@ -3882,7 +3888,7 @@ push $1
 # MemberAccess local1.member1
 mov -8(%ebp), %ebx
 push 4(%ebx)
-# MemberAccess Endslocal1.member1
+# MemberAccess local1.member1 Ends
 # New class1()
 push $20
 call malloc
@@ -3900,6 +3906,7 @@ neg  %eax
 push %eax
 # Negation Ends
 # Arguments Pushed
+# Class: class2 Method: class1
 push 12(%esp)
 call class1_class1
 add $8, %esp
@@ -3941,7 +3948,7 @@ sub $20, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to local0
 # Not
 push $1
 pop  %eax
@@ -3950,7 +3957,7 @@ push %eax
 # Not Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to local0 Ends
 # IfElse
 push $0
 pop %eax
@@ -4007,11 +4014,11 @@ mov $0, %ebx
 cmp %eax, %ebx
 je else_42
 # If
-# Assignment
+# Assignment to local0
 push $1
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to local0 Ends
 # IfElse
 # GreaterEqual
 push $33
@@ -4040,13 +4047,13 @@ push %edx
 # MemberAccess arg1.member1
 mov 16(%ebp), %ebx
 push 4(%ebx)
-# MemberAccess Endsarg1.member1
+# MemberAccess arg1.member1 Ends
 # Plus
 # Negation
 # MemberAccess arg1.member1
 mov 16(%ebp), %ebx
 push 4(%ebx)
-# MemberAccess Endsarg1.member1
+# MemberAccess arg1.member1 Ends
 pop  %eax
 neg  %eax
 push %eax
@@ -4064,7 +4071,7 @@ push 20(%ebp)
 # MemberAccess arg1.member1
 mov 16(%ebp), %ebx
 push 4(%ebx)
-# MemberAccess Endsarg1.member1
+# MemberAccess arg1.member1 Ends
 push $187
 mov $0, %edx
 pop %ebx
@@ -4116,16 +4123,16 @@ else_45:
 # Else Ends
 ifelse_45:
 # If Ends
-# Assignment
+# Assignment to local0
 push $0
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local0 Ends
+# Assignment to i0
 push $85
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
+# Assignment to i0 Ends
 # While
 while_46:
 # Greater
@@ -4149,7 +4156,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je while_end_46
-# Assignment
+# Assignment to i0
 # Plus
 # Variable i0
 push -8(%ebp)
@@ -4167,26 +4174,26 @@ push %eax
 # Plus Ends
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to i0 Ends
+# Assignment to local0
 push $1
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local0 Ends
+# Assignment to local0
 # Variable arg3
 push 24(%ebp)
 # Variablearg3Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local0 Ends
+# Assignment to local0
 # Variable local0
 push -4(%ebp)
 # Variablelocal0Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to local0 Ends
 jmp while_46
 while_end_46:
 # While Ends
@@ -4194,15 +4201,15 @@ while_end_46:
 jmp ifelse_44
 # Else
 else_44:
-# Assignment
+# Assignment to local0
 # Variable member2
 mov 8(%ebp), %ebx
 push 8(%ebx)
 # Variablemember2Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local0 Ends
+# Assignment to i1
 # Negation
 push $68
 pop  %eax
@@ -4211,7 +4218,7 @@ push %eax
 # Negation Ends
 pop %eax
 mov %eax, -12(%ebp)
-# Assignment Ends
+# Assignment to i1 Ends
 # While
 while_47:
 # Greater
@@ -4235,7 +4242,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je while_end_47
-# Assignment
+# Assignment to i1
 # Times
 # Variable i1
 push -12(%ebp)
@@ -4248,7 +4255,7 @@ push %eax
 # Times Ends
 pop %eax
 mov %eax, -12(%ebp)
-# Assignment Ends
+# Assignment to i1 Ends
 # IfElse
 push $1
 pop %eax
@@ -4305,7 +4312,7 @@ ifelse_48:
 # MemberAccess arg1.member2
 mov 16(%ebp), %ebx
 push 8(%ebx)
-# MemberAccess Endsarg1.member2
+# MemberAccess arg1.member2 Ends
 push $printstr
 call printf
 add $8, %esp
@@ -4319,14 +4326,14 @@ push %edx
 # MemberAccess arg1.member3
 mov 16(%ebp), %ebx
 push 12(%ebx)
-# MemberAccess Endsarg1.member3
+# MemberAccess arg1.member3 Ends
 # Or
 # GreaterEqual
 push $133
 # MemberAccess arg1.member3
 mov 16(%ebp), %ebx
 push 12(%ebx)
-# MemberAccess Endsarg1.member3
+# MemberAccess arg1.member3 Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -4386,7 +4393,7 @@ push $1
 # MemberAccess arg1.member1
 mov 16(%ebp), %ebx
 push 4(%ebx)
-# MemberAccess Endsarg1.member1
+# MemberAccess arg1.member1 Ends
 # Variable arg1
 push 16(%ebp)
 # Variablearg1Ends
@@ -4400,16 +4407,16 @@ xchg %eax, (%esp)
 # MethodCall Ends
 add $4, %esp
 # Call Ends
-# Assignment
+# Assignment to local0
 push $0
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to local0 Ends
 # If Ends
 jmp ifelse_43
 # Else
 else_43:
-# Assignment
+# Assignment to i2
 # Negation
 push $52
 pop  %eax
@@ -4418,7 +4425,7 @@ push %eax
 # Negation Ends
 pop %eax
 mov %eax, -16(%ebp)
-# Assignment Ends
+# Assignment to i2 Ends
 # While
 while_49:
 # Greater
@@ -4442,7 +4449,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je while_end_49
-# Assignment
+# Assignment to i2
 # Plus
 # Variable i2
 push -16(%ebp)
@@ -4460,12 +4467,12 @@ push %eax
 # Plus Ends
 pop %eax
 mov %eax, -16(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to i2 Ends
+# Assignment to local0
 push $0
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to local0 Ends
 # Call
 # MethodCall
 push %eax
@@ -4502,7 +4509,7 @@ push $1
 # MemberAccess arg1.member4
 mov 16(%ebp), %ebx
 push 16(%ebx)
-# MemberAccess Endsarg1.member4
+# MemberAccess arg1.member4 Ends
 # Variable arg1
 push 16(%ebp)
 # Variablearg1Ends
@@ -4519,7 +4526,7 @@ add $4, %esp
 jmp while_49
 while_end_49:
 # While Ends
-# Assignment
+# Assignment to local0
 # Equal
 # Variable arg4
 push 28(%ebp)
@@ -4527,7 +4534,7 @@ push 28(%ebp)
 # MemberAccess arg1.member4
 mov 16(%ebp), %ebx
 push 16(%ebx)
-# MemberAccess Endsarg1.member4
+# MemberAccess arg1.member4 Ends
 mov $0, %edx
 pop %ebx
 pop %eax
@@ -4537,7 +4544,7 @@ push %edx
 # Equal Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to local0 Ends
 # Print
 push $206
 push $printstr
@@ -4559,11 +4566,11 @@ add $8, %esp
 jmp ifelse_42
 # Else
 else_42:
-# Assignment
+# Assignment to i3
 push $35
 pop %eax
 mov %eax, -20(%ebp)
-# Assignment Ends
+# Assignment to i3 Ends
 # While
 while_50:
 # Greater
@@ -4582,7 +4589,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je while_end_50
-# Assignment
+# Assignment to i3
 # Times
 # Variable i3
 push -20(%ebp)
@@ -4595,7 +4602,7 @@ push %eax
 # Times Ends
 pop %eax
 mov %eax, -20(%ebp)
-# Assignment Ends
+# Assignment to i3 Ends
 # Print
 # Plus
 # MethodCall
@@ -4655,7 +4662,7 @@ push %edx
 # MemberAccess arg1.member1
 mov 16(%ebp), %ebx
 push 4(%ebx)
-# MemberAccess Endsarg1.member1
+# MemberAccess arg1.member1 Ends
 pop  %eax
 neg  %eax
 push %eax
@@ -4677,9 +4684,10 @@ xchg %eax, (%esp)
 # MemberAccess arg1.member2
 mov 16(%ebp), %ebx
 push 8(%ebx)
-# MemberAccess Endsarg1.member2
+# MemberAccess arg1.member2 Ends
 push $1
 # Arguments Pushed
+# Class: class2 Method: class0
 push 28(%esp)
 call class0_class0
 add $24, %esp
@@ -4722,7 +4730,7 @@ add $4, %esp
 jmp while_50
 while_end_50:
 # While Ends
-# Assignment
+# Assignment to local0
 # MethodCall
 push %eax
 push %ecx
@@ -4739,12 +4747,12 @@ xchg %eax, (%esp)
 # MethodCall Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local0 Ends
+# Assignment to local0
 push $0
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to local0 Ends
 # Else Ends
 ifelse_42:
 # If Ends
@@ -4814,7 +4822,8 @@ imul  %ebx, %eax
 push %eax
 # Times Ends
 # Arguments Pushed
-push 12(%esp)
+# Class: class2 Method: class1
+push 8(%ebp)
 call class1_class1
 add $8, %esp
 pop %edx
@@ -4823,7 +4832,7 @@ xchg %eax, (%esp)
 # MethodCall Ends
 add $4, %esp
 # Call Ends
-# Assignment
+# Assignment to local4
 # Negation
 push $188
 pop  %eax
@@ -4832,18 +4841,18 @@ push %eax
 # Negation Ends
 pop %eax
 mov %eax, -20(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local4 Ends
+# Assignment to local1
 push $0
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local1 Ends
+# Assignment to local0
 push $241
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local0 Ends
+# Assignment to local3
 # New class1()
 push $20
 call malloc
@@ -4876,6 +4885,7 @@ idiv %ebx
 push %eax
 # Divide Ends
 # Arguments Pushed
+# Class: class2 Method: class1
 push 12(%esp)
 call class1_class1
 add $8, %esp
@@ -4888,12 +4898,12 @@ push %eax
 # New class1() Ends
 pop %eax
 mov %eax, -16(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local3 Ends
+# Assignment to local2
 push $0
 pop %eax
 mov %eax, -12(%ebp)
-# Assignment Ends
+# Assignment to local2 Ends
 # Call
 # MethodCall
 push %eax
@@ -4922,13 +4932,14 @@ push $180
 # MemberAccess local3.member1
 mov -16(%ebp), %ebx
 push 4(%ebx)
-# MemberAccess Endslocal3.member1
+# MemberAccess local3.member1 Ends
 pop  %ebx
 pop  %eax
 imul  %ebx, %eax
 push %eax
 # Times Ends
 # Arguments Pushed
+# Class: class2 Method: class1
 push 12(%esp)
 call class1_class1
 add $8, %esp
@@ -4972,7 +4983,7 @@ sub $12, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to local1
 # Not
 push $1
 pop  %eax
@@ -4981,13 +4992,13 @@ push %eax
 # Not Ends
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local1 Ends
+# Assignment to local0
 push $0
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local0 Ends
+# Assignment to local2
 # New class1()
 push $20
 call malloc
@@ -5007,6 +5018,7 @@ imul  %ebx, %eax
 push %eax
 # Times Ends
 # Arguments Pushed
+# Class: class3 Method: class1
 push 12(%esp)
 call class1_class1
 add $8, %esp
@@ -5019,7 +5031,7 @@ push %eax
 # New class1() Ends
 pop %eax
 mov %eax, -12(%ebp)
-# Assignment Ends
+# Assignment to local2 Ends
 # Print
 # Variable local0
 push -4(%ebp)
@@ -5028,7 +5040,7 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
-# Assignment
+# Assignment to local1
 # And
 # Variable member7
 mov 8(%ebp), %ebx
@@ -5045,15 +5057,15 @@ push %eax
 # And Ends
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local1 Ends
+# Assignment to local0
 # Variable member7
 mov 8(%ebp), %ebx
 push 28(%ebx)
 # Variablemember7Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to local0 Ends
 # Print
 push $0
 push $printstr
@@ -5090,7 +5102,8 @@ push %edx
 # Pushing Arguments
 push $181
 # Arguments Pushed
-push 12(%esp)
+# Class: class3 Method: class1
+push 8(%ebp)
 call class1_class1
 add $8, %esp
 pop %edx
@@ -5099,19 +5112,19 @@ xchg %eax, (%esp)
 # MethodCall Ends
 add $4, %esp
 # Call Ends
-# Assignment
+# Assignment to member5
 push $53
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 20(%ebx)
-# Assignment Ends
-# Assignment
+# Assignment to member5 Ends
+# Assignment to member7
 push $1
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 28(%ebx)
-# Assignment Ends
-# Assignment
+# Assignment to member7 Ends
+# Assignment to member6
 # New class0()
 push $12
 call malloc
@@ -5145,6 +5158,7 @@ push $58
 push $1
 push $1
 # Arguments Pushed
+# Class: class3 Method: class0
 push 28(%esp)
 call class0_class0
 add $24, %esp
@@ -5158,8 +5172,8 @@ push %eax
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 24(%ebx)
-# Assignment Ends
-# Assignment
+# Assignment to member6 Ends
+# Assignment to member8
 # Minus
 # Times
 push $73
@@ -5178,8 +5192,8 @@ push %eax
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 32(%ebx)
-# Assignment Ends
-# Assignment
+# Assignment to member8 Ends
+# Assignment to local4
 # New class2()
 push $20
 call malloc
@@ -5202,6 +5216,7 @@ or   %ebx, %eax
 push %eax
 # Or Ends
 # Arguments Pushed
+# Class: class3 Method: class2
 push 24(%esp)
 call class2_class2
 add $20, %esp
@@ -5214,8 +5229,8 @@ push %eax
 # New class2() Ends
 pop %eax
 mov %eax, -20(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local4 Ends
+# Assignment to local1
 # New class1()
 push $20
 call malloc
@@ -5236,6 +5251,7 @@ idiv %ebx
 push %eax
 # Divide Ends
 # Arguments Pushed
+# Class: class3 Method: class1
 push 12(%esp)
 call class1_class1
 add $8, %esp
@@ -5248,18 +5264,18 @@ push %eax
 # New class1() Ends
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local1 Ends
+# Assignment to local0
 push $42
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local0 Ends
+# Assignment to local3
 push $83
 pop %eax
 mov %eax, -16(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local3 Ends
+# Assignment to local2
 # Equal
 push $46
 push $141
@@ -5272,17 +5288,17 @@ push %edx
 # Equal Ends
 pop %eax
 mov %eax, -12(%ebp)
-# Assignment Ends
+# Assignment to local2 Ends
 # Print
 # MemberAccess local4.member4
 mov -20(%ebp), %ebx
 push 16(%ebx)
-# MemberAccess Endslocal4.member4
+# MemberAccess local4.member4 Ends
 push $printstr
 call printf
 add $8, %esp
 # Print Ends
-# Assignment
+# Assignment to local0
 # Divide
 # Variable local3
 push -16(%ebp)
@@ -5290,7 +5306,7 @@ push -16(%ebp)
 # MemberAccess local4.member3
 mov -20(%ebp), %ebx
 push 12(%ebx)
-# MemberAccess Endslocal4.member3
+# MemberAccess local4.member3 Ends
 pop  %ebx
 pop  %eax
 cdq
@@ -5299,7 +5315,7 @@ push %eax
 # Divide Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to local0 Ends
 pop %ebx
 pop %esi
 pop %edi
@@ -5317,7 +5333,7 @@ sub $32, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to local5
 # Times
 push $218
 push $169
@@ -5328,28 +5344,28 @@ push %eax
 # Times Ends
 pop %eax
 mov %eax, -24(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local5 Ends
+# Assignment to local4
 push $1
 pop %eax
 mov %eax, -20(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local4 Ends
+# Assignment to local1
 push $0
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local1 Ends
+# Assignment to local0
 push $254
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local0 Ends
+# Assignment to local3
 push $115
 pop %eax
 mov %eax, -16(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local3 Ends
+# Assignment to local2
 # Plus
 push $240
 push $228
@@ -5360,20 +5376,20 @@ push %eax
 # Plus Ends
 pop %eax
 mov %eax, -12(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local2 Ends
+# Assignment to local4
 push $0
 pop %eax
 mov %eax, -20(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local4 Ends
+# Assignment to local1
 # Variable local1
 push -8(%ebp)
 # Variablelocal1Ends
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local1 Ends
+# Assignment to local5
 # Times
 push $12
 push $151
@@ -5384,7 +5400,7 @@ push %eax
 # Times Ends
 pop %eax
 mov %eax, -24(%ebp)
-# Assignment Ends
+# Assignment to local5 Ends
 # IfElse
 # Not
 push $1
@@ -5397,13 +5413,13 @@ mov $0, %ebx
 cmp %eax, %ebx
 je else_51
 # If
-# Assignment
+# Assignment to local1
 # Variable local1
 push -8(%ebp)
 # Variablelocal1Ends
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
+# Assignment to local1 Ends
 # IfElse
 # Variable local1
 push -8(%ebp)
@@ -5429,7 +5445,7 @@ mov $0, %ebx
 cmp %eax, %ebx
 je else_53
 # If
-# Assignment
+# Assignment to local5
 # Times
 push $104
 push $112
@@ -5440,7 +5456,7 @@ push %eax
 # Times Ends
 pop %eax
 mov %eax, -24(%ebp)
-# Assignment Ends
+# Assignment to local5 Ends
 # Print
 # Plus
 # Variable local0
@@ -5472,11 +5488,11 @@ else_52:
 # Else Ends
 ifelse_52:
 # If Ends
-# Assignment
+# Assignment to local4
 push $1
 pop %eax
 mov %eax, -20(%ebp)
-# Assignment Ends
+# Assignment to local4 Ends
 # If Ends
 jmp ifelse_51
 # Else
@@ -5521,21 +5537,21 @@ add $8, %esp
 # Else Ends
 ifelse_54:
 # If Ends
-# Assignment
+# Assignment to local4
 # Variable local4
 push -20(%ebp)
 # Variablelocal4Ends
 pop %eax
 mov %eax, -20(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local4 Ends
+# Assignment to local3
 # Variable local2
 push -12(%ebp)
 # Variablelocal2Ends
 pop %eax
 mov %eax, -16(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local3 Ends
+# Assignment to local5
 # Minus
 push $60
 push $146
@@ -5546,19 +5562,19 @@ push %eax
 # Minus Ends
 pop %eax
 mov %eax, -24(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local5 Ends
+# Assignment to local3
 push $26
 pop %eax
 mov %eax, -16(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local3 Ends
+# Assignment to local2
 # Variable local3
 push -16(%ebp)
 # Variablelocal3Ends
 pop %eax
 mov %eax, -12(%ebp)
-# Assignment Ends
+# Assignment to local2 Ends
 # IfElse
 # Variable local1
 push -8(%ebp)
@@ -5576,14 +5592,14 @@ push $printstr
 call printf
 add $8, %esp
 # Print Ends
-# Assignment
+# Assignment to local5
 # Variable local3
 push -16(%ebp)
 # Variablelocal3Ends
 pop %eax
 mov %eax, -24(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local5 Ends
+# Assignment to local5
 # Minus
 # Variable local5
 push -24(%ebp)
@@ -5598,7 +5614,7 @@ push %eax
 # Minus Ends
 pop %eax
 mov %eax, -24(%ebp)
-# Assignment Ends
+# Assignment to local5 Ends
 # If Ends
 jmp ifelse_55
 # Else
@@ -5606,7 +5622,7 @@ else_55:
 # Else Ends
 ifelse_55:
 # If Ends
-# Assignment
+# Assignment to local3
 # Negation
 push $151
 pop  %eax
@@ -5615,12 +5631,12 @@ push %eax
 # Negation Ends
 pop %eax
 mov %eax, -16(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local3 Ends
+# Assignment to i0
 push $91
 pop %eax
 mov %eax, -28(%ebp)
-# Assignment Ends
+# Assignment to i0 Ends
 # While
 while_56:
 # Greater
@@ -5639,7 +5655,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je while_end_56
-# Assignment
+# Assignment to i0
 # Plus
 # Variable i0
 push -28(%ebp)
@@ -5652,7 +5668,7 @@ push %eax
 # Plus Ends
 pop %eax
 mov %eax, -28(%ebp)
-# Assignment Ends
+# Assignment to i0 Ends
 # Print
 # Variable local4
 push -20(%ebp)
@@ -5664,16 +5680,16 @@ add $8, %esp
 jmp while_56
 while_end_56:
 # While Ends
-# Assignment
+# Assignment to local3
 push $37
 pop %eax
 mov %eax, -16(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to local3 Ends
+# Assignment to i1
 push $31
 pop %eax
 mov %eax, -32(%ebp)
-# Assignment Ends
+# Assignment to i1 Ends
 # While
 while_57:
 # GreaterEqual
@@ -5692,7 +5708,7 @@ pop %eax
 mov $0, %ebx
 cmp %eax, %ebx
 je while_end_57
-# Assignment
+# Assignment to i1
 # Minus
 # Variable i1
 push -32(%ebp)
@@ -5710,8 +5726,8 @@ push %eax
 # Minus Ends
 pop %eax
 mov %eax, -32(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to i1 Ends
+# Assignment to local2
 # Minus
 # Variable local3
 push -16(%ebp)
@@ -5724,7 +5740,7 @@ push %eax
 # Minus Ends
 pop %eax
 mov %eax, -12(%ebp)
-# Assignment Ends
+# Assignment to local2 Ends
 jmp while_57
 while_end_57:
 # While Ends

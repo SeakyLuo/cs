@@ -11,14 +11,14 @@ sub $0, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to x
 # Variable val
 push 12(%ebp)
 # VariablevalEnds
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 0(%ebx)
-# Assignment Ends
+# Assignment to x Ends
 pop %ebx
 pop %esi
 pop %edi
@@ -36,12 +36,12 @@ sub $0, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to x
 push $1
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 0(%ebx)
-# Assignment Ends
+# Assignment to x Ends
 pop %ebx
 pop %esi
 pop %edi
@@ -57,15 +57,15 @@ sub $4, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to tmp
 # Variable x
 mov 8(%ebp), %ebx
 push 0(%ebx)
 # VariablexEnds
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to tmp Ends
+# Assignment to x
 # Plus
 # Variable x
 mov 8(%ebp), %ebx
@@ -74,7 +74,7 @@ push 0(%ebx)
 # MemberAccess a.x
 mov 12(%ebp), %ebx
 push 0(%ebx)
-# MemberAccess Endsa.x
+# MemberAccess a.x Ends
 pop  %ebx
 pop  %eax
 add  %ebx, %eax
@@ -83,7 +83,7 @@ push %eax
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 0(%ebx)
-# Assignment Ends
+# Assignment to x Ends
 # Print
 # Variable x
 mov 8(%ebp), %ebx
@@ -108,6 +108,7 @@ push %edx
 push -4(%ebp)
 # VariabletmpEnds
 # Arguments Pushed
+# Class: classB Method: classA
 push 12(%esp)
 call classA_classA
 add $8, %esp
@@ -200,6 +201,7 @@ push %edx
 # Pushing Arguments
 push $1
 # Arguments Pushed
+# Class: classB Method: classA
 push 12(%esp)
 call classA_classA
 add $8, %esp
@@ -293,7 +295,7 @@ sub $4, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to b
 # New classB()
 push $4
 call malloc
@@ -305,6 +307,7 @@ push %ecx
 push %edx
 # Pushing Arguments
 # Arguments Pushed
+# Class: Main Method: classB
 push 8(%esp)
 call classB_classB
 add $4, %esp
@@ -317,7 +320,7 @@ push %eax
 # New classB() Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
+# Assignment to b Ends
 # Call
 # MethodCall
 push %eax

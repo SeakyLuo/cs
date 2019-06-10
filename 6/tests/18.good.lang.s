@@ -11,7 +11,7 @@ sub $0, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to x
 # Times
 # Variable x
 mov 8(%ebp), %ebx
@@ -26,8 +26,8 @@ push %eax
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 0(%ebx)
-# Assignment Ends
-# Assignment
+# Assignment to x Ends
+# Assignment to y
 # Plus
 # Variable y
 mov 8(%ebp), %ebx
@@ -42,7 +42,7 @@ push %eax
 pop %eax
 mov 8(%ebp), %ebx
 mov %eax, 4(%ebx)
-# Assignment Ends
+# Assignment to y Ends
 pop %ebx
 pop %esi
 pop %edi
@@ -60,7 +60,7 @@ sub $8, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to a
 # New classA()
 push $8
 call malloc
@@ -69,24 +69,24 @@ push %eax
 # New classA() Ends
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to a Ends
+# Assignment to a
 push $2
 pop %eax
 mov -4(%ebp), %ebx
 mov %eax, 0(%ebx)
-# Assignment Ends
-# Assignment
+# Assignment to a Ends
+# Assignment to a
 push $3
 pop %eax
 mov -4(%ebp), %ebx
 mov %eax, 4(%ebx)
-# Assignment Ends
+# Assignment to a Ends
 # Print
 # MemberAccess a.x
 mov -4(%ebp), %ebx
 push 0(%ebx)
-# MemberAccess Endsa.x
+# MemberAccess a.x Ends
 push $printstr
 call printf
 add $8, %esp
@@ -95,16 +95,16 @@ add $8, %esp
 # MemberAccess a.y
 mov -4(%ebp), %ebx
 push 4(%ebx)
-# MemberAccess Endsa.y
+# MemberAccess a.y Ends
 push $printstr
 call printf
 add $8, %esp
 # Print Ends
-# Assignment
+# Assignment to i
 push $0
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
+# Assignment to i Ends
 # DoWhile
 dowhile_0:
 # Call
@@ -127,7 +127,7 @@ add $4, %esp
 # MemberAccess a.x
 mov -4(%ebp), %ebx
 push 0(%ebx)
-# MemberAccess Endsa.x
+# MemberAccess a.x Ends
 push $printstr
 call printf
 add $8, %esp
@@ -136,12 +136,12 @@ add $8, %esp
 # MemberAccess a.y
 mov -4(%ebp), %ebx
 push 4(%ebx)
-# MemberAccess Endsa.y
+# MemberAccess a.y Ends
 push $printstr
 call printf
 add $8, %esp
 # Print Ends
-# Assignment
+# Assignment to i
 # Plus
 # Variable i
 push -8(%ebp)
@@ -154,7 +154,7 @@ push %eax
 # Plus Ends
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
+# Assignment to i Ends
 # Greater
 push $5
 # Variable i

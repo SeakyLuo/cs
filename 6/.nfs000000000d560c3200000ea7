@@ -20,8 +20,7 @@ class2 extends class1 {
 
 Main {
     main() -> none {
-        class2 local1;
-        local1 = new class2(-1);
+        class1();
     }
 }
 

@@ -41,16 +41,16 @@ sub $8, %esp
 push %edi
 push %esi
 push %ebx
-# Assignment
+# Assignment to x
 push $1
 pop %eax
 mov %eax, -4(%ebp)
-# Assignment Ends
-# Assignment
+# Assignment to x Ends
+# Assignment to y
 push $2
 pop %eax
 mov %eax, -8(%ebp)
-# Assignment Ends
+# Assignment to y Ends
 # Print
 # MethodCall
 push %eax
