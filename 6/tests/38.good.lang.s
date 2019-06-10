@@ -91,7 +91,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Assignment to local2
 push $130
@@ -198,7 +197,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Print
 # Variable local0
@@ -264,7 +262,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Assignment to local3
 push $1
@@ -295,7 +292,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Assignment to local0
 # Not
@@ -408,7 +404,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Assignment to i0
 # Negation
@@ -492,7 +487,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Assignment to local0
 # Variable local0
@@ -886,7 +880,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # IfElse
 # MemberAccess member4.member0
@@ -975,7 +968,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Assignment to member5
 push $0
@@ -1309,7 +1301,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Assignment to member4
 push $160
@@ -1536,7 +1527,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Assignment to local2
 # Variable local0
@@ -1563,7 +1553,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # If Ends
 jmp ifelse_7
@@ -1629,7 +1618,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Print
 # Variable local0
@@ -1692,7 +1680,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Call
 # MethodCall
@@ -1785,7 +1772,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Assignment to i2
 push $2
@@ -1941,7 +1927,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Assignment to i4
 push $303104
@@ -2030,7 +2015,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 jmp while_13
 while_end_13:
@@ -2085,7 +2069,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 pop %ebx
 pop %esi

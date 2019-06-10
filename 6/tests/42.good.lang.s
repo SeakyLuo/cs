@@ -688,7 +688,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Assignment to member5
 # New class0()
@@ -870,7 +869,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Assignment to local3
 # Negation
@@ -903,7 +901,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 pop %ebx
 pop %esi
@@ -977,7 +974,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Call
 # MethodCall
@@ -1009,7 +1005,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Assignment to local0
 # MemberAccess local0.member4
@@ -1038,7 +1033,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Assignment to local1
 # Variable local1
@@ -1147,7 +1141,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 jmp while_8
 while_end_8:
@@ -1220,7 +1213,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Assignment to i2
 push $85
@@ -1294,7 +1286,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 jmp while_10
 while_end_10:
@@ -1314,7 +1305,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # If Ends
 jmp ifelse_9
@@ -1353,7 +1343,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # IfElse
 # Variable local1
@@ -1382,7 +1371,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # If Ends
 jmp ifelse_11
@@ -1444,7 +1432,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Assignment to local1
 push $1
@@ -1479,7 +1466,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Else Ends
 ifelse_11:
@@ -1537,7 +1523,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 jmp while_13
 while_end_13:
@@ -1557,7 +1542,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Assignment to i4
 # Negation
@@ -1642,7 +1626,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Assignment to i5
 # Negation
@@ -1732,7 +1715,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Assignment to i6
 push $42496
@@ -1847,7 +1829,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Assignment to local1
 push $0

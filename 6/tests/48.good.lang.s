@@ -584,7 +584,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Assignment to local2
 # Variable member1
@@ -706,7 +705,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Call
 # MethodCall
@@ -730,7 +728,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Return Statement
 push $97
@@ -945,7 +942,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # If Ends
 jmp ifelse_1
@@ -1048,7 +1044,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Assignment to local4
 push $161

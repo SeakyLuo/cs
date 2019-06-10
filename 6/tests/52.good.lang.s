@@ -292,7 +292,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Return Statement
 push $56
@@ -626,7 +625,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Call
 # MethodCall
@@ -643,7 +641,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 jmp while_7
 while_end_7:
@@ -676,7 +673,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 pop %ebx
 pop %esi
@@ -953,7 +949,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 jmp while_9
 while_end_9:
@@ -1018,7 +1013,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 jmp while_11
 while_end_11:
@@ -1231,7 +1225,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Assignment to member4
 push $54
@@ -1376,7 +1369,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Print
 push $1
@@ -1464,7 +1456,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 pop %ebx
 pop %esi
@@ -1699,7 +1690,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Assignment to local1
 # Plus
@@ -1744,7 +1734,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # IfElse
 # Variable local4
@@ -1796,7 +1785,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Else Ends
 ifelse_19:
@@ -1816,7 +1804,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Assignment to local4
 # GreaterEqual
@@ -1989,7 +1976,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 jmp while_20
 while_end_20:
@@ -2080,7 +2066,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # If Ends
 jmp ifelse_21
@@ -2119,7 +2104,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # IfElse
 # Equal
@@ -2208,7 +2192,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 jmp while_24
 while_end_24:
@@ -2253,7 +2236,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Assignment to local2
 push $41
@@ -2373,7 +2355,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Assignment to local0
 # Variable local0
@@ -2492,7 +2473,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # If Ends
 jmp ifelse_25
@@ -2825,7 +2805,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Print
 # Variable arg1
@@ -2874,7 +2853,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # If Ends
 jmp ifelse_29
@@ -3117,7 +3095,6 @@ pop %edx
 pop %ecx
 xchg %eax, (%esp)
 # MethodCall Ends
-add $4, %esp
 # Call Ends
 # Print
 push $114

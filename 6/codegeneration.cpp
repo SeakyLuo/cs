@@ -89,8 +89,6 @@ void CodeGenerator::visitAssignmentNode(AssignmentNode* node) {
 void CodeGenerator::visitCallNode(CallNode* node) {
     std::cout << "# Call\n";
     node->visit_children(this);
-    // throw off return value ?
-    std::cout << "add $4, %esp\n";
     std::cout << "# Call Ends\n";
 }
 
@@ -345,7 +343,6 @@ void CodeGenerator::visitMemberAccessNode(MemberAccessNode* node) {
 void CodeGenerator::visitVariableNode(VariableNode* node) {
     std::string variableName = node->identifier->name;
     std::cout << "# Variable " << variableName << "\n";
-    node->visit_children(this);
     int offset;
     if (currentMethodInfo.variables->count(variableName)){
         offset = (*currentMethodInfo.variables)[variableName].offset;
@@ -355,7 +352,7 @@ void CodeGenerator::visitVariableNode(VariableNode* node) {
         std::cout << "mov 8(%ebp), %ebx\n";
         std::cout << "push " << offset << "(%ebx)\n";
     }
-    std::cout << "# Variable" << variableName << "Ends\n";
+    std::cout << "# Variable " << variableName << " Ends\n";
 }
 
 void CodeGenerator::visitIntegerLiteralNode(IntegerLiteralNode* node) {
